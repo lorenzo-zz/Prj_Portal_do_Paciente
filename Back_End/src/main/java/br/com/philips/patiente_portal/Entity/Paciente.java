@@ -51,7 +51,6 @@ public class Paciente {
     private LocalDate date;
 
     @NotNull
-    @OneToMany
-    @JoinColumn(name = "id_endereco")
-    private List<Endereco> endereco;
+    @OneToMany(mappedBy = "paciente")
+    private List<Endereco> enderecos;
 }

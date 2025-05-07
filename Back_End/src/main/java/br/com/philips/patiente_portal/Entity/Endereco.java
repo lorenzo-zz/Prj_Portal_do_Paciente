@@ -50,6 +50,7 @@ public class Endereco {
     @Size(min = 80, max = 100)
     private String numero;
 
-    @OneToMany(mappedBy = "id_paciente")
+    @ManyToOne
+    @JoinColumn(name = "id_paciente")
     private Paciente paciente;
 }
