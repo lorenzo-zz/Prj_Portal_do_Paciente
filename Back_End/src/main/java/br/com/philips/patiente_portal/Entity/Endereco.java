@@ -22,19 +22,6 @@ import java.time.LocalDate;
 @Entity
 public class Endereco {
 
-    @Id
-    @NotBlank
-    private Long id;
 
-    @NotBlank
-    @Size(min = 11, max = 30)
-    @Email
-    private String email;
-
-    private  String senha;
-    private  String cpf;
-    private String telefone;
-    private String nome;
-    private LocalDate date;
 
 }
