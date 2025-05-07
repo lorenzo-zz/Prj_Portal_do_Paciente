@@ -10,8 +10,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.List;
+
 @Data
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
@@ -44,9 +47,11 @@ public class Paciente {
     private String nome;
 
     @NotNull
+    @DateTimeFormat (pattern = "dd-mm-yyyy")
     private LocalDate date;
 
     @NotNull
-    @OneToMany(mappedBy = "id_endereco")
-    private Endereco endereco;
+    @OneToMany
+    @JoinColumn(name = "id_endereco")
+    private List<Endereco> endereco;
 }
