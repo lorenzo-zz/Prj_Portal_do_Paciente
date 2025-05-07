@@ -24,7 +24,7 @@
   text-decoration: none;
   font-size: 20px;
   margin-left: 20px;
-  padding: 8px 16px;
+  padding: 10px 16px;
   border: 1.5px solid transparent;
 }
 
@@ -34,7 +34,7 @@
 }
 
 .top_title h1 {
-  background: linear-gradient( #022558, #337fcb);
+  background: linear-gradient( #021f4b, #337fcb);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,8 +46,23 @@
 body {
   height: 2000px
 }
+
 #sign_button {
   border: solid 1.5px white;
   border-radius: 5px;
   padding: 10px;
+}
+
+.navbar a:hover {
+  color: #ffffff;
+  background-color: #04275c;
+  border-radius: 5px;
+}
+
+#sign_button:hover {
+  border: solid 1.5px #023279;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: white;
+  color: #022558;
 }
