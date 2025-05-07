@@ -41,6 +41,9 @@
   height: 280px;
   color: white; 
   box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.4);
+  font-size: 2.5em;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 body {
@@ -57,6 +60,7 @@ body {
   color: #ffffff;
   background-color: #04275c;
   border-radius: 5px;
+  transition: all 0.3s ease;
 }
 
 #sign_button:hover {
@@ -65,4 +69,5 @@ body {
   padding: 10px;
   background-color: white;
   color: #022558;
+  transition: all 0.3s ease;
 }
