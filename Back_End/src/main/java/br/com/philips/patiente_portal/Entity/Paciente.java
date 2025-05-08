@@ -48,7 +48,7 @@ public class Paciente {
 
     @NotNull
     @DateTimeFormat (pattern = "dd-mm-yyyy")
-    private LocalDate date;
+    private LocalDate data;
 
     @NotNull
     @OneToMany(mappedBy = "paciente")
