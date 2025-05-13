@@ -9,10 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.apache.commons.lang3.builder.HashCodeExclude;
 
-import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -25,7 +22,7 @@ public class Endereco {
     private Long id;
 
     @NotBlank
-    @Size(min = 8, max = 8)
+    @Size(min = 9, max = 9 )
     private String cep;
 
     @NotBlank
@@ -44,10 +41,8 @@ public class Endereco {
     @Size(min = 70, max = 100)
     private String bairro;
 
-    @Size(min = 300, max = 500)
     private String complemento;
 
-    @Size(min = 80, max = 100)
     private String numero;
 
     @ManyToOne

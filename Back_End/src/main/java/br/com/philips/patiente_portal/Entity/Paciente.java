@@ -20,7 +20,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "tb_paciente")
 public class Paciente {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -49,6 +51,8 @@ public class Paciente {
     @NotNull
     @DateTimeFormat (pattern = "dd-mm-yyyy")
     private LocalDate data;
+
+    private Boolean ativo;
 
     @NotNull
     @OneToMany(mappedBy = "paciente")
