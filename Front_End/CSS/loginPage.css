@@ -5,7 +5,7 @@ body {
     height: 100vh;
     margin: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #1565ef, #04224f);
+    background: linear-gradient(135deg, #063990, #04224f);
 }
 .form-container {
     background-color: #fff;
@@ -15,34 +15,36 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
 }
+.logo {
+    margin-bottom: 15px;
+}
 input {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin: 8px 0;
+    display: block;
+    width: calc(100% - 16px);
+    margin: 8px auto;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+.btn-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
 button {
-    width: 100%;
+    flex: 1;
     padding: 8px;
-    margin: 5px 0;
     background-color: #4285f4;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 button:hover {
     background-color: #357ae8;
 }
 
 .form-container img {
-    width: 200px;
-    height: 200px;
-}
+    width: 100px;
+    user-select: none;
+} 
