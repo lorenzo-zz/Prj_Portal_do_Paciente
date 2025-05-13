@@ -2,56 +2,13 @@
 #023279 - navbar
  */
 
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: Arial;
-  }
 
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 30px;
-  background-color: #023279; 
-  height: 80px;
-  transition: transform 0.3s ease;
-}
-
-.navbar a {
-  color: white;
-  text-decoration: none;
-  font-size: 20px;
-  margin-left: 20px;
-  padding: 10px 16px;
-  border: 1.5px solid transparent;
-}
 
 .right_links {
   display: flex;
   gap: 20px;
 }
 
-.top_title h1 {
-  background: linear-gradient( #021f4b, #337fcb);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 280px;
-  color: white; 
-  box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.4);
-  font-size: 2.5em;
-<<<<<<< HEAD:Front_End/CSS/homepage.css
-=======
-  font-weight: bold;
->>>>>>> e50aa16fdb7c86b74bae39333bd433d759bdea4d:Front_End/styles.css
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-body {
-  height: 2000px /* temporário */
-}
 
 #sign_button {
   border: solid 1.5px white;
@@ -60,22 +17,14 @@ body {
 }
 
 .navbar a:hover {
-<<<<<<< HEAD:Front_End/CSS/homepage.css
   color: white;
   text-decoration: none;
   font-size: 20px;
   margin-left: 20px;
-  padding: 8px 16px;
   border: 1.5px solid transparent;
   background-color: #022558;
   border-radius: 5px;
   transition: all 0.5s ease;
-=======
-  color: #ffffff;
-  background-color: #04275c;
-  border-radius: 5px;
-  transition: all 0.3s ease;
->>>>>>> e50aa16fdb7c86b74bae39333bd433d759bdea4d:Front_End/styles.css
 }
 
 #sign_button:hover {
@@ -83,11 +32,6 @@ body {
   border-radius: 5px;
   padding: 10px;
   background-color: white;
-<<<<<<< HEAD:Front_End/CSS/homepage.css
   color: #023279;
   transition: all 0.5s ease;
-=======
-  color: #022558;
-  transition: all 0.3s ease;
->>>>>>> e50aa16fdb7c86b74bae39333bd433d759bdea4d:Front_End/styles.css
 }
