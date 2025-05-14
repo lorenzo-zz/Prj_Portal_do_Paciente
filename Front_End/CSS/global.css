@@ -4,9 +4,6 @@
     box-sizing: border-box;
   }
 
-  body {
-    height: 2000px /* temporário */
-  }
   
 .navbar {
     display: flex;
