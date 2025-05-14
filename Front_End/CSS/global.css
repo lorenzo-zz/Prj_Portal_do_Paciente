@@ -2,12 +2,8 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: Arial;
   }
 
-  body {
-    height: 2000px /* temporário */
-  }
   
 .navbar {
     display: flex;
@@ -17,6 +13,7 @@
     background-color: #023279; 
     height: 80px;
     transition: transform 0.3s ease;
+    font-family: Arial;
   }
   
   .navbar a {
@@ -28,14 +25,3 @@
     border: 1.5px solid transparent;
   }
 
-  .top_title h1 {
-    background: linear-gradient( #021f4b, #337fcb);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 280px;
-    color: white; 
-    box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.4);
-    font-size: 2.5em;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  }

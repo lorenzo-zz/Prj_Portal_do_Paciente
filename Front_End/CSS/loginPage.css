@@ -48,3 +48,13 @@ button:hover {
     width: 100px;
     user-select: none;
 } 
+
+.erroLogin{
+    font-size: 1.2m;
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+    font-weight: bold;
+    margin: 8px;
+    display: none;
+}

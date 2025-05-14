@@ -1,29 +1,26 @@
-// 800 x 450
-
 let currentIndex = 0;
-        const images = document.querySelectorAll(".carousel img");
-        const indicators = document.querySelectorAll(".indicator");
-
-        function updateIndicators(index) {
-            indicators.forEach((ind, i) => {
-                ind.classList.toggle("active", i === index);
+        function updateIndicators() {
+            const indicators = document.querySelectorAll('.indicator');
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentIndex);
             });
         }
+        function moveSlide(direction) {
+            const track = document.querySelector('.carousel-track');
+            const items = document.querySelectorAll('.carousel-item');
+            const lastIndex = items.length - 1;
 
-        function showNextImage() {
-            currentIndex = (currentIndex + 1) % images.length;
-            updateCarousel();
+            if (currentIndex === lastIndex && direction === 1) {
+                currentIndex = 0; // Volta direto para o primeiro slide
+            } else {
+                currentIndex = (currentIndex + direction + items.length) % items.length;
+            }
+
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            updateIndicators();
         }
-
-        function goToSlide(index) {
+        function setSlide(index) {
             currentIndex = index;
-            updateCarousel();
+            moveSlide(0);
         }
-
-        function updateCarousel() {
-            const offset = -currentIndex * 100;
-            document.querySelector(".carousel-images").style.transform = `translateX(${offset}%)`;
-            updateIndicators(currentIndex);
-        }
-
-        setInterval(showNextImage, 3000);
+        setInterval(() => moveSlide(1), 3000);
