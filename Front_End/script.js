@@ -11,7 +11,7 @@ let currentIndex = 0;
             const lastIndex = items.length - 1;
 
             if (currentIndex === lastIndex && direction === 1) {
-                currentIndex = 0; // Volta direto para o primeiro slide
+                currentIndex = 0;
             } else {
                 currentIndex = (currentIndex + direction + items.length) % items.length;
             }
@@ -24,3 +24,9 @@ let currentIndex = 0;
             moveSlide(0);
         }
         setInterval(() => moveSlide(1), 3000);
+
+
+        function toggleMenu() {
+            const rightLinks = document.querySelector('.right_links');
+            rightLinks.classList.toggle('active');
+        }

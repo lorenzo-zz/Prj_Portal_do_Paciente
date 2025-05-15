@@ -1,18 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/Front_End/CSS/homepage.css">
     <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="/Front_End/CSS/global.css">
+    <link rel="icon" type="image.png" href="/Front_End/img/logoLogin.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+
     <title>Portal do Paciente</title>
 </head>
 <body>
-    <header class="navbar"> 
+    <header class="navbar">
         <nav>
-        <a href="index.html">Portal Do Paciente</a>
+            <a href="index.html">Portal Do Paciente</a>
         </nav>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
         <div class="right_links">
             <a href="loginPage.html">Login</a>
             <a href="signUpPage.html" id="sign_button">Cadastrar</a>
@@ -20,13 +28,15 @@
     </header>
     <div class="carousel">
         <div class="carousel-track">
-            <div class="carousel-item" style="background-color: #3498db;"></div>
-            <div class="carousel-item" style="background-color: #2ecc71;"></div>
-            <div class="carousel-item" style="background-color: #e74c3c;"></div>
-        </div>
-        <div class="controls">
-            <button onclick="moveSlide(-1)">‹</button>
-            <button onclick="moveSlide(1)">›</button>
+            <div class="carousel-item" id="image1">
+                <h1>Bem-vindo ao Portal do Paciente!</h1>
+            </div>
+            <div class="carousel-item" id="image2">
+                <h1>Agende Suas Consultas com Facilidade!</h1>
+            </div>
+            <div class="carousel-item" id="image3">
+                <h1>Resultados de Exames na Palma da Mão!</h1>
+            </div>
         </div>
         <div class="indicators">
             <span class="indicator" onclick="setSlide(0)"></span>
@@ -35,6 +45,41 @@
         </div>
     </div>
 
+        <div class="greets">
+            <h1>O que deseja fazer hoje?</h1>
+        </div>
+        <div class="main-content">
+        <div class="card-container">
+            <div class="card">
+                <div class="icon">❤️</div>
+                <h2>Minhas Consultas</h2>
+            </div>
+            <div class="card">
+                <div class="icon">💊</div>
+                <h2>Resultados de exames</h2>
+            </div>
+            <div class="card">
+                <div class="icon">💉</div>
+                <h2>Solicitação de exames</h2>
+            </div>
+            <div class="card">
+                <div class="icon">🧬</div>
+                <h2>Atestados médicos</h2>
+            </div>
+            <div class="card">
+                <div class="icon">💊</div>
+                <h2>Editar documentos</h2>
+            </div>
+            <div class="card">
+                <div class="icon">💉</div>
+                <h2>Agendamentos</h2>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>&copy; 2025 Portal do Paciente. Todos os direitos reservados.</p>
+       <a href="">Sobre nós</a>
+    </footer>
     <script src="script.js"></script>
 
 </body>
