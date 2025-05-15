@@ -5,9 +5,13 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDate;
 
+@Data
+@EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "t09a_resultado_exame")
 public class ResultadoExame {
