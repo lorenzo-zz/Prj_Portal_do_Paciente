@@ -4,9 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -17,22 +17,26 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode
 @Entity
-@Table(name = "t09a_documento")
-public class Documento {
+@Table(name = "t09a_paciente_documento")
+public class PacienteDocumento {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @NotBlank
-    private String nomeDocumento;
+    @NotNull
+    @ManyToOne
+    private Paciente paciente;
+    @NotNull
+    @ManyToOne
+    private Documento documento;
 
     @Override
     public String toString() {
-        return "Documento{" +
-                "id=" + id +
-                ", nomeDocumento='" + nomeDocumento + '\'' +
+        return "PacienteDocumento{" +
+                ", paciente=" + paciente +
+                ", documento=" + documento +
                 '}';
     }
 }
