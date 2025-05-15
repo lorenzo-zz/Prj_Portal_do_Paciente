@@ -165,3 +165,7 @@
   color: white;
   text-decoration:underline;
 }
+
+.card a {
+  text-decoration: none;
+}
