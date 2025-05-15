@@ -3,7 +3,6 @@ import com.zaxxer.hikari.HikariConfig; // Importando a classe correta de HikariC
 import com.zaxxer.hikari.HikariDataSource; // Para usar o HikariDataSource
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;

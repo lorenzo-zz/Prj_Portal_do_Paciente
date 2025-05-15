@@ -1,6 +1,5 @@
 package com.example.oracleapi;
 
-import jdk.jfr.DataAmount;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
