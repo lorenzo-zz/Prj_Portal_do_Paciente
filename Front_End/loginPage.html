@@ -8,17 +8,19 @@
 </head>
 <body>
     <div class="form-container">
-        <img src="/Front_End/img/logoLogin.png">
+      <a href="index.html"><img src="/Front_End/img/logoLogin.png"></a>
         <form>
             <input type="text" placeholder="CPF" required>
             <input type="password" placeholder="Senha" required>
+
             <div class="erroLogin">
-                <p>Erro nos dados!</p>
+                <p>Erro na autenticação!</p>
             </div>
 
             <div class="SucessoLogin">
-
+                <p>Sucesso na autenticação!</p>
             </div>
+            
             <div class="btn-container">
                 <button type="submit">Entrar</button>
                 <button onclick="location.href='cadastro.html'">Cadastrar-se</button>
