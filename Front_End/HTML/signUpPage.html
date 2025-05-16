@@ -4,8 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="/Front_End/img/logoSemEscrita.png" type="image/x-icon">
   <link rel="stylesheet" href="../CSS/signUpPage.css" />
-  <title>Sign Up Page</title>
+  <title>Sign Up</title>
 </head>
 
 <body>
@@ -14,47 +15,49 @@
       <form id="cadastroForm">
         <a href="index.html"><img src="../img/logoLogin.png" alt=""></a>
 
+        <h2>Dados Pessoais:</h2>
+
         <div class="caixa_input">
-          <input type="text" name="nome" id="nome" required placeholder="Nome Completo" />
+          <input type="text" name="nome" id="nome" required placeholder="Nome Completo" maxlength="100"/>
         </div>
 
         <div class="caixa_input">
-            <input type=" number" name="cpf" id="cpf" required placeholder="CPF: (ex: 123.456.789-99)" />
+          <input type=" number" name="cpf" id="cpf" required placeholder="CPF: (ex: 123.456.789-99)" maxlength="11"/>
+        </div>
+
+        <div class="caixa_input">
+          <input type="tel" s name="telefone" id="telefone" required placeholder="Telefone: (99) 12345-6789" maxlength="11">
+        </div>
+
+        <div class="caixa_input">
+          <input type="email" name="email" id="email" required placeholder="Email: exemplo@email.com" maxlength="100"/> 
+        </div>
+
+        <div class="radio_sexo">
+          <label for="sexo">Sexo: </label>
+          <input type="radio" name="sexo" id="sexo" value="M" required> Masculino
+          <input type="radio" name="sexo" id="sexo" value="F"> Feminino
+        </div>
+        
+        <div class="dt_nascimento">
+          <label for="dt_nascimento">Data de Nascimento:</label>
+          <input type="date" name="dt_nascimento" id="dt_nascimento" required>
+        </div>
+
+        <div class="input_doc">
+          <input type="file" name="documento" id="documento" accept="image" placeholder="Enviar documento" required>
+        </div>
+
+        <div class="caixa_input">
+          <input type="password" name="senha" id="senha" required placeholder="Senha" maxlength="30">
+        </div>
+        <div class="caixa_input">
+          <input type="password" name="confirmar_senha" id="confirmar_senha" required placeholder="Confirmar Senha" maxlength="30">
+        </div>
+      </form>
     </div>
 
-    <div class="caixa_input">
-      <input type="tel" s name="telefone" id="telefone" required placeholder="Telefone: (99) 12345-6789">
-    </div>
-
-    <div class="caixa_input">
-      <input type="email" name="email" id="email" required placeholder="Email: exemplo@email.com">
-    </div>
-
-    <div class="radio_sexo">
-      <label for="sexo">Sexo: </label>
-      <input type="radio" name="sexo" id="sexoMasculino" value="M" required> Masculino
-      <input type="radio" name="sexo" id="sexoFeminino" value="F" required> Feminino
-    </div>
-
-    <div class="dt_nascimento">
-      <label for="dt_nascimento">Data de Nascimento:</label>
-      <input type="date" name="dt_nascimento" id="dt_nascimento" required>
-    </div>
-
-    <div class="input_doc">
-      <input type="file" name="documento" id="documento" accept="image" placeholder="Enviar documento">
-    </div>
-
-    <div class="caixa_input">
-      <input type="password" name="senha" id="senha" required placeholder="Senha">
-    </div>
-    <div class="caixa_input">
-      <input type="password" name="confirmar_senha" id="confirmar_senha" required placeholder="Confirmar Senha">
-    </div>
-    </form>
-  </div>
-
-  <button type="submit">Registrar</button>
+    <button type="submit">Registrar</button>
   </div>
 </body>
 

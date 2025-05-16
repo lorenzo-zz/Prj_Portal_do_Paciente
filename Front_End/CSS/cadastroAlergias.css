@@ -22,7 +22,7 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-.form_autenticacao h2 {
+.form_alergias h2 {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: #04224f;
 }
@@ -33,7 +33,7 @@ form a {
   align-items: center;
 }
 
-.form_autenticacao form img {
+.form_alergias form img {
   width: 150px;
 }
 
@@ -54,19 +54,6 @@ form {
   font-style: italic;
 }
 
-.radio_sexo {
-  display: flex;
-  gap: 15px;
-  margin-top: 3px;
-  margin-bottom: -7px;
-  accent-color: #4285f4;
-}
-
-.radio_sexo label {
-  font-weight: normal;
-  color: #333;
-}
-
 button {
   padding: 12px;
   background-color: #4285f4;
@@ -84,32 +71,33 @@ button:hover {
   background-color: #357ae8;
 }
 
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.senha input {
-    float: right
-}
-
-.endereco input {
-  width: 100%;
+.alergia {
+  display: inline-flex;
+  align-items: center;
+  background-color: #d0ebff;
+  padding: 10px 8px;
+  margin: 6px 4px 0 0;
   border-radius: 6px;
   font-size: 14px;
-  transition: all 0.3s ease;
-  background-color: #f9f9f9;
-  outline: none;
-  flex: 1;
-  padding: 8px;
-  border: 2px solid #ccc;
-  margin-bottom: 6px;
+  color: #0c2d48;
+  font-weight: bold;
 }
 
-.cidade_estado {
-  display: flex;
-  gap: 5px;
+.alergia button {
+  margin-left: 8px;
+  background-color: transparent;
+  border: none;
+  color: #04224f;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 5px;
+  float: right;
+}
+
+.alergia button:hover {
+  color: #c0392b;
 }
 
 select {
@@ -119,9 +107,9 @@ select {
     background-color: #f9f9f9;
     outline: none;
     flex: 1;
-    padding: 8px;
+    padding: 12px;
     border: 2px solid #ccc;
     color: #999;
     margin-bottom: 6px;
+    width: 100%;
 }
-
