@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../CSS/adressSignUp.css" />
-  <title>Login Page</title>
+  <title>Sign Up</title>
 </head>
 
 <body>
@@ -22,13 +22,13 @@
 
             <br>
 
-            <input type="number" name="cep" id="cep" required placeholder="CEP: (ex: 12345-678)" />
+            <input type="number" name="cep" id="cep" required placeholder="CEP: (ex: 12345-678)" maxlength="8"/>
 
             <div class="cidade_estado">
               
             
-              <select id="estado">
-                <option value="">--Selecione--</option>
+              <select id="estado" required>
+                <option value="" disabled selected>--Selecione--</option>
                 <option value="AC">Acre</option>
                 <option value="AL">Alagoas</option>
                 <option value="AP">Amapá</option>
@@ -58,17 +58,17 @@
                 <option value="TO">Tocantins</option>
                 </select>
 
-              <input type="text" name="cidade" id="cidade" required placeholder="Cidade: São Paulo" />
+              <input type="text" name="cidade" id="cidade" required placeholder="Cidade: São Paulo" maxlength="30"/>
 
             </div>
 
-            <input type="text" name="bairro" id="bairro" required placeholder="Bairro: Centro" />
+            <input type="text" name="bairro" id="bairro" required placeholder="Bairro: Centro" maxlength="100"/>
 
-            <input type="text" name="logradouro" id="logradouro" required placeholder="Logradouro: Rua das Flores" />
+            <input type="text" name="logradouro" id="logradouro" required placeholder="Logradouro: Rua das Flores" maxlength="100"/>
 
-            <input type="number" name="numero" id="numero" required placeholder="Número: 123" />
+            <input type="number" name="numero" id="numero" required placeholder="Número: 123" maxlength="10"/>
 
-            <input type="text" name="complemento" id="complemento" placeholder="Complemento: Apto 101" />
+            <input type="text" name="complemento" id="complemento" placeholder="Complemento: Apto 101" maxlength="100"/>
           </div>
 
 
