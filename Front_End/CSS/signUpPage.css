@@ -32,6 +32,11 @@ form a {
   width: 150px;
 }
 
+.form_autenticacao h2{
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: #04224f;
+}
+
 form {
   display: flex;
   flex-direction: column;
