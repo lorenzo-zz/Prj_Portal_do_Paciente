@@ -22,6 +22,10 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
+.form_autenticacao h2 {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
 form a {
   display: flex;
   justify-content: center;
@@ -37,33 +41,6 @@ form {
   flex-direction: column;
   gap: 15px;
 }
-
-.caixa_input input{
-  flex: 1;
-  padding: 8px;
-  border: 2px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-  background-color: #f9f9f9;
-  transition: all 0.3s ease;
-  outline: none;
-  width: 100%;
-  margin-bottom: -10px;
-}
-
-.dt_nascimento input {
-  width: 54.6%;
-  border-radius: 6px;
-  font-size: 14px;
-  transition: all 0.3s ease;
-  background-color: #f9f9f9;
-  outline: none;
-  flex: 1;
-  padding: 8px;
-  border: 2px solid #ccc;
-  margin-bottom: -5px;
-}
-
 
 .input-row input:focus {
   border-color: #4285f4;
@@ -99,7 +76,7 @@ button {
   cursor: pointer;
   transition: background-color 0.3s ease;
   width: 100%;
-  margin-top: 18px;
+  margin-top: 5px;
 }
 
 button:hover {
@@ -132,5 +109,18 @@ input[type="number"]::-webkit-outer-spin-button {
 .cidade_estado {
   display: flex;
   gap: 5px;
+}
+
+select {
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
+    outline: none;
+    flex: 1;
+    padding: 8px;
+    border: 2px solid #ccc;
+    color: #999;
+    margin-bottom: 6px;
 }
 

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../CSS/adressSignUp.css" />
+  <title>Login Page</title>
+</head>
+
+<body>
+    <div class="form-container">
+      <div class="form_autenticacao">
+        <form>
+
+            
+
+          <a href="index.html"><img src="../img/logoLogin.png" alt=""></a>
+          <div class="endereco">
+            
+            <h2>Endereço:</h2>
+
+            <br>
+
+            <input type="number" name="cep" id="cep" required placeholder="CEP: (ex: 12345-678)" />
+
+            <div class="cidade_estado">
+              
+            
+              <select id="estado">
+                <option value="">--Selecione--</option>
+                <option value="AC">Acre</option>
+                <option value="AL">Alagoas</option>
+                <option value="AP">Amapá</option>
+                <option value="AM">Amazonas</option>
+                <option value="BA">Bahia</option>
+                <option value="CE">Ceará</option>
+                <option value="DF">Distrito Federal</option>
+                <option value="ES">Espírito Santo</option>
+                <option value="GO">Goiás</option>
+                <option value="MA">Maranhão</option>
+                <option value="MT">Mato Grosso</option>
+                <option value="MS">Mato Grosso do Sul</option>
+                <option value="MG">Minas Gerais</option>
+                <option value="PA">Pará</option>
+                <option value="PB">Paraíba</option>
+                <option value="PR">Paraná</option>
+                <option value="PE">Pernambuco</option>
+                <option value="PI">Piauí</option>
+                <option value="RR">Roraima</option>
+                <option value="RO">Rondônia</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="RN">Rio Grande do Norte</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="SC">Santa Catarina</option>
+                <option value="SP">São Paulo</option>
+                <option value="SE">Sergipe</option>
+                <option value="TO">Tocantins</option>
+                </select>
+
+              <input type="text" name="cidade" id="cidade" required placeholder="Cidade: São Paulo" />
+
+            </div>
+
+            <input type="text" name="bairro" id="bairro" required placeholder="Bairro: Centro" />
+
+            <input type="text" name="logradouro" id="logradouro" required placeholder="Logradouro: Rua das Flores" />
+
+            <input type="number" name="numero" id="numero" required placeholder="Número: 123" />
+
+            <input type="text" name="complemento" id="complemento" placeholder="Complemento: Apto 101" />
+          </div>
+
+
+          
+
+        </form>
+      </div>
+      
+      <button type="submit">Registrar</button>
+    </div>
+</body>
+
+</html>
