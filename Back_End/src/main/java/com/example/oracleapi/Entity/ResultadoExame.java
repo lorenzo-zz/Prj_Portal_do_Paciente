@@ -16,12 +16,14 @@ import java.time.LocalDate;
 @Table(name = "t09a_resultado_exame")
 public class ResultadoExame {
 
+        // Tabela ajustada // Completo! 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotBlank
-    @Size(min = 10, max = 100)
+    @Size(max = 500, message = "A descrição deve ter no máximo 500 caracteres")
     private String descricao;
 
     @NotNull
