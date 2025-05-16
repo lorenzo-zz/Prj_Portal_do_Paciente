@@ -50,11 +50,27 @@ button:hover {
 } 
 
 .erroLogin{
-    font-size: 1.2m;
+    font-size: 14px;
     background-color: red;
     color: white;
     border-radius: 10px;
     font-weight: bold;
     margin: 8px;
+    display: flex;
     display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.SucessoLogin {
+    font-size: 14px;
+    background-color: green;
+    color: white;
+    border-radius: 10px;
+    font-weight: bold;
+    margin: 8px;
+    display: flex;
+    display: none;
+    justify-content: center;
+    align-items: center;
 }

@@ -1,0 +1,105 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Front_End/CSS/homepage.css">
+    <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="/Front_End/CSS/global.css">
+    <link rel="icon" type="image.png" href="/Front_End/img/logoLogin.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+
+    <title>Portal do Paciente</title>
+</head>
+<body>
+    <header class="navbar">
+        <nav>
+            <a href="/Front_End/HTML/index.html">Portal Do Paciente</a>
+        </nav>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="right_links">
+            <a href="/Front_End/HTML/loginPage.html">Login</a>
+            <a href="/Front_End/HTML/signUpPage.html" id="sign_button">Cadastrar</a>
+        </div>
+    </header>
+    <div class="carousel">
+        <div class="carousel-track">
+            <div class="carousel-item" id="image1">
+                <h1>Bem-vindo ao Portal do Paciente!</h1>
+            </div>
+            <div class="carousel-item" id="image2">
+                <h1>Agende Suas Consultas com Facilidade!</h1>
+            </div>
+            <div class="carousel-item" id="image3">
+                <h1>Resultados de Exames na Palma da Mão!</h1>
+            </div>
+        </div>
+        <div class="indicators">
+            <span class="indicator" onclick="setSlide(0)"></span>
+            <span class="indicator" onclick="setSlide(1)"></span>
+            <span class="indicator" onclick="setSlide(2)"></span>
+        </div>
+    </div>
+
+        <div class="greets">
+            <h1>O que deseja fazer hoje?</h1>
+        </div>
+        <div class="main-content">
+        <div class="card-container">
+            <div class="card">
+                <a href="/Front_End/HTML/minhasConsultas.html"><div class="icon">
+                    <img src="/Front_End/img/MinhasConsultas.png">
+                </div>
+                <h2>Minhas Consultas</h2>
+                </a>
+            </div>
+            <div class="card">
+               <a href=""><div class="icon">
+                    <img src="/Front_End/img/ResultadoExames.png">
+                </div>
+                <h2>Resultados de exames</h2>
+                </a>
+            </div>
+            <div class="card">
+               <a href=""><div class="icon">
+                    <img src="/Front_End/img/SolicitacaoExames.png">
+                </div>
+                <h2>Solicitação de exames</h2>
+                </a>
+            </div>
+            <div class="card">
+                <a href="/Front_End/HTML/atestadosMedicos.html"><div class="icon">
+                    <img src="/Front_End/img/AtestadoMedico.png">
+                </div>
+                <h2>Atestados médicos</h2>
+                </a>
+            </div>
+            <div class="card">
+               <a href=""><div class="icon">
+                    <img src="/Front_End/img/EditarDocumentos.png">
+                </div>
+                <h2>Editar documentos</h2>
+                </a>
+            </div>
+            <div class="card">
+                <a href=""><div class="icon">
+                    <img src="/Front_End/img/Agendamentos.png">
+                </div>
+                <h2>Agendamentos</h2>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Portal do Paciente. Todos os direitos reservados.</p>
+       <a href="">Sobre nós</a>
+    </footer>
+    <script src="/JS/script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,127 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #063990, #04224f);
+}
+
+.form-container {
+  background-color: #fff;
+  padding: 30px;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.form_autenticacao h2 {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #04224f;
+}
+
+form a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form_autenticacao form img {
+  width: 150px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-row input:focus {
+  border-color: #4285f4;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(66, 133, 244, 0.4);
+}
+
+::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+.radio_sexo {
+  display: flex;
+  gap: 15px;
+  margin-top: 3px;
+  margin-bottom: -7px;
+  accent-color: #4285f4;
+}
+
+.radio_sexo label {
+  font-weight: normal;
+  color: #333;
+}
+
+button {
+  padding: 12px;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 5px;
+}
+
+button:hover {
+  background-color: #357ae8;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.senha input {
+    float: right
+}
+
+.endereco input {
+  width: 100%;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  background-color: #f9f9f9;
+  outline: none;
+  flex: 1;
+  padding: 8px;
+  border: 2px solid #ccc;
+  margin-bottom: 6px;
+}
+
+.cidade_estado {
+  display: flex;
+  gap: 5px;
+}
+
+select {
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
+    outline: none;
+    flex: 1;
+    padding: 8px;
+    border: 2px solid #ccc;
+    color: #999;
+    margin-bottom: 6px;
+}
+

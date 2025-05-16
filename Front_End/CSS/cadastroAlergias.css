@@ -1,0 +1,115 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #063990, #04224f);
+}
+
+.form-container {
+  background-color: #fff;
+  padding: 30px;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.form_alergias h2 {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #04224f;
+}
+
+form a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form_alergias form img {
+  width: 150px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-row input:focus {
+  border-color: #4285f4;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(66, 133, 244, 0.4);
+}
+
+::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+button {
+  padding: 12px;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 5px;
+}
+
+button:hover {
+  background-color: #357ae8;
+}
+
+.alergia {
+  display: inline-flex;
+  align-items: center;
+  background-color: #d0ebff;
+  padding: 10px 8px;
+  margin: 6px 4px 0 0;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #0c2d48;
+  font-weight: bold;
+}
+
+.alergia button {
+  margin-left: 8px;
+  background-color: transparent;
+  border: none;
+  color: #04224f;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 5px;
+  float: right;
+}
+
+.alergia button:hover {
+  color: #c0392b;
+}
+
+select {
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
+    outline: none;
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #ccc;
+    color: #999;
+    margin-bottom: 6px;
+    width: 100%;
+}
