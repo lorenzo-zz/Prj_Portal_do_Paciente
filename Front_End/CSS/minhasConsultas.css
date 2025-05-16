@@ -179,11 +179,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px; /* espaço entre imagem e título */
+    gap: 12px; 
   }
    
   .titulo-img {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     object-fit: contain;
   }

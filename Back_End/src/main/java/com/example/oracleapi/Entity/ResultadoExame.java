@@ -27,7 +27,7 @@ public class ResultadoExame {
     private String descricao;
 
     @NotNull
-    private LocalDate date;
+    private LocalDate dataResultado;
 
     @ManyToOne
     private Medico medico;

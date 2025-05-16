@@ -37,7 +37,6 @@ public class Endereco {
     @Size(min = 3, max = 30, message = "A cidade deve ter no máximo 30 caracteres")
     private String cidade;
     @NotBlank
-    @Size(min = 2, max = 2, message = "A UF deve ter 2 caracteres")
     private String uf;
     @NotBlank
     @Size(max = 50, message = "O bairro deve ter no máximo 100 caracteres")

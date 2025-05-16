@@ -4,9 +4,6 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import org.hibernate.validator.constraints.br.CPF;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,7 +27,7 @@ import lombok.Setter;
 @EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "t09a_paciente")
-public class Paciente implements UserDetails{
+public class Paciente{
     
         // Tabela ajustada // Completo! 
 
@@ -76,40 +73,5 @@ public class Paciente implements UserDetails{
                 ", dataCadastro=" + dataCadastro +
                 ", endereco=" + endereco +
                 '}';
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(null));
-    }
-
-    @Override
-    public String getPassword() {
-        return this.getSenha();
-    }
-
-    @Override
-    public String getUsername() {
-        return this.getEmail();
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
     }
 }
