@@ -6,25 +6,26 @@
     <link rel="shortcut icon" href="/Front_End/img/logoSemEscrita.png" type="image/x-icon">
     <link rel="stylesheet" href="/Front_End/CSS/loginPage.css">
     <title>Login Page</title>
+    <script src="../../JS/LoginServices/login.js"></script>
 </head>
 <body>
     <div class="form-container">
       <a href="index.html"><img src="/Front_End/img/logoLogin.png"></a>
-        <form>
-            <input type="text" placeholder="CPF" required>
-            <input type="password" placeholder="Senha" required>
+        <form id="loginForm">
+            <input type="text" id="nome" placeholder="Nome" required>
+            <input type="password" id="senha" placeholder="Senha" required>
 
             <div class="erroLogin">
                 <p>Erro na autenticação!</p>
             </div>
 
-            <div class="SucessoLogin">
-                <p>Sucesso na autenticação!</p>
-            </div>
-            
             <div class="btn-container">
                 <button type="submit">Entrar</button>
+
+               
+
                 <button onclick="location.href='../HTML/signUpPage.html'">Cadastrar-se</button>
+
             </div>
         </form>
     </div>
