@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="/Front_End/CSS/atestadosMedicos.css">
+    <link rel="stylesheet" href="/Front_End/CSS/global.css">
+    <title>Document</title>
+</head>
+<body>
+    <header class="navbar">
+        <nav>
+          <a href="index.html">Portal Do Paciente</a>
+        </nav>
+        <div class="right_links"></div>
+      </header>
+      <div class="title-area">
+        <div class="title-with-image">
+          <img src="/Front_End/img/logoSemEscrita.png" alt="Ícone de Consulta" class="titulo-img" />
+          <h1>Meus atestados</h1>
+        </div>
+        <p>Acompanhe aqui seus atestados</p>
+      </div>
+    <div class="tabela-atestados">
+        <div class="container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Médico</th>
+                        <th>Data</th>
+                        <th>Hora</th>
+                        <th>Descrição</th>
+                        <th>Baixar</th>
+                    </tr>
+                </thead>
+                <tbody id="atestados-lista">
+                    <!-- Os atestados serão inseridos aqui pelo script -->
+                </tbody>
+            </table>
+    </div>
+        <script src="/JS/atestadosMedicos.js"></script>
+</body>
+</html>
