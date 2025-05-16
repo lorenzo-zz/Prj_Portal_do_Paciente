@@ -51,6 +51,7 @@
   height: 80px;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   user-select: none;
+  text-align: center;
 }
 
 .indicators {
@@ -122,6 +123,7 @@
   font-size: 20px;
   margin-top: 10px;
   color: #333;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
@@ -150,20 +152,7 @@
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   user-select: none;
   width: 100%;
-}
-
-.footer {
-  margin-top: 400px;
-  background-color: #023279;
-  color: white;
-  text-align: center;
-  padding: 20px 0;
-  bottom: 0;
-  width: 100%;
-}
-.footer a {
-  color: white;
-  text-decoration:underline;
+  text-align: center ;
 }
 
 .card a {
