@@ -2,6 +2,7 @@ package com.example.oracleapi.Controller;
 
 import java.sql.SQLException;
 import java.util.Map;
+import javax.security.auth.login.LoginException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,12 +38,12 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String,String>> login(@RequestBody @Valid Paciente paciente){
+    public ResponseEntity<Map<String,String>> login(@RequestBody @Valid Paciente paciente) throws LoginException{
         try{
             loginService.login(paciente);
             return ResponseEntity.status(200).body(Map.of("message", "Usuário logado com sucesso!"));
         }catch(CadastroException e){
-            throw new CadastroException("Erro ao logar usuário: " + e.getMessage());
+            throw new LoginException("Erro ao logar usuário: " + e.getMessage());
         }catch(SQLException e){
             throw new CadastroException("Erro com o banco de dados: " + e.getMessage());
         }catch(Exception e){
