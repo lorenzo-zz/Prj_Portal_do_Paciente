@@ -12,6 +12,7 @@ body {
     background-color: white;
     border-radius: 12px;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    border-left: 6px solid #003f8a;
   }
    
   form {
