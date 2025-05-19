@@ -1,38 +1,23 @@
 
 document.addEventListener('DOMContentLoaded', function () {  //espera o html carragar todo
-    document.getElementById('loginForm').addEventListener('submit', function (event) {
+    document.getElementById('alergiaCadastro').addEventListener('submit', function (event) {
         event.preventDefault();
 
 
-        const nome = document.getElementById('nome').value;
-        const cpf = document.getElementById('cpf').value;
-        const telefone = document.getElementById('telefone').value;
-        const sexo = document.getElementById('radio_sexo').value;
-        const dt_nascimento = document.getElementById('dt_nascimento').value;
-        const documento = document.getElementById('documento').value;
-        const senha = document.getElementById('senha').value;
-        const confirmar_senha = document.getElementById('confirmar_senha').value;
-
+        const alergia = document.getElementById('alergiaSelect').value;
+        
         //json
-        const cadastro = {
-            nome: nome,
-            cpf: cpf,
-            telefone: telefone,
-            sexo: sexo,
-            dt_nascimento: dt_nascimento,
-            documento: documento,
-            senha: senha,
-            confirmar_senha: confirmar_senha,
-
+        const cadastrarAlergia = {
+            alergia: alergia,
 
         };
         //manda a validação de dados para o back  
-        fetch('http://localhost:8080/autenticar/cadastrar', { //mudar o caminho
+        fetch('http://localhost:8080/autenticar/cadastrarAlergia', { //mudar o caminho
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(cadastro)
+            body: JSON.stringify(cadastrarAlergia)
         })
             //se a resposta for diferente de 200 = OK
             .then(async response => {
@@ -43,19 +28,18 @@ document.addEventListener('DOMContentLoaded', function () {  //espera o html car
                 return response.text(); //retorna o texto da vairavel response 
             })
             .then(data => { //se o login der certo 
-                localStorage.setItem('nome', nome) //armazenado para dar as boas vindas depois na tela de login
-                window.location.href = '../Front_End/HTML/adressSignUp.html';
+                window.location.href = '../Front_End/HTML/loginPage.html';
             })
             .catch(error => {
                 const msg = error.message;
-                erroLogin(msg);
+                erroCadastrarAlergia(msg);
             });
     });
 });
 
-function erroLogin(msg) {
+function erroCadastrarAlergia(msg) {
 
-    if (msg === 'Usuário ou senha inválidos!') {
-        document.querySelector('.loginErro').style.display = 'block';
+    if (msg === 'Erro ao cadastrar alergia!') {
+        document.querySelector('.erroCadastrarAlergia').style.display = 'block';
     }
 }
