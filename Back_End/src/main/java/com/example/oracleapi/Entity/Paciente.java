@@ -1,8 +1,6 @@
 package com.example.oracleapi.Entity;
 
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.List;
 import org.hibernate.validator.constraints.br.CPF;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -56,7 +54,6 @@ public class Paciente{
     private LocalDate dataNascimento;
     private char ativo;
     private LocalDate dataCadastro;
-    @NotNull
     @ManyToOne
     private Endereco endereco;
 
