@@ -28,12 +28,13 @@ import lombok.Setter;
 @Entity
 @Table(name = "t09a_paciente")
 public class Paciente{
-    
-        // Tabela ajustada // Completo! 
+
+        // Tabela ajustada // Completo!
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @NotBlank
     @Email
     private String email;
@@ -57,6 +58,7 @@ public class Paciente{
     private String nome;
     @NotNull
     private LocalDate dataNascimento;
+
     private char ativo;
     private LocalDate dataCadastro;
 
@@ -118,7 +120,5 @@ public class Paciente{
         return dataCadastro;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
-    }
+
 }
