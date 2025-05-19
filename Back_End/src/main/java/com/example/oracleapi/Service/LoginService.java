@@ -36,8 +36,16 @@ public class LoginService {
         }
     }
 
+<<<<<<< HEAD
     public Paciente login(Paciente paciente) throws SQLException{
         try{
+=======
+
+
+
+    public Paciente login(Paciente paciente) throws SQLException, LoginException {
+        try {
+>>>>>>> 642b8e27e8c0e86f9658b356924cce7d31027c89
             Connection conn = dataSource.getConnection();
             CallableStatement stmt = conn.prepareCall("{call proc_t09a_login_paciente (?,?,?)}");
             stmt.setString(1, paciente.getEmail());
