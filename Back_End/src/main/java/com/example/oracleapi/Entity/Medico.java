@@ -33,4 +33,5 @@ public class Medico {
     @Enumerated(EnumType.STRING)
     private EspecificacaoMedico especificacaoMedico;
 
+    // crm
 }
