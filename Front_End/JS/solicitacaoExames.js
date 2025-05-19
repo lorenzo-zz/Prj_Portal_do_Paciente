@@ -1,6 +1,24 @@
 const examesLista = [
     // 🩸 Exames de Sangue
  "Hemograma completo",
+    "Contagem de plaquetas",
+    "Contagem de leucócitos",
+    "Contagem de hemácias",
+    "Hematócrito",
+    "Hemoglobina",
+    "Volume corpuscular médio (VCM)",
+    "Hemoglobina corpuscular média (HCM)",
+    "Concentração de hemoglobina corpuscular média (CHCM)",
+    "Índice de anisocitose",
+    "Índice de macrocitose",
+    "Índice de microcitose",
+    "Índice de hipocromia",
+    "Índice de policromasia",
+    "Índice de reticulócitos",
+    "Índice de plaquetas grandes",
+    "Índice de plaquetas imaturas",
+    "Índice de plaquetas jovens",
+
  "Glicemia de jejum",
  "Colesterol total",
  "Triglicerídeos",
@@ -110,6 +128,10 @@ const examesLista = [
 
  // 🩺 Exames Cardiológicos
  "Eletrocardiograma",
+    "Holter 24h",
+    "Monitorização ambulatorial da pressão arterial (MAPA)",
+    "Teste ergométrico",
+    
  "Ecocardiograma",
  "Ecocardiograma com Doppler",
  "Teste ergométrico",
