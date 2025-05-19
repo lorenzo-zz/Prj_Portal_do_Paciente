@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="/Front_End/img/logoSemEscrita.png" type="image/x-icon">
   <link rel="stylesheet" href="../CSS/signUpPage.css" />
   <title>Sign Up</title>
 </head>
@@ -11,8 +12,7 @@
 <body>
   <div class="form-container">
     <div class="form_autenticacao">
-      <form>
-
+      <form id="cadastroForm">
         <a href="index.html"><img src="../img/logoLogin.png" alt=""></a>
 
         <h2>Dados Pessoais:</h2>
@@ -38,7 +38,7 @@
           <input type="radio" name="sexo" id="sexo" value="M" required> Masculino
           <input type="radio" name="sexo" id="sexo" value="F"> Feminino
         </div>
-
+        
         <div class="dt_nascimento">
           <label for="dt_nascimento">Data de Nascimento:</label>
           <input type="date" name="dt_nascimento" id="dt_nascimento" required>
