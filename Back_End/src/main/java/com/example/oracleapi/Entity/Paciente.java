@@ -39,11 +39,14 @@ public class Paciente{
     @Size(min = 8, message = "A senha deve ter no mínimo 8 caracteres")
     private String senha;
     @NotBlank
-    @CPF
-    private String cpf;
+
     @NotBlank
-    @Size(min = 1, max = 1)
-    private char sexo;
+    @Size(min = 11, max = 11)
+    private String cpf;
+
+    @NotNull(message = "O valor deve ser M ou F")
+    private String sexo;
+
     @NotBlank
     @Size(min = 11, max = 11, message = "O telefone deve ter 11 dígitos")
     private String telefone;
@@ -54,6 +57,10 @@ public class Paciente{
     private LocalDate dataNascimento;
     private char ativo;
     private LocalDate dataCadastro;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 642b8e27e8c0e86f9658b356924cce7d31027c89
     @ManyToOne
     private Endereco endereco;
 
@@ -70,5 +77,49 @@ public class Paciente{
                 ", dataCadastro=" + dataCadastro +
                 ", endereco=" + endereco +
                 '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public char getAtivo() {
+        return ativo;
+    }
+
+    public LocalDate getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
     }
 }
