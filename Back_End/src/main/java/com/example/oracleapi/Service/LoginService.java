@@ -3,7 +3,11 @@ package com.example.oracleapi.Service;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Types;
+import javax.security.auth.login.LoginException;
 import javax.sql.DataSource;
+import javax.xml.crypto.Data;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.oracleapi.Entity.Paciente;
@@ -34,8 +38,24 @@ public class LoginService {
             throw new SQLException("Erro ao cadastrar paciente: " + e.getMessage());
         }
     }
-    public Paciente login(Paciente paciente) throws SQLException{
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'login'");
+    public Paciente login(Paciente paciente) throws SQLException, LoginException {
+        try {
+            Connection conn = dataSource.getConnection();
+            CallableStatement stmt = conn.prepareCall("{call proc_t09a_login_paciente (?,?,?)}");
+            stmt.setString(1, paciente.getEmail());
+            stmt.setString(2, paciente.getSenha());
+            stmt.registerOutParameter(3, Types.INTEGER);
+            stmt.execute();
+            int id = stmt.getInt(3);
+            stmt.close();
+
+            if (id == 0){
+                throw new LoginException("Usuario ou Senha Invalida");
+            }
+            return paciente;
+
+        }catch (SQLException e) {
+            throw new SQLException("Ligação incorreta");
+        }
     }
 }
