@@ -3,6 +3,8 @@ package com.example.oracleapi.Controller;
 import java.sql.SQLException;
 import java.util.Map;
 import javax.security.auth.login.LoginException;
+
+import com.example.oracleapi.DTO.LoginDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,10 +40,11 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String,String>> login(@RequestBody @Valid Paciente paciente) throws LoginException{
+    public ResponseEntity<Map<String,String>> login(@RequestBody @Valid LoginDTO loginDTO) throws LoginException{
         try{
-            loginService.login(paciente);
+            loginService.login(loginDTO);
             return ResponseEntity.status(200).body(Map.of("message", "Usuário logado com sucesso!"));
+
         }catch(CadastroException e){
             throw new LoginException("Erro ao logar usuário: " + e.getMessage());
         }catch(SQLException e){
