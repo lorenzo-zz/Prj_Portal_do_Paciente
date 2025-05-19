@@ -32,7 +32,6 @@ public class Paciente{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     @NotBlank
     @Email
     private String email;
@@ -59,10 +58,7 @@ public class Paciente{
 
     private char ativo;
     private LocalDate dataCadastro;
-<<<<<<< HEAD
-=======
 
->>>>>>> 642b8e27e8c0e86f9658b356924cce7d31027c89
     @ManyToOne
     private Endereco endereco;
 
