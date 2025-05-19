@@ -17,15 +17,7 @@
         <nav>
             <a href="/Front_End/HTML/index.html">Portal Do Paciente</a>
         </nav>
-        <div class="hamburger" onclick="toggleMenu()">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-        <div class="right_links">
-            <a href="/Front_End/HTML/loginPage.html">Login</a>
-            <a href="/Front_End/HTML/signUpPage.html" id="sign_button">Cadastrar</a>
-        </div>
+        
     </header>
     <div class="apresentacao">
         <div class="apresentacao_img">
@@ -59,26 +51,41 @@
         </div>
         <div class="paciente">
             <h2>Dados do Paciente</h2>
-            <div>
-
+            <div class="nome_paciente">
+                <label for="nomePaciente">Paciente:</label>
+                <p id="nomePaciente">Nome do Paciente</p>
             </div>
 
-            <div>
-
+            <div class="cpf_paciente">
+                <label for="cpfPaciente">CPF:</label>
+                <p id="cpfPaciente">123.456.789-00</p>
             </div>
 
-            <div>
-
+            <div class="data_nascimento_paciente">
+                <label for="dataNascimentoPaciente">Data de Nascimento:</label>
+                <p id="dataNascimentoPaciente">01/01/1990</p>
             </div>
         </div>
     </div>
-    <div class="dadoConsulta_container">
+    <div class="consulta_container">
+        <div class="dados_consulta">
+            <h2>Dados da Consulta</h2>
+            <div class="data_consulta">
+                <label for="data_consulta">Data da consulta:</label>
+                <p id="data-consulta">10/10/1990</p>
+            </div>
 
+            <div class="">
+                <label for=""></label>
+                <p id=""></p>
+            </div>
+
+            <div class="">
+                <label for=""></label>
+                <p id=""></p>
+            </div>
+        </div>
     </div>
-    <footer class="footer">
-        <p>&copy; 2025 Portal do Paciente. Todos os direitos reservados.</p>
-        <a href="">Sobre nós</a>
-    </footer>
     <script src="../JS/script.js"></script>
 
 </body>

@@ -14,7 +14,7 @@ body {
     width: 50%;
     margin-right: 10px;
     height: 100%;
-    padding: 20px;
+    padding: 15px;
     border-left: 6px solid #003f8a;
 }
 
@@ -24,21 +24,28 @@ body {
     background-color: #fff;
     width: 50%;
     height: 100%;
-    padding: 20px;
-    border-left: 6px solid green;
+    padding: 15px;
+    border-left: 6px solid #003f8a;
 }
 
-.medico label {
+.medico_paciente label {
     margin-right: 5px;
     font-weight: bold;
 }
 
-.medico_paciente h2 {
-    font-size: 1.5em;
+h2 {
+    font-size: 30px;
     display: flex;
     justify-content: center;
     margin-bottom: 5px;
     color: #003f8a;
+}
+
+.paciente div {
+    display: flex;
+    border-bottom: 2px solid #ccc;
+    padding: 5px;
+    margin-bottom: 5px;
 }
 
 .medico div {
@@ -46,14 +53,6 @@ body {
     border-bottom: 2px solid #ccc;
     padding: 5px;
     margin-bottom: 5px;
-}
-
-.paciente {
-    height: 100%;
-    border-radius: 15px;
-    margin-top: 20px;
-    background-color: green;
-    width: 50%;
 }
 
 .medico_paciente {
@@ -65,16 +64,24 @@ body {
     margin-bottom: 30px;
 }
 
-.dadoConsulta_container {
+.dados_consulta {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 70%;
-    height: 100vh;
+    width: 100%;
+    height: 30%;
     margin: 0 auto;
-    margin-top: 10px;
-    background: #fff;border-radius: 15px;
+    background: #fff;
+    border-left: 6px solid #003f8a;
+    border-radius: 15px;
+    justify-content: center;
+    padding: 10px;
+}
+
+.consulta_container {
+    width: 70%;
+    margin: 0 auto;
+    height: 80%;
+    background: none;
+    display: flex;
 }
 
 .apresentacao {
