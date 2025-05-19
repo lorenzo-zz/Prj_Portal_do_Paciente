@@ -38,6 +38,10 @@ public class LoginService {
             throw new SQLException("Erro ao cadastrar paciente: " + e.getMessage());
         }
     }
+
+
+
+
     public Paciente login(Paciente paciente) throws SQLException, LoginException {
         try {
             Connection conn = dataSource.getConnection();
