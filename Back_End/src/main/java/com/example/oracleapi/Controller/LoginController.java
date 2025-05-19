@@ -35,4 +35,18 @@ public class LoginController {
             throw new CadastroException("Erro genérico: " + e.getMessage());
         }
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<Map<String,String>> login(@RequestBody @Valid Paciente paciente){
+        try{
+            loginService.login(paciente);
+            return ResponseEntity.status(200).body(Map.of("message", "Usuário logado com sucesso!"));
+        }catch(CadastroException e){
+            throw new CadastroException("Erro ao logar usuário: " + e.getMessage());
+        }catch(SQLException e){
+            throw new CadastroException("Erro com o banco de dados: " + e.getMessage());
+        }catch(Exception e){
+            throw new CadastroException("Erro genérico: " + e.getMessage());
+        }
+    }
 }

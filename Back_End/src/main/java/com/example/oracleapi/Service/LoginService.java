@@ -34,4 +34,8 @@ public class LoginService {
             throw new SQLException("Erro ao cadastrar paciente: " + e.getMessage());
         }
     }
+    public Paciente login(Paciente paciente) throws SQLException{
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'login'");
+    }
 }
