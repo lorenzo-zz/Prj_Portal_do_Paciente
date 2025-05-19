@@ -14,12 +14,14 @@ import java.time.LocalTime;
 @Table(name = "t09a_agendamento_consulta")
 public class AgendamentoConsulta {
 
+    // Tabela ajustada // Completo!
+    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
 
     @NotBlank
-    @Size(min = 10, max = 500)
+    @Size(max = 500, message = "A descrição deve ter no máximo 500 caracteres")
     private String descricao;
 
     @NotNull
