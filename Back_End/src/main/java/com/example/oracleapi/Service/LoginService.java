@@ -1,23 +1,23 @@
 package com.example.oracleapi.Service;
 
-<<<<<<< HEAD
-import java.sql.*;
-import java.time.LocalDate;
+
+
+
 import javax.security.auth.login.LoginException;
-=======
+
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
->>>>>>> 108feffebddd835081cd0f9d77aaafeade399858
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.oracleapi.Entity.Paciente;
-import com.example.oracleapi.Exception.LoginException;
+
 
 
 @Service
 public class LoginService {
+
 
     @Autowired
     DataSource dataSource;
@@ -54,14 +54,8 @@ public class LoginService {
         }
     }
 
-<<<<<<< HEAD
-    public Paciente login(Paciente paciente) throws SQLException{
-        try{
-=======
-
     public Paciente login(Paciente paciente) throws SQLException, LoginException {
         try {
->>>>>>> 642b8e27e8c0e86f9658b356924cce7d31027c89
             Connection conn = dataSource.getConnection();
             CallableStatement stmt = conn.prepareCall("{call proc_t09a_login_paciente (?,?,?)}");
             stmt.setString(1, paciente.getEmail());
@@ -70,12 +64,13 @@ public class LoginService {
             stmt.execute();
             int id = stmt.getInt(3);
             stmt.close();
-            if(id == 0){
+            if (id == 0) {
                 throw new LoginException("Usuário ou senha inválidos");
             }
             return paciente;
-        }catch(SQLException e ){
+        } catch (SQLException e) {
             throw new SQLException("Erro com a ligação do banco!");
         }
     }
 }
+
