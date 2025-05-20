@@ -53,11 +53,12 @@ public class MinhaConsulta {
     @ManyToOne
     private Medico medico;
 
-    @ManyToOne
-    ResultadoExame resultadoExame;
+    @OneToOne
+    private AgendamentoConsulta agendamentoConsulta;
 
-    @ManyToOne
-    AgendamentoConsulta agendamentoConsulta;
+    private String frequencia;
 
+    private String pressao_arterial;
 
+    private String temperatura;
 }
