@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="shortcut icon" href="/Front_End/img/LogoPortalApenasRedondoFundoBranco.png" type="image/x-icon">
   <link rel="stylesheet" href="../CSS/signUpPage.css" />
-  <title>SignUp</title>
+  <title>Sign Up</title>
 </head>
 
 <body>
@@ -26,12 +26,11 @@
         </div>
 
         <div class="caixa_input">
-          <input type="number" name="cpf" id="cpf" required placeholder="CPF: (ex: 123.456.789-99)" maxlength="11" />
+          <input type="text" name="cpf" id="cpf" required placeholder="CPF: (somente números)" maxlength="11" pattern="\d{11}" />
         </div>
 
         <div class="caixa_input">
-          <input type="tel" name="telefone" id="telefone" required placeholder="Telefone: (99) 12345-6789"
-            maxlength="11">
+          <input type="text" name="telefone" id="telefone" required placeholder="Telefone: (somente números)" maxlength="11" pattern="\d{10,11}" />
         </div>
 
         <div class="caixa_input">
@@ -50,7 +49,7 @@
         </div>
 
         <div class="input_doc">
-          <input type="file" name="documento" id="documento" accept="image/*" placeholder="Enviar documento" required>
+          <input type="file" name="documento" id="documento" accept="image/*" required>
         </div>
 
         <div class="caixa_input">
@@ -58,13 +57,25 @@
         </div>
 
         <div class="caixa_input">
-          <input type="password" name="confirmar_senha" id="confirmar_senha" required placeholder="Confirmar Senha"
-            maxlength="30">
+          <input type="password" name="confirmar_senha" id="confirmar_senha" required placeholder="Confirmar Senha" maxlength="30">
         </div>
 
         <button type="submit">Registrar</button>
       </form>
     </div>
+
+    <!-- Scripts para impedir letras nos campos numéricos -->
+    <script>
+      document.getElementById('cpf').addEventListener('input', function () {
+        this.value = this.value.replace(/\D/g, '');
+      });
+
+      document.getElementById('telefone').addEventListener('input', function () {
+        this.value = this.value.replace(/\D/g, '');
+      });
+    </script>
+
+    <!-- Seu JS principal -->
     <script src="/Front_End/JS/CadastroServices/cadastro.js"></script>
   </div>
 </body>
