@@ -13,6 +13,8 @@ import lombok.*;
 @Table(name = "t09a_paciente_documento")
 public class PacienteDocumento {
 
+    // Tabela ajustada // Completo!
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
