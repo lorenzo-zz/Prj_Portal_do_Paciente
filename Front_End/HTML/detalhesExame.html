@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Detalhes do Exame - Portal do Paciente</title>
+  <link rel="stylesheet" href="/Front_End/CSS/global.css" />
+  <link rel="stylesheet" href="/Front_End/CSS/detalhesExame.css" />
+  <link rel="shortcut icon" href="/Front_End/img/LogoPortalApenasRedondoFundoBranco.png" type="image/x-icon">
+</head>
+<body>
+  <header class="navbar">
+    <nav>
+      <a href="index.html">Portal Do Paciente</a>
+    </nav>
+  </header>
+
+  <div class="title-area">
+    <div class="title-with-image">
+      <img src="/Front_End/img/logoSemEscrita.png" alt="Ícone de Exames" class="titulo-img" />
+      <h1>Detalhes do Exame</h1>
+    </div>
+    <p>Confira todas as informações do exame selecionado</p>
+  </div>
+
+  <main class="detalhes-container">
+    <div class="resultado-details">
+      <div class="detail-group">
+        <label>Exame:</label>
+        <p id="nome-exame">Nome do Exame</p>
+      </div>
+      <div class="detail-group">
+        <label>Data:</label>
+        <p id="data-exame">DD/MM/AAAA</p>
+      </div>
+      <div class="detail-group">
+        <label>Hora:</label>
+        <p id="hora-exame">HH:MM</p>
+      </div>
+      <div class="detail-group">
+        <label>Resultado:</label>
+        <p id="resultado-exame">Detalhes completos do resultado do exame aqui.</p>
+      </div>
+    </div>
+
+    <button type="button" class="voltar-btn" onclick="voltarPagina()">Voltar</button>
+  </main>
+
+  <script src="/Front_End/JS/detalhesExame.js"></script>
+</body>
+</html>
