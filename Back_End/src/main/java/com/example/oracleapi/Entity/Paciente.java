@@ -60,6 +60,9 @@ public class Paciente{
     @ManyToOne
     private Endereco endereco;
 
+    @NotBlank
+    private String documento;
+
     @Override
     public String toString() {
         return "Paciente{" +
