@@ -1,44 +1,54 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <link rel="shortcut icon" href="/Front_End/img/LogoPortalApenasRedondoFundoBranco.png" type="image/x-icon">
-    <link rel="stylesheet" href="/Front_End/CSS/atestadosMedicos.css">
-    <link rel="stylesheet" href="/Front_End/CSS/global.css">
-    <title>Atestados - Portal do Paciente</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <link rel="shortcut icon" href="/Front_End/img/LogoPortalApenasRedondoFundoBranco.png" type="image/x-icon">
+  <link rel="stylesheet" href="/Front_End/CSS/atestadosMedicos.css">
+  <link rel="stylesheet" href="/Front_End/CSS/global.css">
+  <title>Atestados - Portal do Paciente</title>
 </head>
+
 <body>
-    <header class="navbar">
-        <nav>
-          <a href="index.html">Portal Do Paciente</a>
-        </nav>
-      </header>
-      <div class="title-area">
-        <div class="title-with-image">
-          <img src="/Front_End/img/logoSemEscrita.png" alt="Ícone de Consulta" class="titulo-img" />
-          <h1>Meus atestados</h1>
-        </div>
-        <p>Acompanhe aqui seus atestados</p>
-      </div>
-    <div class="tabela-atestados">
-        <div class="container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Médico</th>
-                        <th>Data</th>
-                        <th>Hora</th>
-                        <th>Descrição</th>
-                        <th>Baixar</th>
-                    </tr>
-                </thead>
-                <tbody id="atestados-lista">
-                </tbody>
-            </table>
+  <header class="navbar">
+    <nav>
+      <a href="index.html">Portal Do Paciente</a>
+    </nav>
+  </header>
+
+  <div class="page_navigator">
+        <a href="../HTML/index.html">Portal do Paciente</a>
+        <p>/</p>
+        <p>Atestados Médicos</p>
     </div>
     
-        <script src="/Front_End/JS/atestadosMedicos.js"></script>
+  <div class="title-area">
+    <div class="title-with-image">
+      <img src="/Front_End/img/logoSemEscrita.png" alt="Ícone de Consulta" class="titulo-img" />
+      <h1>Meus atestados</h1>
+    </div>
+    <p>Acompanhe aqui seus atestados</p>
+  </div>
+  <div class="tabela-atestados">
+    <div class="container">
+      <table>
+        <thead>
+          <tr>
+            <th>Médico</th>
+            <th>Data</th>
+            <th>Hora</th>
+            <th>Descrição</th>
+            <th>Baixar</th>
+          </tr>
+        </thead>
+        <tbody id="atestados-lista">
+        </tbody>
+      </table>
+    </div>
+
+    <script src="/Front_End/JS/atestadosMedicos.js"></script>
 </body>
+
 </html>
