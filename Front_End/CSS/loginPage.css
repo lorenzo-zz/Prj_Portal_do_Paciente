@@ -6,6 +6,8 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #063990, #04224f);
+    user-select: none;
+
 }
 .form-container {
     background-color: #fff;
