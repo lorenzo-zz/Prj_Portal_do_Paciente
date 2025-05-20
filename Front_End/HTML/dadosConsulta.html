@@ -1,14 +1,14 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/Front_End/CSS/dadosConsulta.css">
-    <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="/Front_End/CSS/global.css">
-    <link rel="icon" type="image.png" href="/Front_End/img/logoLogin.png">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../CSS/dadosConsulta.css" />
+    <link rel="stylesheet" href="../CSS/global.css" />
+    <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon" />
+    <link rel="icon" type="image/png" href="../img/logoLogin.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <title>Portal do Paciente</title>
 </head>
 
@@ -17,27 +17,23 @@
         <nav>
             <a href="/Front_End/HTML/index.html">Portal Do Paciente</a>
         </nav>
-        
     </header>
+
     <div class="apresentacao">
         <div class="apresentacao_img">
-            <img src="../img/logoSemEscrita.png" alt="logo do portal do paciente" class="logo">
-
+            <img src="../img/logoSemEscrita.png" alt="logo do portal do paciente" class="logo" />
             <h1>Dados da Consulta</h1>
-
         </div>
         <p>Olá, <span id="nomePaciente">Nome do Paciente</span></p>
-
-
     </div>
+
     <div class="medico_paciente">
         <div class="medico">
             <h2>Dados do Médico</h2>
             <div class="nome_medico">
                 <label for="nomeMedico">Médico:</label>
-                <p id="nomeMedico"> Nome do Médico</p>
+                <p id="nomeMedico">Nome do Médico</p>
             </div>
-
             <div class="especialidade_medico">
                 <label for="especialidadeMedico">Especialidade:</label>
                 <p id="especialidadeMedico">Cardiologia</p>
@@ -46,27 +42,25 @@
                 <label for="crmMedico">CRM:</label>
                 <p id="crmMedico">123456</p>
             </div>
-            
-            
         </div>
+
         <div class="paciente">
             <h2>Dados do Paciente</h2>
             <div class="nome_paciente">
                 <label for="nomePaciente">Paciente:</label>
                 <p id="nomePaciente">Nome do Paciente</p>
             </div>
-
             <div class="cpf_paciente">
                 <label for="cpfPaciente">CPF:</label>
                 <p id="cpfPaciente">123.456.789-00</p>
             </div>
-
             <div class="data_nascimento_paciente">
                 <label for="dataNascimentoPaciente">Data de Nascimento:</label>
                 <p id="dataNascimentoPaciente">01/01/1990</p>
             </div>
         </div>
     </div>
+
     <div class="consulta_container">
         <div class="dados_consulta">
             <h2>Dados da Consulta</h2>
@@ -74,20 +68,39 @@
                 <label for="data_consulta">Data da consulta:</label>
                 <p id="data-consulta">10/10/1990</p>
             </div>
+            <div class="motivo_consulta">
+                <label for="motivo_consulta">Motivo da consulta:</label>
+                <p id="motivo_consulta">Paciente se queixa de fortes dores de cabeça.</p>
+            </div>
+            <div class="historico_doencas">
+                <label for="historico_doencas">Histórico de Doenças:</label>
+                <p id="historico_doencas">Nenhum histórico relevante.</p>
 
-            <div class="">
-                <label for=""></label>
-                <p id=""></p>
             </div>
 
-            <div class="">
-                <label for=""></label>
-                <p id=""></p>
+            <h2>Sinais Vitais</h2>
+            <div class="frequencia_cardiaca">
+                <label for="frequencia_cardiaca">Frequência:</label>
+                <p class="frequencia_cardiaca">72 bpm</p>
+            </div>
+            <div class="pressao_arterial">
+                <label for="pressao_arterial">Pressão Arterial:</label>
+                <p class="pressao_arterial">120/80 mmHg</p>
+            </div>
+            <div class="temperatura">
+                <label for="temperatura">Temperatura:</label>
+                <p class="temperatura">36.5 °C</p>
+            </div>
+
+
+            <h2>Diagnóstico</h2>
+            <div class="diagnostico_texto">
+                <label for="diagnostico_texto">Diagnóstico:</label>
+                <p id="diagnostico_texto"></p>
             </div>
         </div>
-    </div>
-    <script src="../JS/script.js"></script>
 
+    </div>
 </body>
 
 </html>
