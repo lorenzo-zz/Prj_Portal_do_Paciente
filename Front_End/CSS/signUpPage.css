@@ -139,7 +139,7 @@ input[type="number"]::-webkit-outer-spin-button {
   gap: 5px;
 }
 
-.erroCadastar{
+.erroCadastar {
     font-size: 14px;
     background-color: red;
     color: white;
