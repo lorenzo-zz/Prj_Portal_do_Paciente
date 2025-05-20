@@ -21,17 +21,17 @@ const consultas = [
       status: "cancelada",
     },
     {
-      nome: "Dr. Luis Inácio da Silva",
+      nome: "Dr. Pedro Henrique de Borba",
       data: "30/05/2025",
       hora: "11:00",
-      especialidade: "Petrolão",
+      especialidade: "fazer coisa errada no github",
       status: "confirmada",
     },
     {
-      nome: "Dr. Leo Lins",
+      nome: "Dr. P2",
       data: "01/06/2025",
       hora: "15:00",
-      especialidade: "Thais Carla",
+      especialidade: "p2 para de mexer no github",
       status: "pendente",
     },
     {

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Front_End/CSS/editarPerfil.css">
+    <link rel="stylesheet" href="/Front_End/CSS/global.css">
+    <link rel="shortcut icon" href="/Front_End/img/LogoPortalApenasRedondoFundoBranco.png" type="image/x-icon">
+    <title>Editar Perfil - Portal do Paciente</title>
+</head>
+
+<body>
+    <header class="navbar">
+        <nav>
+            <a href="/Front_End/HTML/index.html">Portal Do Paciente</a>
+        </nav>
+    </header>
+
+    <div class="logo-title">
+        <img src="/Front_End/img/logoSemEscrita.png" alt="Logo">
+        <h2 class="title">Editar Perfil</h2>
+    </div>
+    <div class="texto">
+        <p>Edite aqui o seu perfil</p>
+    </div>
+    <div class="container">
+
+        <div class="card">
+            <form id="editProfileForm">
+                <input type="text" placeholder="Nome Completo" id="nome" maxlength="100"><br>
+                <input type="tel" placeholder="Telefone: (99) 12345-6789" id="telefone" maxlength="11"><br>
+                <input type="email" placeholder="Email: exemplo@email.com" id="email" maxlength="100"><br>
+                <input type="text" id="dt_nascimento" value="Data de nascimento: 19/01/2000" disabled><br>
+                <h3>Endereço</h3>
+                <input type="text" placeholder="CEP" id="cep" maxlength="9"><br>
+                <input type="text" placeholder="Rua" id="rua" maxlength="100"><br>
+                <input type="text" placeholder="Número" id="numero" maxlength="10"><br>
+                <input type="text" placeholder="Complemento" id="complemento" maxlength="50"><br>
+                <input type="text" placeholder="Bairro" id="bairro" maxlength="50"><br>
+                <input type="text" placeholder="Cidade" id="cidade" maxlength="50"><br>
+                <input type="text" placeholder="Estado" id="estado" maxlength="2"><br>
+                <input type="password" placeholder="Nova Senha" id="senha" maxlength="30"><br>
+                <input type="password" placeholder="Confirmar Nova Senha" id="confirmar_senha" maxlength="30"><br>
+                <button type="button" onclick="showModal()">Salvar Alterações</button>
+
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p>Perfil atualizado com sucesso!</p>
+        <button onclick="closeModal()" class="ok-button">OK</button>
+    </div>
+</div>
+            </form>
+        </div>
+    </div>
+    <script src="/Front_End/JS/editarPerfil.js"></script>
+</body>
+
+</html>

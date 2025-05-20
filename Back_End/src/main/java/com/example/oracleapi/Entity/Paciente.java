@@ -65,7 +65,7 @@ public class Paciente{
     public String toString() {
         return "Paciente{" +
                 ", email='" + email + '\'' +
-                ", cpf='" + cpf + '\'' +
+               ", cpf='" + cpf + '\'' +
                 ", sexo=" + sexo +
                 ", telefone='" + telefone + '\'' +
                 ", nome='" + nome + '\'' +
