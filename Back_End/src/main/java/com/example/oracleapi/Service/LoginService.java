@@ -23,7 +23,7 @@ public class LoginService {
 
     public void cadastrar(Paciente paciente) throws SQLException {
         try (Connection conn = dataSource.getConnection();
-             CallableStatement stmt = conn.prepareCall("{call proc_t09a_cadastro_paciente(?, ?, ?, ?, ?, ?, ?)}");
+             CallableStatement stmt = conn.prepareCall("{call proc_t09a_cadastro_paciente(?, ?, ?, ?, ?, ?, ?)}")){
 
              stmt.setString(1, paciente.getEmail());
              stmt.setString(2, paciente.getSenha());
