@@ -61,7 +61,7 @@ public class Paciente{
 
     @NotBlank
     @Size(min = 500, max = 500)
-    private String docgitumento;
+    private String documento;
 
     private char ativo;
 
