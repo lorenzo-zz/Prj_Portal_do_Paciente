@@ -1,25 +1,16 @@
 package com.example.oracleapi.Service;
 
 
-
+import com.example.oracleapi.DTO.LoginDTO;
+import com.example.oracleapi.Entity.Paciente;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.security.auth.login.LoginException;
-
-<<<<<<< HEAD
-import java.sql.*;
 import javax.sql.DataSource;
-
-import com.example.oracleapi.DTO.LoginDTO;
-import jakarta.validation.Valid;
-=======
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
-import javax.sql.DataSource;
->>>>>>> e8be7de3296ca75080b615bd2d04d03c5aeaccb3
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import com.example.oracleapi.Entity.Paciente;
 
 
 
@@ -32,25 +23,15 @@ public class LoginService {
 
     public void cadastrar(Paciente paciente) throws SQLException {
         try (Connection conn = dataSource.getConnection();
-<<<<<<< HEAD
-             CallableStatement stmt = conn.prepareCall("{call proc_t09a_cadastro_paciente (?,?,?,?,?,?,?)}")) {
-=======
-             CallableStatement stmt = conn.prepareCall("{call proc_t09a_cadastro_paciente (?,?,?,?,?,?,?,?,?)}")) {
->>>>>>> e8be7de3296ca75080b615bd2d04d03c5aeaccb3
+             CallableStatement stmt = conn.prepareCall("{call proc_t09a_cadastro_paciente(?, ?, ?, ?, ?, ?, ?)}");
 
-            stmt.setString(1, paciente.getEmail());
-            stmt.setString(2, paciente.getSenha());
-            stmt.setString(3, paciente.getCpf());
-            stmt.setString(4, String.valueOf(paciente.getSexo()));
-            stmt.setString(5, paciente.getTelefone());
-            stmt.setString(6, paciente.getNome());
-<<<<<<< HEAD
-            stmt.setDate(7, java.sql.Date.valueOf(paciente.getDataNascimento()));
-=======
-            stmt.setString(7, String.valueOf(paciente.getAtivo()));
-            stmt.setDate(8, java.sql.Date.valueOf(paciente.getDataCadastro()));
-            stmt.setDate(9, java.sql.Date.valueOf(paciente.getDataNascimento()));
->>>>>>> e8be7de3296ca75080b615bd2d04d03c5aeaccb3
+             stmt.setString(1, paciente.getEmail());
+             stmt.setString(2, paciente.getSenha());
+             stmt.setString(3, paciente.getCpf());
+             stmt.setString(4, String.valueOf(paciente.getSexo())); // CHAR
+             stmt.setString(5, paciente.getTelefone());
+             stmt.setString(6, paciente.getNome());
+             stmt.setDate(7, java.sql.Date.valueOf(paciente.getDataNascimento()));
 
             stmt.execute();
         } catch (SQLException e) {
@@ -58,7 +39,6 @@ public class LoginService {
         }
     }
 
-<<<<<<< HEAD
     public void login(LoginDTO loginDTO) throws SQLException, LoginException {
         try (Connection conn = dataSource.getConnection();
              CallableStatement stmt = conn.prepareCall("{call proc_t09a_login_paciente (?,?)}")) {
@@ -69,24 +49,6 @@ public class LoginService {
 
         } catch (SQLException e) {
             throw new SQLException("Erro com a ligação do banco: " + e.getMessage(), e);
-=======
-    public Paciente login(Paciente paciente) throws SQLException, LoginException {
-        try {
-            Connection conn = dataSource.getConnection();
-            CallableStatement stmt = conn.prepareCall("{call proc_t09a_login_paciente (?,?,?)}");
-            stmt.setString(1, paciente.getEmail());
-            stmt.setString(2, paciente.getSenha());
-            stmt.registerOutParameter(3, java.sql.Types.INTEGER);
-            stmt.execute();
-            int id = stmt.getInt(3);
-            stmt.close();
-            if (id == 0) {
-                throw new LoginException("Usuário ou senha inválidos");
-            }
-            return paciente;
-        } catch (SQLException e) {
-            throw new SQLException("Erro com a ligação do banco!");
->>>>>>> e8be7de3296ca75080b615bd2d04d03c5aeaccb3
         }
     }
 }
