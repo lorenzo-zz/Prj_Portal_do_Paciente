@@ -1,6 +1,6 @@
 
 document.addEventListener('DOMContentLoaded', function () {  //espera o html carragar todo
-    document.getElementById('loginForm').addEventListener('submit', function (event) {
+    document.getElementById('cadastroForm').addEventListener('submit', function (event) {
         event.preventDefault();
 
 
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {  //espera o html car
         const confirmar_senha = document.getElementById('confirmar_senha').value;
 
         //json
-        const cadastro = {
+        const cadastrarInfPessoais = {
             nome: nome,
             cpf: cpf,
             telefone: telefone,
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {  //espera o html car
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(cadastro)
+            body: JSON.stringify(cadastrarInfPessoais)
         })
             //se a resposta for diferente de 200 = OK
             .then(async response => {
@@ -48,14 +48,14 @@ document.addEventListener('DOMContentLoaded', function () {  //espera o html car
             })
             .catch(error => {
                 const msg = error.message;
-                erroLogin(msg);
+                erroCadastrar(msg);
             });
     });
 });
 
 function erroLogin(msg) {
 
-    if (msg === 'Usuário ou senha inválidos!') {
-        document.querySelector('.loginErro').style.display = 'block';
+    if (msg === 'Erro ao cadastrar as informações pessoais!') {
+        document.querySelector('.erroCadastrar').style.display = 'block';
     }
 }
