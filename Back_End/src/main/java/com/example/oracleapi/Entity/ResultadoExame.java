@@ -1,41 +1,36 @@
 package com.example.oracleapi.Entity;
 
-
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-import java.time.LocalDate;
-
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = "id")
+@ToString
 @Entity
 @Table(name = "t09a_resultado_exame")
 public class ResultadoExame {
-
-        // Tabela ajustada // Completo! 
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
+    private long id;
     @NotBlank
-    @Size(max = 500, message = "A descrição deve ter no máximo 500 caracteres")
-    private String descricao;
-
+    private String resutlado;
     @NotNull
-    private LocalDate dataResultado;
-
-    @ManyToOne
-    private Medico medico;
-
-    @ManyToOne
-    private Paciente paciente;
-
-    @ManyToOne
-    private Prescricao prescricao;
-
+    @OneToOne
+    private RequisicaoExame solicitacaoExame;
 }

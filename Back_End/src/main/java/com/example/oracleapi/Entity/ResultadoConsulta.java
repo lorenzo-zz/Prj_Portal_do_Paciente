@@ -1,25 +1,25 @@
 package com.example.oracleapi.Entity;
 
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
-
-import com.example.oracleapi.Model.EspecificacaoMedico;
 
 @Data
+@EqualsAndHashCode(of = "id")
 @Entity
-@Table(name = "t09a_agendamento_consulta")
-public class AgendamentoConsulta {
+@Table(name = "t09a_resultado_consulta")
+public class ResultadoConsulta {
 
-    // Tabela ajustada // Completo!
-    
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+        // Tabela ajustada // Completo! 
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotBlank
@@ -27,14 +27,17 @@ public class AgendamentoConsulta {
     private String descricao;
 
     @NotNull
-    private LocalDate data;
+    private LocalDate dataResultado;
 
-    @NotNull
-    private LocalTime hora;
+    @ManyToOne
+    private Medico medico;
 
     @ManyToOne
     private Paciente paciente;
 
-    @Enumerated(EnumType.STRING)
-    private EspecificacaoMedico especificacaoMedico;
+    @OneToOne
+    private Prescricao prescricao;
+
+    @OneToOne
+    private MinhaConsulta minhaConsulta;
 }
