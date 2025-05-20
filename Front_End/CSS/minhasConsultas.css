@@ -108,12 +108,7 @@ body {
    
   .status-confirmada {
     background-color: #d1f5d3;
-    color: #237e2c;
-  }
-   
-  .status-pendente {
-    background-color: #fff7d6;
-    color: #b58b00;
+    color:#237e2c;
   }
    
   .status-cancelada {
@@ -188,3 +183,44 @@ body {
     height: 120px;
     object-fit: contain;
   }
+
+ .filtro-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  margin-left: 280px;
+  margin-top: 20px;
+}
+
+.filtro-container label {
+  font-weight: bold;
+  color: #023279;
+  font-size: 1rem;
+}
+
+#filtro-status {
+  padding: 8px 12px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 2px solid #005fc5;
+  background-color: white;
+  color: #023279;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+#filtro-status:hover {
+  border-color: #004a9f;
+}
+
+#filtro-status:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0, 127, 255, 0.5);
+}
+#filtro-status option {
+  background-color: white;
+  color: #023279;
+}
