@@ -1,0 +1,120 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f0f0f0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Apresentação */
+.apresentacao {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 40px;
+  color: #023279;
+}
+
+.apresentacao h1 {
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  color: #003f8a;
+}
+
+.apresentacao img {
+  width: 100px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/* Médico e Paciente */
+.medico_paciente {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  width: 90%;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.medico, .paciente {
+  background-color: #fff;
+  border-left: 6px solid #003f8a;
+  border-radius: 15px;
+  padding: 15px;
+  flex: 1 1 300px;
+  max-width: 500px;
+}
+
+.medico div, .paciente div {
+  display: flex;
+  border-bottom: 2px solid #ccc;
+  padding: 5px 0;
+}
+
+.medico_paciente label, .consulta_container label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 1.5rem;
+  text-align: center;
+  color: #003f8a;
+  margin-bottom: 10px;
+  margin-top: 20px
+}
+
+/* Consulta */
+.consulta_container {
+  width: 90%;
+  margin: 0 auto 50px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.dados_consulta, .exames, .diagnostico {
+  width: 100%;
+  max-width: 1015px;
+  background-color: #fff;
+  border-left: 6px solid #003f8a;
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.dados_consulta div, .exames div, .diagnostico div {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  border-bottom: solid 2px #ccc;
+  padding: 5px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .medico_paciente {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .medico, .paciente {
+    width: 100%;
+  }
+
+  .consulta_container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .dados_consulta {
+    width: 100%;
+  }
+}

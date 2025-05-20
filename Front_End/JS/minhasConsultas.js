@@ -11,7 +11,7 @@ const consultas = [
       data: "25/05/2025",
       hora: "09:30",
       especialidade: "Dermatologia",
-      status: "pendente",
+      status: "confirmada",
     },
     {
       nome: "Dr. Carlos Mendes",
@@ -21,18 +21,18 @@ const consultas = [
       status: "cancelada",
     },
     {
-      nome: "Dr. Luis Inácio da Silva",
+      nome: "Dr. Pedro Henrique de Borba",
       data: "30/05/2025",
       hora: "11:00",
-      especialidade: "Petrolão",
+      especialidade: "fazer coisa errada no github",
       status: "confirmada",
     },
     {
-      nome: "Dr. Leo Lins",
+      nome: "Dr. P2",
       data: "01/06/2025",
       hora: "15:00",
-      especialidade: "Thais Carla",
-      status: "pendente",
+      especialidade: "p2 para de mexer no github",
+      status: "confirmada",
     },
     {
       nome: "Dra. Carla Dias",
@@ -46,7 +46,7 @@ const consultas = [
       data: "05/06/2025",
       hora: "13:30",
       especialidade: "Pediatria",
-      status: "pendente",
+      status: "confirmada",
     },
     {
       nome: "Dra. Camila Rocha",
@@ -65,58 +65,71 @@ const consultas = [
   ];
    
   const consultasPorPagina = 6;
-  let paginaAtual = 0;
-   
-  function renderizarConsultas() {
+let paginaAtual = 0;
+
+document.getElementById("filtro-status").addEventListener("change", function () {
+    paginaAtual = 0; // Resetando a página ao mudar o filtro
+    renderizarConsultas();
+});
+
+function renderizarConsultas() {
     const lista = document.getElementById("consultas-lista");
     lista.innerHTML = "";
-   
+
+    const filtroStatus = document.getElementById("filtro-status").value;
+
+    let consultasFiltradas = consultas;
+    if (filtroStatus !== "todos") {
+        consultasFiltradas = consultas.filter(consulta => consulta.status === filtroStatus);
+    }
+
     const inicio = paginaAtual * consultasPorPagina;
     const fim = inicio + consultasPorPagina;
-    const pagina = consultas.slice(inicio, fim);
-   
+    const pagina = consultasFiltradas.slice(inicio, fim);
+
     pagina.forEach((consulta, index) => {
-      const card = document.createElement("a");
-      card.href = `consulta.html?id=${inicio + index + 1}`;
-      card.className = "consulta-card-link";
-      card.innerHTML = `
-        <div class="consulta-card">
-          <div class="consulta-box">
-            <div class="consulta-info">
-              <h2>Consulta com ${consulta.nome}</h2>
-              <p><strong>Data:</strong> ${consulta.data}</p>
-              <p><strong>Hora:</strong> ${consulta.hora}</p>
-              <p><strong>Especialidade:</strong> ${consulta.especialidade}</p>
+        const card = document.createElement("a");
+        card.href = `consulta.html?id=${inicio + index + 1}`;
+        card.className = "consulta-card-link";
+        card.innerHTML = `
+            <div class="consulta-card">
+                <div class="consulta-box">
+                    <div class="consulta-info">
+                        <h2>Consulta com ${consulta.nome}</h2>
+                        <p><strong>Data:</strong> ${consulta.data}</p>
+                        <p><strong>Hora:</strong> ${consulta.hora}</p>
+                        <p><strong>Especialidade:</strong> ${consulta.especialidade}</p>
+                    </div>
+                    <div class="consulta-acoes">
+                        <span class="status status-${consulta.status}">${capitalize(consulta.status)}</span>
+                    </div>
+                </div>
             </div>
-            <div class="consulta-acoes">
-              <span class="status status-${consulta.status}">${capitalize(consulta.status)}</span>
-            </div>
-          </div>
-        </div>
-      `;
-      lista.appendChild(card);
+        `;
+        lista.appendChild(card);
     });
-   
+
     document.getElementById("anterior").disabled = paginaAtual === 0;
-    document.getElementById("proximo").disabled = fim >= consultas.length;
-  }
-   
-  function capitalize(text) {
-    return text.charAt(0).toUpperCase() + text.slice(1);
-  }
-   
-  document.getElementById("anterior").addEventListener("click", () => {
+    document.getElementById("proximo").disabled = fim >= consultasFiltradas.length;
+}
+
+document.getElementById("anterior").addEventListener("click", () => {
     if (paginaAtual > 0) {
-      paginaAtual--;
-      renderizarConsultas();
+        paginaAtual--;
+        renderizarConsultas();
     }
-  });
-   
-  document.getElementById("proximo").addEventListener("click", () => {
+});
+
+document.getElementById("proximo").addEventListener("click", () => {
     if ((paginaAtual + 1) * consultasPorPagina < consultas.length) {
-      paginaAtual++;
-      renderizarConsultas();
+        paginaAtual++;
+        renderizarConsultas();
     }
-  });
-   
-  renderizarConsultas();
+});
+
+function capitalize(text) {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+// Inicializa a renderização das consultas
+renderizarConsultas();

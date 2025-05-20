@@ -5,6 +5,12 @@ import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.validator.constraints.br.CPF;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -64,7 +70,7 @@ public class Paciente{
     public String toString() {
         return "Paciente{" +
                 ", email='" + email + '\'' +
-                ", cpf='" + cpf + '\'' +
+               ", cpf='" + cpf + '\'' +
                 ", sexo=" + sexo +
                 ", telefone='" + telefone + '\'' +
                 ", nome='" + nome + '\'' +
@@ -74,11 +80,6 @@ public class Paciente{
                 ", endereco=" + endereco +
                 '}';
     }
-
-
-
-
-
 
     public int getId() {
         return id;

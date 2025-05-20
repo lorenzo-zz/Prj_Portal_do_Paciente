@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 CREATE OR REPLACE PROCEDURE proc_t09a_cadastro_paciente
 (
   p_email            IN VARCHAR2,
@@ -10,6 +11,18 @@ CREATE OR REPLACE PROCEDURE proc_t09a_cadastro_paciente
   p_ativo            IN CHAR DEFAULT 'S',
   p_data_cadastro    IN DATE DEFAULT SYSDATE
 )
+=======
+create or replace PROCEDURE proc_t09a_cadastro_paciente
+( p_email    IN VARCHAR2,
+  p_senha    IN VARCHAR2,
+  p_cpf      IN VARCHAR2,
+  p_sexo     IN CHAR,
+  p_telefone IN VARCHAR2,
+  p_nome IN VARCHAR2,
+  p_ativo IN CHAR DEFAULT 'S',
+  p_data_cadastro IN DATE DEFAULT SYSDATE,
+  p_data_nascimento IN DATE)
+>>>>>>> e8be7de3296ca75080b615bd2d04d03c5aeaccb3
 AS
     v_nome VARCHAR2(100);
     v_cpf VARCHAR2(11);
@@ -36,7 +49,11 @@ BEGIN
         RAISE_APPLICATION_ERROR(-20003, v_erro3);
     END IF;
 
+<<<<<<< HEAD
     INSERT INTO t09a_paciente (CPF, DATA_NASCIMENTO, EMAIL, NOME, SENHA, SEXO, TELEFONE, ATIVO, DATA_CADASTRO )
+=======
+    INSERT INTO t09a_paciente (CPF, DATA_NASCIMENTO, EMAIL, NOME, SENHA, SEXO, TELEFONE, ATIVO, DATA_CADASTRO)
+>>>>>>> e8be7de3296ca75080b615bd2d04d03c5aeaccb3
     VALUES(p_cpf, p_data_nascimento, p_email, p_nome, p_senha, p_sexo, p_telefone, p_ativo, p_data_cadastro);
 
 EXCEPTION
@@ -46,6 +63,7 @@ EXCEPTION
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('Erro inesperado: ' || SQLERRM);
         RAISE_APPLICATION_ERROR(-20005, 'Erro inesperado: ' || SQLERRM);
+<<<<<<< HEAD
 END proc_t09a_cadastro_paciente;
 CREATE OR REPLACE PROCEDURE proc_t09a_cadastro_paciente
 (
@@ -97,3 +115,6 @@ EXCEPTION
         RAISE_APPLICATION_ERROR(-20005, 'Erro inesperado: ' || SQLERRM);
 END proc_t09a_cadastro_paciente;/
 /
+=======
+END proc_t09a_cadastro_paciente;
+>>>>>>> e8be7de3296ca75080b615bd2d04d03c5aeaccb3

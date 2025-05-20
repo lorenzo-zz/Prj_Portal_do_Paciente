@@ -1,4 +1,5 @@
 CREATE OR REPLACE PROCEDURE proc_t09a_medico(
+<<<<<<< HEAD
 
     p_nome IN VARCHAR2,
 
@@ -63,3 +64,26 @@ begin
     end;
 
     /
+=======
+    p_nome IN VARCHAR2,
+    p_ativo IN CHAR,
+    p_especificacao_medico IN VARCHAR2
+)
+AS
+BEGIN
+    INSERT INTO t09a_medico (NOME, ATIVO, ESPECIFICACAO_MEDICO)
+    VALUES (
+        p_nome,
+        P_ativo,
+        p_especificacao_medico
+    );
+END proc_t09a_medico;
+
+begin
+    proc_t09a_medico(
+    'Dr. Mamilecos Oliveira',
+    'S',
+    'CARDIOLOGIA');
+    end;
+    /
+>>>>>>> e8be7de3296ca75080b615bd2d04d03c5aeaccb3

@@ -4,6 +4,36 @@
   box-sizing: border-box;
 }
 
+.page_navigator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  background: #cfcfcf;
+  width: 100%;
+  width: auto;
+}
+
+.page_navigator a {
+  text-decoration: none;
+  color: #003f8a;
+  font-size: 1.25em;
+  padding: 10px 16px;
+  border-radius: 5px;
+  border: 1.5px solid transparent;
+}
+
+.page_navigator a:hover {
+  color: #fff;
+  background-color: rgb(8,52,124,0.8);
+}
+
+.page_navigator p {
+  font-size: 1.25em;
+  color: #003f8a;
+  margin: 0 10px;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -89,3 +119,4 @@
   color: white;
   text-decoration:underline;
 }
+
