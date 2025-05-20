@@ -2,6 +2,7 @@ package com.example.oracleapi.Entity;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.validator.constraints.br.CPF;
 import jakarta.validation.constraints.Email;
@@ -53,6 +54,7 @@ public class Paciente{
     private LocalDate dataNascimento;
 
     private char ativo;
+
     private LocalDate dataCadastro;
 
     @ManyToOne
@@ -72,6 +74,11 @@ public class Paciente{
                 ", endereco=" + endereco +
                 '}';
     }
+
+
+
+
+
 
     public int getId() {
         return id;
