@@ -60,7 +60,8 @@ public class Paciente{
     private LocalDate dataNascimento;
 
     @NotBlank
-    private String documento;
+    @Size(min = 500, max = 500)
+    private String docgitumento;
 
     private char ativo;
 
