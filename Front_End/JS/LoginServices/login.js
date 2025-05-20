@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {  // espera o html ca
         }; 
 
         // Envia dados para o backend
-        fetch('http://localhost:8080/api/login', {
+        fetch('http://localhost:8080/autenticar/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

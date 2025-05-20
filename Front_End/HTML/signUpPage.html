@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
   <meta charset="UTF-8" />
@@ -17,7 +17,7 @@
 
         <h2>Dados Pessoais:</h2>
 
-        <div class="erroCadastrar">
+        <div class="erroCadastrar" style="display: none;">
           <p>Erro ao cadastrar as informações pessoais!</p>
         </div>
 
@@ -26,11 +26,11 @@
         </div>
 
         <div class="caixa_input">
-          <input type=" number" name="cpf" id="cpf" required placeholder="CPF: (ex: 123.456.789-99)" maxlength="11" />
+          <input type="number" name="cpf" id="cpf" required placeholder="CPF: (ex: 123.456.789-99)" maxlength="11" />
         </div>
 
         <div class="caixa_input">
-          <input type="tel" s name="telefone" id="telefone" required placeholder="Telefone: (99) 12345-6789"
+          <input type="tel" name="telefone" id="telefone" required placeholder="Telefone: (99) 12345-6789"
             maxlength="11">
         </div>
 
@@ -40,8 +40,8 @@
 
         <div class="radio_sexo">
           <label for="sexo">Sexo: </label>
-          <input type="radio" name="sexo" id="sexo" value="M" required> Masculino
-          <input type="radio" name="sexo" id="sexo" value="F"> Feminino
+          <input type="radio" name="sexo" id="sexo_m" value="M" required> Masculino
+          <input type="radio" name="sexo" id="sexo_f" value="F"> Feminino
         </div>
 
         <div class="dt_nascimento">
@@ -50,20 +50,22 @@
         </div>
 
         <div class="input_doc">
-          <input type="file" name="documento" id="documento" accept="image" placeholder="Enviar documento" required>
+          <input type="file" name="documento" id="documento" accept="image/*" placeholder="Enviar documento" required>
         </div>
 
         <div class="caixa_input">
           <input type="password" name="senha" id="senha" required placeholder="Senha" maxlength="30">
         </div>
+
         <div class="caixa_input">
           <input type="password" name="confirmar_senha" id="confirmar_senha" required placeholder="Confirmar Senha"
             maxlength="30">
         </div>
+
+        <button type="submit">Registrar</button>
       </form>
     </div>
-
-    <button type="submit">Registrar</button>
+    <script src="/Front_End/JS/CadastroServices/cadastro.js"></script>
   </div>
 </body>
 
