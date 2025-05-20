@@ -35,6 +35,8 @@ public class RequisicaoExame {
     private int id;
     @NotNull
     private LocalDate dataRequisicao;
+    @NotNull
+    private LocalDate horaRequisicao;
     @NotBlank
     @Size(max = 500, message = "A descrição deve ter no máximo 500 caracteres")
     private String descricao;
