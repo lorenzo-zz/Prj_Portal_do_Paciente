@@ -59,12 +59,17 @@ public class Paciente{
     @NotNull
     private LocalDate dataNascimento;
 
+    @NotBlank
+    private String documento;
+
     private char ativo;
 
     private LocalDate dataCadastro;
 
     @ManyToOne
     private Endereco endereco;
+
+
 
     @Override
     public String toString() {
