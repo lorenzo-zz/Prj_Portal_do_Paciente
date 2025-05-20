@@ -29,24 +29,12 @@ public class LoginService {
             stmt.setString(1, paciente.getEmail());
             stmt.setString(2, paciente.getSenha());
             stmt.setString(3, paciente.getCpf());
-            stmt.setString(4, String.valueOf(paciente.getSexo())); // CHAR
+            stmt.setString(4, String.valueOf(paciente.getSexo()));
             stmt.setString(5, paciente.getTelefone());
             stmt.setString(6, paciente.getNome());
-            stmt.setString(7, String.valueOf(paciente.getAtivo())); // CHAR
-
-            // Data cadastro (parâmetro 8)
-            if (paciente.getDataCadastro() != null) {
-                stmt.setDate(8, java.sql.Date.valueOf(paciente.getDataCadastro()));
-            } else {
-                stmt.setNull(8, java.sql.Types.DATE);
-            }
-
-            // Data nascimento (parâmetro 9)
-            if (paciente.getDataNascimento() != null) {
-                stmt.setDate(9, java.sql.Date.valueOf(paciente.getDataNascimento()));
-            } else {
-                stmt.setNull(9, java.sql.Types.DATE);
-            }
+            stmt.setString(7, String.valueOf(paciente.getAtivo()));
+            stmt.setDate(8, java.sql.Date.valueOf(paciente.getDataCadastro()));
+            stmt.setDate(9, java.sql.Date.valueOf(paciente.getDataNascimento()));
 
             stmt.execute();
         } catch (SQLException e) {
