@@ -361,3 +361,7 @@ document.getElementById("exames-form").addEventListener("submit", function(event
 
  alert(`Solicitação de exame enviada!\n\nTipo: ${tipoExame}\nMédico: ${medicoSolicitante}\nData: ${dataSolicitacao}`);
 });
+
+function limparFormulario() {
+  document.getElementById("exames-form").reset();
+}
