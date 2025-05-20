@@ -17,21 +17,21 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/autenticar")
 public class LoginController {
-    
+
     @Autowired
     private LoginService loginService;
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<Map<String,String>> cadastrar(@RequestBody @Valid Paciente paciente){
+    public ResponseEntity<Map<String, String>> cadastrar(@RequestBody @Valid Paciente paciente) {
 
-        try{
+        try {
             loginService.cadastrar(paciente);
             return ResponseEntity.status(200).body(Map.of("message", "Usuário cadastrado com sucesso!"));
-        }catch(CadastroException e){
+        } catch (CadastroException e) {
             throw new CadastroException("Erro ao cadastrar usuário: " + e.getMessage());
-        }catch(SQLException e){
+        } catch (SQLException e) {
             throw new CadastroException("Erro com o banco de dados: " + e.getMessage());
-        }catch(Exception e){
+        } catch (Exception e) {
             throw new CadastroException("Erro genérico: " + e.getMessage());
         }
     }
@@ -44,9 +44,9 @@ public class LoginController {
 
         }catch(CadastroException e){
             throw new LoginException("Erro ao logar usuário: " + e.getMessage());
-        }catch(SQLException e){
+        } catch (SQLException e) {
             throw new CadastroException("Erro com o banco de dados: " + e.getMessage());
-        }catch(Exception e){
+        } catch (Exception e) {
             throw new CadastroException("Erro genérico: " + e.getMessage());
         }
     }

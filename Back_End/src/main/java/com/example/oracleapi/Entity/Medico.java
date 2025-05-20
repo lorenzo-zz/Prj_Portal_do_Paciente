@@ -33,5 +33,7 @@ public class Medico {
     @Enumerated(EnumType.STRING)
     private EspecificacaoMedico especificacaoMedico;
 
-    // crm
+    @NotBlank
+    @Size(max = 15, message = "O CRM deve ter no máximo 15 caracteres")
+    private String crm;
 }

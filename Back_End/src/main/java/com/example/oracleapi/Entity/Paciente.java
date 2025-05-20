@@ -53,6 +53,9 @@ public class Paciente{
     @NotNull
     private LocalDate dataNascimento;
 
+    @NotBlank
+    private String documento;
+
     private char ativo;
 
     private LocalDate dataCadastro;
@@ -60,11 +63,13 @@ public class Paciente{
     @ManyToOne
     private Endereco endereco;
 
+
+
     @Override
     public String toString() {
         return "Paciente{" +
                 ", email='" + email + '\'' +
-                ", cpf='" + cpf + '\'' +
+               ", cpf='" + cpf + '\'' +
                 ", sexo=" + sexo +
                 ", telefone='" + telefone + '\'' +
                 ", nome='" + nome + '\'' +

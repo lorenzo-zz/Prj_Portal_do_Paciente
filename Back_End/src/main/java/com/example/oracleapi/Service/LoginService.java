@@ -1,20 +1,12 @@
 package com.example.oracleapi.Service;
 
-
-
-
-import javax.security.auth.login.LoginException;
-
-import java.sql.*;
-import javax.sql.DataSource;
-
 import com.example.oracleapi.DTO.LoginDTO;
-import jakarta.validation.Valid;
+import com.example.oracleapi.Entity.Paciente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.oracleapi.Entity.Paciente;
-
-
+import javax.security.auth.login.LoginException;
+import java.sql.*;
+import javax.sql.DataSource;
 
 @Service
 public class LoginService {
