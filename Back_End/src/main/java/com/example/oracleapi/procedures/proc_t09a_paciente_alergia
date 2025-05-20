@@ -1,0 +1,30 @@
+CREATE OR REPLACE PROCEDURE proc_t09a_paciente_alergia(
+    p_descricao       IN VARCHAR2,
+    p_nome_alergia    IN VARCHAR2,
+    p_idPaciente      IN INT
+)
+AS
+    v_count INTEGER;
+BEGIN
+    -- Verifica se já existe a alergia para o mesmo paciente
+    SELECT COUNT(*) INTO v_count
+    FROM t09a_paciente_alergia
+    WHERE paciente_id = p_idPaciente
+      AND UPPER(nome) = UPPER(p_nome_alergia);
+
+    IF v_count = 0 THEN
+        INSERT INTO t09a_paciente_alergia (paciente_id, descricao, nome)
+        VALUES (p_idPaciente, UPPER(p_descricao), UPPER(p_nome_alergia));
+    ELSE
+        RAISE_APPLICATION_ERROR(-20001, 'Alergia já cadastrada para este paciente.');
+    END IF;
+END;
+/
+
+begin
+proc_t09a_paciente_alergia(
+    p_descricao     => 'Reação intensa na pele',
+    p_nome_alergia  => 'ALERGIA_ALIMENTAR',
+    p_idPaciente    => 11
+    );
+end;
