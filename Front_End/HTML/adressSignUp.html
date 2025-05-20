@@ -24,7 +24,8 @@
             <p>Erro ao cadastrar endereço!</p>
           </div>
 
-          <input type="number" name="cep" id="cep" required placeholder="CEP: (ex: 12345-678)" maxlength="8" />
+          <input type="text" name="cep" id="cep" required placeholder="CEP: (89085-124)" maxlength="8"
+            pattern="\d{8}" />
 
           <div class="cidade_estado">
 
@@ -74,10 +75,16 @@
           <input type="text" name="complemento" id="complemento" placeholder="Complemento: Apto 101" maxlength="100" />
         </div>
 
+        <button type="submit">Registrar</button>
       </form>
     </div>
 
-    <button type="submit">Registrar</button>
+    <!--Js secundario formatação cep e numero da casa-->
+    <script src="/Front_End/JS/CadastroServices/cadastroEndereco/formatacaoCepNumero.js"></script>
+    <!--Js principal json-->
+    <script src="/Front_End/JS/CadastroServices/cadastroEndereco/enderecoCadastro.js"></script>
+
+
   </div>
 </body>
 
