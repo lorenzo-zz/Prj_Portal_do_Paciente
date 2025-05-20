@@ -76,10 +76,6 @@
             <scope>test</scope>
         </dependency>
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 642b8e27e8c0e86f9658b356924cce7d31027c89
     </dependencies>
 
     <build>
