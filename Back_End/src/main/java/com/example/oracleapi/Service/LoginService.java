@@ -43,6 +43,7 @@ public class LoginService {
             stmt.setString(7, null); // ativo
             stmt.setDate(8, java.sql.Date.valueOf(paciente.getDataNascimento()));       
             stmt.execute();
+
         } catch (SQLException e) {
             throw new SQLException("Erro ao cadastrar paciente: " + e.getMessage(), e);
         }
