@@ -46,5 +46,8 @@ public class RequisicaoExame {
     @NotNull
     @ManyToOne
     private MinhaConsulta minhaConsulta;
-
+    @NotBlank
+    private String tipoConvenio;
+    @NotBlank
+    private String nomeDocumento;
 }

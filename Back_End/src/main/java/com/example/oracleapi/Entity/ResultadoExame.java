@@ -29,7 +29,7 @@ public class ResultadoExame {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotBlank
-    private String resutlado;
+    private String resultado;
     @NotNull
     @OneToOne
     private RequisicaoExame solicitacaoExame;
