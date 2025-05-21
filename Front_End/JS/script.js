@@ -9,6 +9,9 @@ function updateIndicators() {
 
 function updateSlide() {
     const track = document.querySelector('.carousel-track');
+    
+    // força reflow (recalcula layout) antes de aplicar a transformação
+    track.offsetHeight; 
     track.style.transform = `translateX(-${currentIndex * 100}%)`;
     updateIndicators();
 }
@@ -29,7 +32,13 @@ function toggleMenu() {
     rightLinks.classList.toggle('active');
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    updateSlide(); // garante slide inicial
-    setInterval(() => moveSlide(1), 3000);
-});
+// Pré-carregamento com fallback para garantir que tudo está visível
+window.onload = () => {
+    // Aguarda o próximo frame para garantir layout estável
+    requestAnimationFrame(() => {
+        updateSlide(); // primeira exibição
+        setTimeout(() => {
+            setInterval(() => moveSlide(1), 3000); // inicia rotação
+        }, 100); // pequeno delay para estabilizar layout
+    });
+};
