@@ -24,6 +24,9 @@ document.addEventListener('DOMContentLoaded', function () {  //espera o html car
             
 
         };
+
+        console.log("Dados para cadastro de endereço:", cadastrarEndereco);
+
         //manda a validação de dados para o back  
         fetch('http://localhost:8080/autenticar/cadastrarEndereco', { //mudar o caminho
             method: 'POST',

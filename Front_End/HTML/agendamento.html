@@ -17,6 +17,12 @@
     </nav>
   </header>
 
+  <div class="page_navigator">
+        <a href="../HTML/index.html">Portal do Paciente</a>
+        <p>/</p>
+        <p>Agendamentos</p>
+    </div>
+
 
   <div class="title-area">
     <div class="title-with-image">
@@ -67,7 +73,9 @@
       <div class="form-group">
         <label for="email">E-mail:</label>
         <input type="email" id="email" name="email" required placeholder="Email: exemplo@email.com" maxlength="100" />
-      </div>
+      </div>  
+
+    <button type="button" class="limpar-btn" onclick="limparFormulario()">Limpar Formulário</button>
 
       <button type="submit" class="solicitar-btn">Agendar Consulta</button>
     </form>

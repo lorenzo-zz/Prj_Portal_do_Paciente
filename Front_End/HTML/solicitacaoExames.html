@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Solicitação de Exames - Portal do Paciente</title>
   <link rel="stylesheet" href="/Front_End/CSS/global.css" />
   <link rel="stylesheet" href="/Front_End/CSS/solicitacaoExames.css" />
   <link rel="shortcut icon" href="/Front_End/img/LogoPortalApenasRedondoFundoBranco.png" type="image/x-icon">
 </head>
+
 <body>
- 
+
   <header class="navbar">
     <nav>
       <a href="index.html">Portal Do Paciente</a>
     </nav>
   </header>
 
- 
+  <div class="page_navigator">
+    <a href="../HTML/index.html">Portal do Paciente</a>
+    <p>/</p>
+    <p>Solicitação de Exames</p>
+  </div>
+
   <div class="title-area">
     <div class="title-with-image">
       <img src="/Front_End/img/logoSemEscrita.png" alt="Ícone de Exames" class="titulo-img" />
@@ -24,55 +31,58 @@
     </div>
     <p>Solicite seus exames médicos de forma rápida e segura</p>
   </div>
- 
+
   <main class="exames-container">
     <form id="exames-form">
       <div class="form-group">
         <label for="nome-paciente">Nome Completo:</label>
         <input type="text" id="nome-paciente" name="nome-paciente" required />
       </div>
- 
+
       <div class="form-group">
         <label for="cpf-paciente">CPF:</label>
         <input type="text" id="cpf-paciente" name="cpf-paciente" required />
       </div>
- 
+
       <div class="form-group">
         <label for="tipo-exame">Tipo de Exame:</label>
         <select id="tipo-exame" name="tipo-exame">
           <option value="" selected disabled>Selecione um tipo de exame</option>
         </select>
       </div>
- 
+
       <div class="form-group">
         <label for="convenio">Convênio / Plano de Saúde:</label>
         <input type="text" id="convenio" name="convenio" />
       </div>
- 
+
       <div class="form-group">
         <label for="telefone">Telefone:</label>
         <input type="tel" id="telefone" name="telefone" required />
       </div>
- 
+
       <div class="form-group">
         <label for="email">E-mail:</label>
         <input type="email" id="email" name="email" required />
       </div>
 
       <div class="form-group">
-        <label for="anexar-arquivo">Anexar Arquivo (opcional):</label>
+        <label for="anexar-arquivo">Anexar Guia de Solicitação do Exame:</label>
         <input type="file" id="anexar-arquivo" name="anexar-arquivo" />
       </div>
- 
+
       <div class="form-group">
         <label for="observacoes">Observações:</label>
         <textarea id="observacoes" name="observacoes" rows="4"></textarea>
       </div>
- 
+
+      <button type="button" class="limpar-btn" onclick="limparFormulario()">Limpar Formulário</button>
+
       <button type="submit" class="solicitar-btn">Solicitar Exame</button>
     </form>
   </main>
- 
+
   <script src="/Front_End/JS/solicitacaoExames.js"></script>
 </body>
+
 </html>

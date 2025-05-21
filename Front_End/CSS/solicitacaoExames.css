@@ -3,6 +3,7 @@ body {
     background-color: #f4f7fb;
     margin: 0;
     padding: 0;
+    user-select: none;
   }
    
   .exames-container {
@@ -80,7 +81,7 @@ body {
    
   .title-with-image h1 {
     font-size: 4rem;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
    
   .title-area p {
@@ -110,3 +111,22 @@ body {
       padding: 12px;
     }
   }
+
+.limpar-btn {
+  background-color: #f0f8ff; /* Branco azulado (tom suave) */
+  color: #023279; /* Azul escuro para o texto */
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+  border: 1.5px solid #005fc5; /* Borda azul para um toque refinado */
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.limpar-btn:hover {
+  background-color: #e0efff; /* Um tom mais intenso ao passar o mouse */
+  transform: scale(1.05);
+}
+

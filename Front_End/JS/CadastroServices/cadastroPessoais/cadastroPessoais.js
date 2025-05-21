@@ -6,11 +6,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const cpf = document.getElementById('cpf').value;
     const telefone = document.getElementById('telefone').value;
     const email = document.getElementById('email').value;
-
     const sexoInput = document.querySelector('input[name="sexo"]:checked'); //verifica qual dos botões está selecionado masculino ou feminino
     const sexo = sexoInput ? sexoInput.value : '';
-
     const dt_nascimento = document.getElementById('dt_nascimento').value;
+    const documento = document.getElementById('documento').value;
     const senha = document.getElementById('senha').value;
 
     if (!sexo) {
@@ -19,13 +18,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const cadastrarInfPessoais = {
-      nome,
-      cpf,
-      email,
-      telefone,
-      sexo,
+      nome: nome,
+      cpf: cpf,
+      email: email,
+      telefone: telefone,
+      sexo: sexo,
       dataNascimento: dt_nascimento,
-      senha
+      documento: documento,
+      senha: senha,
     };
 
     console.log("Dados para cadastro:", cadastrarInfPessoais);

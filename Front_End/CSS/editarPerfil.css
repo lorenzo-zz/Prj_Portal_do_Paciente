@@ -1,7 +1,9 @@
 body {
     margin: 0;
-    background-color: #e2e8f0;
+    background-color: #f4f7fb;
     font-family: Arial, sans-serif;
+    user-select: none;
+
 }
 
 .container {

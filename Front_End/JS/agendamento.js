@@ -36,3 +36,7 @@ function fecharModal() {
   document.getElementById("modal-alerta").classList.add("hidden");
 }
 
+function limparFormulario() {
+  document.getElementById("consulta-form").reset();
+}
+
