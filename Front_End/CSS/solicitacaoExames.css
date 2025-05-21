@@ -3,6 +3,7 @@ body {
     background-color: #f4f7fb;
     margin: 0;
     padding: 0;
+    user-select: none;
   }
    
   .exames-container {
@@ -80,7 +81,7 @@ body {
    
   .title-with-image h1 {
     font-size: 4rem;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
    
   .title-area p {

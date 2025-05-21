@@ -1,18 +1,12 @@
 package com.example.oracleapi.Service;
 
-
 import com.example.oracleapi.DTO.LoginDTO;
 import com.example.oracleapi.Entity.Paciente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.security.auth.login.LoginException;
+import java.sql.*;
 import javax.sql.DataSource;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.SQLException;
-
-
 
 @Service
 public class LoginService {
@@ -23,15 +17,17 @@ public class LoginService {
 
     public void cadastrar(Paciente paciente) throws SQLException {
         try (Connection conn = dataSource.getConnection();
-             CallableStatement stmt = conn.prepareCall("{call proc_t09a_cadastro_paciente(?, ?, ?, ?, ?, ?, ?)}")){
+             CallableStatement stmt = conn.prepareCall("{call proc_t09a_cadastro_paciente (?,?,?,?,?,?,?,?,?)}") ){
 
-             stmt.setString(1, paciente.getEmail());
-             stmt.setString(2, paciente.getSenha());
-             stmt.setString(3, paciente.getCpf());
-             stmt.setString(4, String.valueOf(paciente.getSexo())); // CHAR
-             stmt.setString(5, paciente.getTelefone());
-             stmt.setString(6, paciente.getNome());
-             stmt.setDate(7, java.sql.Date.valueOf(paciente.getDataNascimento()));
+            stmt.setString(1, paciente.getEmail());
+            stmt.setString(2, paciente.getSenha());
+            stmt.setString(3, paciente.getCpf());
+            stmt.setString(4, String.valueOf(paciente.getSexo()));
+            stmt.setString(5, paciente.getTelefone());
+            stmt.setString(6, paciente.getNome());
+            stmt.setString(7, "S"); // ativo
+            stmt.setNull(8, java.sql.Types.DATE); // data_cadastro
+            stmt.setDate(9, java.sql.Date.valueOf(paciente.getDataNascimento()));
 
             stmt.execute();
         } catch (SQLException e) {

@@ -6,6 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="shortcut icon" href="/Front_End/img/LogoPortalApenasRedondoFundoBranco.png" type="image/x-icon">
   <link rel="stylesheet" href="../CSS/signUpPage.css" />
+  <!--js secudanrio cpf e numero-->
+  <script src="../JS/CadastroServices/cadastroPessoais/formatacaoCpfNumero.js"></script>
+  <!-- JS principal json -->
+  <script src="../JS/CadastroServices/cadastroPessoais/cadastroPessoais.js"></script>
   <title>Sign Up</title>
 </head>
 
@@ -26,11 +30,13 @@
         </div>
 
         <div class="caixa_input">
-          <input type="text" name="cpf" id="cpf" required placeholder="CPF: (somente números)" maxlength="11" pattern="\d{11}" />
+          <input type="text" name="cpf" id="cpf" required placeholder="CPF: (somente números)" maxlength="11"
+            pattern="\d{11}" />
         </div>
 
         <div class="caixa_input">
-          <input type="text" name="telefone" id="telefone" required placeholder="Telefone: (somente números)" maxlength="11" pattern="\d{10,11}" />
+          <input type="text" name="telefone" id="telefone" required placeholder="Telefone: (somente números)"
+            maxlength="11" pattern="\d{10,11}" />
         </div>
 
         <div class="caixa_input">
@@ -57,26 +63,15 @@
         </div>
 
         <div class="caixa_input">
-          <input type="password" name="confirmar_senha" id="confirmar_senha" required placeholder="Confirmar Senha" maxlength="30">
+          <input type="password" name="confirmar_senha" id="confirmar_senha" required placeholder="Confirmar Senha"
+            maxlength="30">
         </div>
 
         <button type="submit">Registrar</button>
       </form>
     </div>
 
-    <!-- Scripts para impedir letras nos campos numéricos -->
-    <script>
-      document.getElementById('cpf').addEventListener('input', function () {
-        this.value = this.value.replace(/\D/g, '');
-      });
 
-      document.getElementById('telefone').addEventListener('input', function () {
-        this.value = this.value.replace(/\D/g, '');
-      });
-    </script>
-
-    <!-- Seu JS principal -->
-    <script src="/Front_End/JS/CadastroServices/cadastro.js"></script>
   </div>
 </body>
 
