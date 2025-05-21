@@ -64,19 +64,10 @@
       </form>
     </div>
 
-    <!-- Scripts para impedir letras nos campos numéricos -->
-    <script>
-      document.getElementById('cpf').addEventListener('input', function () {
-        this.value = this.value.replace(/\D/g, '');
-      });
-
-      document.getElementById('telefone').addEventListener('input', function () {
-        this.value = this.value.replace(/\D/g, '');
-      });
-    </script>
-
-    <!-- Seu JS principal -->
-    <script src="/Front_End/JS/CadastroServices/cadastro.js"></script>
+    <!--js secudanrio cpf e numero-->
+    <script src="/Front_End/JS/CadastroServices/cadastroPessoais/formatacaoCpfNumero.js"></script>
+    <!-- JS principal json -->
+    <script src="/Front_End/JS/CadastroServices/cadastroPessoais/cadastroPessoais.js"></script>
   </div>
 </body>
 

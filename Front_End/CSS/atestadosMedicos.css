@@ -44,6 +44,8 @@ button:hover {
 
 body {
     background-color: #f2f6fa;
+    user-select: none;
+
 }
 
 .title-area {

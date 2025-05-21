@@ -1,36 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
+ 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="shortcut icon" href="/Front_End/img/LogoPortalApenasRedondoFundoBranco.png" type="image/x-icon">
   <link rel="stylesheet" href="../CSS/cadastroAlergias.css" />
-  <link rel="script" href="../JS/cadastroAlergias.js">
   <title>Cadastro Alergias -  Portal do Paciente</title>
-
+ 
 </head>
-
+ 
 <body>
   <div class="form-container">
     <div class="form_alergias">
-
+ 
       <form id="alergiaCadastro">
-
+ 
         <a href="index.html"><img src="../img/logoLogin.png" alt=""></a>
         <div class="alergias">
           <h2>Selecione suas alergias:</h2>
-
+ 
           <div class="erroCadastrarAlergia">
             <p>Erro ao cadastrar alergia!</p>
           </div>
-
+ 
           <div id="alergiasSelecionadas"></div>
-            <script src="../JS/cadastroAlergias.js"></script>
           </div>
         </form>
     </div>
-      <button type="submit">Confirmar</button>
           <br>
           <select id="alergiaSelect">
             <option value="" disabled selected>Escolha uma alergia</option>
@@ -94,18 +91,19 @@
             <option value="Lustradores">Lustradores</option>
             <option value="Produtos capilares">Produtos capilares</option>
           </select>
-
+ 
           <button type="button" onclick="adicionarAlergia()">Adicionar</button>
-
-
-
-          <script src="../../JS/cadastroAlergias.js"></script>
+ 
+ 
+          <button type="submit">Confirmar</button>
+          <script src="/Front_End/JS/CadastroServices/cadastroAlergia/cadastroAlergias.js"></script>
         </div>
       </form>
-
+ 
     </div>
-    <button type="submit">Confirmar</button>
+   
   </div>
 </body>
-
+ 
 </html>
+ 

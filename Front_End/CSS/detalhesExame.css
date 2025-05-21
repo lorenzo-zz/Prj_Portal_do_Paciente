@@ -1,0 +1,114 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f7fb;
+  margin: 0;
+  padding: 0;
+}
+
+.detalhes-container {
+  max-width: 40%;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  border-left: 6px solid #003f8a;
+}
+
+.resultado-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.detail-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-group label {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #023279;
+}
+
+.detail-group p {
+  background-color: #f0f0f0;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Botão voltar */
+.voltar-btn {
+  background-color: #005fc5;
+  color: white;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.voltar-btn:hover {
+  background-color: #004a9f;
+  transform: scale(1.05);
+}
+
+/* Título e imagem */
+.title-area {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.title-with-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #023279;
+}
+
+.title-with-image img {
+  width: 120px;
+  height: 120px;
+  margin-right: 15px;
+}
+
+.title-with-image h1 {
+  font-size: 4rem;
+  margin-bottom: 12px;
+  color: #023279;
+}
+
+.title-area p {
+  font-size: 1.4rem;
+  color: #4a4a4a;
+  margin-top: 12px;
+  text-align: center;
+  
+}
+
+
+@media (max-width: 768px) {
+  .detalhes-container {
+    max-width: 90%;
+    padding: 20px;
+  }
+  
+  .detail-group p {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+  
+  .voltar-btn {
+    font-size: 1rem;
+    padding: 12px;
+  }
+}
