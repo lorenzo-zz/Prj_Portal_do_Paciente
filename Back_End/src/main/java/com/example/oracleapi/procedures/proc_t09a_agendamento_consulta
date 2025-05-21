@@ -1,0 +1,39 @@
+create or replace PROCEDURE proc_t09a_agendamento_consulta (
+    p_descricao    IN VARCHAR2,
+    p_dataDia      IN DATE,
+    p_dataHora     IN DATE,
+    p_idPaciente   IN INT,
+    p_especificacaoMedico in varchar2
+)
+AS
+    v_countMesmoHorario         INT;
+    v_countIntervaloProibido    INT;
+    v_dataHoraConsulta          DATE;
+BEGIN
+    v_dataHoraConsulta := TO_DATE(TO_CHAR(p_dataDia, 'DD/MM/YYYY') || ' ' || TO_CHAR(p_dataHora, 'HH24:MI'), 'DD/MM/YYYY HH24:MI');
+
+    SELECT COUNT(*) INTO v_countMesmoHorario
+    FROM t09a_agendamento_consulta
+    WHERE HORA = p_dataHora
+      AND DATA = p_dataDia;
+
+    IF v_countMesmoHorario > 0 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Já possui um paciente nesse horário!');
+    END IF;
+
+    SELECT COUNT(*) INTO v_countIntervaloProibido
+    FROM t09a_agendamento_consulta
+    WHERE ABS(
+        (v_dataHoraConsulta - 
+         TO_DATE(TO_CHAR(DATA, 'DD/MM/YYYY') || ' ' || TO_CHAR(HORA, 'HH24:MI'), 'DD/MM/YYYY HH24:MI')
+        ) * 24
+    ) < 1;
+
+    IF v_countIntervaloProibido > 0 THEN
+        RAISE_APPLICATION_ERROR(-20002, 'Não é possível agendar consulta com intervalo menor que 1 hora.');
+    END IF;
+
+    INSERT INTO t09a_agendamento_consulta (DATA, HORA, PACIENTE_ID, DESCRICAO, ESPECIFICACAO_MEDICO)
+    VALUES (p_dataDia, p_dataHora, p_idPaciente, p_descricao, p_especificacaoMedico);
+
+END proc_t09a_agendamento_consulta;

@@ -89,7 +89,7 @@ function renderizarConsultas() {
 
     pagina.forEach((consulta, index) => {
         const card = document.createElement("a");
-        card.href = `consulta.html?id=${inicio + index + 1}`;
+        card.href = `dadosConsulta.html?id=${inicio + index + 1}`;
         card.className = "consulta-card-link";
         card.innerHTML = `
             <div class="consulta-card">
