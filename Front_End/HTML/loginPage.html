@@ -1,38 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="shortcut icon" href="/Front_End/img/LogoPortalApenasRedondoFundoBranco.png" type="image/x-icon">
+  <link rel="shortcut icon" href="/Front_End/img/LogoPortalApenasRedondoFundoBranco.png" type="image/x-icon">
+  <link rel="stylesheet" href="/Front_End/CSS/loginPage.css">
+  <script src="/Front_End/JS/LoginServices/formataçãoCpf.js"></script>
 
-
-    <link rel="stylesheet" href="/Front_End/CSS/loginPage.css">
-    <title>SignIn</title>
+  <title>SignIn</title>
 </head>
+
 <body>
-    <div class="form-container">
-      <a href="index.html"><img src="/Front_End/img/logoLogin.png"></a>
-        <form>
-            <input type="text" name="cpf" id="cpf" required placeholder="CPF: (somente números)" maxlength="11" pattern="\d{11}" />
-            <input type="password" placeholder="Senha" required> 
+  <div class="form-container">
+    <a href="index.html"><img src="/Front_End/img/logoLogin.png"></a>
+    <form>
+      <input type="text" name="cpf" id="cpf" required placeholder="CPF: (somente números)" maxlength="11"
+        pattern="\d{11}" />
+      <input type="password" placeholder="Senha" required>
 
-            <div class="erroLogin">
-                <p>Erro na autenticação!</p>
-            </div>
-            
-            <div class="btn-container">
-                <button type="submit">Entrar</button>
-                <button onclick="location.href='../HTML/signUpPage.html'">Cadastrar-se</button>
-            </div>
-        </form>
-    </div>
-      <!-- Scripts para impedir letras nos campos numéricos -->
-<script>
-      document.getElementById('cpf').addEventListener('input', function () {
-        this.value = this.value.replace(/\D/g, '');
-      });
+      <div class="erroLogin">
+        <p>Erro na autenticação!</p>
+      </div>
 
-</script>
+      <div class="btn-container">
+        <button type="submit">Entrar</button>
+        <button onclick="location.href='../HTML/signUpPage.html'">Cadastrar-se</button>
+      </div>
+    </form>
+  </div>
+
 </body>
+
 </html>
