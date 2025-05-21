@@ -9,13 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const sexoInput = document.querySelector('input[name="sexo"]:checked'); //verifica qual dos botões está selecionado masculino ou feminino
     const sexo = sexoInput ? sexoInput.value : '';
     const dt_nascimento = document.getElementById('dt_nascimento').value;
-    const documento = document.getElementById('documento').value;
     const senha = document.getElementById('senha').value;
-
-    if (!sexo) {
-      alert("Por favor, selecione o sexo.");
-      return;
-    }
 
     const cadastrarInfPessoais = {
       nome: nome,
@@ -24,20 +18,20 @@ document.addEventListener('DOMContentLoaded', function () {
       telefone: telefone,
       sexo: sexo,
       dataNascimento: dt_nascimento,
-      documento: documento,
-      senha: senha,
+      senha: senha
     };
 
-    console.log("Dados para cadastro:", cadastrarInfPessoais);
-
+    const formData = new FormData();
+    const arquivoInput = document.getElementById("arquivo");
+    const arquivo = arquivoInput.files[0];
+    formData.append("paciente", new Blob([JSON.stringify(cadastrarInfPessoais)], { type: "application/json" }));
+    formData.append("arquivo", arquivo);
 
     fetch('http://localhost:8080/autenticar/cadastrar', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(cadastrarInfPessoais)
+      body: formData
     })
+
       .then(async response => {
         if (!response.ok) {
           const errorData = await response.json();
