@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="shortcut icon" href="/Front_End/img/LogoPortalApenasRedondoFundoBranco.png" type="image/x-icon">
   <link rel="stylesheet" href="../CSS/cadastroAlergias.css" />
-  <title>Cadastro Alergias -  Portal do Paciente</title>
+  <script src="../JS/CadastroServices/cadastroAlergia/cadastroAlergias.js"></script>
+  <title>Cadastro Alergias - Portal do Paciente</title>
  
 </head>
  
@@ -25,85 +26,81 @@
           </div>
  
           <div id="alergiasSelecionadas"></div>
-          </div>
-        </form>
-    </div>
-          <br>
-          <select id="alergiaSelect">
-            <option value="" disabled selected>Escolha uma alergia</option>
-            <option value="Alimentar">Alimentar</option>
-            <option value="Medicamentos">Medicamentos</option>
-            <option value="Respiratória">Respiratória</option>
-            <option value="Dermatológica">Dermatológica</option>
-            <option value="Ocular">Ocular</option>
-            <option value="Contactante">Contactante</option>
-            <option value="Látex">Látex</option>
-            <option value="Mofo">Mofo</option>
-            <option value="Poeira">Poeira</option>
-            <option value="Pólen">Pólen</option>
-            <option value="Animais">Animais</option>
-            <option value="Frutos do mar">Frutos do mar</option>
-            <option value="Lactose">Lactose</option>
-            <option value="Glúten">Glúten</option>
-            <option value="Ovo">Ovo</option>
-            <option value="Amendoim">Amendoim</option>
-            <option value="Soja">Soja</option>
-            <option value="Trigo">Trigo</option>
-            <option value="Nozes">Nozes</option>
-            <option value="Castanhas">Castanhas</option>
-            <option value="Frutas cítricas">Frutas cítricas</option>
-            <option value="Picada de insetos">Picada de insetos</option>
-            <option value="Abelha">Abelha</option>
-            <option value="Vespas">Vespas</option>
-            <option value="Perfumes">Perfumes</option>
-            <option value="Cosméticos">Cosméticos</option>
-            <option value="Detergentes">Detergentes</option>
-            <option value="Bebidas alcoólicas">Bebidas alcoólicas</option>
-            <option value="Cafeína">Cafeína</option>
-            <option value="Conservantes">Conservantes</option>
-            <option value="Corantes">Corantes</option>
-            <option value="Aditivos alimentares">Aditivos alimentares</option>
-            <option value="Sulfitos">Sulfitos</option>
-            <option value="Níquel">Níquel</option>
-            <option value="Cobalto">Cobalto</option>
-            <option value="Formaldeído">Formaldeído</option>
-            <option value="Fungos">Fungos</option>
-            <option value="Pelos">Pelos</option>
-            <option value="Ácaros">Ácaros</option>
-            <option value="Antiinflamatórios">Antiinflamatórios</option>
-            <option value="Antibióticos">Antibióticos</option>
-            <option value="Analgésicos">Analgésicos</option>
-            <option value="Penicilina">Penicilina</option>
-            <option value="AAS (Ácido Acetilsalicílico)">AAS (Ácido Acetilsalicílico)</option>
-            <option value="Insulina">Insulina</option>
-            <option value="Anticonvulsivantes">Anticonvulsivantes</option>
-            <option value="Anestésicos">Anestésicos</option>
-            <option value="Inibidores da enzima conversora">Inibidores da enzima conversora</option>
-            <option value="Vacinas">Vacinas</option>
-            <option value="Produtos de limpeza">Produtos de limpeza</option>
-            <option value="Tintas">Tintas</option>
-            <option value="Metal">Metal</option>
-            <option value="Fibras sintéticas">Fibras sintéticas</option>
-            <option value="Poeira doméstica">Poeira doméstica</option>
-            <option value="Plantas">Plantas</option>
-            <option value="Cereais">Cereais</option>
-            <option value="Azeites">Azeites</option>
-            <option value="Lustradores">Lustradores</option>
-            <option value="Produtos capilares">Produtos capilares</option>
-          </select>
- 
-          <button type="button" onclick="adicionarAlergia()">Adicionar</button>
- 
- 
-          <button type="submit">Confirmar</button>
-          <script src="/Front_End/JS/CadastroServices/cadastroAlergia/cadastroAlergias.js"></script>
         </div>
       </form>
- 
     </div>
-   
+    <br>
+    <select id="alergiaSelect">
+      <option value="" disabled selected>Escolha uma alergia</option>
+      <option value="Alimentar">Alimentar</option>
+      <option value="Medicamentos">Medicamentos</option>
+      <option value="Respiratória">Respiratória</option>
+      <option value="Dermatológica">Dermatológica</option>
+      <option value="Ocular">Ocular</option>
+      <option value="Contactante">Contactante</option>
+      <option value="Látex">Látex</option>
+      <option value="Mofo">Mofo</option>
+      <option value="Poeira">Poeira</option>
+      <option value="Pólen">Pólen</option>
+      <option value="Animais">Animais</option>
+      <option value="Frutos do mar">Frutos do mar</option>
+      <option value="Lactose">Lactose</option>
+      <option value="Glúten">Glúten</option>
+      <option value="Ovo">Ovo</option>
+      <option value="Amendoim">Amendoim</option>
+      <option value="Soja">Soja</option>
+      <option value="Trigo">Trigo</option>
+      <option value="Nozes">Nozes</option>
+      <option value="Castanhas">Castanhas</option>
+      <option value="Frutas cítricas">Frutas cítricas</option>
+      <option value="Picada de insetos">Picada de insetos</option>
+      <option value="Abelha">Abelha</option>
+      <option value="Vespas">Vespas</option>
+      <option value="Perfumes">Perfumes</option>
+      <option value="Cosméticos">Cosméticos</option>
+      <option value="Detergentes">Detergentes</option>
+      <option value="Bebidas alcoólicas">Bebidas alcoólicas</option>
+      <option value="Cafeína">Cafeína</option>
+      <option value="Conservantes">Conservantes</option>
+      <option value="Corantes">Corantes</option>
+      <option value="Aditivos alimentares">Aditivos alimentares</option>
+      <option value="Sulfitos">Sulfitos</option>
+      <option value="Níquel">Níquel</option>
+      <option value="Cobalto">Cobalto</option>
+      <option value="Formaldeído">Formaldeído</option>
+      <option value="Fungos">Fungos</option>
+      <option value="Pelos">Pelos</option>
+      <option value="Ácaros">Ácaros</option>
+      <option value="Antiinflamatórios">Antiinflamatórios</option>
+      <option value="Antibióticos">Antibióticos</option>
+      <option value="Analgésicos">Analgésicos</option>
+      <option value="Penicilina">Penicilina</option>
+      <option value="AAS (Ácido Acetilsalicílico)">AAS (Ácido Acetilsalicílico)</option>
+      <option value="Insulina">Insulina</option>
+      <option value="Anticonvulsivantes">Anticonvulsivantes</option>
+      <option value="Anestésicos">Anestésicos</option>
+      <option value="Inibidores da enzima conversora">Inibidores da enzima conversora</option>
+      <option value="Vacinas">Vacinas</option>
+      <option value="Produtos de limpeza">Produtos de limpeza</option>
+      <option value="Tintas">Tintas</option>
+      <option value="Metal">Metal</option>
+      <option value="Fibras sintéticas">Fibras sintéticas</option>
+      <option value="Poeira doméstica">Poeira doméstica</option>
+      <option value="Plantas">Plantas</option>
+      <option value="Cereais">Cereais</option>
+      <option value="Azeites">Azeites</option>
+      <option value="Lustradores">Lustradores</option>
+      <option value="Produtos capilares">Produtos capilares</option>
+    </select>
+ 
+    <button type="button" onclick="adicionarAlergia()">Adicionar</button>
+    <button type="submit">Confirmar</button>
+ 
   </div>
+  </form>
+  </div>
+  </div>
+ 
 </body>
  
 </html>
- 

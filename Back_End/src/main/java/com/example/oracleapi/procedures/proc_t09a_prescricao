@@ -1,25 +1,13 @@
-create or replace procedure proc_t09a_prescricao(
-p_remedio in varchar2,
-p_data in date,
-p_descricao in varchar2
+-- Ajustada 100% -- Testada
+
+
+CREATE OR REPLACE PROCEDURE proc_t09a_prescricao(
+    p_remedio IN VARCHAR2,
+    p_data IN DATE,
+    p_descricao IN VARCHAR2
 )
-as
-v_nome varchar2(200);
-v_descricao varchar2(200);
-
-begin
-
-insert into t09a_prescricao(DATA, DESCRICAO, REMEDIO)
-values(p_data,p_remedio,p_descricao);
-
-end;
-/
-
-
-begin
-proc_t09a_prescricao(
-    p_remedio     => 'Paracetamol 500mg',
-    p_data        => TO_DATE('19/05/2025', 'DD/MM/YYYY'),
-    p_descricao   => 'Tomar 1 comprimido a cada 6 horas se houver dor.'
-    );
-end;
+AS
+BEGIN
+    INSERT INTO t09a_prescricao(DATA, DESCRICAO, REMEDIO)
+    VALUES(p_data, p_descricao, p_remedio);
+END;
