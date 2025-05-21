@@ -16,8 +16,7 @@ public class WebConfig {
                 registry.addMapping("/**")
                         .allowedOrigins("http://10.125.5.217:5500/") // URL frontend
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
-                        .allowedHeaders("*")
-                        .allowCredentials(true);
+                        .allowedHeaders("*");
             }
         };
     }
