@@ -84,15 +84,18 @@ body {
 .title-with-image h1 {
   font-size: 4rem;
   margin-bottom: 12px;
+  color: #023279;
 }
 
 .title-area p {
   font-size: 1.4rem;
   color: #4a4a4a;
   margin-top: 12px;
+  text-align: center;
+  
 }
 
-/* Responsividade */
+
 @media (max-width: 768px) {
   .detalhes-container {
     max-width: 90%;
