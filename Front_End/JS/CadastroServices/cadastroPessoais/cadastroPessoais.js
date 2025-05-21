@@ -21,16 +21,14 @@ document.addEventListener('DOMContentLoaded', function () {
       senha: senha
     };
 
-    const arquivo = document.getElementById("arquivo");
     const formData = new FormData();
+    const arquivoInput = document.getElementById("arquivo");
+    const arquivo = arquivoInput.files[0];
     formData.append("paciente", new Blob([JSON.stringify(cadastrarInfPessoais)], { type: "application/json" }));
     formData.append("arquivo", arquivo);
 
     fetch('http://localhost:8080/autenticar/cadastrar', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
       body: formData
     })
 
