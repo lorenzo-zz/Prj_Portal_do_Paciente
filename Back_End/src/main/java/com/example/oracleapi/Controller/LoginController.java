@@ -23,12 +23,11 @@ public class LoginController {
     private LoginService loginService;
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<Map<String, String>> cadastrar(@RequestPart("paciente") @Valid Paciente paciente,
-                                                         @RequestParam("arquivo")  MultipartFile arquivo) {
-
+    public ResponseEntity<?> cadastrar(
+            @RequestPart("paciente") Paciente paciente,
+            @RequestPart("arquivo") MultipartFile arquivo) {
         try {
-            loginService.cadastrar(paciente);
-            loginService.salvarDocumento(paciente.getCpf(), arquivo);
+            loginService.cadastrar(paciente, arquivo);
             return ResponseEntity.status(200).body(Map.of("message", "Usuário cadastrado com sucesso!"));
         } catch (CadastroException e) {
             throw new CadastroException("Erro ao cadastrar usuário: " + e.getMessage());
@@ -40,12 +39,12 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String,String>> login(@RequestBody @Valid LoginDTO loginDTO) throws LoginException{
-        try{
+    public ResponseEntity<Map<String, String>> login(@RequestBody @Valid LoginDTO loginDTO) throws LoginException {
+        try {
             loginService.login(loginDTO);
             return ResponseEntity.status(200).body(Map.of("message", "Usuário logado com sucesso!"));
 
-        }catch(CadastroException e){
+        } catch (CadastroException e) {
             throw new LoginException("Erro ao logar usuário: " + e.getMessage());
         } catch (SQLException e) {
             throw new CadastroException("Erro com o banco de dados: " + e.getMessage());
