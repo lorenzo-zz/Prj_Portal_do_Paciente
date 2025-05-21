@@ -1,35 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<<<<<<< HEAD
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/Front_End/img/LogoPortalApenasRedondoFundoBranco.png" type="image/x-icon">
     <link rel="stylesheet" href="/Front_End/CSS/loginPage.css">
     <script src="../JS/LoginServices/login.js"></script>
     <title>SignIn</title>
-=======
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link rel="shortcut icon" href="/Front_End/img/LogoPortalApenasRedondoFundoBranco.png" type="image/x-icon">
-  <link rel="stylesheet" href="/Front_End/CSS/loginPage.css">
-  <script src="/Front_End/JS/LoginServices/formataçãoCpf.js"></script>
-
-  <title>SignIn</title>
->>>>>>> d82f92733de226b45d8f0810ab8ec0772722a525
 </head>
-
 <body>
-  <div class="form-container">
-    <a href="index.html"><img src="/Front_End/img/logoLogin.png"></a>
-    <form>
-      <input type="text" name="cpf" id="cpf" required placeholder="CPF: (somente números)" maxlength="11"
-        pattern="\d{11}" />
-      <input type="password" placeholder="Senha" required>
+    <div class="form-container">
+      <a href="index.html"><img src="/Front_End/img/logoLogin.png"></a>
+        <form id="formLogin">
+            <input type="text" name="cpf" id="cpf" required placeholder="CPF: (somente números)" maxlength="11" pattern="\d{11}" />
+            <input type="password" id="senha" placeholder="Senha" required> 
 
-<<<<<<< HEAD
             <div class="erroLogin">
                 <p>Erro na autenticação!</p>
             </div>
@@ -40,19 +25,5 @@
             </div>
         </form>
     </div>
-=======
-      <div class="erroLogin">
-        <p>Erro na autenticação!</p>
-      </div>
-
-      <div class="btn-container">
-        <button type="submit">Entrar</button>
-        <button onclick="location.href='../HTML/signUpPage.html'">Cadastrar-se</button>
-      </div>
-    </form>
-  </div>
-
->>>>>>> d82f92733de226b45d8f0810ab8ec0772722a525
 </body>
-
 </html>

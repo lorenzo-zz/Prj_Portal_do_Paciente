@@ -80,7 +80,7 @@ public class LoginService {
         try (Connection conn = dataSource.getConnection();
                 CallableStatement stmt = conn.prepareCall("{call proc_t09a_login_paciente (?,?)}")) {
 
-            stmt.setString(1, loginDTO.nome());
+            stmt.setString(1, loginDTO.cpf());
             stmt.setString(2, loginDTO.senha());
             stmt.execute();
 
