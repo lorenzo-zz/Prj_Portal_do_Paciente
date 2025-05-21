@@ -22,7 +22,7 @@ body {
 
 .apresentacao h1 {
   font-size: 4rem
-  font-color: #003f8a;
+  font-color #003f8a;
   margin-bottom: 10px;
 }
 
@@ -71,6 +71,7 @@ h2 {
   margin-bottom: 10px;
   margin-top: 20px
 }
+
 
 
 .consulta_container {
@@ -225,3 +226,6 @@ h2 {
     height: 120px;
     object-fit: contain;
   }
+
+  
+  
