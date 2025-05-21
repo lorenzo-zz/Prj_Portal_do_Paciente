@@ -5,6 +5,8 @@ import com.example.oracleapi.Entity.Paciente;
 import com.example.oracleapi.Exception.LoginException;
 import com.example.oracleapi.Repository.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.sql.DataSource;
@@ -17,6 +19,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+@Service
 public class LoginService {
 
     @Autowired
@@ -25,11 +28,14 @@ public class LoginService {
     @Autowired
     private DataSource dataSource;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     // Metodo de cadastrar paciente
 
     public void cadastrar(Paciente paciente) throws SQLException {
         try (Connection conn = dataSource.getConnection();
-             CallableStatement stmt = conn.prepareCall("{call proc_t09a_cadastro_paciente (?,?,?,?,?,?,?,?,?)}") ){
+             CallableStatement stmt = conn.prepareCall("{call proc_t09a_cadastro_paciente (?,?,?,?,?,?,?,?)}") ){
 
             stmt.setString(1, paciente.getEmail());
             stmt.setString(2, paciente.getSenha());
@@ -38,7 +44,6 @@ public class LoginService {
             stmt.setString(5, paciente.getTelefone());
             stmt.setString(6, paciente.getNome());
             stmt.setString(7, null); // ativo
-            stmt.setString(8,paciente.getDocumento());
 
             stmt.execute();
         } catch (SQLException e) {
@@ -62,6 +67,7 @@ public class LoginService {
 
         // Atualiza apenas o caminho do documento no paciente
         pacienteRepository.atualizarCaminhoDocumento(cpf, caminhoArquivo.toString());
+
     }
 
     // Metodo de Login

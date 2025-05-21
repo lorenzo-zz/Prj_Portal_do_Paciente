@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/autenticar")
 public class LoginController {
 
@@ -22,8 +23,8 @@ public class LoginController {
     private LoginService loginService;
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<Map<String, String>> cadastrar(@ModelAttribute @Valid Paciente paciente,
-                                                         @RequestParam("arquivo") MultipartFile arquivo) {
+    public ResponseEntity<Map<String, String>> cadastrar(@RequestPart("paciente") @Valid Paciente paciente,
+                                                         @RequestParam("arquivo")  MultipartFile arquivo) {
 
         try {
             loginService.cadastrar(paciente);
