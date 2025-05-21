@@ -1,20 +1,21 @@
 package com.example.oracleapi.Controller;
 
-import java.sql.SQLException;
-import java.util.Map;
-import javax.security.auth.login.LoginException;
-
 import com.example.oracleapi.DTO.LoginDTO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import com.example.oracleapi.Entity.Paciente;
 import com.example.oracleapi.Exception.CadastroException;
 import com.example.oracleapi.Service.LoginService;
-
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.security.auth.login.LoginException;
+import java.sql.SQLException;
+import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/autenticar")
 public class LoginController {
 
@@ -22,10 +23,12 @@ public class LoginController {
     private LoginService loginService;
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<Map<String, String>> cadastrar(@RequestBody @Valid Paciente paciente) {
+    public ResponseEntity<Map<String, String>> cadastrar(@RequestPart("paciente") @Valid Paciente paciente,
+                                                         @RequestParam("arquivo")  MultipartFile arquivo) {
 
         try {
             loginService.cadastrar(paciente);
+            loginService.salvarDocumento(paciente.getCpf(), arquivo);
             return ResponseEntity.status(200).body(Map.of("message", "Usuário cadastrado com sucesso!"));
         } catch (CadastroException e) {
             throw new CadastroException("Erro ao cadastrar usuário: " + e.getMessage());
