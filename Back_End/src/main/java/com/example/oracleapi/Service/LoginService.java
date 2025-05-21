@@ -4,10 +4,13 @@ import com.example.oracleapi.DTO.LoginDTO;
 import com.example.oracleapi.Entity.Paciente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 import javax.security.auth.login.LoginException;
 import java.sql.*;
 import javax.sql.DataSource;
 
+@CrossOrigin(origins = "*")
 @Service
 public class LoginService {
 
@@ -25,8 +28,8 @@ public class LoginService {
             stmt.setString(4, String.valueOf(paciente.getSexo()));
             stmt.setString(5, paciente.getTelefone());
             stmt.setString(6, paciente.getNome());
-            stmt.setString(7, "S"); // ativo
-            stmt.setNull(8, java.sql.Types.DATE); // data_cadastro
+            stmt.setString(7, "S"); 
+            stmt.setNull(8, java.sql.Types.DATE); 
             stmt.setDate(9, java.sql.Date.valueOf(paciente.getDataNascimento()));
 
             stmt.execute();
