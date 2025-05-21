@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+  
+  .titulo_principal {
+    background-color: #145cc8;
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+    font-size: 1.5rem;
+  }
+  
+  .sobre-nos {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+  
+  .sobre-nos h2 {
+    color: #145cc8;
+    margin-top: 40px;
+  }
+  
+  .sobre-nos ul {
+    padding-left: 20px;
+  }
+  
+  .sobre-nos li {
+    margin-bottom: 10px;
+  }
+  
+  .sobre-nos li a{
+    margin-bottom: 10px;
+    text-decoration: none;
+  }
+
+  .contato a {
+    color: #145cc8;
+    text-decoration: none;
+  }
+  
+  .footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #ddd;
+    margin-top: 60px;
+    font-size: 0.9em;
+  }
+  
