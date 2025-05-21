@@ -172,3 +172,15 @@
   transition: 0.3s;
 }
 
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  will-change: transform;
+}
+
+.carousel-item {
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+}
+
+
