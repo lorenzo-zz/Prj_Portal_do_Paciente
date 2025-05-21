@@ -21,8 +21,9 @@ body {
 }
 
 .apresentacao h1 {
-  font-size: clamp(1.5rem, 4vw, 3rem);
-  color: #003f8a;
+  font-size: 4rem
+  font-color: #003f8a;
+  margin-bottom: 10px;
 }
 
 .apresentacao img {
@@ -99,7 +100,7 @@ h2 {
   padding: 5px;
 }
 
-/* Responsividade */
+
 @media (max-width: 768px) {
   .medico_paciente {
     flex-direction: column;
@@ -194,3 +195,33 @@ h2 {
     background-color: #02265c;
 }
 
+ .title-area {
+    text-align: center;
+    margin-top: 50px;
+    color: #023279;
+  }
+   
+  .title-area h1 {
+    font-size: 4rem;
+    margin-bottom: 10px;
+  }
+   
+  .title-area p {
+     font-size: 1.4rem;
+    color: #4a4a4a;
+    margin-top: 12px;
+    text-align: center;
+  }
+   
+  .title-with-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px; 
+  }
+   
+  .titulo-img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+  }
