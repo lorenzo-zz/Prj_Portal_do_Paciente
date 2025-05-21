@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
       })
       .then(data => {
         localStorage.setItem('nome', nome);
-        window.location.href = '../Front_End/HTML/adressSignUp.html';
+        window.location.href = '/Front_End/HTML/index.html';
       })
       .catch(error => {
         const msg = error.message;

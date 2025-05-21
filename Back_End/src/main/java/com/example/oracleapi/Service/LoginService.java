@@ -17,6 +17,7 @@ import java.nio.file.StandardCopyOption;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 @CrossOrigin(origins = "*")
 @Service
@@ -30,29 +31,32 @@ public class LoginService {
 
     // Metodo de cadastrar paciente
 
-    public void cadastrar(Paciente paciente) throws SQLException {
+    public void cadastrar(Paciente paciente, MultipartFile arquivo) throws SQLException, IOException {
         try (Connection conn = dataSource.getConnection();
-             CallableStatement stmt = conn.prepareCall("{call proc_t09a_cadastro_paciente (?,?,?,?,?,?,?,?)}") ){
+                CallableStatement stmt = conn.prepareCall("{call proc_t09a_cadastro_paciente (?,?,?,?,?,?,?,?,?)}")) {
 
             stmt.setString(1, paciente.getEmail());
             stmt.setString(2, paciente.getSenha());
             stmt.setString(3, paciente.getCpf());
-            stmt.setString(4, String.valueOf(paciente.getSexo()));
+            stmt.setString(4, paciente.getSexo());
             stmt.setString(5, paciente.getTelefone());
             stmt.setString(6, paciente.getNome());
-            stmt.setString(7, null); // ativo
-            stmt.setDate(8, java.sql.Date.valueOf(paciente.getDataNascimento()));       
+            stmt.setDate(7, java.sql.Date.valueOf(paciente.getDataNascimento()));
+            stmt.setString(8, "S"); // Sempre "S" para ativo
+            stmt.setDate(9, java.sql.Date.valueOf(LocalDate.now()));
             stmt.execute();
 
+            if (arquivo != null && !arquivo.isEmpty()) {
+                salvarDocumento(paciente.getCpf(), arquivo);
+            }
         } catch (SQLException e) {
             throw new SQLException("Erro ao cadastrar paciente: " + e.getMessage(), e);
         }
     }
 
-    //Metodo de Salvar documento do paciente
-
     public void salvarDocumento(String cpf, MultipartFile arquivo) throws IOException {
-        if (arquivo == null || arquivo.isEmpty()) return;
+        if (arquivo == null || arquivo.isEmpty())
+            return;
 
         Path uploadPath = Paths.get("uploads");
         if (!Files.exists(uploadPath)) {
@@ -63,16 +67,16 @@ public class LoginService {
         Path caminhoArquivo = uploadPath.resolve(nomeArquivo);
         Files.copy(arquivo.getInputStream(), caminhoArquivo, StandardCopyOption.REPLACE_EXISTING);
 
-        // Atualiza apenas o caminho do documento no paciente
-        pacienteRepository.atualizarCaminhoDocumento(cpf, caminhoArquivo.toString());
+        Paciente paciente = pacienteRepository.findByCpf(cpf)
+                .orElseThrow(() -> new IOException("Paciente não encontrado"));
 
+        paciente.setDocumento(nomeArquivo);
+        pacienteRepository.save(paciente);
     }
-
-    // Metodo de Login
 
     public void login(LoginDTO loginDTO) throws SQLException, LoginException {
         try (Connection conn = dataSource.getConnection();
-             CallableStatement stmt = conn.prepareCall("{call proc_t09a_login_paciente (?,?)}")) {
+                CallableStatement stmt = conn.prepareCall("{call proc_t09a_login_paciente (?,?)}")) {
 
             stmt.setString(1, loginDTO.nome());
             stmt.setString(2, loginDTO.senha());

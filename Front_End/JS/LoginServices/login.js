@@ -13,12 +13,12 @@ document.addEventListener('DOMContentLoaded', function () {  // espera o html ca
     document.getElementById('loginForm').addEventListener('submit', function (event) {
         event.preventDefault();
 
-        const nome = document.getElementById('nome').value;  
+        const cpf = document.getElementById('cpf').value;  
         const senha = document.getElementById('senha').value;
 
         // JSON com os dados
         const login = {
-            nome: nome,
+            nome: cpf,
             senha: senha,
         }; 
 
@@ -30,16 +30,15 @@ document.addEventListener('DOMContentLoaded', function () {  // espera o html ca
             },
             body: JSON.stringify(login)
         })
-        // Se a resposta for diferente de 200 = erro
         .then(async response => {  
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.erro || 'Erro desconhecido');
             }
-            return response.text(); // retorna o texto da variável response 
+            return response.text(); 
         })
-        .then(data => { // se o login der certo 
-            localStorage.setItem('nome', nome); // Mantém o nome para saudação na próxima página, se necessário
+        .then(data => { 
+            localStorage.setItem('nome', nome);
             window.location.href = '../Front_End/HTML/index.html';
         })
         .catch(error => {

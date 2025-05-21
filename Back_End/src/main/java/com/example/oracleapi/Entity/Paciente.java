@@ -1,13 +1,24 @@
 package com.example.oracleapi.Entity;
 
-import jakarta.persistence.*;
+import java.time.LocalDate;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.*;
-
-import java.time.LocalDate;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -18,8 +29,6 @@ import java.time.LocalDate;
 @Table(name = "t09a_paciente")
 public class Paciente{
 
-        // Tabela ajustada // Completo!
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -29,7 +38,6 @@ public class Paciente{
     @NotBlank
     @Size(min = 8, message = "A senha deve ter no mínimo 8 caracteres")
     private String senha;
-    @NotBlank
 
     @NotBlank
     @Size(min = 11, max = 11)
@@ -47,8 +55,6 @@ public class Paciente{
     @NotNull
     private LocalDate dataNascimento;
 
-    @NotBlank
-    @Size(max = 500)
     private String documento;
 
     private char ativo;
@@ -74,11 +80,6 @@ public class Paciente{
                 ", endereco=" + endereco +
                 '}';
     }
-
-
-
-
-
 
     public int getId() {
         return id;

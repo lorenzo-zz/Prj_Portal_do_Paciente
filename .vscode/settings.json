@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.debug.settings.onBuildFailureProceed": true
+=======
     "liveServer.settings.multiRootWorkspaceName": "Prj_Portal_do_Paciente"
 
     "java.compile.nullAnalysis.mode": "automatic"
 
+>>>>>>> d82f92733de226b45d8f0810ab8ec0772722a525
 }
