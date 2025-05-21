@@ -5,10 +5,9 @@ import com.example.oracleapi.Entity.Paciente;
 import com.example.oracleapi.Exception.LoginException;
 import com.example.oracleapi.Repository.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,6 +18,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+@CrossOrigin(origins = "*")
 @Service
 public class LoginService {
 
@@ -27,9 +27,6 @@ public class LoginService {
 
     @Autowired
     private DataSource dataSource;
-
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
 
     // Metodo de cadastrar paciente
 
@@ -44,7 +41,7 @@ public class LoginService {
             stmt.setString(5, paciente.getTelefone());
             stmt.setString(6, paciente.getNome());
             stmt.setString(7, null); // ativo
-
+            stmt.setDate(8, java.sql.Date.valueOf(paciente.getDataNascimento()));       
             stmt.execute();
         } catch (SQLException e) {
             throw new SQLException("Erro ao cadastrar paciente: " + e.getMessage(), e);
