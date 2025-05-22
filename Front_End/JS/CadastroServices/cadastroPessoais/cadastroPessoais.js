@@ -37,11 +37,14 @@ document.addEventListener('DOMContentLoaded', function () {
           const errorData = await response.json();
           throw new Error(errorData.erro || 'Erro desconhecido');
         }
-        return response.text();
+        return response.json();
       })
       .then(data => {
-        localStorage.setItem('nome', nome);
-        window.location.href = '/Front_End/HTML/adressSingUp.html';
+
+        localStorage.setItem('cpf', data.cpf);
+        localStorage.setItem('nome', data.nome);
+        window.location.href = '/Front_End/HTML/index.html';
+
       })
       .catch(error => {
         const msg = error.message;

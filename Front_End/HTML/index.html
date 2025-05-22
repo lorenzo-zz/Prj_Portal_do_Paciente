@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/Front_End/CSS/homepage.css">
     <link rel="shortcut icon" href="/Front_End/img/LogoPortalApenasRedondoFundoBranco.png" type="image/x-icon">
     <link rel="stylesheet" href="/Front_End/CSS/global.css">
+    <script src="../JS/Index/UserLogado.js"></script>
+    <script src="../JS/Index/SelecionarOpcoes.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
     <title>Homepage - Portal do Paciente</title>
 </head>
+
 <body>
     <header class="navbar">
         <nav>
@@ -21,10 +24,11 @@
             <div></div>
             <div></div>
         </div>
-        <div class="right_links">
-            <a href="/Front_End/HTML/loginPage.html">Entrar</a>
+        <div class="right_links" id="right_links">
+            <a href="/Front_End/HTML/loginPage.html" id="login_button">Entrar</a>
             <a href="/Front_End/HTML/signUpPage.html" id="sign_button">Registrar-se</a>
         </div>
+        <a href="/Front_End/HTML/loginPage.html" id="logout_button">Sair</a>
     </header>
     <div class="carousel">
         <div class="carousel-track">
@@ -45,51 +49,57 @@
         </div>
     </div>
 
-        <div class="greets">
-            <h1>O que deseja fazer hoje?</h1>
-        </div>
-        <div class="main-content">
+    <div class="greets">
+        <h1>O que deseja fazer hoje?</h1>
+    </div>
+    <div class="main-content">
         <div class="card-container">
             <div class="card">
-                <a href="/Front_End/HTML/minhasConsultas.html"><div class="icon">
-                    <img src="/Front_End/img/MinhasConsultas.png">
-                </div>
-                <h2>Minhas Consultas</h2>
+                <a href="/Front_End/HTML/minhasConsultas.html">
+                    <div class="icon">
+                        <img src="/Front_End/img/MinhasConsultas.png">
+                    </div>
+                    <h2>Minhas Consultas</h2>
                 </a>
             </div>
             <div class="card">
-               <a href="/Front_End/HTML/listaResultadosExames.html"><div class="icon">
-                    <img src="/Front_End/img/ResultadoExames.png">
-                </div>
-                <h2>Resultados de exames</h2>
+                <a href="/Front_End/HTML/listaResultadosExames.html">
+                    <div class="icon">
+                        <img src="/Front_End/img/ResultadoExames.png">
+                    </div>
+                    <h2>Resultados de exames</h2>
                 </a>
             </div>
             <div class="card">
-               <a href="/Front_End/HTML/solicitacaoExames.html"><div class="icon">
-                    <img src="/Front_End/img/SolicitacaoExames.png">
-                </div>
-                <h2>Solicitação de exames</h2>
+                <a href="/Front_End/HTML/solicitacaoExames.html">
+                    <div class="icon">
+                        <img src="/Front_End/img/SolicitacaoExames.png">
+                    </div>
+                    <h2>Solicitação de exames</h2>
                 </a>
             </div>
             <div class="card">
-                <a href="/Front_End/HTML/atestadosMedicos.html"><div class="icon">
-                    <img src="/Front_End/img/AtestadoMedico.png">
-                </div>
-                <h2>Atestados médicos</h2>
+                <a href="/Front_End/HTML/atestadosMedicos.html">
+                    <div class="icon">
+                        <img src="/Front_End/img/AtestadoMedico.png">
+                    </div>
+                    <h2>Atestados médicos</h2>
                 </a>
             </div>
             <div class="card">
-               <a href="/Front_End/HTML/editarPerfil.html"><div class="icon">
-                    <img src="/Front_End/img/EditarDocumentos.png">
-                </div>
-                <h2>Editar perfil</h2>
+                <a href="/Front_End/HTML/editarPerfil.html">
+                    <div class="icon">
+                        <img src="/Front_End/img/EditarDocumentos.png">
+                    </div>
+                    <h2>Editar perfil</h2>
                 </a>
             </div>
             <div class="card">
-                <a href="/Front_End/HTML/agendamento.html"><div class="icon">
-                    <img src="/Front_End/img/Agendamentos.png">
-                </div>
-                <h2>Agendamentos</h2>
+                <a href="/Front_End/HTML/agendamento.html">
+                    <div class="icon">
+                        <img src="/Front_End/img/Agendamentos.png">
+                    </div>
+                    <h2>Agendamentos</h2>
                 </a>
             </div>
         </div>
@@ -97,9 +107,10 @@
 
     <footer class="footer">
         <p>&copy; 2025 Portal do Paciente. Todos os direitos reservados.</p>
-       <a href="/Front_End/HTML/sobreNos.html">Sobre nós</a>
+        <a href="/Front_End/HTML/sobreNos.html">Sobre nós</a>
     </footer>
     <script src="/Front_End/JS/script.js"></script>
 
 </body>
+
 </html>

@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.security.auth.login.LoginException;
 import java.sql.SQLException;
 import java.util.Map;
 
@@ -39,17 +37,17 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> login(@RequestBody @Valid LoginDTO loginDTO) throws LoginException {
+    public ResponseEntity<Map<String, String>> login(@RequestBody @Valid LoginDTO loginDTO) {
         try {
-            loginService.login(loginDTO);
-            return ResponseEntity.status(200).body(Map.of("message", "Usuário logado com sucesso!"));
-
-        } catch (CadastroException e) {
-            throw new LoginException("Erro ao logar usuário: " + e.getMessage());
+            Paciente paciente = loginService.login(loginDTO); // retornando paciente
+            return ResponseEntity.status(200).body(Map.of(
+                    "message", "Usuário logado com sucesso!",
+                    "nome", paciente.getNome()));
         } catch (SQLException e) {
-            throw new CadastroException("Erro com o banco de dados: " + e.getMessage());
+            return ResponseEntity.status(500).body(Map.of("erro", "Erro no banco de dados: " + e.getMessage()));
         } catch (Exception e) {
-            throw new CadastroException("Erro genérico: " + e.getMessage());
+            return ResponseEntity.status(500).body(Map.of("erro", "Erro inesperado: " + e.getMessage()));
         }
     }
+
 }

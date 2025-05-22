@@ -1,35 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/Front_End/img/LogoPortalApenasRedondoFundoBranco.png" type="image/x-icon">
-    <link rel="stylesheet" href="/Front_End/CSS/loginPage.css">
-    <script src="/LoginServices/login.js"></script>
+    <link rel="stylesheet" href="../CSS/loginPage.css">
+    <script src="../JS/LoginServices/login.js"></script>
+    <script src="../JS/Index/LimparCPF.js"></script>
     <title>SignIn</title>
 
 </head>
-
 <body>
-  <div class="form-container">
-    <a href="index.html"><img src="/Front_End/img/logoLogin.png"></a>
-    <form>
-      <input type="text" name="cpf" id="cpf" required placeholder="CPF: (somente números)" maxlength="11"
-        pattern="\d{11}" />
-      <input type="password" placeholder="Senha" required>
+  
+    <div class="form-container">
+      <a href="index.html"><img src="../img/logoLogin.png"></a>
+        <form id="formLogin">
+            <input type="text" name="cpf" id="cpf" required placeholder="CPF: (somente números)" maxlength="11" pattern="\d{11}" />
+            <input type="password" id="senha" placeholder="Senha" required> 
 
+            <div class="erroLogin">
+                <p>Erro na autenticação!</p>
+            </div>
+            
+            <div class="btn-container">
+                <button type="submit">Entrar</button>
+                <button onclick="location.href='../HTML/signUpPage.html'">Cadastrar-se</button>
+            </div>
+        </form>
+    </div>
 
-      <div class="erroLogin">
-        <p>Erro na autenticação!</p>
-      </div>
-
-      <div class="btn-container">
-        <button type="submit">Entrar</button>
-        <button onclick="location.href='../HTML/signUpPage.html'">Cadastrar-se</button>
-      </div>
-    </form>
-  </div>
 </body>
-
 </html>
