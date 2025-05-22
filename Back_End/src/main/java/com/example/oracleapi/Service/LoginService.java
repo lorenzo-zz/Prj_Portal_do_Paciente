@@ -1,6 +1,7 @@
 package com.example.oracleapi.Service;
 
 import com.example.oracleapi.DTO.LoginDTO;
+import com.example.oracleapi.Entity.Endereco;
 import com.example.oracleapi.Entity.Paciente;
 import com.example.oracleapi.Exception.LoginException;
 import com.example.oracleapi.Repository.PacienteRepository;
@@ -44,13 +45,11 @@ public class LoginService {
             stmt.setDate(7, java.sql.Date.valueOf(paciente.getDataNascimento()));
             stmt.setString(8, "S"); // Sempre "S" para ativo
             stmt.setDate(9, java.sql.Date.valueOf(LocalDate.now()));
-
             stmt.execute();
 
             if (arquivo != null && !arquivo.isEmpty()) {
                 salvarDocumento(paciente.getCpf(), arquivo);
             }
-
         } catch (SQLException e) {
             throw new SQLException("Erro ao cadastrar paciente: " + e.getMessage(), e);
         }
@@ -93,6 +92,31 @@ public class LoginService {
             throw new SQLException("Erro ao processar login: " + e.getMessage(), e);
         } catch (LoginException e) {
             throw new LoginException("Erro inesperado: " + e.getMessage());
+        }
+    }
+
+    public void cadastrarEndereco(Endereco endereco) throws SQLException{
+        try (Connection conn = dataSource.getConnection();
+             CallableStatement stmt = conn.prepareCall("{call proc_t09a_endereco(?, ?, ?, ?, ?, ?, ?)}")
+        ){
+            stmt.setString(1, endereco.getCep());
+            stmt.setString(2, endereco.getLogradouro());
+            stmt.setString(3, endereco.getCidade());
+            stmt.setString(4,endereco.getUf());
+            stmt.setString(5,endereco.getBairro());
+            stmt.setString(6, endereco.getComplemento());
+            stmt.setString(7, endereco.getNumero());
+
+            if (endereco.getNumero() != null && !endereco.getNumero().isEmpty()) {
+                stmt.setInt(7, Integer.parseInt(endereco.getNumero()));
+            } else {
+                stmt.setNull(7, java.sql.Types.INTEGER);
+            }
+
+            stmt.execute();
+
+        } catch (SQLException e) {
+            throw new SQLException("Erro com a ligação do banco: " + e.getMessage());
         }
     }
 }

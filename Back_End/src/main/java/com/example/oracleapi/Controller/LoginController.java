@@ -1,6 +1,7 @@
 package com.example.oracleapi.Controller;
 
 import com.example.oracleapi.DTO.LoginDTO;
+import com.example.oracleapi.Entity.Endereco;
 import com.example.oracleapi.Entity.Paciente;
 import com.example.oracleapi.Exception.CadastroException;
 import com.example.oracleapi.Service.LoginService;
@@ -49,5 +50,23 @@ public class LoginController {
             return ResponseEntity.status(500).body(Map.of("erro", "Erro inesperado: " + e.getMessage()));
         }
     }
+
+    @PostMapping("/cadastrar/endereco")
+    public ResponseEntity<?> cadastroEndereco(@RequestBody Endereco endereco) {
+        try {
+            loginService.cadastrarEndereco(endereco);
+            return ResponseEntity.status(200).body(Map.of("message", "Endereço do usuario cadastrado com sucesso"));
+        }catch (CadastroException e){
+            throw new CadastroException("Erro ao cadastrar o endereço" + e.getMessage());
+        } catch (SQLException e) {
+            throw new CadastroException("Erro com o banco de dados: " + e.getMessage());
+        } catch (Exception e) {
+            throw new CadastroException("Erro genérico: " + e.getMessage());
+        }
+    }
+
+
+
+
 
 }
