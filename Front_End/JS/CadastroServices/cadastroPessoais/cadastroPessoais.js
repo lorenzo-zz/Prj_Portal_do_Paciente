@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(data => {
         localStorage.setItem('cpf', data.cpf);
         localStorage.setItem('nome', data.nome);
-        window.location.href = '/Front_End/HTML/index.html';
+        window.location.href = 'http://172.20.208.1:5500/Front_End/HTML/adressSignUp.html';
       })
       .catch(error => {
         const msg = error.message;

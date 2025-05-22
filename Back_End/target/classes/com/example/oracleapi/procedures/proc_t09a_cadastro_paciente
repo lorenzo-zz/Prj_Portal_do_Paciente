@@ -1,0 +1,54 @@
+create or replace PROCEDURE proc_t09a_cadastro_paciente
+(
+  p_email            IN VARCHAR2,
+  p_senha            IN VARCHAR2,
+  p_cpf              IN VARCHAR2,
+  p_sexo             IN CHAR,
+  p_telefone         IN VARCHAR2,
+  p_nome             IN VARCHAR2,
+  p_data_nascimento  IN DATE,
+  p_ativo            IN CHAR DEFAULT 'S',
+  p_data_cadastro    IN DATE DEFAULT SYSDATE,
+  p_documento        IN VARCHAR2
+)
+AS
+    v_count_nome    NUMBER;
+    v_count_cpf     NUMBER;
+    v_count_senha   NUMBER;
+    v_count_email   NUMBER;
+    v_idade         INT;
+
+    v_erro1 VARCHAR2(100) := 'Erro: Nome já cadastrado.';
+    v_erro3 VARCHAR2(100) := 'Erro: CPF já cadastrado.';
+    v_erro4 VARCHAR2(100) := 'Erro: Email já cadastrado.';
+    v_erro5 VARCHAR2(100) := 'Erro: Idade mínima para cadastro é 18 anos.';
+BEGIN
+    SELECT COUNT(*) INTO v_count_cpf FROM t09a_paciente WHERE cpf = p_cpf;
+    IF v_count_cpf > 0 THEN
+        RAISE_APPLICATION_ERROR(-20003, v_erro3);
+    END IF;
+
+    SELECT COUNT(*) INTO v_count_email FROM t09a_paciente WHERE email = p_email;
+    IF v_count_email > 0 THEN
+        RAISE_APPLICATION_ERROR(-20004, v_erro4);
+    END IF;
+
+    SELECT COUNT(*) INTO v_count_nome FROM t09a_paciente WHERE nome = p_nome;
+    IF v_count_nome > 0 THEN
+        RAISE_APPLICATION_ERROR(-20006, v_erro1);
+    END IF;
+
+    v_idade := TRUNC(MONTHS_BETWEEN(SYSDATE, p_data_nascimento) / 12);
+    IF v_idade < 18 THEN
+        RAISE_APPLICATION_ERROR(-20007, v_erro5);
+    END IF;
+
+    INSERT INTO t09a_paciente (CPF, DATA_NASCIMENTO, EMAIL, NOME, SENHA, SEXO, TELEFONE, ATIVO, DATA_CADASTRO, DOCGITUMENTO)
+    VALUES (p_cpf, p_data_nascimento, p_email, p_nome, p_senha, p_sexo, p_telefone, p_ativo, p_data_cadastro, p_documento);
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RAISE_APPLICATION_ERROR(-20008, 'Erro: Registro não encontrado.');
+    WHEN OTHERS THEN
+        RAISE_APPLICATION_ERROR(-20999, 'Erro inesperado: ' || SQLERRM);
+END proc_t09a_cadastro_paciente;

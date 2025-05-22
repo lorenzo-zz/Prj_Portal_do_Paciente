@@ -1,5 +1,6 @@
 package com.example.oracleapi.Service;
 
+import com.example.oracleapi.DTO.EnderecoDTO;
 import com.example.oracleapi.DTO.LoginDTO;
 import com.example.oracleapi.Entity.Endereco;
 import com.example.oracleapi.Entity.Paciente;
@@ -95,24 +96,39 @@ public class LoginService {
         }
     }
 
-    public void cadastrarEndereco(Endereco endereco) throws SQLException{
+    public void cadastrarEndereco(EnderecoDTO endereco) throws SQLException {
         try (Connection conn = dataSource.getConnection();
-             CallableStatement stmt = conn.prepareCall("{call proc_t09a_endereco(?, ?, ?, ?, ?, ?, ?)}")
-        ){
-            stmt.setString(1, endereco.getCep());
-            stmt.setString(2, endereco.getLogradouro());
-            stmt.setString(3, endereco.getCidade());
-            stmt.setString(4,endereco.getUf());
-            stmt.setString(5,endereco.getBairro());
-            stmt.setString(6, endereco.getComplemento());
-            stmt.setString(7, endereco.getNumero());
+                CallableStatement stmt = conn.prepareCall("{call proc_t09a_endereco(?, ?, ?, ?, ?, ?, ?)}")) {
+            stmt.setString(1, endereco.cep());
+            stmt.setString(2, endereco.logradouro());
+            stmt.setString(3, endereco.cidade());
+            stmt.setString(4, endereco.uf());
+            stmt.setString(5, endereco.bairro());
+            stmt.setString(6, endereco.complemento());
+            stmt.setString(7, endereco.numero());
 
-            if (endereco.getNumero() != null && !endereco.getNumero().isEmpty()) {
-                stmt.setInt(7, Integer.parseInt(endereco.getNumero()));
+            if (endereco.numero() != null && !endereco.numero().isEmpty()) {
+                stmt.setInt(7, Integer.parseInt(endereco.numero()));
             } else {
                 stmt.setNull(7, java.sql.Types.INTEGER);
             }
 
+            Paciente paciente = pacienteRepository.findByNome(endereco.nomePaciente())
+                    .orElseThrow(() -> new SQLException("Paciente não encontrado"));
+
+            Endereco enderecoEntity = new Endereco();
+
+            enderecoEntity.setCep(endereco.cep());
+            enderecoEntity.setLogradouro(endereco.logradouro());
+            enderecoEntity.setCidade(endereco.cidade());
+            enderecoEntity.setUf(endereco.uf());
+            enderecoEntity.setBairro(endereco.bairro());
+            enderecoEntity.setComplemento(endereco.complemento());
+            enderecoEntity.setNumero(endereco.numero());
+
+            paciente.setEndereco(enderecoEntity);
+            pacienteRepository.save(paciente);
+            
             stmt.execute();
 
         } catch (SQLException e) {

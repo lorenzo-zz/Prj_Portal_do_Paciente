@@ -1,5 +1,5 @@
 
-document.addEventListener('DOMContentLoaded', function () {  //espera o html carragar todo
+document.addEventListener('DOMContentLoaded', function () {  
     document.getElementById('enderecoCadastroForm').addEventListener('submit', function (event) {
         event.preventDefault();
 
@@ -12,39 +12,34 @@ document.addEventListener('DOMContentLoaded', function () {  //espera o html car
         const numero = document.getElementById('numero').value;
         const complemento = document.getElementById('complemento').value;
 
-        //json
         const cadastrarEndereco = {
-            cep: cep,
-            uf: uf,
-            cidade: cidade,
-            bairro: bairro,
-            logradouro: logradouro,
-            numero: numero,
-            complemento: complemento,
-            
-
+            cep : cep,
+            logradouro : logradouro,
+            cidade : cidade,
+            uf : uf,
+            bairro : bairro,
+            complemento : complemento,
+            numero : numero
         };
 
         console.log("Dados para cadastro de endereço:", cadastrarEndereco);
 
-        //manda a validação de dados para o back  
-        fetch('http://localhost:8080/autenticar/cadastrarEndereco', { //mudar o caminho
+        fetch('http://localhost:8080/autenticar/cadastrar/endereco', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(cadastrarEndereco)
         })
-            //se a resposta for diferente de 200 = OK
             .then(async response => {
                 if (!response.ok) {
                     const errorData = await response.json();
                     throw new Error(errorData.erro || 'Erro desconhecido');
                 }
-                return response.text(); //retorna o texto da vairavel response 
+                return response.text(); 
             })
-            .then(data => { //se o login der certo 
-                window.location.href = '../Front_End/HTML/cadastroAlergias.html';
+            .then(data => {
+                window.location.href = 'http://172.20.208.1:5500/Front_End/HTML/index.html';
             })
             .catch(error => {
                 const msg = error.message;
