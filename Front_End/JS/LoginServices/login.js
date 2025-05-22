@@ -2,15 +2,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('formLogin').addEventListener('submit', function (event) {
         event.preventDefault();
 
-        const nomeSalvo = localStorage.getItem('nome');
-        if (nomeSalvo) {
-            const campoNome = document.getElementById('nome');
-            if (campoNome) {
-                campoNome.value = nomeSalvo;
-
-            }
-        }
-
         const cpf = document.getElementById('cpf').value;
         const senha = document.getElementById('senha').value;
 
@@ -36,11 +27,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.text();
             })
             .then(data => {
-                localStorage.setItem('nome', nome);
-                window.location.href = '../Front_End/HTML/index.html';
+                localStorage.setItem('cpf', data.cpf);
+                localStorage.setItem('nome', data.nome);
+                window.location.href = '/Front_End/HTML/index.html';
             })
             .catch(error => {
-                const msg = error.message;
+                const msg = error.message;  
                 erroLogin(msg);
             });
     });
