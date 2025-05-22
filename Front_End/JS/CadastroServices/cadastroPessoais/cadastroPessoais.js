@@ -40,9 +40,11 @@ document.addEventListener('DOMContentLoaded', function () {
         return response.json();
       })
       .then(data => {
+
         localStorage.setItem('cpf', data.cpf);
         localStorage.setItem('nome', data.nome);
         window.location.href = '/Front_End/HTML/index.html';
+
       })
       .catch(error => {
         const msg = error.message;
