@@ -37,10 +37,11 @@ document.addEventListener('DOMContentLoaded', function () {
           const errorData = await response.json();
           throw new Error(errorData.erro || 'Erro desconhecido');
         }
-        return response.text();
+        return response.json();
       })
       .then(data => {
-        localStorage.setItem('nome', nome);
+        localStorage.setItem('cpf', data.cpf);
+        localStorage.setItem('nome', data.nome);
         window.location.href = '/Front_End/HTML/index.html';
       })
       .catch(error => {

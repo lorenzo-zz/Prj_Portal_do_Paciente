@@ -37,4 +37,44 @@ public class AgendamentoConsulta {
 
     @Enumerated(EnumType.STRING)
     private EspecificacaoMedico especificacaoMedico;
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+
+    public LocalTime getHora() {
+        return hora;
+    }
+
+    public void setHora(LocalTime hora) {
+        this.hora = hora;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
+    public EspecificacaoMedico getEspecificacaoMedico() {
+        return especificacaoMedico;
+    }
+
+    public void setEspecificacaoMedico(EspecificacaoMedico especificacaoMedico) {
+        this.especificacaoMedico = especificacaoMedico;
+    }
 }

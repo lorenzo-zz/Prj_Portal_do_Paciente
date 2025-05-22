@@ -6,9 +6,9 @@
     <link rel="stylesheet" href="/Front_End/CSS/homepage.css">
     <link rel="shortcut icon" href="/Front_End/img/LogoPortalApenasRedondoFundoBranco.png" type="image/x-icon">
     <link rel="stylesheet" href="/Front_End/CSS/global.css">
+    <script src="../JS/Index/UserLogado.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
     <title>Homepage - Portal do Paciente</title>
 </head>
 <body>
@@ -21,9 +21,10 @@
             <div></div>
             <div></div>
         </div>
-        <div class="right_links">
-            <a href="/Front_End/HTML/loginPage.html">Entrar</a>
+        <div class="right_links" id="right_links">
+            <a href="/Front_End/HTML/loginPage.html" id="login_button">Entrar</a>
             <a href="/Front_End/HTML/signUpPage.html" id="sign_button">Registrar-se</a>
+            <a href="/Front_End/HTML/loginPage.html" id="logout_button" onclick="LimparCPF()">Sair</a>
         </div>
     </header>
     <div class="carousel">

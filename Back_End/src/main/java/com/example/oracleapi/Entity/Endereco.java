@@ -21,7 +21,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "t09a_endereco")
 public class Endereco {
-    
+
     // Tabela ajustada // Completo! 
 
     @Id
@@ -55,5 +55,62 @@ public class Endereco {
                 ", complemento='" + complemento + '\'' +
                 ", numero='" + numero + '\'' +
                 '}';
+    }
+
+
+    public String getCep() {
+        return cep;
+    }
+
+    public String getLogradouro() {
+        return logradouro;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 }

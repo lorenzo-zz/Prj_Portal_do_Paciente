@@ -6,16 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="shortcut icon" href="/Front_End/img/LogoPortalApenasRedondoFundoBranco.png" type="image/x-icon">
   <link rel="stylesheet" href="../CSS/signUpPage.css" />
-<<<<<<< HEAD
   <script src="../JS/CadastroServices/cadastroPessoais/formatacaoCpfNumero.js"></script>
-=======
-
-
-  <!--js secudanrio cpf e numero-->
-  <script src="../JS/CadastroServices/cadastroPessoais/formatacaoCpfNumero.js"></script>
-  <!-- JS principal json -->
-
->>>>>>> d82f92733de226b45d8f0810ab8ec0772722a525
   <script src="../JS/CadastroServices/cadastroPessoais/cadastroPessoais.js"></script>
   <title>Sign Up</title>
 </head>
@@ -62,6 +53,8 @@
         </div>
 
         <div class="input_doc">
+          <h3>Foto do documento:</h3>
+          <br>
           <input type="file" id="arquivo" required />
         </div>
 
@@ -73,8 +66,17 @@
           <input type="password" name="confirmar_senha" id="confirmar_senha" required placeholder="Confirmar Senha"
             maxlength="30">
         </div>
-
+        <div class="erroCPF">
+          <p>Este CPF já está em uso!</p>
+        </div>
+        <div class="erroEMAIL">
+          <p>Este email já está em uso!</p>
+        </div>
+        <div class="erroSENHA">
+          <p>As senhas devem ser iguais!</p>
+        </div>
         <button type="submit">Registrar</button>
+        <button onclick="location.href='../HTML/loginPage.html'">Retornar ao Login</button>
       </form>
     </div>
   </div>

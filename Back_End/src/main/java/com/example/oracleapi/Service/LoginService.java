@@ -1,6 +1,7 @@
 package com.example.oracleapi.Service;
 
 import com.example.oracleapi.DTO.LoginDTO;
+import com.example.oracleapi.Entity.Endereco;
 import com.example.oracleapi.Entity.Paciente;
 import com.example.oracleapi.Exception.LoginException;
 import com.example.oracleapi.Repository.PacienteRepository;
@@ -74,17 +75,48 @@ public class LoginService {
         pacienteRepository.save(paciente);
     }
 
-    public void login(LoginDTO loginDTO) throws SQLException, LoginException {
+    public Paciente login(LoginDTO loginDTO) throws SQLException, LoginException {
         try (Connection conn = dataSource.getConnection();
                 CallableStatement stmt = conn.prepareCall("{call proc_t09a_login_paciente (?,?)}")) {
 
-            stmt.setString(1, loginDTO.nome());
+            stmt.setString(1, loginDTO.cpf());
             stmt.setString(2, loginDTO.senha());
             stmt.execute();
 
+            return pacienteRepository.findByCpf(loginDTO.cpf())
+                    .orElseThrow(() -> new LoginException("Paciente não encontrado após login."));
         } catch (SQLException e) {
-            throw new SQLException("Erro com a ligação do banco: " + e.getMessage(), e);
+            if (e.getErrorCode() == 20001) {
+                throw new LoginException("CPF ou senha inválidos.");
+            }
+            throw new SQLException("Erro ao processar login: " + e.getMessage(), e);
+        } catch (LoginException e) {
+            throw new LoginException("Erro inesperado: " + e.getMessage());
         }
     }
 
+    public void cadastrarEndereco(Endereco endereco) throws SQLException{
+        try (Connection conn = dataSource.getConnection();
+             CallableStatement stmt = conn.prepareCall("{call proc_t09a_endereco(?, ?, ?, ?, ?, ?, ?)}")
+        ){
+            stmt.setString(1, endereco.getCep());
+            stmt.setString(2, endereco.getLogradouro());
+            stmt.setString(3, endereco.getCidade());
+            stmt.setString(4,endereco.getUf());
+            stmt.setString(5,endereco.getBairro());
+            stmt.setString(6, endereco.getComplemento());
+            stmt.setString(7, endereco.getNumero());
+
+            if (endereco.getNumero() != null && !endereco.getNumero().isEmpty()) {
+                stmt.setInt(7, Integer.parseInt(endereco.getNumero()));
+            } else {
+                stmt.setNull(7, java.sql.Types.INTEGER);
+            }
+
+            stmt.execute();
+
+        } catch (SQLException e) {
+            throw new SQLException("Erro com a ligação do banco: " + e.getMessage());
+        }
+    }
 }
