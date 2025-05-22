@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
       })
       .then(data => {
         localStorage.setItem('nome', nome);
-        window.location.href = '/Front_End/HTML/index.html';
+        window.location.href = '/Front_End/HTML/adressSingUp.html';
       })
       .catch(error => {
         const msg = error.message;
