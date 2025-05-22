@@ -27,9 +27,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.text();
             })
             .then(data => {
-                localStorage.setItem('cpf', data.cpf);
+                localStorage.setItem('cpf', cpf);
                 localStorage.setItem('nome', data.nome);
-                window.location.href = '../../HTML/index.html';
+                window.location.href = 'http://172.20.208.1:5500/Front_End/HTML/index.html';
             })
             .catch(error => {
                 const msg = error.message;  
