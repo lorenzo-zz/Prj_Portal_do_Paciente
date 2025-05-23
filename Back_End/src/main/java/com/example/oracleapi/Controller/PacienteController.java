@@ -51,7 +51,7 @@ public class PacienteController {
         }
     }
 
-    @PostMapping("/paciente/medico")
+    @PostMapping("/medico")
     public ResponseEntity<?> medico(@RequestBody MedicoDTO medicoDTO) {
         try {
             pacienteService.cadastrarMedico(medicoDTO);
@@ -63,7 +63,7 @@ public class PacienteController {
         }
     }
 
-    @PostMapping("/paciente/prescricao")
+    @PostMapping("/prescricao")
     public ResponseEntity<?> prescricao(@RequestBody PrescricaoDTO prescricaoDTO) {
         try {
             pacienteService.cadastrarPrescricao(prescricaoDTO);
@@ -75,7 +75,7 @@ public class PacienteController {
         }
     }
 
-    @PostMapping("/paciente/prescricao/requisicao-exame")
+    @PostMapping("/prescricao/requisicao-exame")
     public ResponseEntity<?> prescricaoExame(@RequestBody RequisicaoExameDTO requisicaoExameDTO) {
         try{
             pacienteService.cadastrarRequisicaoExame(requisicaoExameDTO);
@@ -88,7 +88,7 @@ public class PacienteController {
         }
     }
 
-    @PostMapping("paciente/resultado-consulta")
+    @PostMapping("/resultado-consulta")
     public ResponseEntity<?> resultadoConsulta (@RequestBody ResultadoConsultaDTO resultadoExameDTO){
         try{
             pacienteService.cadastrarResultadoConsulta(resultadoExameDTO);
@@ -98,20 +98,26 @@ public class PacienteController {
         }
     }
 
-    @PostMapping("paciente/resultado-exame")
+    @PostMapping("/resultado-exame")
     public ResponseEntity<?> resultadoExame(@RequestBody ResultadoExameDTO resultadoExameDTO){
         try{
             pacienteService.cadastrarResultadoExame(resultadoExameDTO);
             return ResponseEntity.status(200).body(Map.of("Messagem", "Resultado do exame salvo com sucesso"));
-        }catch (ResultadoExameExeception | SQLException e){
+        }catch (ResultadoExameExeception e){
             throw new ResultadoExameExeception("Erro ao salvar o resultado do exame" +  e.getMessage());
         }
     }
 
-    @PostMapping("/paciente/dados-paciente")
-    public ResponseEntity<?> dadosPaciente(RequestBody Paciente
-
-
-
+    @PostMapping("/dados-paciente")
+    public ResponseEntity<?> dadosPaciente(@RequestBody RetornoPacienteDTO retornoPacienteDTO) throws SQLException {
+     try{
+            pacienteService.dadosDoPaciente(retornoPacienteDTO);
+            return ResponseEntity.status(200).body(Map.of("Messagem", " Dados trazidos corretamente com sucesso"));
+        } catch (DadosPacienteException e){
+         throw  new DadosPacienteException("Erro ao trazer os dados do paciente" + e.getMessage());
+     } catch (SQLException e) {
+         throw new SQLException("Erro genérico" + e.getMessage());
+     }
+    }
 }
 

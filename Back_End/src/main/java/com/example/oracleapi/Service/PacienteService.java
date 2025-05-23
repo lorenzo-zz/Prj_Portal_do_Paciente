@@ -19,17 +19,17 @@ public class PacienteService {
     @Autowired
     private PacienteRepository pacienteRepository;
 
-    @Autowired
-    private EnderecoRepository enderecoRepository;
-
-    @Autowired
-    private MinhaConsultaRepository minhaConsultaRepository;
-
-    @Autowired
-    private MedicoRepository medicoRepository;
-
-    @Autowired
-    private AlergiaRepository alergiaRepository;
+//    @Autowired
+//    private EnderecoRepository enderecoRepository;
+//
+//    @Autowired
+//    private MinhaConsultaRepository minhaConsultaRepository;
+//
+//    @Autowired
+//    private MedicoRepository medicoRepository;
+//
+//    @Autowired
+//    private AlergiaRepository alergiaRepository;
 
 
     public void agendarConsulta(AgendamentoConsultaDTO agendamentoConsulta) throws SQLException {
@@ -82,7 +82,7 @@ public class PacienteService {
             stmt.setRowId(8, (RowId) minhaConsultaDTO.medico());
             stmt.setRowId(9, (RowId) minhaConsultaDTO.agendamentoConsulta());
             stmt.setString(10, minhaConsultaDTO.frequencia());
-            stmt.setString(11,minhaConsultaDTO.pressaoArterial())
+            stmt.setString(11,minhaConsultaDTO.pressaoArterial());
             stmt.setString(12, minhaConsultaDTO.temperatura());
 
             stmt.execute();
@@ -162,7 +162,7 @@ public class PacienteService {
 
     public void cadastrarResultadoExame(ResultadoExameDTO resultadoExameDTO) {
         try (Connection conn = dataSource.getConnection();
-             CallableStatement stmt = conn.prepareCall("{call proc_t09a_resultado_exame(?, ?)}")
+             CallableStatement stmt = conn.prepareCall("{call proc_t09a_resultado_exame(?, ?)}");
         ) {
 
             stmt.setString(1, String.valueOf(Date.valueOf(resultadoExameDTO.descricao())));
@@ -172,6 +172,19 @@ public class PacienteService {
 
         } catch (SQLException e){
             throw new RuntimeException(e);
+        }
+    }
+
+    public void dadosDoPaciente(RetornoPacienteDTO retornoPacienteDTO) throws SQLException {
+        try (Connection conn = dataSource.getConnection()) {
+            CallableStatement stmt = conn.prepareCall("{call proc_t09a_dados_paciente(?)}");
+
+            stmt.setString(1, retornoPacienteDTO.cpf());
+
+            stmt.execute();
+
+        }catch (SQLException e){
+            throw new SQLException("Erro generico" + e.getMessage());
         }
     }
 }

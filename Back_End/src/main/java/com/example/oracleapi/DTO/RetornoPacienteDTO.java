@@ -13,7 +13,8 @@ public record RetornoPacienteDTO(
             String complemento,
             String bairro,
             String cidade,
-            String uf
+            String uf,
+            String cpf
 
 ) {
     
