@@ -51,14 +51,14 @@ button:hover {
     user-select: none;
 } 
 
-.erroLogin{
-    font-size: 14px;
-    background-color: red;
+.erroLogin, .erroNulo{
+    font-size: 12px;
+    background-color: rgb(225, 84, 84);
     color: white;
     border-radius: 10px;
     font-weight: bold;
-    margin: 8px;
-    display: flex;
+    margin: 10px;
+    padding: 2px;
     display: none;
     justify-content: center;
     align-items: center;
