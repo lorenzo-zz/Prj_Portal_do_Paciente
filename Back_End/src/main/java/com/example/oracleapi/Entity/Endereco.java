@@ -28,7 +28,7 @@ public class Endereco {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotBlank
-    @Size(min = 8, max = 8, message = "O CEP deve ter 8 dígitos")
+    @Size( max = 9, message = "O CEP deve ter 8 dígitos")
     private String cep;
     @NotBlank
     @Size(min = 10, max = 100, message = "O logradouro deve ter no máximo 100 caracteres")

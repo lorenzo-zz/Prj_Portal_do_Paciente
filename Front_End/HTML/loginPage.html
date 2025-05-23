@@ -15,7 +15,7 @@
     <div class="form-container">
       <a href="index.html"><img src="../img/logoLogin.png"></a>
         <form id="formLogin">
-            <input type="text" name="cpf" id="cpf" required placeholder="CPF: (somente números)" maxlength="11" pattern="\d{11}" />
+            <input type="text" name="cpf" id="cpf" required placeholder="CPF:" maxlength="11" pattern="\d{11}" inputmode="numeric" oninput="this.value = this.value.replace(/\D/g, '')" />
             <input type="password" id="senha" placeholder="Senha" required> 
 
             <div class="erroLogin">

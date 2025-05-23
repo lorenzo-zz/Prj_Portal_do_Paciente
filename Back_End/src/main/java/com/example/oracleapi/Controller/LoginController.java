@@ -1,5 +1,6 @@
 package com.example.oracleapi.Controller;
 
+import com.example.oracleapi.DTO.EnderecoDTO;
 import com.example.oracleapi.DTO.LoginDTO;
 import com.example.oracleapi.Entity.Endereco;
 import com.example.oracleapi.Entity.Paciente;
@@ -52,7 +53,7 @@ public class LoginController {
     }
 
     @PostMapping("/cadastrar/endereco")
-    public ResponseEntity<?> cadastroEndereco(@RequestBody Endereco endereco) {
+    public ResponseEntity<?> cadastroEndereco(@RequestBody EnderecoDTO endereco) {
         try {
             loginService.cadastrarEndereco(endereco);
             return ResponseEntity.status(200).body(Map.of("message", "Endereço do usuario cadastrado com sucesso"));
