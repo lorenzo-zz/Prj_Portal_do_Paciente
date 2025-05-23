@@ -1,6 +1,7 @@
 package com.example.oracleapi.Entity;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,7 +37,7 @@ public class RequisicaoExame {
     @NotNull
     private LocalDate dataRequisicao;
     @NotNull
-    private LocalDate horaRequisicao;
+    private LocalTime horaRequisicao;
     @NotBlank
     @Size(max = 500, message = "A descrição deve ter no máximo 500 caracteres")
     private String descricao;
