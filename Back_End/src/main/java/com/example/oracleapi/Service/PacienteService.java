@@ -67,7 +67,7 @@ public class PacienteService {
 
     }
 
-    public void minhaConsulta(MinhaConsultaDTO minhaConsultaDTO){
+    public void minhaConsulta(MinhaConsultaDTO minhaConsultaDTO) {
         try (Connection conn = dataSource.getConnection();
              CallableStatement stmt = conn.prepareCall("{call proc_t09a_agendamento_consulta(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}")
         ) {
@@ -82,12 +82,12 @@ public class PacienteService {
             stmt.setRowId(8, (RowId) minhaConsultaDTO.medico());
             stmt.setRowId(9, (RowId) minhaConsultaDTO.agendamentoConsulta());
             stmt.setString(10, minhaConsultaDTO.frequencia());
-            stmt.setString(11,minhaConsultaDTO.pressaoArterial());
+            stmt.setString(11, minhaConsultaDTO.pressaoArterial());
             stmt.setString(12, minhaConsultaDTO.temperatura());
 
             stmt.execute();
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
@@ -108,7 +108,7 @@ public class PacienteService {
     }
 
     public void cadastrarPrescricao(PrescricaoDTO prescricaoDTO) throws SQLException {
-        try(Connection conn = dataSource.getConnection()){
+        try (Connection conn = dataSource.getConnection()) {
             CallableStatement stmt = conn.prepareCall("call proc_t09a_precricao(?,?,?)");
 
             stmt.setString(1, prescricaoDTO.remedio());
@@ -117,14 +117,14 @@ public class PacienteService {
 
             stmt.execute();
 
-        }catch (SQLException e){
-            throw  new SQLException("Erro ao cadastrar prescrição");
+        } catch (SQLException e) {
+            throw new SQLException("Erro ao cadastrar prescrição");
         }
     }
 
 
     public void cadastrarRequisicaoExame(RequisicaoExameDTO requisicaoExameDTO) throws SQLException {
-        try (Connection conn = dataSource.getConnection()){
+        try (Connection conn = dataSource.getConnection()) {
             CallableStatement stmt = conn.prepareCall("call proc_t09a_requisicao_exame(?,?,?,?,?,?,?)");
 
             stmt.setString(1, String.valueOf(requisicaoExameDTO.dataRequisicao()));
@@ -144,17 +144,17 @@ public class PacienteService {
 
 
     public void cadastrarResultadoConsulta(ResultadoConsultaDTO resultadoConsultaDTO) throws SQLException {
-        try(Connection conn = dataSource.getConnection()){
+        try (Connection conn = dataSource.getConnection()) {
             CallableStatement stmt = conn.prepareCall("call proc_t09a_resultado_consulta(?,?,?,?,?,?)");
 
-            stmt.setString(1,resultadoConsultaDTO.descricao());
+            stmt.setString(1, resultadoConsultaDTO.descricao());
             stmt.setString(2, String.valueOf(resultadoConsultaDTO.dataResultado()));
             stmt.setRowId(3, (RowId) resultadoConsultaDTO.medico());
             stmt.setRowId(4, (RowId) resultadoConsultaDTO.paciente());
             stmt.setRowId(5, (RowId) resultadoConsultaDTO.prescricao());
             stmt.setRowId(6, (RowId) resultadoConsultaDTO.minhaConsulta());
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new SQLException("Erro ao processar resultado exame");
         }
     }
@@ -170,20 +170,49 @@ public class PacienteService {
 
             stmt.execute();
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void dadosDoPaciente(RetornoPacienteDTO retornoPacienteDTO) throws SQLException {
+    public RetornoPacienteDTO dadosDoPaciente(String cpf) throws SQLException {
         try (Connection conn = dataSource.getConnection()) {
-            CallableStatement stmt = conn.prepareCall("{call proc_t09a_dados_paciente(?)}");
+            CallableStatement stmt = conn.prepareCall("{call proc_t09a_dados_paciente(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
 
-            stmt.setString(1, retornoPacienteDTO.cpf());
+            stmt.setString(1, cpf);
 
+            // Registrar os parâmetros OUT
+            stmt.registerOutParameter(2, Types.VARCHAR); // nome
+            stmt.registerOutParameter(3, Types.VARCHAR); // telefone
+            stmt.registerOutParameter(4, Types.VARCHAR); // email
+            stmt.registerOutParameter(5, Types.DATE);    // dataNascimento
+            stmt.registerOutParameter(6, Types.VARCHAR); // cep
+            stmt.registerOutParameter(7, Types.VARCHAR); // logradouro
+            stmt.registerOutParameter(8, Types.VARCHAR); // numero
+            stmt.registerOutParameter(9, Types.VARCHAR); // complemento
+            stmt.registerOutParameter(10, Types.VARCHAR); // bairro
+            stmt.registerOutParameter(11, Types.VARCHAR); // cidade
+            stmt.registerOutParameter(12, Types.VARCHAR); // uf
+
+            // Executar
             stmt.execute();
 
-        }catch (SQLException e){
+            // Montar DTO de retorno
+            return new RetornoPacienteDTO(
+                    stmt.getString(2),  // nome
+                    stmt.getString(3),  // telefone
+                    stmt.getString(4),  // email
+                    stmt.getDate(5) != null ? String.valueOf(stmt.getDate(5).toLocalDate()) : null, // dataNascimento
+                    stmt.getString(6),  // cep
+                    stmt.getString(7),  // logradouro
+                    stmt.getString(8),  // numero
+                    stmt.getString(9),  // complemento
+                    stmt.getString(10), // bairro
+                    stmt.getString(11), // cidade
+                    stmt.getString(12), // uf
+                    cpf                 // cpf (último!)
+            );
+            } catch (SQLException e) {
             throw new SQLException("Erro generico" + e.getMessage());
         }
     }

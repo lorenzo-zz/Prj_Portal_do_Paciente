@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLException;
 import java.util.Map;
 
-@RestController("/paciente")
+@RestController
+@RequestMapping("/paciente")
 public class PacienteController {
 
     @Autowired
@@ -106,18 +108,17 @@ public class PacienteController {
         }catch (ResultadoExameExeception e){
             throw new ResultadoExameExeception("Erro ao salvar o resultado do exame" +  e.getMessage());
         }
-    }
-
-    @PostMapping("/dados-paciente")
-    public ResponseEntity<?> dadosPaciente(@RequestBody RetornoPacienteDTO retornoPacienteDTO) throws SQLException {
-     try{
-            pacienteService.dadosDoPaciente(retornoPacienteDTO);
-            return ResponseEntity.status(200).body(Map.of("Messagem", " Dados trazidos corretamente com sucesso"));
+    }    @PostMapping("/dados-paciente")
+    public ResponseEntity<?> dadosPaciente(@RequestBody CpfDTO cpfDTO) throws SQLException {
+        try{
+            return ResponseEntity.status(200).body(Map.of("Messagem",pacienteService.dadosDoPaciente(cpfDTO.cpf())));
         } catch (DadosPacienteException e){
-         throw  new DadosPacienteException("Erro ao trazer os dados do paciente" + e.getMessage());
-     } catch (SQLException e) {
-         throw new SQLException("Erro genérico" + e.getMessage());
-     }
+            throw  new DadosPacienteException("Erro ao trazer os dados do paciente" + e.getMessage());
+        } catch (SQLException e) {
+            throw new SQLException("Erro genérico" + e.getMessage());
+        }
     }
 }
+
+
 
