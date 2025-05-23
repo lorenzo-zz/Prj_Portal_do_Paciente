@@ -2,7 +2,6 @@ package com.example.oracleapi.Controller;
 
 import com.example.oracleapi.DTO.EnderecoDTO;
 import com.example.oracleapi.DTO.LoginDTO;
-import com.example.oracleapi.Entity.Endereco;
 import com.example.oracleapi.Entity.Paciente;
 import com.example.oracleapi.Exception.CadastroException;
 import com.example.oracleapi.Service.LoginService;

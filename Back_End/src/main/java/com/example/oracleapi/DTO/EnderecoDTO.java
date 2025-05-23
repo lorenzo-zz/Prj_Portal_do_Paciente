@@ -1,7 +1,7 @@
 package com.example.oracleapi.DTO;
 
 public record EnderecoDTO(
-        String nomePaciente,
+        String cpfPaciente,
         String cep,
         String logradouro,
         String cidade,

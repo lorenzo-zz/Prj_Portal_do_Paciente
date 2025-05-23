@@ -11,8 +11,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const logradouro = document.getElementById('logradouro').value;
         const numero = document.getElementById('numero').value;
         const complemento = document.getElementById('complemento').value;
+        const cpfPaciente = localStorage.getItem('cpf');
 
         const cadastrarEndereco = {
+            cpfPaciente: cpfPaciente,
             cep : cep,
             logradouro : logradouro,
             cidade : cidade,
@@ -43,14 +45,6 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch(error => {
                 const msg = error.message;
-                erroCadastrarEndereco(msg);
             });
     });
 });
-
-function erroLogin(msg) {
-
-    if (msg === 'Erro ao cadastrar endereço!') {
-        document.querySelector('.erroCadastrarEndereco').style.display = 'block';
-    }
-}

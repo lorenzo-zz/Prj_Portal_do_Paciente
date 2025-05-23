@@ -5,8 +5,8 @@ import com.example.oracleapi.DTO.LoginDTO;
 import com.example.oracleapi.Entity.Endereco;
 import com.example.oracleapi.Entity.Paciente;
 import com.example.oracleapi.Exception.LoginException;
+import com.example.oracleapi.Repository.EnderecoRepository;
 import com.example.oracleapi.Repository.PacienteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,16 +20,23 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @Service
 public class LoginService {
 
-    @Autowired
-    private PacienteRepository pacienteRepository;
+    private final EnderecoRepository enderecoRepository;
 
-    @Autowired
-    private DataSource dataSource;
+    private final PacienteRepository pacienteRepository;
+
+    private final DataSource dataSource;
+
+    public LoginService(DataSource dataSource, PacienteRepository pacienteRepository, EnderecoRepository enderecoRepository) {
+        this.dataSource = dataSource;
+        this.pacienteRepository = pacienteRepository;
+        this.enderecoRepository = enderecoRepository;
+    }
 
     // Metodo de cadastrar paciente
 
@@ -112,24 +119,18 @@ public class LoginService {
             } else {
                 stmt.setNull(7, java.sql.Types.INTEGER);
             }
+            stmt.execute();
 
-            Paciente paciente = pacienteRepository.findByNome(endereco.nomePaciente())
+            Optional<Endereco> enderecoSalvo = enderecoRepository.findByCepAndNumeroAndLogradouro(endereco.cep(), endereco.numero(), endereco.logradouro());
+            if (enderecoSalvo.isEmpty()) {
+                throw new SQLException("Endereço não foi salvo corretamente.");
+            }
+
+            Paciente paciente = pacienteRepository.findByCpf(endereco.cpfPaciente())
                     .orElseThrow(() -> new SQLException("Paciente não encontrado"));
 
-            Endereco enderecoEntity = new Endereco();
-
-            enderecoEntity.setCep(endereco.cep());
-            enderecoEntity.setLogradouro(endereco.logradouro());
-            enderecoEntity.setCidade(endereco.cidade());
-            enderecoEntity.setUf(endereco.uf());
-            enderecoEntity.setBairro(endereco.bairro());
-            enderecoEntity.setComplemento(endereco.complemento());
-            enderecoEntity.setNumero(endereco.numero());
-
-            paciente.setEndereco(enderecoEntity);
+            paciente.setEndereco(enderecoSalvo.get());
             pacienteRepository.save(paciente);
-            
-            stmt.execute();
 
         } catch (SQLException e) {
             throw new SQLException("Erro com a ligação do banco: " + e.getMessage());

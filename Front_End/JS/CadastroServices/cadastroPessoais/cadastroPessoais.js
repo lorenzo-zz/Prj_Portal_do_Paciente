@@ -41,14 +41,9 @@ document.addEventListener('DOMContentLoaded', function () {
       })
       .then(data => {
 
-        localStorage.setItem('cpf', data.cpf);
-        localStorage.setItem('nome', data.nome);
-<<<<<<< HEAD
+        localStorage.setItem('cpf', cpf);
+        localStorage.setItem('nome', nome);
         window.location.href = 'http://172.20.208.1:5500/Front_End/HTML/adressSignUp.html';
-=======
-        window.location.href = '/Front_End/HTML/index.html';
-
->>>>>>> 0cf1d13afd1cdb103976aca2880818d3285bee87
       })
       .catch(error => {
         const msg = error.message;
