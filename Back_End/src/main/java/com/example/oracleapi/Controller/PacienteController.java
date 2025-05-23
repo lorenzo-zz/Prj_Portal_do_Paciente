@@ -108,6 +108,9 @@ public class PacienteController {
         }
     }
 
+    @PostMapping("/paciente/dados-paciente")
+    public ResponseEntity<?> dadosPaciente(RequestBody Paciente
+
 
 
 }
