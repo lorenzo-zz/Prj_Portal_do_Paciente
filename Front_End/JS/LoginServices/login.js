@@ -4,14 +4,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const cpf = document.getElementById('cpf').value;
         const senha = document.getElementById('senha').value;
+        const erroLogin = document.querySelector('.erroLogin');
+        const erroNulo = document.querySelector('.erroNulo');
 
-        // JSON com os dados
+
+        erroLogin.style.display = 'none';
+        erroNulo.style.display = 'none';
+        
         const login = {
             cpf: cpf,
             senha: senha,
         };
 
-        // Envia dados para o backend
+        if(cpf === "" || senha === "") {
+            erroNulo.style.display = 'block';
+            return;
+        }
+
         fetch('http://localhost:8080/autenticar/login', {
             method: 'POST',
             headers: {
@@ -32,14 +41,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 window.location.href = 'http://172.20.208.1:5500/Front_End/HTML/index.html';
             })
             .catch(error => {
-                const msg = error.message;  
-                erroLogin(msg);
+                const msg = error.message;
+
+                if(msg.includes("CPF ou senha inválidos.")) {
+                    erroLogin.style.display = 'block';
+                }
             });
     });
 });
-
-function erroLogin(msg) {
-    if (msg === 'Erro na autenticação!') {
-        document.querySelector('.erroLogin').style.display = 'block';
-    }
-}

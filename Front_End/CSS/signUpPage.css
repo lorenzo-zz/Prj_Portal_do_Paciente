@@ -139,54 +139,16 @@ input[type="number"]::-webkit-outer-spin-button {
   gap: 5px;
 }
 
-.erroCadastar {
-    font-size: 14px;
-    background-color: red;
+.erroCPF, .erroEMAIL, .erroSENHA, .erroNulo, .erroIdade{
+    font-size: 12px;
+    background-color: rgb(225, 84, 84);
     color: white;
-    border-radius: 10px;
+    border-radius: 5px;
     font-weight: bold;
-    margin: 8px;
-    display: flex;
+    margin: 15px;
+    padding: 12px;
     display: none;
     justify-content: center;
     align-items: center;
-}
-
-.erroCPF {
-    font-size: 14px;
-    background-color: red;
-    color: white;
-    border-radius: 10px;
-    font-weight: bold;
-    margin: 8px;
-    display: flex;
-    display: none;
-    justify-content: center;
-    align-items: center;
-}
-
-.erroEMAIL {
-  font-size: 14px;
-  background-color: red;
-  color: white;
-  border-radius: 10px;
-  font-weight: bold;
-  margin: 8px;
-  display: flex;
-  display: none;
-  justify-content: center;
-  align-items: center;
-}
-
-.erroSENHA {
-  font-size: 14px;
-  background-color: red;
-  color: white;
-  border-radius: 10px;
-  font-weight: bold;
-  margin: 8px;
-  display: flex;
-  display: none;
-  justify-content: center;
-  align-items: center;
+    text-align: center;
 }

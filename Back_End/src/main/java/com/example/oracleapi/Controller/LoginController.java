@@ -56,17 +56,16 @@ public class LoginController {
         try {
             loginService.cadastrarEndereco(endereco);
             return ResponseEntity.status(200).body(Map.of("message", "Endereço do usuario cadastrado com sucesso"));
-        }catch (CadastroException e){
-            throw new CadastroException("Erro ao cadastrar o endereço" + e.getMessage());
         } catch (SQLException e) {
+            if (e.getMessage().contains("CPF já cadastrado")) {
+                throw new CadastroException("CPF já cadastrado!");
+            } else if (e.getMessage().contains("Email já cadastrado")) {
+                throw new CadastroException("Email já cadastrado!");
+            } else if (e.getMessage().contains("Idade minima de 18 anos.")) {
+                throw new CadastroException("Idade mínima para cadastro é 18 anos.");
+            }
             throw new CadastroException("Erro com o banco de dados: " + e.getMessage());
-        } catch (Exception e) {
-            throw new CadastroException("Erro genérico: " + e.getMessage());
         }
     }
-
-
-
-
 
 }

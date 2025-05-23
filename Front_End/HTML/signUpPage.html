@@ -24,57 +24,69 @@
         </div>
 
         <div class="caixa_input">
-          <input type="text" name="nome" id="nome" required placeholder="Nome Completo" maxlength="100" />
+          <input type="text" name="nome" id="nome"  placeholder="Nome Completo" maxlength="100" />
         </div>
 
         <div class="caixa_input">
-          <input type="text" name="cpf" id="cpf" required placeholder="CPF: (somente números)" maxlength="11"
+          <input type="text" name="cpf" id="cpf"  placeholder="CPF: (somente números)" maxlength="11"
             pattern="\d{11}" />
         </div>
 
         <div class="caixa_input">
-          <input type="text" name="telefone" id="telefone" required placeholder="Telefone: (somente números)"
+          <input type="text" name="telefone" id="telefone"  placeholder="Telefone: (somente números)"
             maxlength="11" pattern="\d{10,11}" />
         </div>
 
         <div class="caixa_input">
-          <input type="email" name="email" id="email" required placeholder="Email: exemplo@email.com" maxlength="100" />
+          <input type="email" name="email" id="email"  placeholder="Email: exemplo@email.com" maxlength="100" />
         </div>
 
         <div class="radio_sexo">
           <label for="sexo">Sexo: </label>
-          <input type="radio" name="sexo" id="sexo_m" value="M" required> Masculino
+          <input type="radio" name="sexo" id="sexo_m" value="M" > Masculino
           <input type="radio" name="sexo" id="sexo_f" value="F"> Feminino
         </div>
 
         <div class="dt_nascimento">
           <label for="dt_nascimento">Data de Nascimento:</label>
-          <input type="date" name="dt_nascimento" id="dt_nascimento" required>
+          <input type="date" name="dt_nascimento" id="dt_nascimento" >
         </div>
 
         <div class="input_doc">
           <h3>Foto do documento:</h3>
           <br>
-          <input type="file" id="arquivo" required />
+          <input type="file" id="arquivo" />
         </div>
 
         <div class="caixa_input">
-          <input type="password" name="senha" id="senha" required placeholder="Senha" maxlength="30">
+          <input type="password" name="senha" id="senha"  placeholder="Senha" maxlength="30">
         </div>
 
         <div class="caixa_input">
-          <input type="password" name="confirmar_senha" id="confirmar_senha" required placeholder="Confirmar Senha"
+          <input type="password" name="confirmar_senha" id="confirmar_senha"  placeholder="Confirmar Senha"
             maxlength="30">
         </div>
+
         <div class="erroCPF">
           <p>Este CPF já está em uso!</p>
         </div>
+
         <div class="erroEMAIL">
           <p>Este email já está em uso!</p>
         </div>
+
         <div class="erroSENHA">
           <p>As senhas devem ser iguais!</p>
         </div>
+
+        <div class="erroNulo">
+          <p>Necessário preencher todos os dados!</p>
+        </div>
+
+        <div class="erroIdade">
+          <p>Idade minima para cadastro de 18 anos!</p>
+        </div>
+        
         <button type="submit">Registrar</button>
         <button onclick="location.href='../HTML/loginPage.html'">Retornar ao Login</button>
       </form>

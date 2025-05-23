@@ -6,10 +6,33 @@ document.addEventListener('DOMContentLoaded', function () {
     const cpf = document.getElementById('cpf').value;
     const telefone = document.getElementById('telefone').value;
     const email = document.getElementById('email').value;
-    const sexoInput = document.querySelector('input[name="sexo"]:checked'); //verifica qual dos botões está selecionado masculino ou feminino
+    const sexoInput = document.querySelector('input[name="sexo"]:checked');
     const sexo = sexoInput ? sexoInput.value : '';
     const dt_nascimento = document.getElementById('dt_nascimento').value;
     const senha = document.getElementById('senha').value;
+    const confirmarSenha = document.getElementById('confirmar_senha').value;
+
+    const erroIdade = document.querySelector('.erroIdade');
+    const erroNulo = document.querySelector('.erroNulo');
+    const cpfErro = document.querySelector('.erroCPF');
+    const emailErro = document.querySelector('.erroEMAIL');
+    const erroSenha = document.querySelector('.erroSENHA');
+
+    erroNulo.style.display = 'none';
+    cpfErro.style.display = 'none';
+    emailErro.style.display = 'none';
+    erroSenha.style.display = 'none';
+    erroIdade.style.display = 'none';
+
+    if (nome === "" || cpf === "" || telefone === "" || email === "" || sexo === "" || dt_nascimento === "" || senha === "") {
+      erroNulo.style.display = 'block';
+      return;
+    }
+
+    if (senha !== confirmarSenha) {
+      erroSenha.style.display = 'block';
+      return;
+    }
 
     const cadastrarInfPessoais = {
       nome: nome,
@@ -24,6 +47,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const formData = new FormData();
     const arquivoInput = document.getElementById("arquivo");
     const arquivo = arquivoInput.files[0];
+
+    if (!arquivo) {
+      erroNulo.style.display = 'block';
+      return;
+    }
+
     formData.append("paciente", new Blob([JSON.stringify(cadastrarInfPessoais)], { type: "application/json" }));
     formData.append("arquivo", arquivo);
 
@@ -31,29 +60,39 @@ document.addEventListener('DOMContentLoaded', function () {
       method: 'POST',
       body: formData
     })
-
       .then(async response => {
         if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.erro || 'Erro desconhecido');
+          const errorText = await response.text();
+          throw new Error(errorText);
         }
         return response.json();
       })
       .then(data => {
-
         localStorage.setItem('cpf', cpf);
         localStorage.setItem('nome', nome);
         window.location.href = 'http://172.20.208.1:5500/Front_End/HTML/adressSignUp.html';
       })
-      .catch(error => {
-        const msg = error.message;
-        erroCadastrar(msg);
+      .catch(async error => {
+        let errorMsg = '';
+
+        try {
+          const errJson = await error.response.json(); // tenta pegar erro do corpo
+          errorMsg = errJson.message || errJson.erro || JSON.stringify(errJson);
+        } catch (e) {
+          errorMsg = error.message || "Erro desconhecido";
+        }
+
+        const msg = errorMsg.toLowerCase();
+
+        if (msg.includes("cpf") && msg.includes("cadastrado")) {
+          cpfErro.style.display = 'block';
+        } else if (msg.includes("email") && msg.includes("cadastrado")) {
+          emailErro.style.display = 'block';
+        } else if (msg.includes("idade") && msg.includes("18 anos")) {
+          erroIdade.style.display = 'block';
+        } else {
+          alert("Erro: " + errorMsg);
+        }
       });
   });
 });
-
-function erroCadastrar(msg) {
-  if (msg === 'Erro ao cadastrar as informações pessoais!') {
-    document.querySelector('.erroCadastrar').style.display = 'block';
-  }
-}
