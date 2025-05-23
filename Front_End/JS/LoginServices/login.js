@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 localStorage.setItem('cpf', cpf);
                 localStorage.setItem('nome', data.nome);
-                window.location.href = 'http://172.20.208.1:5500/Front_End/HTML/index.html';
+                window.location.href = 'http://127.0.0.1:5500/Front_End/HTML/index.html';
             })
             .catch(error => {
                 const msg = error.message;  
