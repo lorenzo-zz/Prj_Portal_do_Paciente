@@ -50,10 +50,11 @@
                 <input type="text" placeholder="Bairro" id="bairro" maxlength="50"><br>
                 <input type="text" placeholder="Cidade" id="cidade" maxlength="50"><br>
                 <input type="text" placeholder="Estado" id="estado" maxlength="2"><br>
-                <input type="password" placeholder="Nova Senha" id="senha" maxlength="30"><br>
-                <input type="password" placeholder="Confirmar Nova Senha" id="confirmar_senha" maxlength="30"><br>
                 <button type="button" onclick="showModal()">Salvar Alterações</button>
 
+                <div class="sucessoAlteracao">
+                  <h3>Alterações salvas com sucesso!</h3>
+                </div>
                 <div id="modal" class="modal">
                     <div class="modal-content">
                         <span class="close" onclick="closeModal()">&times;</span>
@@ -155,6 +156,9 @@
  
           <button type="submit">Confirmar</button>
           <script src="/Front_End/JS/CadastroServices/cadastroAlergia/cadastroAlergias.js"></script>
+        </div>
+        <div class="sucessoAlteracao2">
+          <h3>Alterações salvas com sucesso!</h3>
         </div>
       </form>
  

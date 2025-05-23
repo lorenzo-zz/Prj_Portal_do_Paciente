@@ -68,6 +68,10 @@ document.addEventListener('DOMContentLoaded', function () {
         return response.json();
       })
       .then(data => {
+
+
+        localStorage.setItem('cpf', data.cpf);
+        localStorage.setItem('nome', data.nome);
         localStorage.setItem('cpf', cpf);
         localStorage.setItem('nome', nome);
         window.location.href = 'http://172.20.208.1:5500/Front_End/HTML/adressSignUp.html';
