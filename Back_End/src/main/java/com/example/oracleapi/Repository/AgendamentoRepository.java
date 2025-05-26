@@ -13,5 +13,5 @@ import org.springframework.stereotype.Repository;
 public interface AgendamentoRepository extends JpaRepository<AgendamentoConsulta, Integer> {
 
 
-    Optional<Object> findByPacienteDataHora(int paciente, LocalDate data, LocalTime hora);
+    Optional<Object> findByPacienteIdAndDataAndHora(int paciente, LocalDate data, LocalTime hora);
 }

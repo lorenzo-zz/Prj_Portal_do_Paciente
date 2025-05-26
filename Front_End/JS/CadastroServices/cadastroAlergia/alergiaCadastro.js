@@ -1,45 +1,35 @@
 
-document.addEventListener('DOMContentLoaded', function () {  //espera o html carragar todo
+document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('alergiaCadastro').addEventListener('submit', function (event) {
         event.preventDefault();
 
 
         const alergia = document.getElementById('alergiaSelect').value;
-        
-        //json
-        const cadastrarAlergia = {
-            alergia: alergia,
+        const cpf = localStorage.getItem('cpf');
 
+        const cadastrarAlergia = {
+            nomeAlergia: alergia,
+            paciente: {
+                cpf: cpf
+            }
         };
-        //manda a validação de dados para o back  
-        fetch('http://localhost:8080/autenticar/cadastrarAlergia', { //mudar o caminho
+        fetch('http://localhost:8080/paciente/alergias', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(cadastrarAlergia)
         })
-            //se a resposta for diferente de 200 = OK
             .then(async response => {
                 if (!response.ok) {
                     const errorData = await response.json();
                     throw new Error(errorData.erro || 'Erro desconhecido');
                 }
-                return response.text(); //retorna o texto da vairavel response 
+                return response.text(); 
             })
-            .then(data => { //se o login der certo 
-                window.location.href = '../Front_End/HTML/loginPage.html';
+            .then(data => {  
             })
             .catch(error => {
-                const msg = error.message;
-                erroCadastrarAlergia(msg);
             });
     });
 });
-
-function erroCadastrarAlergia(msg) {
-
-    if (msg === 'Erro ao cadastrar alergia!') {
-        document.querySelector('.erroCadastrarAlergia').style.display = 'block';
-    }
-}

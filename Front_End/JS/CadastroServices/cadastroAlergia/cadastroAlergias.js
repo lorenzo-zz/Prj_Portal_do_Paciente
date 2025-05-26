@@ -1,3 +1,4 @@
+
 const alergias = new Set();
 
 function adicionarAlergia() {
@@ -13,6 +14,7 @@ function adicionarAlergia() {
 function removerAlergia(alergia) {
   alergias.delete(alergia);
   atualizarLista();
+  remover(alergia);
 }
 
 function atualizarLista() {
@@ -24,5 +26,37 @@ function atualizarLista() {
     div.className = 'alergia';
     div.innerHTML = `${alergia} <button onclick="removerAlergia('${alergia}')">X</button>`;
     container.appendChild(div);
-  });
+  }
+  );
+}
+
+function remover(alergia) {
+  const cpf = localStorage.getItem('cpf');
+
+  const dados = {
+    nomeAlergia: alergia,
+    paciente: {
+      cpf: cpf
+    }
+  };
+
+  fetch(`http://localhost:8080/paciente/alergias-remover`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(dados)
+  })
+    .then(async response => {
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.erro || 'Erro ao remover alergia');
+      }
+
+      alert('Alergia removida com sucesso!');
+    })
+    .catch(error => {
+      console.error(error);
+      alert('Erro ao remover alergia!');
+    });
 }
