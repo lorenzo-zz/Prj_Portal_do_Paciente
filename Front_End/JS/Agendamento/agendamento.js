@@ -10,6 +10,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const especialidade = document.getElementById("especialidade");
     const horario = document.getElementById("horario");
 
+    if( !nome || !cpf || !data.value || !telefone.value || !email.value || !especialidade.value || !horario.value) {
+      alert("Por favor, preencha todos os campos obrigatórios.");
+      return;
+    }
+
     const dados = {
       nomePaciente: nome,
       cpfPaciente: cpf,
@@ -34,9 +39,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         return response.text();
       }).then(data => {
-        consulta-form.reset();
+        
       }).catch(error => {
-        alert("Erro ao agendar consulta: " + error.message);
       })
   });
 });
