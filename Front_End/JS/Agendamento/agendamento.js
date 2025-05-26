@@ -1,0 +1,42 @@
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("consulta-form").addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const nome = localStorage.getItem("nome");
+    const cpf = localStorage.getItem("cpf");
+    const data = document.getElementById("data");
+    const telefone = document.getElementById("telefone");
+    const email = document.getElementById("email");
+    const especialidade = document.getElementById("especialidade");
+    const horario = document.getElementById("horario");
+
+    const dados = {
+      nomePaciente: nome,
+      cpfPaciente: cpf,
+      data: data.value,
+      telefone: telefone.value,
+      email: email.value,
+      especificacaoMedico: especialidade.value,
+      hora: horario.value + ":00" 
+    };
+
+    fetch('http://localhost:8080/paciente/agendar-consulta', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dados)
+    })
+      .then(async response => {
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.erro || 'Erro ao agendar consulta');
+        }
+        return response.text();
+      }).then(data => {
+        consulta-form.reset();
+      }).catch(error => {
+        alert("Erro ao agendar consulta: " + error.message);
+      })
+  });
+});

@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import javax.sql.DataSource;
 import java.sql.*;
 
@@ -41,22 +40,20 @@ public class PacienteService {
 
     public void agendarConsulta(AgendamentoConsultaDTO agendamentoConsulta) throws SQLException {
         try (Connection conn = dataSource.getConnection()) {
-            CallableStatement stmt = conn.prepareCall("{call proc_t09a_agendamento_consulta(?, ?, ?, ?, ?)}");
+            CallableStatement stmt = conn.prepareCall("{call proc_t09a_agendamento_consulta(?, ?, ?, ?, ?, ?, ?)}");
 
-            int paciente = pacienteRepository.findByCpf(agendamentoConsulta.pacienteCpf())
-                    .orElseThrow(() -> new SQLException("Erro banco de dados"))
-                    .getId();
-
-            stmt.setString(1, agendamentoConsulta.descricao());
-            stmt.setDate(2, Date.valueOf(agendamentoConsulta.data())); // java.time.LocalDate
-            stmt.setTime(3, Time.valueOf(agendamentoConsulta.hora())); // java.time.LocalTime
-            stmt.setInt(4, paciente);
-            stmt.setString(5, String.valueOf(agendamentoConsulta.especificacaoMedico()));
+            stmt.setString(1, agendamentoConsulta.nomePaciente());
+            stmt.setString(2, agendamentoConsulta.cpfPaciente());
+            stmt.setDate(3, Date.valueOf(agendamentoConsulta.data()));
+            stmt.setString(4, agendamentoConsulta.telefone());
+            stmt.setString(5, agendamentoConsulta.email());
+            stmt.setString(6, String.valueOf(agendamentoConsulta.especificacaoMedico()));
+            stmt.setTime(7, Time.valueOf(agendamentoConsulta.hora()));
 
             stmt.execute();
 
         } catch (SQLException e) {
-            throw new SQLException("Erro ao processar gendamento consulta");
+            throw new SQLException("Erro ao processar agendamento consulta", e);
         }
     }
 
