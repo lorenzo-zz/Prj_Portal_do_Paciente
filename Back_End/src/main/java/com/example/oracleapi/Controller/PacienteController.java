@@ -51,7 +51,7 @@ public class PacienteController {
         }
     }
 
-    @PostMapping("/alergias-remover")
+    @DeleteMapping("/alergias-remover")
     public ResponseEntity<?> alergiaRemover(@RequestBody PacienteAlergiaDTO pacienteAlergiaDTO) {
         try {
             pacienteService.alergiaRemover(pacienteAlergiaDTO);

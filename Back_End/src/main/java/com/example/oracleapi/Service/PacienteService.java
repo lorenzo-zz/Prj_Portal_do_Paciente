@@ -268,7 +268,7 @@ public class PacienteService {
                 .orElseThrow(() -> new SQLException("Paciente não encontrado"));
 
         try (Connection conn = dataSource.getConnection()) {
-            CallableStatement stmt = conn.prepareCall("{call proc_t09a_paciente_alergia(?, ?)}");
+            CallableStatement stmt = conn.prepareCall("{call proc_remover_alergia_paciente(?, ?)}");
 
             stmt.setString(1, pacienteAlergiaDTO.nomeAlergia());
             stmt.setInt(2, pacienteExistente.getId());
