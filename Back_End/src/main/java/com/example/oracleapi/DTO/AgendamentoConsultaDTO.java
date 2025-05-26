@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public record AgendamentoConsultaDTO(
+        String pacienteCpf,
         String descricao,
         LocalDate data,
         LocalTime hora,

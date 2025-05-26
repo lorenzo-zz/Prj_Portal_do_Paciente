@@ -8,6 +8,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public record MinhaConsultaDTO(
+        String pacienteCpf,
+        String medicoCrm,
+        String agedamento,
         LocalDate data,
         LocalTime hora,
         String descricao,
