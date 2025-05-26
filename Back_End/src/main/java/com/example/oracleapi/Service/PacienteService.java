@@ -165,13 +165,15 @@ public class PacienteService {
                     .orElseThrow(() -> new SQLException("Médico não encontrado"))
                     .getId();
 
-
+            // Buscar ID da MinhaConsulta
             int minhaConsulta = minhaConsultaRepository.findByPacienteMedicoDataHora(
                             paciente,
                             medico,
                             requisicaoExameDTO.dataRequisicao(),
                             requisicaoExameDTO.horaRequisicao()
                     ).orElseThrow(() -> new SQLException("Consulta não encontrada"))
+                    .getId();
+
 
 
             stmt.setString(1, String.valueOf(requisicaoExameDTO.dataRequisicao()));

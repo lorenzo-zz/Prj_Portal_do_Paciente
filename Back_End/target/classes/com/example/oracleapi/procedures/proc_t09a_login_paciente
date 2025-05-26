@@ -1,0 +1,21 @@
+create or replace PROCEDURE proc_t09a_login_paciente (
+    p_cpf   IN VARCHAR2,
+    p_senha IN VARCHAR2
+)
+AS
+    v_count   NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO v_count
+    FROM t09a_paciente
+    WHERE cpf = p_cpf AND senha = p_senha;
+
+    IF v_count = 1 THEN
+        DBMS_OUTPUT.PUT_LINE('Login efetuado com sucesso.');
+    ELSE
+        RAISE_APPLICATION_ERROR(-20001, 'CPF ou senha inválidos.');
+    END IF;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE_APPLICATION_ERROR(-20002, 'Erro inesperado: ' || SQLERRM);
+END;
