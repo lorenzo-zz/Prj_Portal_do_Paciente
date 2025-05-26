@@ -1,18 +1,13 @@
 package com.example.oracleapi.Service;
 
 import com.example.oracleapi.DTO.*;
-import com.example.oracleapi.Entity.AgendamentoConsulta;
-import com.example.oracleapi.Repository.AgendamentoRepository;
-import com.example.oracleapi.Repository.MedicoRepository;
-import com.example.oracleapi.Repository.MinhaConsultaRepository;
-import com.example.oracleapi.Repository.PacienteRepository;
+import com.example.oracleapi.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @Service
@@ -32,6 +27,9 @@ public class PacienteService {
 
     @Autowired
     private MedicoRepository medicoRepository;
+
+    @Autowired
+    private PrescricaoRepository prescricaoRepository;
 
 //    @Autowired
 //    private AlergiaRepository alergiaRepository;
@@ -89,7 +87,7 @@ public class PacienteService {
                     .orElseThrow(() -> new SQLException("Erro banco de dados"))
                     .getId();
 
-            int agendamento = agendamentoRepository.findByPacienteDataHora(
+            int agendamento = agendamentoRepository.findByPacienteIdAndDataAndHora(
                             paciente,
                             minhaConsultaDTO.data(),
                             minhaConsultaDTO.hora()
@@ -127,7 +125,7 @@ public class PacienteService {
 
             stmt.setString(1, pacienteAlergiaDTO.descricao());
             stmt.setString(2, pacienteAlergiaDTO.nomeAlergia());
-            stmt.setInt(3,  paciente);
+            stmt.setInt(3, paciente);
 
             stmt.execute();
 
@@ -156,29 +154,13 @@ public class PacienteService {
         try (Connection conn = dataSource.getConnection()) {
             CallableStatement stmt = conn.prepareCall("call proc_t09a_requisicao_exame(?,?,?,?,?,?,?)");
 
-            int paciente = pacienteRepository.findByCpf(requisicaoExameDTO.pacienteCpf())
-                    .orElseThrow(() -> new SQLException("Paciente não encontrado"))
-                    .getId();
-
-            // Buscar médico pelo CRM
-            int medico = medicoRepository.findByCrm(requisicaoExameDTO.medicoCrm())
-                    .orElseThrow(() -> new SQLException("Médico não encontrado"))
-                    .getId();
-
-
-            int minhaConsulta = minhaConsultaRepository.findByPacienteMedicoDataHora(
-                            paciente,
-                            medico,
-                            requisicaoExameDTO.dataRequisicao(),
-                            requisicaoExameDTO.horaRequisicao()
-                    ).orElseThrow(() -> new SQLException("Consulta não encontrada"))
-
+            int minhaConsultaId = requisicaoExameDTO.minhaConsulta().getId();
 
             stmt.setString(1, String.valueOf(requisicaoExameDTO.dataRequisicao()));
             stmt.setString(2, String.valueOf(requisicaoExameDTO.horaRequisicao()));
             stmt.setString(3, requisicaoExameDTO.descricao());
             stmt.setString(4, requisicaoExameDTO.tipoExame());
-            stmt.setInt(5,  minhaConsulta);
+            stmt.setInt(5, minhaConsultaId);
             stmt.setString(6, requisicaoExameDTO.tipoExame());
             stmt.setString(7, requisicaoExameDTO.nomeDocumento());
 
@@ -194,12 +176,34 @@ public class PacienteService {
         try (Connection conn = dataSource.getConnection()) {
             CallableStatement stmt = conn.prepareCall("call proc_t09a_resultado_consulta(?,?,?,?,?,?)");
 
+            int pacienteId = pacienteRepository.findByCpf(resultadoConsultaDTO.pacienteCpf())
+                    .orElseThrow(() -> new SQLException("Paciente não encontrado"))
+                    .getId();
+
+            int medicoId = medicoRepository.findByCrm(resultadoConsultaDTO.medicoCrm())
+                    .orElseThrow(() -> new SQLException("Médico não encontrado"))
+                    .getId();
+
+            int minhaConsultaId = minhaConsultaRepository.findByPacienteMedicoDataHora(
+                            pacienteId,
+                            resultadoConsultaDTO.hora(),
+                            resultadoConsultaDTO.dataResultado()
+                    ).orElseThrow(() -> new SQLException("Consulta não encontrada"))
+                    .getId();
+
+            int prescricaoId = prescricaoRepository.findByDescricao(resultadoConsultaDTO.prescricaoDescricao())
+                    .orElseThrow(() -> new SQLException("Prescrição não encontrada"))
+                    .getId();
+
+
             stmt.setString(1, resultadoConsultaDTO.descricao());
             stmt.setString(2, String.valueOf(resultadoConsultaDTO.dataResultado()));
-            stmt.setRowId(3, (RowId) resultadoConsultaDTO.medico());
-            stmt.setRowId(4, (RowId) resultadoConsultaDTO.paciente());
-            stmt.setRowId(5, (RowId) resultadoConsultaDTO.prescricao());
-            stmt.setRowId(6, (RowId) resultadoConsultaDTO.minhaConsulta());
+            stmt.setInt(3, medicoId);
+            stmt.setInt(4, pacienteId);
+            stmt.setInt(5, prescricaoId);
+            stmt.setInt(6, minhaConsultaId);
+
+            stmt.execute();
 
         } catch (SQLException e) {
             throw new SQLException("Erro ao processar resultado exame");
@@ -212,8 +216,10 @@ public class PacienteService {
              CallableStatement stmt = conn.prepareCall("{call proc_t09a_resultado_exame(?, ?)}");
         ) {
 
-            stmt.setString(1, String.valueOf(Date.valueOf(resultadoExameDTO.descricao())));
-            stmt.setRowId(2, (RowId) resultadoExameDTO.requisicaoExame());
+            int requisicaoExameId = resultadoExameDTO.requisicaoExame().getId();
+
+            stmt.setString(1, resultadoExameDTO.descricao());
+            stmt.setInt(2, requisicaoExameId);
 
             stmt.execute();
 

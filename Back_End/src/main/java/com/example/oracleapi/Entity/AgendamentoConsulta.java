@@ -38,6 +38,10 @@ public class AgendamentoConsulta {
     @Enumerated(EnumType.STRING)
     private EspecificacaoMedico especificacaoMedico;
 
+    public int getId() {
+        return id;
+    }
+
     public String getDescricao() {
         return descricao;
     }

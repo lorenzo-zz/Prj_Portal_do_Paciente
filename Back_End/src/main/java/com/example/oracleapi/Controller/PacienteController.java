@@ -115,8 +115,8 @@ public class PacienteController {
             throw new SQLException("Erro genérico" + e.getMessage());
         }
     }
-
-    @PutMapping("/edição")
+//
+//    @PutMapping("/edição")
 
 }
 

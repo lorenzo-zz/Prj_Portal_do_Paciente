@@ -1,4 +1,4 @@
-package com.example.oracleapi.DTO;
+package com.example.oracleapi.Exception;
 
 public class DadosPacienteException extends RuntimeException {
     public DadosPacienteException(String message) {

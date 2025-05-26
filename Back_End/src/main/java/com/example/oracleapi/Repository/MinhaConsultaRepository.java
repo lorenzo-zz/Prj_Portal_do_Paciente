@@ -10,5 +10,7 @@ import java.util.Optional;
 public interface MinhaConsultaRepository extends JpaRepository<MinhaConsulta, Integer> {
 
 
-    Optional<Object> findByPacienteMedicoDataHora(int paciente, int medico, LocalDate localDate, LocalTime localTime);
+    Optional<MinhaConsulta> findByPacienteMedicoDataHora(String paciente, String medico, LocalDate localDate, LocalTime localTime);
+
+    Optional<MinhaConsulta> findByPacienteMedicoDataHora(int pacienteId, LocalTime hora, LocalDate localDate);
 }

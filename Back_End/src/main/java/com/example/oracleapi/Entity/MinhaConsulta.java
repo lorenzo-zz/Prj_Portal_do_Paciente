@@ -61,4 +61,8 @@ public class MinhaConsulta {
     private String pressao_arterial;
 
     private String temperatura;
+
+    public int getId() {
+        return id;
+    }
 }

@@ -30,4 +30,7 @@ public class PacienteAlergia {
     @ManyToOne
     private Paciente paciente;
 
+    public int getId() {
+        return id;
+    }
 }
