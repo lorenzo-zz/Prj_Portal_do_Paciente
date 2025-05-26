@@ -1,8 +1,5 @@
 package com.example.oracleapi.Controller;
 
-
-import com.example.oracleapi.DTO.*;
-import com.example.oracleapi.Exception.*;
 import com.example.oracleapi.Service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,13 +31,13 @@ public class PacienteController {
     }
 
     @PostMapping("/minha-consulta")
-    public ResponseEntity<?> MinhaConsulta(@RequestBody MinhaConsultaDTO minhaConsultaDTO){
-        try {
-            pacienteService.minhaConsulta(minhaConsultaDTO);
+    public ResponseEntity<?> MinhaConsulta(@RequestBody MinhaConsultaDTO minhaConsultaDTO) {
+        try { 
+            pacienteService.minhaConsulta(minhaConsultaDTO); 
             return ResponseEntity.status(200).body(Map.of("mensagem", "Aqui está sua consulta"));
-        }catch (ConsultaException e){
-            throw new ConsultaException("Erro ao retornar sua consulta" + e.getMessage());
-        }
+        } catch (ConsultaException e) {
+             throw new ConsultaExcept ion("Erro ao retornar sua consulta" + e.getMessage());
+        }  
     }
 
     @PostMapping("/alergias")
@@ -50,6 +47,18 @@ public class PacienteController {
             return ResponseEntity.status(200).body(Map.of("mensagem", "Alergia cadastrada com sucesso"));
         } catch (AlergiaException e) {
             throw new AlergiaException("Erro ao cadastrar alergia" + e.getMessage());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @PostMapping("/alergias-remover")
+    public ResponseEntity<?> alergiaRemover(@RequestBody PacienteAlergiaDTO pacienteAlergiaDTO) {
+        try {
+            pacienteService.alergiaRemover(pacienteAlergiaDTO);
+            return ResponseEntity.status(200).body(Map.of("mensagem", "Alergia removida com sucesso"));
+        } catch (AlergiaException e) {
+            throw new AlergiaException("Erro ao remover alergia" + e.getMessage());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -69,53 +78,50 @@ public class PacienteController {
 
     @PostMapping("/prescricao")
     public ResponseEntity<?> prescricao(@RequestBody PrescricaoDTO prescricaoDTO) {
-        try {
-            pacienteService.cadastrarPrescricao(prescricaoDTO);
-            return ResponseEntity.status(200).body(Map.of("Messagem", "Prescrição cadastrado com sucesso"));
+        try  {
+             pacienteService.cadastrarPrescricao(prescricaoDTO);
+             return ResponseEntity.status(200).body(Map.of("Messagem", "Prescrição cadastrado com sucesso"));
         } catch (PrescricaoException e) {
-            throw new PrescricaoException("Erro ao cadastrar o prescrição" + e.getMessage());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+             throw new PrescricaoException(" Erro ao cadastrar o prescrição" + e.getMessage());
+        }  catch (SQLException e) { 
+             throw new RuntimeException(e); 
         }
     }
 
     @PostMapping("/prescricao/requisicao-exame")
     public ResponseEntity<?> prescricaoExame(@RequestBody RequisicaoExameDTO requisicaoExameDTO) {
-        try{
-            pacienteService.cadastrarRequisicaoExame(requisicaoExameDTO);
-            return ResponseEntity.status(200).body(Map.of("Massagem", "Requisicao exame salva com sucesso"));
-
-        }catch (RequisicaoExameException e){
-            throw new RequisicaoExameException("Erro ao salvar a Requisicao do exame" + e.getMessage());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        try{ 
+             pacienteService.cadastrarRequisicoExame(requisicaoExameDTO); 
+             return ResponseEntity.status(200)body(Map.of("Massagem", "Requisicao exame salva com s ucesso"));
+ 
+        } catch (RequisicaoExameException e){ 
+             throw new RequisicaoExameException("Erro ao salva r a Requisicao do exame" + e etMessage());
+        }  catch (SQLException e) {  
+            throw new RuntimeException(e); 
         }
     }
+ 
+    @PostMa pping("/resultado-consulta") 
+    public  ResponseEntity<?> resultadoConsulta (@RequestBody ResultadoConsultaDTO resultadoE xameDTO){
+        try {
+             pacienteService.cadastrarResult adoConsulta(resultadoExameDTO);
+             return ResponseEntity.status(20 0).body(Map.of("Messagem", "Resultado da co ulta salvo com sucesso"));
+        } catch (ResultadoConsultaExeception  | SQLException e){ 
+      
 
-    @PostMapping("/resultado-consulta")
-    public ResponseEntity<?> resultadoConsulta (@RequestBody ResultadoConsultaDTO resultadoExameDTO){
-        try{
-            pacienteService.cadastrarResultadoConsulta(resultadoExameDTO);
-            return ResponseEntity.status(200).body(Map.of("Messagem", "Resultado da consulta salvo com sucesso"));
-        }catch (ResultadoConsultaExeception | SQLException e){
-            throw new ResultadoConsultaExeception("Erro ao salvar o resultado do exame" +  e.getMessage());
-        }
-    }
 
-    @PostMapping("/resultado-exame")
-    public ResponseEntity<?> resultadoExame(@RequestBody ResultadoExameDTO resultadoExameDTO){
-        try{
-            pacienteService.cadastrarResultadoExame(resultadoExameDTO);
-            return ResponseEntity.status(200).body(Map.of("Messagem", "Resultado do exame salvo com sucesso"));
-        }catch (ResultadoExameExeception e){
-            throw new ResultadoExameExeception("Erro ao salvar o resultado do exame" +  e.getMessage());
-        }
-    }
 
-@PostMapping("/dados-paciente")
-public ResponseEntity<?> dadosPaciente(@RequestBody Map<String, String> body) {
-    try {
-        String cpf = body.get("cpf");
+                @Post
+                 
+             
+                        pacienteService.c
+                        return ResponseEnt
+                    }catch (ResultadoE
+                 
+             
+         
+    @
+ 
         RetornoPacienteDTO paciente = pacienteService.dadosDoPaciente(cpf);
         return ResponseEntity.ok(paciente);
     } catch (SQLException e) {
