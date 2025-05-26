@@ -119,20 +119,25 @@ input, select {
   align-items: center;
   justify-content: center;
   z-index: 999;
+  
 }
 
 .modal-conteudo {
   background-color: white;
-  padding: 30px 40px;
+  padding: 30px;
   border-radius: 12px;
   text-align: center;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  margin-top: 45vh;
+
+  
 }
 
 .modal-conteudo p {
   font-size: 1.2rem;
   color: #023279;
   margin-bottom: 20px;
+  
 }
 
 .modal-conteudo button {
@@ -161,19 +166,19 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .limpar-btn {
-  background-color: #f0f8ff; /* Branco azulado (tom suave) */
-  color: #023279; /* Azul escuro para o texto */
+  background-color: #f0f8ff;
+  color: #023279; 
   padding: 14px;
   border-radius: 10px;
   font-size: 1.1rem;
   font-weight: bold;
   transition: background-color 0.3s, transform 0.2s;
-  border: 1.5px solid #005fc5; /* Borda azul para um toque refinado */
+  border: 1.5px solid #005fc5; 
   cursor: pointer;
   margin-top: 10px;
 }
 
 .limpar-btn:hover {
-  background-color: #e0efff; /* Um tom mais intenso ao passar o mouse */
+  background-color: #e0efff; 
   transform: scale(1.05);
 }
