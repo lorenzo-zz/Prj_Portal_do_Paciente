@@ -1,6 +1,10 @@
 package com.example.oracleapi.Service;
 
 import com.example.oracleapi.DTO.*;
+import com.example.oracleapi.Entity.AgendamentoConsulta;
+import com.example.oracleapi.Repository.AgendamentoRepository;
+import com.example.oracleapi.Repository.MedicoRepository;
+import com.example.oracleapi.Repository.MinhaConsultaRepository;
 import com.example.oracleapi.Repository.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @Service
@@ -19,15 +24,15 @@ public class PacienteService {
     @Autowired
     private PacienteRepository pacienteRepository;
 
-//    @Autowired
-//    private EnderecoRepository enderecoRepository;
-//
-//    @Autowired
-//    private MinhaConsultaRepository minhaConsultaRepository;
-//
-//    @Autowired
-//    private MedicoRepository medicoRepository;
-//
+    @Autowired
+    private AgendamentoRepository agendamentoRepository;
+
+    @Autowired
+    private MinhaConsultaRepository minhaConsultaRepository;
+
+    @Autowired
+    private MedicoRepository medicoRepository;
+
 //    @Autowired
 //    private AlergiaRepository alergiaRepository;
 
@@ -36,16 +41,21 @@ public class PacienteService {
         try (Connection conn = dataSource.getConnection()) {
             CallableStatement stmt = conn.prepareCall("{call proc_t09a_agendamento_consulta(?, ?, ?, ?, ?)}");
 
+            int paciente = pacienteRepository.findByCpf(agendamentoConsulta.pacienteCpf())
+                    .orElseThrow(() -> new SQLException("Erro banco de dados"))
+                    .getId();
+
             stmt.setString(1, agendamentoConsulta.descricao());
             stmt.setDate(2, Date.valueOf(agendamentoConsulta.data())); // java.time.LocalDate
             stmt.setTime(3, Time.valueOf(agendamentoConsulta.hora())); // java.time.LocalTime
-            stmt.setRowId(4, (RowId) agendamentoConsulta.paciente());
+            stmt.setInt(4, paciente);
             stmt.setString(5, String.valueOf(agendamentoConsulta.especificacaoMedico()));
 
             stmt.execute();
 
+
         } catch (SQLException e) {
-            throw new SQLException("Erro ao processar agendamento consulta");
+            throw new SQLException("Erro ao processar gendamento consulta");
         }
     }
 
@@ -71,6 +81,21 @@ public class PacienteService {
         try (Connection conn = dataSource.getConnection();
              CallableStatement stmt = conn.prepareCall("{call proc_t09a_agendamento_consulta(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}")
         ) {
+            int paciente = pacienteRepository.findByCpf(minhaConsultaDTO.pacienteCpf())
+                    .orElseThrow(() -> new SQLException("Erro banco de dados"))
+                    .getId();
+
+            int medico = medicoRepository.findByCrm(minhaConsultaDTO.medicoCrm())
+                    .orElseThrow(() -> new SQLException("Erro banco de dados"))
+                    .getId();
+
+            int agendamento = agendamentoRepository.findByPacienteDataHora(
+                            paciente,
+                            minhaConsultaDTO.data(),
+                            minhaConsultaDTO.hora()
+                    ).orElseThrow(() -> new SQLException("Agendamento não encontrado"))
+                    .getId();
+
 
             stmt.setDate(1, Date.valueOf(minhaConsultaDTO.data()));
             stmt.setTime(2, Time.valueOf(minhaConsultaDTO.hora()));
@@ -78,9 +103,9 @@ public class PacienteService {
             stmt.setString(4, minhaConsultaDTO.resultado());
             stmt.setString(5, "S");
             stmt.setString(6, minhaConsultaDTO.consultaStatus());
-            stmt.setRowId(7, (RowId) minhaConsultaDTO.paciente());
-            stmt.setRowId(8, (RowId) minhaConsultaDTO.medico());
-            stmt.setRowId(9, (RowId) minhaConsultaDTO.agendamentoConsulta());
+            stmt.setInt(7, paciente);
+            stmt.setInt(8, medico);
+            stmt.setInt(9, agendamento);
             stmt.setString(10, minhaConsultaDTO.frequencia());
             stmt.setString(11, minhaConsultaDTO.pressaoArterial());
             stmt.setString(12, minhaConsultaDTO.temperatura());
@@ -96,9 +121,13 @@ public class PacienteService {
         try (Connection conn = dataSource.getConnection()) {
             CallableStatement stmt = conn.prepareCall("{call proc_t09a_paciente_alergia(?, ?, ?)}");
 
+            int paciente = pacienteRepository.findByCpf(pacienteAlergiaDTO.pacienteCpf())
+                    .orElseThrow(() -> new SQLException("Erro banco de dados"))
+                    .getId();
+
             stmt.setString(1, pacienteAlergiaDTO.descricao());
             stmt.setString(2, pacienteAlergiaDTO.nomeAlergia());
-            stmt.setRowId(3, (RowId) pacienteAlergiaDTO.paciente());
+            stmt.setInt(3,  paciente);
 
             stmt.execute();
 
@@ -127,11 +156,29 @@ public class PacienteService {
         try (Connection conn = dataSource.getConnection()) {
             CallableStatement stmt = conn.prepareCall("call proc_t09a_requisicao_exame(?,?,?,?,?,?,?)");
 
+            int paciente = pacienteRepository.findByCpf(requisicaoExameDTO.pacienteCpf())
+                    .orElseThrow(() -> new SQLException("Paciente não encontrado"))
+                    .getId();
+
+            // Buscar médico pelo CRM
+            int medico = medicoRepository.findByCrm(requisicaoExameDTO.medicoCrm())
+                    .orElseThrow(() -> new SQLException("Médico não encontrado"))
+                    .getId();
+
+
+            int minhaConsulta = minhaConsultaRepository.findByPacienteMedicoDataHora(
+                            paciente,
+                            medico,
+                            requisicaoExameDTO.dataRequisicao(),
+                            requisicaoExameDTO.horaRequisicao()
+                    ).orElseThrow(() -> new SQLException("Consulta não encontrada"))
+
+
             stmt.setString(1, String.valueOf(requisicaoExameDTO.dataRequisicao()));
             stmt.setString(2, String.valueOf(requisicaoExameDTO.horaRequisicao()));
             stmt.setString(3, requisicaoExameDTO.descricao());
             stmt.setString(4, requisicaoExameDTO.tipoExame());
-            stmt.setRowId(5, (RowId) requisicaoExameDTO.minhaConsulta());
+            stmt.setInt(5,  minhaConsulta);
             stmt.setString(6, requisicaoExameDTO.tipoExame());
             stmt.setString(7, requisicaoExameDTO.nomeDocumento());
 
@@ -212,7 +259,7 @@ public class PacienteService {
                     stmt.getString(12), // uf
                     cpf                 // cpf (último!)
             );
-            } catch (SQLException e) {
+        } catch (SQLException e) {
             throw new SQLException("Erro generico" + e.getMessage());
         }
     }

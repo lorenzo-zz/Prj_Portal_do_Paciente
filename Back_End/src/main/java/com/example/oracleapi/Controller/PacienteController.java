@@ -6,10 +6,7 @@ import com.example.oracleapi.Exception.*;
 import com.example.oracleapi.Service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.Map;
@@ -118,6 +115,9 @@ public class PacienteController {
             throw new SQLException("Erro genérico" + e.getMessage());
         }
     }
+
+    @PutMapping("/edição")
+
 }
 
 
