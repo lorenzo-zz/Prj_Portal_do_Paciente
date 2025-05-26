@@ -1,11 +1,12 @@
 package com.example.oracleapi.Service;
 
 import com.example.oracleapi.DTO.*;
+import com.example.oracleapi.Entity.Paciente;
 import com.example.oracleapi.Repository.PacienteRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
-
 import javax.sql.DataSource;
 import java.sql.*;
 
@@ -19,18 +20,17 @@ public class PacienteService {
     @Autowired
     private PacienteRepository pacienteRepository;
 
-//    @Autowired
-//    private EnderecoRepository enderecoRepository;
-//
-//    @Autowired
-//    private MinhaConsultaRepository minhaConsultaRepository;
-//
-//    @Autowired
-//    private MedicoRepository medicoRepository;
-//
-//    @Autowired
-//    private AlergiaRepository alergiaRepository;
-
+    // @Autowired
+    // private EnderecoRepository enderecoRepository;
+    //
+    // @Autowired
+    // private MinhaConsultaRepository minhaConsultaRepository;
+    //
+    // @Autowired
+    // private MedicoRepository medicoRepository;
+    //
+    // @Autowired
+    // private AlergiaRepository alergiaRepository;
 
     public void agendarConsulta(AgendamentoConsultaDTO agendamentoConsulta) throws SQLException {
         try (Connection conn = dataSource.getConnection()) {
@@ -67,10 +67,10 @@ public class PacienteService {
 
     }
 
-    public void minhaConsulta(MinhaConsultaDTO minhaConsultaDTO){
+    public void minhaConsulta(MinhaConsultaDTO minhaConsultaDTO) {
         try (Connection conn = dataSource.getConnection();
-             CallableStatement stmt = conn.prepareCall("{call proc_t09a_agendamento_consulta(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}")
-        ) {
+                CallableStatement stmt = conn
+                        .prepareCall("{call proc_t09a_agendamento_consulta(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}")) {
 
             stmt.setDate(1, Date.valueOf(minhaConsultaDTO.data()));
             stmt.setTime(2, Time.valueOf(minhaConsultaDTO.hora()));
@@ -82,33 +82,36 @@ public class PacienteService {
             stmt.setRowId(8, (RowId) minhaConsultaDTO.medico());
             stmt.setRowId(9, (RowId) minhaConsultaDTO.agendamentoConsulta());
             stmt.setString(10, minhaConsultaDTO.frequencia());
-            stmt.setString(11,minhaConsultaDTO.pressaoArterial());
+            stmt.setString(11, minhaConsultaDTO.pressaoArterial());
             stmt.setString(12, minhaConsultaDTO.temperatura());
 
             stmt.execute();
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
     public void cadastrarAlergia(PacienteAlergiaDTO pacienteAlergiaDTO) throws SQLException {
-        try (Connection conn = dataSource.getConnection()) {
-            CallableStatement stmt = conn.prepareCall("{call proc_t09a_paciente_alergia(?, ?, ?)}");
 
-            stmt.setString(1, pacienteAlergiaDTO.descricao());
-            stmt.setString(2, pacienteAlergiaDTO.nomeAlergia());
-            stmt.setRowId(3, (RowId) pacienteAlergiaDTO.paciente());
+        Paciente pacienteExistente = pacienteRepository.findByCpf(pacienteAlergiaDTO.paciente().getCpf())
+                .orElseThrow(() -> new SQLException("Paciente não encontrado"));
+
+        try (Connection conn = dataSource.getConnection()) {
+            CallableStatement stmt = conn.prepareCall("{call proc_t09a_paciente_alergia(?, ?)}");
+
+            stmt.setString(1, pacienteAlergiaDTO.nomeAlergia());
+            stmt.setInt(2, pacienteExistente.getId());
 
             stmt.execute();
 
         } catch (SQLException e) {
-            throw new SQLException("Erro ao processar cadastrar alergia");
+            throw new SQLException(e.getMessage(), e);
         }
     }
 
     public void cadastrarPrescricao(PrescricaoDTO prescricaoDTO) throws SQLException {
-        try(Connection conn = dataSource.getConnection()){
+        try (Connection conn = dataSource.getConnection()) {
             CallableStatement stmt = conn.prepareCall("call proc_t09a_precricao(?,?,?)");
 
             stmt.setString(1, prescricaoDTO.remedio());
@@ -117,14 +120,13 @@ public class PacienteService {
 
             stmt.execute();
 
-        }catch (SQLException e){
-            throw  new SQLException("Erro ao cadastrar prescrição");
+        } catch (SQLException e) {
+            throw new SQLException("Erro ao cadastrar prescrição");
         }
     }
 
-
     public void cadastrarRequisicaoExame(RequisicaoExameDTO requisicaoExameDTO) throws SQLException {
-        try (Connection conn = dataSource.getConnection()){
+        try (Connection conn = dataSource.getConnection()) {
             CallableStatement stmt = conn.prepareCall("call proc_t09a_requisicao_exame(?,?,?,?,?,?,?)");
 
             stmt.setString(1, String.valueOf(requisicaoExameDTO.dataRequisicao()));
@@ -142,49 +144,72 @@ public class PacienteService {
         }
     }
 
-
     public void cadastrarResultadoConsulta(ResultadoConsultaDTO resultadoConsultaDTO) throws SQLException {
-        try(Connection conn = dataSource.getConnection()){
+        try (Connection conn = dataSource.getConnection()) {
             CallableStatement stmt = conn.prepareCall("call proc_t09a_resultado_consulta(?,?,?,?,?,?)");
 
-            stmt.setString(1,resultadoConsultaDTO.descricao());
+            stmt.setString(1, resultadoConsultaDTO.descricao());
             stmt.setString(2, String.valueOf(resultadoConsultaDTO.dataResultado()));
             stmt.setRowId(3, (RowId) resultadoConsultaDTO.medico());
             stmt.setRowId(4, (RowId) resultadoConsultaDTO.paciente());
             stmt.setRowId(5, (RowId) resultadoConsultaDTO.prescricao());
             stmt.setRowId(6, (RowId) resultadoConsultaDTO.minhaConsulta());
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new SQLException("Erro ao processar resultado exame");
         }
     }
 
-
     public void cadastrarResultadoExame(ResultadoExameDTO resultadoExameDTO) {
         try (Connection conn = dataSource.getConnection();
-             CallableStatement stmt = conn.prepareCall("{call proc_t09a_resultado_exame(?, ?)}");
-        ) {
+                CallableStatement stmt = conn.prepareCall("{call proc_t09a_resultado_exame(?, ?)}");) {
 
             stmt.setString(1, String.valueOf(Date.valueOf(resultadoExameDTO.descricao())));
             stmt.setRowId(2, (RowId) resultadoExameDTO.requisicaoExame());
 
             stmt.execute();
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void dadosDoPaciente(RetornoPacienteDTO retornoPacienteDTO) throws SQLException {
+    public RetornoPacienteDTO dadosDoPaciente(String cpf) throws SQLException {
         try (Connection conn = dataSource.getConnection()) {
-            CallableStatement stmt = conn.prepareCall("{call proc_t09a_dados_paciente(?)}");
+            CallableStatement stmt = conn
+                    .prepareCall("{call proc_t09a_dados_paciente(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
 
-            stmt.setString(1, retornoPacienteDTO.cpf());
+            stmt.setString(1, cpf);
+            stmt.registerOutParameter(2, Types.VARCHAR);
+            stmt.registerOutParameter(3, Types.VARCHAR);
+            stmt.registerOutParameter(4, Types.VARCHAR);
+            stmt.registerOutParameter(5, Types.DATE);
+            stmt.registerOutParameter(6, Types.VARCHAR);
+            stmt.registerOutParameter(7, Types.VARCHAR);
+            stmt.registerOutParameter(8, Types.VARCHAR);
+            stmt.registerOutParameter(9, Types.VARCHAR);
+            stmt.registerOutParameter(10, Types.VARCHAR);
+            stmt.registerOutParameter(11, Types.VARCHAR);
+            stmt.registerOutParameter(12, Types.VARCHAR);
 
             stmt.execute();
 
-        }catch (SQLException e){
-            throw new SQLException("Erro generico" + e.getMessage());
+            return new RetornoPacienteDTO(
+                    stmt.getString(2),
+                    stmt.getString(3),
+                    stmt.getString(4),
+                    stmt.getDate(5) != null ? stmt.getDate(5).toLocalDate().toString() : null,
+                    stmt.getString(6),
+                    stmt.getString(7),
+                    stmt.getString(8),
+                    stmt.getString(9),
+                    stmt.getString(10),
+                    stmt.getString(11),
+                    stmt.getString(12),
+                    cpf);
+        } catch (SQLException e) {
+            throw new SQLException("Erro ao consultar paciente: " + e.getMessage(), e);
         }
     }
+
 }

@@ -6,14 +6,18 @@ import com.example.oracleapi.Exception.*;
 import com.example.oracleapi.Service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLException;
 import java.util.Map;
 
-@RestController("/paciente")
+@CrossOrigin(origins = "*")
+@RequestMapping("/paciente")
+@RestController
 public class PacienteController {
 
     @Autowired
@@ -108,16 +112,15 @@ public class PacienteController {
         }
     }
 
-    @PostMapping("/dados-paciente")
-    public ResponseEntity<?> dadosPaciente(@RequestBody RetornoPacienteDTO retornoPacienteDTO) throws SQLException {
-     try{
-            pacienteService.dadosDoPaciente(retornoPacienteDTO);
-            return ResponseEntity.status(200).body(Map.of("Messagem", " Dados trazidos corretamente com sucesso"));
-        } catch (DadosPacienteException e){
-         throw  new DadosPacienteException("Erro ao trazer os dados do paciente" + e.getMessage());
-     } catch (SQLException e) {
-         throw new SQLException("Erro genérico" + e.getMessage());
-     }
+@PostMapping("/dados-paciente")
+public ResponseEntity<?> dadosPaciente(@RequestBody Map<String, String> body) {
+    try {
+        String cpf = body.get("cpf");
+        RetornoPacienteDTO paciente = pacienteService.dadosDoPaciente(cpf);
+        return ResponseEntity.ok(paciente);
+    } catch (SQLException e) {
+        return ResponseEntity.status(500).body(Map.of("erro", "Erro ao buscar paciente: " + e.getMessage()));
     }
+}
 }
 
