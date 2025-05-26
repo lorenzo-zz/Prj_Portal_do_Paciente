@@ -31,9 +31,6 @@ public class PacienteService {
     @Autowired
     private PrescricaoRepository prescricaoRepository;
 
-//    @Autowired
-//    private AlergiaRepository alergiaRepository;
-
 
     public void agendarConsulta(AgendamentoConsultaDTO agendamentoConsulta) throws SQLException {
         try (Connection conn = dataSource.getConnection()) {
@@ -87,8 +84,7 @@ public class PacienteService {
                     .orElseThrow(() -> new SQLException("Erro banco de dados"))
                     .getId();
 
-            int agendamento = agendamentoRepository.findByPacienteIdAndDataAndHora(
-                            paciente,
+            int agendamento = agendamentoRepository.findByDataAndHora(
                             minhaConsultaDTO.data(),
                             minhaConsultaDTO.hora()
                     ).orElseThrow(() -> new SQLException("Agendamento não encontrado"))
@@ -154,7 +150,27 @@ public class PacienteService {
         try (Connection conn = dataSource.getConnection()) {
             CallableStatement stmt = conn.prepareCall("call proc_t09a_requisicao_exame(?,?,?,?,?,?,?)");
 
+
             int minhaConsultaId = requisicaoExameDTO.minhaConsulta().getId();
+
+            int paciente = pacienteRepository.findByCpf(requisicaoExameDTO.pacienteCpf())
+                    .orElseThrow(() -> new SQLException("Paciente não encontrado"))
+                    .getId();
+
+            // Buscar médico pelo CRM
+            int medico = medicoRepository.findByCrm(requisicaoExameDTO.medicoCrm())
+                    .orElseThrow(() -> new SQLException("Médico não encontrado"))
+                    .getId();
+
+            // Buscar ID da MinhaConsulta
+            int minhaConsulta = minhaConsultaRepository.findByPacienteMedicoDataHora(
+                            paciente,
+                            String.valueOf(medico),
+                            requisicaoExameDTO.dataRequisicao(),
+                            requisicaoExameDTO.horaRequisicao()
+                    ).orElseThrow(() -> new SQLException("Consulta não encontrada"))
+                    .getId();
+
 
             stmt.setString(1, String.valueOf(requisicaoExameDTO.dataRequisicao()));
             stmt.setString(2, String.valueOf(requisicaoExameDTO.horaRequisicao()));
@@ -184,8 +200,7 @@ public class PacienteService {
                     .orElseThrow(() -> new SQLException("Médico não encontrado"))
                     .getId();
 
-            int minhaConsultaId = minhaConsultaRepository.findByPacienteMedicoDataHora(
-                            pacienteId,
+            int minhaConsultaId = minhaConsultaRepository.findByDataAndHora(
                             resultadoConsultaDTO.hora(),
                             resultadoConsultaDTO.dataResultado()
                     ).orElseThrow(() -> new SQLException("Consulta não encontrada"))

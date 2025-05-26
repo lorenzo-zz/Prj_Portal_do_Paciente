@@ -7,9 +7,9 @@ import com.example.oracleapi.Service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.sql.SQLException;
 import java.util.Map;
+import com.example.oracleapi.Exception.DadosPacienteException;
 
 @RestController
 @RequestMapping("/paciente")
@@ -109,8 +109,8 @@ public class PacienteController {
     public ResponseEntity<?> dadosPaciente(@RequestBody CpfDTO cpfDTO) throws SQLException {
         try{
             return ResponseEntity.status(200).body(Map.of("Messagem",pacienteService.dadosDoPaciente(cpfDTO.cpf())));
-        } catch (DadosPacienteException e){
-            throw  new DadosPacienteException("Erro ao trazer os dados do paciente" + e.getMessage());
+        } catch (RuntimeException e){
+            throw new DadosPacienteException("Paciente não encontrado");
         } catch (SQLException e) {
             throw new SQLException("Erro genérico" + e.getMessage());
         }
