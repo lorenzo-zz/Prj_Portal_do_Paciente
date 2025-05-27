@@ -18,6 +18,7 @@ public interface AgendamentoRepository extends JpaRepository<AgendamentoConsulta
 
     Optional<Object> findByPacienteIdAndDataAndHora(int paciente, LocalDate data, LocalTime hora);
 
+
     Optional<Paciente> findByPacienteCpf(String cpf);
 
 }
