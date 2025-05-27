@@ -1,9 +1,11 @@
 package com.example.oracleapi.Controller;
 
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +17,7 @@ import com.example.oracleapi.DTO.CpfDTO;
 import com.example.oracleapi.DTO.MinhaConsultaDTO;
 import com.example.oracleapi.DTO.PrescricaoDTO;
 import com.example.oracleapi.DTO.ResultadoConsultaDTO;
+import com.example.oracleapi.DTO.RetornoAgendamentoDTO;
 import com.example.oracleapi.Exception.ConsultaException;
 import com.example.oracleapi.Exception.PrescricaoException;
 import com.example.oracleapi.Exception.ResultadoConsultaExeception;
@@ -72,12 +75,14 @@ public class ConsultaController {
         }
     }
 
-    @PostMapping("/listar-consultas")
-    public ResponseEntity<List> listarConsultas(CpfDTO cpfPaciente) {
-        try {
-            return ResponseEntity.status(200).body(consultaService.listarConsultas(cpfPaciente));
-        } catch (ConsultaException e) {
-            throw new RuntimeException("Erro ao listar consultas: " + e.getMessage());
-        }
+@PostMapping("/listar-consultas")
+public ResponseEntity<List<RetornoAgendamentoDTO>> listarConsultas(@RequestBody CpfDTO cpfPaciente) {
+    try {
+        List<RetornoAgendamentoDTO> consultas = consultaService.listarConsultas(cpfPaciente);
+        return ResponseEntity.ok(consultas);
+    } catch (ConsultaException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Collections.emptyList());
     }
+}
+
 }

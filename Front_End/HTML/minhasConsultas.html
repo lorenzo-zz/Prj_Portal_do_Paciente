@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="shortcut icon" href="/Front_End/img/LogoPortalApenasRedondoFundoBranco.png" type="image/x-icon">
   <title>Minhas Consultas - Portal do Paciente</title>
   <link rel="stylesheet" href="/Front_End/CSS/global.css">
-  <script src="../JS/Index/UserLogado.js"></script>
   <link rel="stylesheet" href="/Front_End/CSS/minhasConsultas.css">
-  <script src="../JS/MinhaConsulta/minhasConsultas.js"></script>
+  <script src="../JS/MinhaConsulta/minhasConsultas.js" defer></script>
 </head>
+
 <body>
-    
+
   <header class="navbar">
     <nav>
       <a href="index.html">Portal Do Paciente</a>
@@ -21,47 +22,46 @@
     </div>
   </header>
 
-      <div class="page_navigator">
-        <a href="../HTML/index.html">Portal do Paciente</a>
-        <p>/</p>
-        <p>Minhas Consultas</p>
-    </div>
+  <div class="page_navigator">
+    <a href="../HTML/index.html">Portal do Paciente</a>
+    <p>/</p>
+    <p>Minhas Consultas</p>
+  </div>
 
   <div class="title-area">
-  <div class="title-with-image">
-    <img src="/Front_End/img/logoSemEscrita.png" alt="Ícone de Consulta" class="titulo-img" />
-    <h1>Minhas Consultas</h1>
-  </div>
-  <p>Acompanhe aqui todas as suas consultas agendadas.</p>
-</div>
-
-<div class="filtro-container">
-  <label for="filtro-status">Filtrar por status:</label>
-  <select id="filtro-status">
-    <option value="todos">Todos</option>
-    <option value="confirmada">Confirmada</option>
-    <option value="cancelada">Cancelada</option>
-    <option value="finalizada">Finalizada</option>
-    <option value="mais-recente">Mais Recente</option>
-  </select>
-</div>
-
- 
- 
-  <main class="consultas-container">
-    <div id="consultas-lista"></div>
-    <div class="consulta-box">
-      <a href="/Front_End/HTML/dadosConsulta.html"></a>
+    <div class="title-with-image">
+      <img src="/Front_End/img/logoSemEscrita.png" alt="Ícone de Consulta" class="titulo-img" />
+      <h1>Minhas Consultas</h1>
     </div>
+    <p>Acompanhe aqui todas as suas consultas agendadas.</p>
+  </div>
+
+  <div class="filtro-container">
+    <label for="filtro-status">Filtrar por status:</label>
+    <select id="filtro-status">
+      <option value="todos">Todos</option>
+      <option value="confirmada">Confirmada</option>
+      <option value="cancelada">Cancelada</option>
+      <option value="finalizada">Finalizada</option>
+      <option value="mais-recente">Mais Recente</option>
+    </select>
+  </div>
+
+  <main class="consultas-container">
+
+    <div id="consultas-lista" class="consultas-container"></div>
+
     <div class="paginacao">
       <button id="anterior" class="navegacao-btn" disabled>Anterior</button>
       <button id="proximo" class="navegacao-btn">Próximo</button>
     </div>
   </main>
 
-    <footer class="footer">
-        <p>&copy; 2025 Portal do Paciente. Todos os direitos reservados.</p>
-       <a href="/Front_End/HTML/sobreNos.html">Sobre nós</a>
-    </footer>
+  <footer class="footer">
+    <p>&copy; 2025 Portal do Paciente. Todos os direitos reservados.</p>
+    <a href="/Front_End/HTML/sobreNos.html">Sobre nós</a>
+  </footer>
+
 </body>
+
 </html>

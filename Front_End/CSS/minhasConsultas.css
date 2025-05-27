@@ -30,7 +30,7 @@ body {
    
   .consultas-container::before {
     content: '';
-    position: absolute;
+    position: absolute;    
     top: 0.5rem;
     right: 0.5rem;
     bottom: 0.5rem;
@@ -48,7 +48,7 @@ body {
     border-left: 6px solid #003f8a;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    padding: 1px;
+    padding: 70px;
     display: flex;
     justify-content: space-between;
     align-items: center;

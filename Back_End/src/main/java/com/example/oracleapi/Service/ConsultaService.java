@@ -135,12 +135,17 @@ public class ConsultaService {
                 .toList();
     }
 
-    public List listarConsultas(CpfDTO cpfPaciente) {
+    public List<RetornoAgendamentoDTO> listarConsultas(CpfDTO cpfPaciente) {
         return agendamentoRepository.findAll()
                 .stream()
                 .filter(e -> e.getPaciente().getCpf().equals(cpfPaciente.cpf()))
-                .map(RetornoAgendamentoDTO::new)
+                .map(agendamento -> new RetornoAgendamentoDTO(
+                        agendamento.getPaciente().getNome(),
+                        agendamento.getData(),
+                        agendamento.getHora(),
+                        agendamento.getEspecificacaoMedico(),
+                        agendamento.getStatus()))
                 .toList();
-
+                
     }
 }

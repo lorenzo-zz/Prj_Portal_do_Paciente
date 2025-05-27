@@ -1,7 +1,7 @@
 package com.example.oracleapi.Repository;
 
 import com.example.oracleapi.Entity.AgendamentoConsulta;
-
+import com.example.oracleapi.Entity.Paciente;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Optional;
@@ -14,4 +14,6 @@ public interface AgendamentoRepository extends JpaRepository<AgendamentoConsulta
 
 
     Optional<Object> findByPacienteIdAndDataAndHora(int paciente, LocalDate data, LocalTime hora);
+
+    Optional<Paciente> findByPacienteCpf(String cpf);
 }

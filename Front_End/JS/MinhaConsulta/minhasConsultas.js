@@ -1,74 +1,56 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const cpf = localStorage.getItem('cpf');
+document.addEventListener("DOMContentLoaded", function () {
+  const cpf = localStorage.getItem("cpf");
 
-    
-  const consultasPorPagina = 6;
-  let paginaAtual = 0;
+  const dados = {
+    cpf: cpf
+  };
 
-  document.getElementById("filtro-status").addEventListener("change", function () {
-    paginaAtual = 0; 
-    renderizarConsultas();
-  });
+  fetch('http://localhost:8080/consulta/listar-consultas', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(dados)
+  })
+    .then(async response => {
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.erro || 'Erro ao buscar consultas');
+      }
+      return response.json();
+    })
+    .then(data => {
+      const lista = document.getElementById('consultas-lista');
+      lista.innerHTML = '';
 
-  function renderizarConsultas() {
-    const lista = document.getElementById("consultas-lista");
-    lista.innerHTML = "";
+      if (data.length === 0) {
+        lista.innerHTML = '<p>Nenhuma consulta encontrada.</p>';
+        return;
+      }
 
-    const filtroStatus = document.getElementById("filtro-status").value;
+      data.forEach((consulta) => {
+        const card = `
+        <div class="consulta-card">
+        <h3>Nome Paciente: ${consulta.nomePaciente}</h3>
+        <p><strong>Hora:</strong> ${consulta.hora}</p>
+        <p><strong>Data:</strong> ${consulta.data}</p>
+        <p><strong>Especialidade:</strong> ${consulta.especificacaoMedico}</p>
+        <p><strong>Status:</strong> ${consulta.status}</p>
+        </div>
+         `;
+        lista.insertAdjacentHTML('beforeend', card);
+      });
 
-    let consultasFiltradas = consultas;
-    if (filtroStatus !== "todos") {
-      consultasFiltradas = consultas.filter(consulta => consulta.status === filtroStatus);
-    }
+      const cards = document.querySelectorAll('.consulta-card');
+      cards.forEach((card, index) => {
+        card.addEventListener('click', () => {
+          localStorage.setItem('consultaId', data[index].id);
+          window.location.href = 'http://172.20.208.1:5500/Front_End/HTML/dadosConsulta.html';
+        });
+      });
+    })
 
-    const inicio = paginaAtual * consultasPorPagina;
-    const fim = inicio + consultasPorPagina;
-    const pagina = consultasFiltradas.slice(inicio, fim);
-
-    pagina.forEach((consulta, index) => {
-      const card = document.createElement("a");
-      card.href = `dadosConsulta.html?id=${inicio + index + 1}`;
-      card.className = "consulta-card-link";
-      card.innerHTML = `
-            <div class="consulta-card">
-                <div class="consulta-box">
-                    <div class="consulta-info">
-                        <h2>Consulta com ${consulta.nome}</h2>
-                        <p><strong>Data:</strong> ${consulta.data}</p>
-                        <p><strong>Hora:</strong> ${consulta.hora}</p>
-                        <p><strong>Especialidade:</strong> ${consulta.especialidade}</p>
-                    </div>
-                    <div class="consulta-acoes">
-                        <span class="status status-${consulta.status}">${capitalize(consulta.status)}</span>
-                    </div>
-                </div>
-            </div>
-        `;
-      lista.appendChild(card);
+    .catch(error => {
+      console.error('Erro ao buscar consultas:', error.message);
     });
-
-    document.getElementById("anterior").disabled = paginaAtual === 0;
-    document.getElementById("proximo").disabled = fim >= consultasFiltradas.length;
-  }
-
-  document.getElementById("anterior").addEventListener("click", () => {
-    if (paginaAtual > 0) {
-      paginaAtual--;
-      renderizarConsultas();
-    }
-  });
-
-  document.getElementById("proximo").addEventListener("click", () => {
-    if ((paginaAtual + 1) * consultasPorPagina < consultas.length) {
-      paginaAtual++;
-      renderizarConsultas();
-    }
-  });
-
-  function capitalize(text) {
-    return text.charAt(0).toUpperCase() + text.slice(1);
-  }
-
-  renderizarConsultas();
-
 });
