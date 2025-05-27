@@ -3,15 +3,21 @@ package com.example.oracleapi.Repository;
 import com.example.oracleapi.Entity.MinhaConsulta;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
 @Repository
 public interface MinhaConsultaRepository extends JpaRepository<MinhaConsulta, Integer> {
 
+    @Query("SELECT m FROM MinhaConsulta m WHERE m.paciente.id = :pacienteId AND m.medico.id = :medicoId AND m.data = :data AND m.hora = :hora")
+    Optional<MinhaConsulta> findByPacienteAndMedicoAndDataAndHora(
+            @Param("pacienteId") int pacienteId,
+            @Param("medicoId") int medicoId,
+            @Param("data") LocalDate data,
+            @Param("hora") LocalTime hora);
 
-    Optional<MinhaConsulta> findByPacienteMedicoDataHora(int paciente, String medico, LocalDate localDate, LocalTime localTime);
-
-    Optional<MinhaConsulta> findByDataAndHora( LocalTime hora, LocalDate localDate);
 }
