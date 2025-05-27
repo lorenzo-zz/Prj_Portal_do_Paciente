@@ -1,7 +1,6 @@
 package com.example.oracleapi.Service;
 
 import com.example.oracleapi.DTO.*;
-import com.example.oracleapi.Entity.AgendamentoConsulta;
 import com.example.oracleapi.Entity.Paciente;
 import com.example.oracleapi.Exception.AlergiaException;
 import com.example.oracleapi.Repository.*;
@@ -24,9 +23,6 @@ public class PacienteService {
 
     @Autowired
     private PacienteRepository pacienteRepository;
-
-    @Autowired
-    private AgendamentoRepository agendamentoRepository;
 
     @Autowired
     private MinhaConsultaRepository minhaConsultaRepository;
@@ -76,44 +72,6 @@ public class PacienteService {
 
     }
 
-    public void minhaConsulta(MinhaConsultaDTO minhaConsultaDTO) {
-        try (Connection conn = dataSource.getConnection();
-             CallableStatement stmt = conn
-                     .prepareCall("{call proc_t09a_agendamento_consulta(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}")) {
-            int paciente = pacienteRepository.findByCpf(minhaConsultaDTO.pacienteCpf())
-                    .orElseThrow(() -> new SQLException("Erro banco de dados"))
-                    .getId();
-
-            int medico = medicoRepository.findByCrm(minhaConsultaDTO.medicoCrm())
-                    .orElseThrow(() -> new SQLException("Erro banco de dados"))
-                    .getId();
-
-
-            int agendamento = ((AgendamentoConsulta) agendamentoRepository.findByPacienteIdAndDataAndHora(
-                    paciente,
-                    minhaConsultaDTO.data(),
-                    minhaConsultaDTO.hora()).orElseThrow(() -> new SQLException("Agendamento não encontrado")))
-                    .getId();
-
-            stmt.setDate(1, Date.valueOf(minhaConsultaDTO.data()));
-            stmt.setTime(2, Time.valueOf(minhaConsultaDTO.hora()));
-            stmt.setString(3, minhaConsultaDTO.descricao());
-            stmt.setString(4, minhaConsultaDTO.resultado());
-            stmt.setString(5, "S");
-            stmt.setString(6, minhaConsultaDTO.consultaStatus());
-            stmt.setInt(7, paciente);
-            stmt.setInt(8, medico);
-            stmt.setInt(9, agendamento);
-            stmt.setString(10, minhaConsultaDTO.frequencia());
-            stmt.setString(11, minhaConsultaDTO.pressaoArterial());
-            stmt.setString(12, minhaConsultaDTO.temperatura());
-
-            stmt.execute();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
 
     public void cadastrarAlergia(PacienteAlergiaDTO pacienteAlergiaDTO) throws SQLException {
