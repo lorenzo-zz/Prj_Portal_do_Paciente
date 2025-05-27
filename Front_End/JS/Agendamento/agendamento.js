@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const email = document.getElementById("email").value;
     const especialidade = document.getElementById("especialidade").value;
     const horario = document.getElementById("horario").value;
+    document.getElementById('cpf-paciente').value = cpf;
 
     if (!nome || !cpf || !data || !telefone || !email || !especialidade || !horario) {
       alert("Por favor, preencha todos os campos obrigatórios.");

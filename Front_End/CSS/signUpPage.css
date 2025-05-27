@@ -139,7 +139,7 @@ input[type="number"]::-webkit-outer-spin-button {
   gap: 5px;
 }
 
-.erroCPF, .erroEMAIL, .erroSENHA, .erroNulo, .erroIdade{
+.erroCPF, .erroEMAIL, .erroSENHA, .erroNulo, .erroIdade, .erroDocumento, .senhaVazia {
     font-size: 12px;
     background-color: rgb(225, 84, 84);
     color: white;
@@ -151,4 +151,17 @@ input[type="number"]::-webkit-outer-spin-button {
     justify-content: center;
     align-items: center;
     text-align: center;
+}
+
+.senhaInput input{
+  flex: 1;
+  padding: 8px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+  outline: none;
+  width: 100%;
+  margin-bottom: -10px;
 }

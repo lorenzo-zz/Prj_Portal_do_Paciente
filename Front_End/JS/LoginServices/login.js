@@ -9,17 +9,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         erroLogin.style.display = 'none';
-        erroNulo.style.display = 'none';
         
         const login = {
             cpf: cpf,
             senha: senha,
         };
 
-        if(cpf === "" || senha === "") {
-            erroNulo.style.display = 'block';
-            return;
-        }
+        
 
         fetch('http://localhost:8080/autenticar/login', {
             method: 'POST',

@@ -39,4 +39,8 @@ public class Prescricao {
                 ", descricao='" + descricao + '\'' +
                 '}';
     }
+
+    public int getId() {
+        return id;
+    }
 }

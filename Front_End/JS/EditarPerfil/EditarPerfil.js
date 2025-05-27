@@ -82,4 +82,40 @@ function erroLogin(msg) {
 }
  
 
+// ----------------Validação dos campos
 
+
+document.addEventListener("DOMContentLoaded", function () {
+    const campoCPF = document.getElementById("cpf-paciente");
+    const campoTelefone = document.getElementById("telefone");
+    const campoNome = document.getElementById("nome");
+    const campoCep = document.getElementById("cep");
+  
+
+    if (campoTelefone) {
+      campoTelefone.addEventListener("input", function () {
+        this.value = this.value.replace(/\D/g, "");
+      });
+    }
+  
+    if (campoNome) {
+      campoNome.addEventListener("input", function () {
+        this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, "");
+      });
+    }
+  });
+  
+  document.addEventListener("DOMContentLoaded", function () {
+    const campoCEP = document.getElementById("cep");
+    const campoNumero = document.getElementById("numero");
+  
+    campoCEP.addEventListener("input", function () {
+      this.value = this.value.replace(/\D/g, '');
+    });
+  
+
+    campoNumero.addEventListener("input", function () {
+      this.value = this.value.replace(/\D/g, '');
+    });
+  });
+  
