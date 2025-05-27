@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.oracleapi.DTO.AgendamentoConsultaDTO;
 import com.example.oracleapi.DTO.CpfDTO;
+import com.example.oracleapi.DTO.MinhaConsultaDTO;
 import com.example.oracleapi.DTO.PrescricaoDTO;
 import com.example.oracleapi.DTO.ResultadoConsultaDTO;
 import com.example.oracleapi.DTO.RetornoAgendamentoDTO;
+import com.example.oracleapi.Entity.MinhaConsulta;
 import com.example.oracleapi.Exception.ConsultaException;
 import com.example.oracleapi.Exception.PrescricaoException;
 import com.example.oracleapi.Exception.ResultadoConsultaExeception;
@@ -64,14 +66,23 @@ public class ConsultaController {
         }
     }
 
-@PostMapping("/listar-consultas")
-public ResponseEntity<List<RetornoAgendamentoDTO>> listarConsultas(@RequestBody CpfDTO cpfPaciente) {
-    try {
-        List<RetornoAgendamentoDTO> consultas = consultaService.listarConsultas(cpfPaciente);
-        return ResponseEntity.ok(consultas);
-    } catch (ConsultaException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Collections.emptyList());
+    @PostMapping("/listar-consultas")
+    public ResponseEntity<List<RetornoAgendamentoDTO>> listarConsultas(@RequestBody CpfDTO cpfPaciente) {
+        try {
+            List<RetornoAgendamentoDTO> consultas = consultaService.listarConsultas(cpfPaciente);
+            return ResponseEntity.ok(consultas);
+        } catch (ConsultaException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Collections.emptyList());
+        }
     }
-}
 
+    @PostMapping("/dados-consulta")
+    public ResponseEntity<List<MinhaConsulta>> dadosConsulta(MinhaConsultaDTO idConsulta) {
+        try {
+            List<MinhaConsulta> consultas = consultaService.dadosConsulta(idConsulta);
+            return ResponseEntity.ok(consultas);
+        } catch (ConsultaException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Collections.emptyList());
+        }
+    }
 }

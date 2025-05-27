@@ -12,11 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.oracleapi.DTO.AgendamentoConsultaDTO;
 import com.example.oracleapi.DTO.CpfDTO;
+import com.example.oracleapi.DTO.MinhaConsultaDTO;
 import com.example.oracleapi.DTO.PrescricaoDTO;
 import com.example.oracleapi.DTO.ResultadoConsultaDTO;
 import com.example.oracleapi.DTO.RetornoAgendamentoDTO;
+import com.example.oracleapi.Entity.MinhaConsulta;
 import com.example.oracleapi.Model.ConsultaStatus;
 import com.example.oracleapi.Repository.AgendamentoRepository;
+import com.example.oracleapi.Repository.MinhaConsultaRepository;
 
 @Service
 public class ConsultaService {
@@ -26,6 +29,9 @@ public class ConsultaService {
 
     @Autowired
     private AgendamentoRepository agendamentoRepository;
+
+    @Autowired
+    private MinhaConsultaRepository consultaRepository;
 
     public void agendarConsulta(AgendamentoConsultaDTO agendamentoConsulta) throws SQLException {
         try (Connection conn = dataSource.getConnection()) {
@@ -114,5 +120,11 @@ public class ConsultaService {
                         agendamento.getStatus()))
                 .toList();
 
+    }
+
+    public List<MinhaConsulta> dadosConsulta(MinhaConsultaDTO idConsulta) {
+        return consultaRepository.findAll()
+                .stream()
+                .toList();
     }
 }

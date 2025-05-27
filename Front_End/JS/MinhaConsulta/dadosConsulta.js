@@ -1,17 +1,32 @@
-document.getElementById("btnCancelarConsulta").addEventListener("click", function () {
-    document.getElementById("modalConfirmacao").style.display = "flex";
-});
+document.addEventListener("DOMContentLoaded", function () {
 
-document.getElementById("btnFechar").addEventListener("click", function () {
-    document.getElementById("modalConfirmacao").style.display = "none";
-});
+    const idConsulta = localStorage.getItem("consultaId");
 
-document.getElementById("btnConfirmar").addEventListener("click", function () {
-    alert("Consulta cancelada com sucesso.");
-    document.getElementById("modalConfirmacao").style.display = "none";
-    // Aqui pode-se adicionar a lógica para remover a consulta do banco de dados
-});
+    const dados = {
+        idAgendamento: idConsulta
+    };
 
-//aqui o @Lorenzo vai adicionar a lógica para preencher os dados da consulta
-////aqui o @Lorenzo vai adicionar a lógica para o botão de cancelar consulta
-//aqui o @Lorenzo vai adicionar a lógica para o botão de confirmar cancelamento
+    fetch('http://localhost:8080/consulta/dados-consulta', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dados)
+    })
+        .then(async response => {
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.erro || 'Erro ao buscar consultas');
+            }
+            return response.json();
+        })
+        .then(data => {
+            data.array.forEach(dadosPaciente => {
+                if (dadosPaciente.id = idConsulta)
+                    document.getElementById('nomeMedico').value = dadosPaciente.medico.nome;
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao buscar consultas:', error.message);
+        });
+});
