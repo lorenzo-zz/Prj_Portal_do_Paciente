@@ -13,24 +13,23 @@ document.addEventListener('DOMContentLoaded', function () {
     const confirmarSenha = document.getElementById('confirmar_senha').value;
 
     const erroIdade = document.querySelector('.erroIdade');
-    const erroNulo = document.querySelector('.erroNulo');
     const cpfErro = document.querySelector('.erroCPF');
     const emailErro = document.querySelector('.erroEMAIL');
     const erroSenha = document.querySelector('.erroSENHA');
+    const erroArquivo = document.querySelector('.erroDocumento');
+    const erroSenhaInexistente = document.querySelector('.senhaVazia');
 
-    erroNulo.style.display = 'none';
+
     cpfErro.style.display = 'none';
     emailErro.style.display = 'none';
     erroSenha.style.display = 'none';
     erroIdade.style.display = 'none';
+    erroArquivo.style.display = 'none';
+    erroSenhaInexistente.style.display = 'none';
 
-    if (nome === "" || cpf === "" || telefone === "" || email === "" || sexo === "" || dt_nascimento === "" || senha === "") {
-      erroNulo.style.display = 'block';
-      return;
-    }
 
-    if (senha !== confirmarSenha) {
-      erroSenha.style.display = 'block';
+    if (senha == null) {
+      erroSenhaInexistente.style.display = 'block';
       return;
     }
 
@@ -48,10 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const arquivoInput = document.getElementById("arquivo");
     const arquivo = arquivoInput.files[0];
 
-    if (!arquivo) {
-      erroNulo.style.display = 'block';
-      return;
-    }
+
 
     formData.append("paciente", new Blob([JSON.stringify(cadastrarInfPessoais)], { type: "application/json" }));
     formData.append("arquivo", arquivo);
@@ -74,13 +70,13 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem('nome', data.nome);
         localStorage.setItem('cpf', cpf);
         localStorage.setItem('nome', nome);
-        window.location.href = 'http://172.20.208.1:5500/Front_End/HTML/adressSignUp.html';
+        window.location.href = 'http://127.0.0.1:5500/Front_End/HTML/adressSignUp.html';
       })
       .catch(async error => {
         let errorMsg = '';
 
         try {
-          const errJson = await error.response.json(); // tenta pegar erro do corpo
+          const errJson = await error.response.json();
           errorMsg = errJson.message || errJson.erro || JSON.stringify(errJson);
         } catch (e) {
           errorMsg = error.message || "Erro desconhecido";
@@ -94,8 +90,10 @@ document.addEventListener('DOMContentLoaded', function () {
           emailErro.style.display = 'block';
         } else if (msg.includes("idade") && msg.includes("18 anos")) {
           erroIdade.style.display = 'block';
-        } else {
-          alert("Erro: " + errorMsg);
+        } else if (msg.includes("arquivo") && msg.includes("present")){
+          erroArquivo.style.display = 'block';
+        } else if (msg.includes("Erro com o banco de dados: Erro ao cadastrar paciente: ORA-20999: Erro inesperado: ORA-01400: n├úo ├® poss├¡vel inserir NULL em")){
+          erroSenhaInexistente.style.display = 'block'
         }
       });
   });
