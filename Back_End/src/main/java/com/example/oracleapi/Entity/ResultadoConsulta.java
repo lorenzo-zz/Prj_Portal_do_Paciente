@@ -41,4 +41,8 @@ public class ResultadoConsulta {
 
     @OneToOne
     private MinhaConsulta minhaConsulta;
+
+    public int getId() {
+        return id;
+    }
 }
