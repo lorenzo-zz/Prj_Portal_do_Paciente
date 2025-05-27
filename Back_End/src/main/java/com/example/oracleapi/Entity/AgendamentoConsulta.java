@@ -39,5 +39,6 @@ public class AgendamentoConsulta {
     @NotBlank
     private String email;
 
+    @Enumerated(EnumType.STRING)
     private ConsultaStatus status;
 }

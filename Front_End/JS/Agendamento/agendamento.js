@@ -2,17 +2,15 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("consulta-form").addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const nome = document.getElementById("nome-paciente");
-    const cpf = document.getElementById("cpf-paciente");
-    const data = document.getElementById("data");
-    const telefone = document.getElementById("telefone");
-    const email = document.getElementById("email");
-    const especialidade = document.getElementById("especialidade");
-    const horario = document.getElementById("horario");
-    const form = document.getElementById('form-consulta');
+    const nome = document.getElementById("nome-paciente").value;
+    const cpf = document.getElementById("cpf-paciente").value;
+    const data = document.getElementById("data").value;
+    const telefone = document.getElementById("telefone").value;
+    const email = document.getElementById("email").value;
+    const especialidade = document.getElementById("especialidade").value;
+    const horario = document.getElementById("horario").value;
 
-    console.log(nome, cpf, data.value, telefone.value, email.value, especialidade.value, horario.value);
-    if( !nome || !cpf || !data.value || !telefone.value || !email.value || !especialidade.value || !horario.value) {
+    if (!nome || !cpf || !data || !telefone || !email || !especialidade || !horario) {
       alert("Por favor, preencha todos os campos obrigatórios.");
       return;
     }
@@ -20,11 +18,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const dados = {
       nomePaciente: nome,
       cpfPaciente: cpf,
-      data: data.value,
-      telefone: telefone.value,
-      email: email.value,
-      especificacaoMedico: especialidade.value,
-      hora: horario.value + ":00" 
+      data: data,
+      telefone: telefone,
+      email: email,
+      especificacaoMedico: especialidade,
+      hora: horario + ":00"
     };
 
     fetch('http://localhost:8080/consulta/agendar-consulta', {
@@ -56,7 +54,7 @@ function limparFormulario() {
 function fecharModal() {
   const modal = document.getElementById('modal-alerta');
   modal.classList.add('hidden');
-  limparFormulario(); 
+  limparFormulario();
 }
 
 // ------------------------------ Validação dos campos

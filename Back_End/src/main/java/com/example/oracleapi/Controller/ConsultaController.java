@@ -29,12 +29,14 @@ public class ConsultaController {
     private ConsultaService consultaService;
 
     @PostMapping("/agendar-consulta")
-    public ResponseEntity<?> consulta(@RequestBody AgendamentoConsultaDTO agendamentoConsultaDTO) {
+    public ResponseEntity<?> consulta(@RequestBody AgendamentoConsultaDTO agendamentoConsultaDTO) throws SQLException {
         try {
             consultaService.agendarConsulta(agendamentoConsultaDTO);
             return ResponseEntity.status(200).body(Map.of("mensagem", "Agendamento concluido com sucesso"));
-        } catch (ConsultaException | SQLException e) {
-            throw new ConsultaException("Erro ao cadastrar consulta" + e.getMessage());
+        } catch (SQLException e) {
+            System.err.println("Erro Oracle Code: " + e.getErrorCode());
+            System.err.println("Mensagem do Oracle: " + e.getMessage());
+            throw new SQLException("Erro ao processar agendamento consulta: " + e.getMessage(), e);
         }
     }
 
