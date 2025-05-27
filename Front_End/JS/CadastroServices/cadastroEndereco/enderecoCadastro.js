@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.text(); 
             })
             .then(data => {
-                window.location.href = 'http://172.20.208.1:5500/Front_End/HTML/index.html';
+                window.location.href = 'http://127.0.0.1:5500/Front_End/HTML/cadastroAlergias.html';
             })
             .catch(error => {
                 const msg = error.message;

@@ -19,52 +19,52 @@
 
         <h2>Dados Pessoais:</h2>
 
-        <div class="erroCadastrar" style="display: none;">
+        <div class="erroCadastrar" style="display: none;" required>
           <p>Erro ao cadastrar as informações pessoais!</p>
         </div>
 
-        <div class="caixa_input">
+        <div class="caixa_input" required>
           <input type="text" name="nome" id="nome"  placeholder="Nome Completo" maxlength="100" />
         </div>
 
-        <div class="caixa_input">
+        <div class="caixa_input" required>
           <input type="text" name="cpf" id="cpf"  placeholder="CPF: (somente números)" maxlength="11"
             pattern="\d{11}" />
         </div>
 
-        <div class="caixa_input">
+        <div class="caixa_input" required>
           <input type="text" name="telefone" id="telefone"  placeholder="Telefone: (somente números)"
             maxlength="11" pattern="\d{10,11}" />
         </div>
 
-        <div class="caixa_input">
+        <div class="caixa_input" required>
           <input type="email" name="email" id="email"  placeholder="Email: exemplo@email.com" maxlength="100" />
         </div>
 
-        <div class="radio_sexo">
+        <div class="radio_sexo" required>
           <label for="sexo">Sexo: </label>
           <input type="radio" name="sexo" id="sexo_m" value="M" > Masculino
           <input type="radio" name="sexo" id="sexo_f" value="F"> Feminino
         </div>
 
-        <div class="dt_nascimento">
+        <div class="dt_nascimento" required>
           <label for="dt_nascimento">Data de Nascimento:</label>
-          <input type="date" name="dt_nascimento" id="dt_nascimento" >
+          <input type="date" name="dt_nascimento" id="dt_nascimento" min="1900-01-01" max="2100-12-31">
         </div>
 
-        <div class="input_doc">
+        <div class="input_doc" required>
           <h3>Foto do documento:</h3>
           <br>
           <input type="file" id="arquivo" />
         </div>
 
-        <div class="caixa_input">
-          <input type="password" name="senha" id="senha"  placeholder="Senha" maxlength="30">
+        <div class="senhaInput">
+          <input type="password" name="senha" id="senha"  placeholder="Senha" maxlength="30" required>
         </div>
 
-        <div class="caixa_input">
+        <div class="senhaInput">
           <input type="password" name="confirmar_senha" id="confirmar_senha"  placeholder="Confirmar Senha"
-            maxlength="30">
+            maxlength="30" required>
         </div>
 
         <div class="erroCPF">
@@ -79,12 +79,15 @@
           <p>As senhas devem ser iguais!</p>
         </div>
 
-        <div class="erroNulo">
-          <p>Necessário preencher todos os dados!</p>
-        </div>
-
         <div class="erroIdade">
           <p>Idade minima para cadastro de 18 anos!</p>
+        </div>
+        
+        <div class="erroDocumento">
+          <p>O documento pessoal deve ser adicionado!</p>
+        </div>
+        <div class="senhaVazia">
+          <p>Insira uma senha!</p>
         </div>
         
         <button type="submit">Registrar</button>

@@ -3,12 +3,11 @@ package com.example.oracleapi.Entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.example.oracleapi.Model.ConsultaStatus;
 import com.example.oracleapi.Model.EspecificacaoMedico;
 
 @Data
@@ -17,14 +16,10 @@ import com.example.oracleapi.Model.EspecificacaoMedico;
 public class AgendamentoConsulta {
 
     // Tabela ajustada // Completo!
-    
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
-
-    @NotBlank
-    @Size(max = 500, message = "A descrição deve ter no máximo 500 caracteres")
-    private String descricao;
 
     @NotNull
     private LocalDate data;
@@ -38,43 +33,45 @@ public class AgendamentoConsulta {
     @Enumerated(EnumType.STRING)
     private EspecificacaoMedico especificacaoMedico;
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+   public int getId() {
+        return id;
     }
 
     public LocalDate getData() {
         return data;
     }
 
-    public void setData(LocalDate data) {
-        this.data = data;
-    }
-
     public LocalTime getHora() {
         return hora;
-    }
-
-    public void setHora(LocalTime hora) {
-        this.hora = hora;
     }
 
     public Paciente getPaciente() {
         return paciente;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-    }
-
     public EspecificacaoMedico getEspecificacaoMedico() {
         return especificacaoMedico;
     }
 
-    public void setEspecificacaoMedico(EspecificacaoMedico especificacaoMedico) {
-        this.especificacaoMedico = especificacaoMedico;
+    public String getTelefone() {
+        return telefone;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public ConsultaStatus getStatus() {
+        return status;
+    }
+
+    @NotBlank
+    private String telefone;
+
+
+    @NotBlank
+    private String email;
+
+    @Enumerated(EnumType.STRING)
+    private ConsultaStatus status;
 }

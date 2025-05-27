@@ -1,6 +1,5 @@
 package com.example.oracleapi.Entity;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -22,7 +21,7 @@ import com.example.oracleapi.Model.ConsultaStatus;
 public class MinhaConsulta {
 
     // Tabela ajustada // Completo!
-     
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -41,7 +40,7 @@ public class MinhaConsulta {
     @Size(max = 250, message = "O resultado deve ter no máximo 250 caracteres")
     private String resultado;
 
-    @Size(min = 1,max = 1, message = "O campo ativo deve ter no máximo 1 caractere")
+    @Size(min = 1, max = 1, message = "O campo ativo deve ter no máximo 1 caractere")
     private char ativo;
 
     @Enumerated(EnumType.STRING)
@@ -51,6 +50,7 @@ public class MinhaConsulta {
     private Paciente paciente;
 
     @ManyToOne
+    @JoinColumn(name = "medico_id")
     private Medico medico;
 
     @OneToOne
@@ -61,4 +61,8 @@ public class MinhaConsulta {
     private String pressao_arterial;
 
     private String temperatura;
+
+    public int getId() {
+        return id;
+    }
 }

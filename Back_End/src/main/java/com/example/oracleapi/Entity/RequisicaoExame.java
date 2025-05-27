@@ -51,4 +51,8 @@ public class RequisicaoExame {
     private String tipoConvenio;
     @NotBlank
     private String nomeDocumento;
+
+    public int getId() {
+        return id;
+    }
 }
