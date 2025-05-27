@@ -4,7 +4,6 @@ import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.List;
-
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.Date;
@@ -13,15 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.oracleapi.DTO.AgendamentoConsultaDTO;
 import com.example.oracleapi.DTO.CpfDTO;
-import com.example.oracleapi.DTO.MinhaConsultaDTO;
 import com.example.oracleapi.DTO.PrescricaoDTO;
 import com.example.oracleapi.DTO.ResultadoConsultaDTO;
 import com.example.oracleapi.DTO.RetornoAgendamentoDTO;
-import com.example.oracleapi.Entity.AgendamentoConsulta;
 import com.example.oracleapi.Model.ConsultaStatus;
 import com.example.oracleapi.Repository.AgendamentoRepository;
-import com.example.oracleapi.Repository.MedicoRepository;
-import com.example.oracleapi.Repository.PacienteRepository;
 
 @Service
 public class ConsultaService {
@@ -30,69 +25,40 @@ public class ConsultaService {
     private DataSource dataSource;
 
     @Autowired
-    private PacienteRepository pacienteRepository;
-
-    @Autowired
-    private MedicoRepository medicoRepository;
-
-    @Autowired
     private AgendamentoRepository agendamentoRepository;
 
     public void agendarConsulta(AgendamentoConsultaDTO agendamentoConsulta) throws SQLException {
         try (Connection conn = dataSource.getConnection()) {
-            CallableStatement stmt = conn.prepareCall("{call proc_t09a_agendamento_consulta(?, ?, ?, ?, ?, ?, ?,?)}");
+            conn.setAutoCommit(false); // controle manual da transação
 
-            stmt.setString(1, agendamentoConsulta.nomePaciente());
-            stmt.setString(2, agendamentoConsulta.cpfPaciente());
-            stmt.setDate(3, Date.valueOf(agendamentoConsulta.data()));
-            stmt.setString(4, agendamentoConsulta.telefone());
-            stmt.setString(5, agendamentoConsulta.email());
-            stmt.setString(6, String.valueOf(agendamentoConsulta.especificacaoMedico()));
-            stmt.setTime(7, Time.valueOf(agendamentoConsulta.hora()));
-            stmt.setString(8, ConsultaStatus.CONFIRMADA.name());
+            // 1. Chamar procedure de agendamento, supondo que ela retorne ID via OUT param
+            CallableStatement stmtAgendamento = conn
+                    .prepareCall("{call proc_t09a_agendamento_consulta(?, ?, ?, ?, ?, ?, ?, ?, ?)}");
 
-            stmt.execute();
+            stmtAgendamento.setString(1, agendamentoConsulta.nomePaciente());
+            stmtAgendamento.setString(2, agendamentoConsulta.cpfPaciente());
+            stmtAgendamento.setDate(3, Date.valueOf(agendamentoConsulta.data()));
+            stmtAgendamento.setString(4, agendamentoConsulta.telefone());
+            stmtAgendamento.setString(5, agendamentoConsulta.email());
+            stmtAgendamento.setString(6, String.valueOf(agendamentoConsulta.especificacaoMedico()));
+            stmtAgendamento.setTime(7, Time.valueOf(agendamentoConsulta.hora()));
+            stmtAgendamento.setString(8, ConsultaStatus.CONFIRMADA.name());
+            // Parâmetro OUT para capturar o ID criado
+            stmtAgendamento.registerOutParameter(9, java.sql.Types.INTEGER);
 
-        } catch (SQLException e) {
-            throw new SQLException("Erro ao processar agendamento consulta", e);
-        }
-    }
+            stmtAgendamento.execute();
 
-    public void minhaConsulta(MinhaConsultaDTO minhaConsultaDTO) {
-        try (Connection conn = dataSource.getConnection();
-                CallableStatement stmt = conn
-                        .prepareCall("{call proc_t09a_minha_consulta(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}")) {
-            int paciente = pacienteRepository.findByCpf(minhaConsultaDTO.pacienteCpf())
-                    .orElseThrow(() -> new SQLException("Erro banco de dados"))
-                    .getId();
+            int novoAgendamentoId = stmtAgendamento.getInt(9);
 
-            int medico = medicoRepository.findByCrm(minhaConsultaDTO.medicoCrm())
-                    .orElseThrow(() -> new SQLException("Erro banco de dados"))
-                    .getId();
+            // 2. Chamar procedure para inserir em minha consulta
+            CallableStatement stmtMinhaConsulta = conn.prepareCall("{call proc_t09a_minha_consulta(?)}");
+            stmtMinhaConsulta.setInt(1, novoAgendamentoId);
+            stmtMinhaConsulta.execute();
 
-            int agendamento = ((AgendamentoConsulta) agendamentoRepository.findByPacienteIdAndDataAndHora(
-                    paciente,
-                    minhaConsultaDTO.data(),
-                    minhaConsultaDTO.hora()).orElseThrow(() -> new SQLException("Agendamento não encontrado")))
-                    .getId();
-
-            stmt.setDate(1, Date.valueOf(minhaConsultaDTO.data()));
-            stmt.setTime(2, Time.valueOf(minhaConsultaDTO.hora()));
-            stmt.setString(3, minhaConsultaDTO.descricao());
-            stmt.setString(4, minhaConsultaDTO.resultado());
-            stmt.setString(5, "S");
-            stmt.setString(6, minhaConsultaDTO.consultaStatus());
-            stmt.setInt(7, paciente);
-            stmt.setInt(8, medico);
-            stmt.setInt(9, agendamento);
-            stmt.setString(10, minhaConsultaDTO.frequencia());
-            stmt.setString(11, minhaConsultaDTO.pressaoArterial());
-            stmt.setString(12, minhaConsultaDTO.temperatura());
-
-            stmt.execute();
+            conn.commit();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new SQLException("Erro ao processar agendamento e inclusão em minhas consultas", e);
         }
     }
 
@@ -140,12 +106,13 @@ public class ConsultaService {
                 .stream()
                 .filter(e -> e.getPaciente().getCpf().equals(cpfPaciente.cpf()))
                 .map(agendamento -> new RetornoAgendamentoDTO(
+                        agendamento.getId(),
                         agendamento.getPaciente().getNome(),
                         agendamento.getData(),
                         agendamento.getHora(),
                         agendamento.getEspecificacaoMedico(),
                         agendamento.getStatus()))
                 .toList();
-                
+
     }
 }

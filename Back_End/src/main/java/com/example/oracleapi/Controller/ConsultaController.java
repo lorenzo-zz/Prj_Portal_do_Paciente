@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.oracleapi.DTO.AgendamentoConsultaDTO;
 import com.example.oracleapi.DTO.CpfDTO;
-import com.example.oracleapi.DTO.MinhaConsultaDTO;
 import com.example.oracleapi.DTO.PrescricaoDTO;
 import com.example.oracleapi.DTO.ResultadoConsultaDTO;
 import com.example.oracleapi.DTO.RetornoAgendamentoDTO;
@@ -40,16 +39,6 @@ public class ConsultaController {
             System.err.println("Erro Oracle Code: " + e.getErrorCode());
             System.err.println("Mensagem do Oracle: " + e.getMessage());
             throw new SQLException("Erro ao processar agendamento consulta: " + e.getMessage(), e);
-        }
-    }
-
-    @PostMapping("/minha-consulta")
-    public ResponseEntity<?> MinhaConsulta(@RequestBody MinhaConsultaDTO minhaConsultaDTO) {
-        try {
-            consultaService.minhaConsulta(minhaConsultaDTO);
-            return ResponseEntity.status(200).body(Map.of("mensagem", "Aqui está sua consulta"));
-        } catch (ConsultaException e) {
-            throw new ConsultaException("Erro ao retornar sua consulta" + e.getMessage());
         }
     }
 
