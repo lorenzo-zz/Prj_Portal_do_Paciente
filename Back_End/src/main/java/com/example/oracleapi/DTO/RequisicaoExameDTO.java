@@ -15,5 +15,5 @@ public record RequisicaoExameDTO(
         MinhaConsulta minhaConsulta,
         String tipoConvenio,
         String nomeDocumento
-) {
+) {     
 }

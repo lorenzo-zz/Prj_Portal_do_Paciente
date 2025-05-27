@@ -1,0 +1,10 @@
+create or replace PROCEDURE proc_t09a_prescricao(
+    p_remedio IN VARCHAR2,
+    p_data IN DATE,
+    p_descricao IN VARCHAR2
+)
+AS
+BEGIN
+    INSERT INTO t09a_prescricao(DATA, DESCRICAO, REMEDIO)
+    VALUES(p_data, p_descricao, p_remedio);
+END;
