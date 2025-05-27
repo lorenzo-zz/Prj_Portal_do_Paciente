@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/Front_End/CSS/global.css" />
   <link rel="stylesheet" href="/Front_End/CSS/solicitacaoExames.css" />
   <link rel="shortcut icon" href="/Front_End/img/LogoPortalApenasRedondoFundoBranco.png" type="image/x-icon">
+  <script src="../JS/solicitacaoExames.js"></script>
 </head>
 
 <body>
@@ -39,19 +40,145 @@
     <form id="exames-form">
       <div class="form-group">
         <label for="nome-paciente">Nome Completo:</label>
-        <input type="text" id="nome-paciente" name="nome-paciente"  />
+        <input type="text" id="nome-paciente" name="nome-paciente" required />
       </div>
 
       <div class="form-group">
         <label for="cpf-paciente">CPF:</label>
-        <input type="text" id="cpf-paciente" name="cpf-paciente" maxlength="11" />
+        <input type="text" id="cpf-paciente" name="cpf-paciente" maxlength="11" disabled />
       </div>
 
       <div class="form-group">
         <label for="tipo-exame">Tipo de Exame:</label>
-        <select id="tipo-exame" name="tipo-exame">
-          <option value="" selected disabled>Selecione um tipo de exame</option>
+        <select id="exame" name="exame">
+          <option value="Hemograma completo">Hemograma completo</option>
+          <option value="Contagem de plaquetas">Contagem de plaquetas</option>
+          <option value="Contagem de leucócitos">Contagem de leucócitos</option>
+          <option value="Contagem de hemácias">Contagem de hemácias</option>
+          <option value="Hematócrito">Hematócrito</option>
+          <option value="Hemoglobina">Hemoglobina</option>
+          <option value="Volume corpuscular médio (VCM)">Volume corpuscular médio (VCM)</option>
+          <option value="Hemoglobina corpuscular média (HCM)">Hemoglobina corpuscular média (HCM)</option>
+          <option value="Concentração de hemoglobina corpuscular média (CHCM)">Concentração de hemoglobina corpuscular
+            média (CHCM)</option>
+          <option value="Índice de anisocitose">Índice de anisocitose</option>
+          <option value="Índice de macrocitose">Índice de macrocitose</option>
+          <option value="Índice de microcitose">Índice de microcitose</option>
+          <option value="Índice de hipocromia">Índice de hipocromia</option>
+          <option value="Índice de policromasia">Índice de policromasia</option>
+          <option value="Índice de reticulócitos">Índice de reticulócitos</option>
+          <option value="Índice de plaquetas grandes">Índice de plaquetas grandes</option>
+          <option value="Índice de plaquetas imaturas">Índice de plaquetas imaturas</option>
+          <option value="Índice de plaquetas jovens">Índice de plaquetas jovens</option>
+          <option value="Glicemia de jejum">Glicemia de jejum</option>
+          <option value="Colesterol total">Colesterol total</option>
+          <option value="Triglicerídeos">Triglicerídeos</option>
+          <option value="Ácido úrico">Ácido úrico</option>
+          <option value="Creatinina">Creatinina</option>
+          <option value="Ureia">Ureia</option>
+          <option value="TGO (AST)">TGO (AST)</option>
+          <option value="TGP (ALT)">TGP (ALT)</option>
+          <option value="Gama GT">Gama GT</option>
+          <option value="Fosfatase alcalina">Fosfatase alcalina</option>
+          <option value="Bilirrubina total e frações">Bilirrubina total e frações</option>
+          <option value="Albumina">Albumina</option>
+          <option value="Globulina">Globulina</option>
+          <option value="Relação A/G">Relação A/G</option>
+          <option value="Tempo de protrombina (TP)">Tempo de protrombina (TP)</option>
+          <option value="Tempo de tromboplastina parcial ativada (TTPa)">Tempo de tromboplastina parcial ativada (TTPa)
+          </option>
+          <option value="INR">INR</option>
+          <option value="Fibrinogênio">Fibrinogênio</option>
+          <option value="D-dímero">D-dímero</option>
+          <option value="Eletrólitos (sódio, potássio, cloro)">Eletrólitos (sódio, potássio, cloro)</option>
+          <option value="Cálcio total">Cálcio total</option>
+          <option value="Cálcio ionizado">Cálcio ionizado</option>
+          <option value="Magnésio">Magnésio</option>
+          <option value="Fósforo">Fósforo</option>
+          <option value="Ferro sérico">Ferro sérico</option>
+          <option value="Ferritina">Ferritina</option>
+          <option value="Transferrina">Transferrina</option>
+          <option value="Índice de saturação da transferrina">Índice de saturação da transferrina</option>
+          <option value="Zinco">Zinco</option>
+          <option value="Cobre">Cobre</option>
+          <option value="Vitamina B12">Vitamina B12</option>
+          <option value="Ácido fólico">Ácido fólico</option>
+          <option value="Homocisteína">Homocisteína</option>
+          <option value="Vitamina D">Vitamina D</option>
+          <option value="Paratormônio (PTH)">Paratormônio (PTH)</option>
+          <option value="Testosterona total">Testosterona total</option>
+          <option value="Testosterona livre">Testosterona livre</option>
+          <option value="DHEA-S">DHEA-S</option>
+          <option value="FSH">FSH</option>
+          <option value="LH">LH</option>
+          <option value="Estradiol">Estradiol</option>
+          <option value="Progesterona">Progesterona</option>
+          <option value="Prolactina">Prolactina</option>
+          <option value="Cortisol">Cortisol</option>
+          <option value="ACTH">ACTH</option>
+          <option value="Insulina">Insulina</option>
+          <option value="Peptídeo C">Peptídeo C</option>
+          <option value="Glicemia pós-prandial">Glicemia pós-prandial</option>
+          <option value="Hemoglobina glicada">Hemoglobina glicada</option>
+          <option value="Anticorpos anti-TPO">Anticorpos anti-TPO</option>
+          <option value="Anticorpos anti-tireoglobulina">Anticorpos anti-tireoglobulina</option>
+          <option value="Tireoglobulina">Tireoglobulina</option>
+          <option value="CEA">CEA</option>
+          <option value="CA 125">CA 125</option>
+          <option value="CA 19-9">CA 19-9</option>
+          <option value="CA 15-3">CA 15-3</option>
+          <option value="Alfa-fetoproteína">Alfa-fetoproteína</option>
+          <option value="Beta-HCG">Beta-HCG</option>
+          <option value="PSA total">PSA total</option>
+          <option value="PSA livre">PSA livre</option>
+          <option value="CK total">CK total</option>
+          <option value="CK-MB">CK-MB</option>
+          <option value="Troponina I">Troponina I</option>
+          <option value="Mioglobina">Mioglobina</option>
+          <option value="BNP">BNP</option>
+          <option value="NT-proBNP">NT-proBNP</option>
+          <option value="Lipase">Lipase</option>
+          <option value="Amilase">Amilase</option>
+          <option value="Gastrina">Gastrina</option>
+          <option value="Calcitonina">Calcitonina</option>
+          <option value="Proteína total">Proteína total</option>
+          <option value="Imunoglobulina A">Imunoglobulina A</option>
+          <option value="Imunoglobulina G">Imunoglobulina G</option>
+          <option value="Imunoglobulina M">Imunoglobulina M</option>
+          <option value="PCR ultrassensível">PCR ultrassensível</option>
+          <option value="Lipoproteína A">Lipoproteína A</option>
+          <option value="Apolipoproteína A1">Apolipoproteína A1</option>
+          <option value="Apolipoproteína B">Apolipoproteína B</option>
+          <option value="Colesterol HDL">Colesterol HDL</option>
+          <option value="Colesterol LDL">Colesterol LDL</option>
+          <option value="Colesterol VLDL">Colesterol VLDL</option>
+          <option value="Perfil lipídico">Perfil lipídico</option>
+          <option value="Teste de função hepática">Teste de função hepática</option>
+          <option value="Teste de função renal">Teste de função renal</option>
+          <option value="Teste de coagulação">Teste de coagulação</option>
+          <option value="Exame toxicológico">Exame toxicológico</option>
+          <option value="Anticorpos ANA">Anticorpos ANA</option>
+          <option value="Anticorpos anti-DNA">Anticorpos anti-DNA</option>
+          <option value="Fator reumatoide">Fator reumatoide</option>
+          <option value="Complemento C3">Complemento C3</option>
+          <option value="Complemento C4">Complemento C4</option>
+          <option value="Anticardiolipina IgG/IgM">Anticardiolipina IgG/IgM</option>
+          <option value="Lúpus anticoagulante">Lúpus anticoagulante</option>
+          <option value="Anti-CCP">Anti-CCP</option>
+          <option value="Teste de HIV">Teste de HIV</option>
+          <option value="Hepatite A IgM">Hepatite A IgM</option>
+          <option value="Hepatite B (HBsAg, anti-HBs, anti-HBc)">Hepatite B (HBsAg, anti-HBs, anti-HBc)</option>
+          <option value="Hepatite C (anti-HCV)">Hepatite C (anti-HCV)</option>
+          <option value="Sífilis (VDRL, FTA-Abs)">Sífilis (VDRL, FTA-Abs)</option>
+          <option value="Citomegalovírus IgG/IgM">Citomegalovírus IgG/IgM</option>
+          <option value="Toxoplasmose IgG/IgM">Toxoplasmose IgG/IgM</option>
+          <option value="Rubéola IgG/IgM">Rubéola IgG/IgM</option>
+          <option value="Herpes simples IgG/IgM">Herpes simples IgG/IgM</option>
+          <option value="Epstein-Barr IgG/IgM">Epstein-Barr IgG/IgM</option>
+          <option value="Zika vírus IgG/IgM">Zika vírus IgG/IgM</option>
+          <option value="Chikungunya IgG/IgM">Chikungunya IgG/IgM</option>
         </select>
+
       </div>
 
       <div class="form-group">
@@ -61,12 +188,12 @@
 
       <div class="form-group">
         <label for="telefone">Telefone:</label>
-        <input type="tel" id="telefone" name="telefone" maxlength="11"/>
+        <input type="tel" id="telefone" name="telefone" maxlength="11" required />
       </div>
 
       <div class="form-group">
         <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email"/>
+        <input type="email" id="email" name="email" required />
       </div>
 
       <div class="form-group">
@@ -84,6 +211,12 @@
 
       <button type="submit" class="solicitar-btn">Solicitar Exame</button>
     </form>
+    <div id="modal-alerta" class="modal-alerta hidden">
+      <div class="modal-conteudo">
+        <p>Consulta agendada com sucesso!</p>
+        <button onclick="fecharModal()">OK</button>
+      </div>
+    </div>
   </main>
 
   <footer class="footer">
@@ -91,7 +224,7 @@
     <a href="/Front_End/HTML/sobreNos.html">Sobre nós</a>
   </footer>
 
-  <script src="/Front_End/JS/solicitacaoExames.js"></script>
+
 </body>
 
 </html>

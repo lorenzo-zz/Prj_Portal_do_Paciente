@@ -1,0 +1,31 @@
+create or replace PROCEDURE proc_t09a_paciente_alergia(
+    p_descricao       IN VARCHAR2,
+    p_nome_alergia    IN VARCHAR2,
+    p_idPaciente      IN INT
+)
+AS
+    v_exists int;
+    v_count INTEGER;
+BEGIN
+
+    SELECT COUNT(*) INTO v_count
+    FROM t09a_paciente_alergia
+    WHERE paciente_id = p_idPaciente
+      AND UPPER(nome) = UPPER(p_nome_alergia);
+
+    IF v_count > 0 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Alergia já cadastrada para este paciente.');
+    END IF;
+
+   SELECT COUNT(*) INTO v_exists
+   FROM t09a_paciente
+   WHERE id = p_idPaciente;
+
+    IF v_exists = 0 THEN
+      raise_application_error(-20005, 'Paciente não encontrado.');
+   END IF;
+
+
+    INSERT INTO t09a_paciente_alergia (paciente_id, descricao, nome)
+    VALUES (p_idPaciente, UPPER(p_descricao), UPPER(p_nome_alergia));
+END;
