@@ -5,11 +5,11 @@ import com.example.oracleapi.Entity.AgendamentoConsulta;
 import com.example.oracleapi.Entity.Paciente;
 import com.example.oracleapi.Exception.AlergiaException;
 import com.example.oracleapi.Repository.*;
+import com.example.oracleapi.Repository.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import javax.sql.DataSource;
 import java.sql.*;
 import java.time.LocalDate;
@@ -41,7 +41,7 @@ public class PacienteService {
         try (Connection conn = dataSource.getConnection()) {
             CallableStatement stmt = conn.prepareCall("{call proc_t09a_agendamento_consulta(?, ?, ?, ?, ?)}");
 
-            int paciente = pacienteRepository.findByCpf(agendamentoConsulta.pacienteCpf())
+            int paciente = pacienteRepository.findByCpf(agendamentoConsulta.cpfPaciente())
                     .orElseThrow(() -> new SQLException("Erro banco de dados"))
                     .getId();
 
@@ -115,6 +115,7 @@ public class PacienteService {
         }
     }
 
+
     public void cadastrarAlergia(PacienteAlergiaDTO pacienteAlergiaDTO) throws SQLException {
         Paciente pacienteExistente = pacienteRepository.findByCpf(pacienteAlergiaDTO.paciente().getCpf())
                 .orElseThrow(() -> new SQLException("Paciente não encontrado"));
@@ -142,6 +143,7 @@ public class PacienteService {
             throw new SQLException(e.getMessage(), e);
         }
     }
+
 
     public void cadastrarPrescricao(PrescricaoDTO prescricaoDTO) throws SQLException {
         try (Connection conn = dataSource.getConnection()) {
@@ -257,36 +259,34 @@ public class PacienteService {
 
             stmt.setString(1, cpf);
 
-            // Registrar os parâmetros OUT
-            stmt.registerOutParameter(2, Types.VARCHAR); // nome
-            stmt.registerOutParameter(3, Types.VARCHAR); // telefone
-            stmt.registerOutParameter(4, Types.VARCHAR); // email
-            stmt.registerOutParameter(5, Types.DATE); // dataNascimento
-            stmt.registerOutParameter(6, Types.VARCHAR); // cep
-            stmt.registerOutParameter(7, Types.VARCHAR); // logradouro
-            stmt.registerOutParameter(8, Types.VARCHAR); // numero
-            stmt.registerOutParameter(9, Types.VARCHAR); // complemento
-            stmt.registerOutParameter(10, Types.VARCHAR); // bairro
-            stmt.registerOutParameter(11, Types.VARCHAR); // cidade
-            stmt.registerOutParameter(12, Types.VARCHAR); // uf
+            stmt.registerOutParameter(2, Types.VARCHAR); 
+            stmt.registerOutParameter(3, Types.VARCHAR); 
+            stmt.registerOutParameter(4, Types.VARCHAR); 
+            stmt.registerOutParameter(5, Types.DATE); 
+            stmt.registerOutParameter(6, Types.VARCHAR); 
+            stmt.registerOutParameter(7, Types.VARCHAR);
+            stmt.registerOutParameter(8, Types.VARCHAR); 
+            stmt.registerOutParameter(9, Types.VARCHAR); 
+            stmt.registerOutParameter(10, Types.VARCHAR); 
+            stmt.registerOutParameter(11, Types.VARCHAR); 
+            stmt.registerOutParameter(12, Types.VARCHAR); 
 
-            // Executar
+            
             stmt.execute();
 
-            // Montar DTO de retorno
             return new RetornoPacienteDTO(
-                    stmt.getString(2), // nome
-                    stmt.getString(3), // telefone
-                    stmt.getString(4), // email
-                    stmt.getDate(5) != null ? String.valueOf(stmt.getDate(5).toLocalDate()) : null, // dataNascimento
-                    stmt.getString(6), // cep
-                    stmt.getString(7), // logradouro
-                    stmt.getString(8), // numero
-                    stmt.getString(9), // complemento
-                    stmt.getString(10), // bairro
-                    stmt.getString(11), // cidade
-                    stmt.getString(12), // uf
-                    cpf // cpf (último!)
+                    stmt.getString(2),
+                    stmt.getString(3), 
+                    stmt.getString(4), 
+                    stmt.getDate(5) != null ? String.valueOf(stmt.getDate(5).toLocalDate()) : null, 
+                    stmt.getString(6), 
+                    stmt.getString(7), 
+                    stmt.getString(8),
+                    stmt.getString(9), 
+                    stmt.getString(10), 
+                    stmt.getString(11), 
+                    stmt.getString(12), 
+                    cpf 
             );
         } catch (SQLException e) {
             throw new SQLException("Erro generico" + e.getMessage());
@@ -299,7 +299,7 @@ public class PacienteService {
                 .orElseThrow(() -> new SQLException("Paciente não encontrado"));
 
         try (Connection conn = dataSource.getConnection()) {
-            CallableStatement stmt = conn.prepareCall("{call proc_t09a_paciente_alergia(?, ?)}");
+            CallableStatement stmt = conn.prepareCall("{call proc_remover_alergia_paciente(?, ?)}");
 
             stmt.setString(1, pacienteAlergiaDTO.nomeAlergia());
             stmt.setInt(2, pacienteExistente.getId());

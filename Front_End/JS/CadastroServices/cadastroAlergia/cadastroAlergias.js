@@ -52,11 +52,8 @@ function remover(alergia) {
         const errorData = await response.json();
         throw new Error(errorData.erro || 'Erro ao remover alergia');
       }
-
-      alert('Alergia removida com sucesso!');
     })
     .catch(error => {
       console.error(error);
-      alert('Erro ao remover alergia!');
     });
 }
