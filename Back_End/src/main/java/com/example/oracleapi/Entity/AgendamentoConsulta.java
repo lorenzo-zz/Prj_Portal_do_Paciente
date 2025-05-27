@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import java.time.LocalDate;
 import java.time.LocalTime;
+
+import com.example.oracleapi.Model.ConsultaStatus;
 import com.example.oracleapi.Model.EspecificacaoMedico;
 
 @Data
@@ -14,7 +16,7 @@ import com.example.oracleapi.Model.EspecificacaoMedico;
 public class AgendamentoConsulta {
 
     // Tabela ajustada // Completo!
-    
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
@@ -36,4 +38,7 @@ public class AgendamentoConsulta {
 
     @NotBlank
     private String email;
+
+    @NotNull
+    private ConsultaStatus status;
 }

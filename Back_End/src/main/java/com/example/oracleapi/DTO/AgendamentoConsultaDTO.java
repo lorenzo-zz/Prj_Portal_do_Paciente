@@ -5,12 +5,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public record AgendamentoConsultaDTO(
-        String nomePaciente,
-        String cpfPaciente,
-        LocalDate data,
-        String telefone,
-        String email,
-        EspecificacaoMedico especificacaoMedico,
-        LocalTime hora
-) {
+                String nomePaciente,
+                String cpfPaciente,
+                LocalDate data,
+                String telefone,
+                String email,
+                EspecificacaoMedico especificacaoMedico,
+                LocalTime hora) {
 }

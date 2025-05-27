@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
       hora: horario.value + ":00" 
     };
 
-    fetch('http://localhost:8080/paciente/agendar-consulta', {
+    fetch('http://localhost:8080/consulta/agendar-consulta', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

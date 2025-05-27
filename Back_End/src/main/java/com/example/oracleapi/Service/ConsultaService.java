@@ -3,6 +3,8 @@ package com.example.oracleapi.Service;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.List;
+
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.Date;
@@ -10,9 +12,11 @@ import java.sql.RowId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.oracleapi.DTO.AgendamentoConsultaDTO;
+import com.example.oracleapi.DTO.CpfDTO;
 import com.example.oracleapi.DTO.MinhaConsultaDTO;
 import com.example.oracleapi.DTO.PrescricaoDTO;
 import com.example.oracleapi.DTO.ResultadoConsultaDTO;
+import com.example.oracleapi.DTO.RetornoAgendamentoDTO;
 import com.example.oracleapi.Entity.AgendamentoConsulta;
 import com.example.oracleapi.Repository.AgendamentoRepository;
 import com.example.oracleapi.Repository.MedicoRepository;
@@ -23,7 +27,7 @@ public class ConsultaService {
 
     @Autowired
     private DataSource dataSource;
-    
+
     @Autowired
     private PacienteRepository pacienteRepository;
 
@@ -55,7 +59,7 @@ public class ConsultaService {
     public void minhaConsulta(MinhaConsultaDTO minhaConsultaDTO) {
         try (Connection conn = dataSource.getConnection();
                 CallableStatement stmt = conn
-                        .prepareCall("{call proc_t09a_agendamento_consulta(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}")) {
+                        .prepareCall("{call proc_t09a_minha_consulta(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}")) {
             int paciente = pacienteRepository.findByCpf(minhaConsultaDTO.pacienteCpf())
                     .orElseThrow(() -> new SQLException("Erro banco de dados"))
                     .getId();
@@ -119,5 +123,22 @@ public class ConsultaService {
         } catch (SQLException e) {
             throw new SQLException("Erro ao processar resultado exame");
         }
+    }
+
+    public List todasConsultas(CpfDTO cpfPaciente) {
+
+        return agendamentoRepository.findAll()
+                .stream()
+                .filter(e -> e.getPaciente().getCpf().equals(cpfPaciente.cpf()))
+                .toList();
+    }
+
+    public List listarConsultas(CpfDTO cpfPaciente) {
+        return agendamentoRepository.findAll()
+                .stream()
+                .filter(e -> e.getPaciente().getCpf().equals(cpfPaciente.cpf()))
+                .map(RetornoAgendamentoDTO::new)
+                .toList();
+
     }
 }

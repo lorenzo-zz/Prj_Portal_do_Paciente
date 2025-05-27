@@ -38,7 +38,6 @@ public class LoginService {
         this.enderecoRepository = enderecoRepository;
     }
 
-    // Metodo de cadastrar paciente
 
     public void cadastrar(Paciente paciente, MultipartFile arquivo) throws SQLException, IOException {
         try (Connection conn = dataSource.getConnection();
@@ -51,7 +50,7 @@ public class LoginService {
             stmt.setString(5, paciente.getTelefone());
             stmt.setString(6, paciente.getNome());
             stmt.setDate(7, java.sql.Date.valueOf(paciente.getDataNascimento()));
-            stmt.setString(8, "S"); // Sempre "S" para ativo
+            stmt.setString(8, "S"); 
             stmt.setDate(9, java.sql.Date.valueOf(LocalDate.now()));
             stmt.execute();
 

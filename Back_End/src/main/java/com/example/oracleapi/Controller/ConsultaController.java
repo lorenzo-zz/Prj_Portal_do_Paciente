@@ -1,8 +1,8 @@
 package com.example.oracleapi.Controller;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.oracleapi.DTO.AgendamentoConsultaDTO;
+import com.example.oracleapi.DTO.CpfDTO;
 import com.example.oracleapi.DTO.MinhaConsultaDTO;
 import com.example.oracleapi.DTO.PrescricaoDTO;
 import com.example.oracleapi.DTO.ResultadoConsultaDTO;
@@ -66,6 +67,15 @@ public class ConsultaController {
             return ResponseEntity.status(200).body(Map.of("Messagem", "Resultado da consulta salvo com sucesso"));
         } catch (ResultadoConsultaExeception | SQLException e) {
             throw new ResultadoConsultaExeception("Erro ao salvar o resultado do exame" + e.getMessage());
+        }
+    }
+
+    @PostMapping("/listar-consultas")
+    public ResponseEntity<List> listarConsultas(CpfDTO cpfPaciente) {
+        try {
+            return ResponseEntity.status(200).body(consultaService.listarConsultas(cpfPaciente));
+        } catch (ConsultaException e) {
+            throw new RuntimeException("Erro ao listar consultas: " + e.getMessage());
         }
     }
 }
