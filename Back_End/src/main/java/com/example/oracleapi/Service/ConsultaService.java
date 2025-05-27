@@ -18,6 +18,7 @@ import com.example.oracleapi.DTO.PrescricaoDTO;
 import com.example.oracleapi.DTO.ResultadoConsultaDTO;
 import com.example.oracleapi.DTO.RetornoAgendamentoDTO;
 import com.example.oracleapi.Entity.AgendamentoConsulta;
+import com.example.oracleapi.Model.ConsultaStatus;
 import com.example.oracleapi.Repository.AgendamentoRepository;
 import com.example.oracleapi.Repository.MedicoRepository;
 import com.example.oracleapi.Repository.PacienteRepository;
@@ -39,7 +40,7 @@ public class ConsultaService {
 
     public void agendarConsulta(AgendamentoConsultaDTO agendamentoConsulta) throws SQLException {
         try (Connection conn = dataSource.getConnection()) {
-            CallableStatement stmt = conn.prepareCall("{call proc_t09a_agendamento_consulta(?, ?, ?, ?, ?, ?, ?)}");
+            CallableStatement stmt = conn.prepareCall("{call proc_t09a_agendamento_consulta(?, ?, ?, ?, ?, ?, ?,?)}");
 
             stmt.setString(1, agendamentoConsulta.nomePaciente());
             stmt.setString(2, agendamentoConsulta.cpfPaciente());
@@ -48,6 +49,7 @@ public class ConsultaService {
             stmt.setString(5, agendamentoConsulta.email());
             stmt.setString(6, String.valueOf(agendamentoConsulta.especificacaoMedico()));
             stmt.setTime(7, Time.valueOf(agendamentoConsulta.hora()));
+            stmt.setString(8, ConsultaStatus.CONFIRMADA.name());
 
             stmt.execute();
 

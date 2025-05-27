@@ -39,6 +39,5 @@ public class AgendamentoConsulta {
     @NotBlank
     private String email;
 
-    @NotNull
     private ConsultaStatus status;
 }

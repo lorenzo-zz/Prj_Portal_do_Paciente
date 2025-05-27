@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("consulta-form").addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const nome = localStorage.getItem("nome");
-    const cpf = localStorage.getItem("cpf");
+    const nome = document.getElementById("nome-paciente");
+    const cpf = document.getElementById("cpf-paciente");
     const data = document.getElementById("data");
     const telefone = document.getElementById("telefone");
     const email = document.getElementById("email");
@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const horario = document.getElementById("horario");
     const form = document.getElementById('form-consulta');
 
+    console.log(nome, cpf, data.value, telefone.value, email.value, especialidade.value, horario.value);
     if( !nome || !cpf || !data.value || !telefone.value || !email.value || !especialidade.value || !horario.value) {
       alert("Por favor, preencha todos os campos obrigatórios.");
       return;
