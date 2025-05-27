@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const email = document.getElementById("email");
     const especialidade = document.getElementById("especialidade");
     const horario = document.getElementById("horario");
+    const form = document.getElementById('form-consulta');
 
     if( !nome || !cpf || !data.value || !telefone.value || !email.value || !especialidade.value || !horario.value) {
       alert("Por favor, preencha todos os campos obrigatórios.");
@@ -39,8 +40,20 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         return response.text();
       }).then(data => {
-        
+        document.getElementById('modal-alerta').classList.remove('hidden');
+        form.reset();
       }).catch(error => {
       })
   });
 });
+
+function limparFormulario() {
+  const form = document.getElementById("consulta-form");
+  form.reset();
+}
+
+function fecharModal() {
+  const modal = document.getElementById('modal-alerta');
+  modal.classList.add('hidden');
+  limparFormulario(); 
+}
