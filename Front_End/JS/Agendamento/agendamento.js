@@ -58,3 +58,29 @@ function fecharModal() {
   modal.classList.add('hidden');
   limparFormulario(); 
 }
+
+// ------------------------------ Validação dos campos
+
+document.addEventListener("DOMContentLoaded", function () {
+  const campoCPF = document.getElementById("cpf-paciente");
+  const campoTelefone = document.getElementById("telefone");
+  const campoNome = document.getElementById("nome-paciente");
+
+  if (campoCPF) {
+    campoCPF.addEventListener("input", function () {
+      this.value = this.value.replace(/\D/g, "");
+    });
+  }
+
+  if (campoTelefone) {
+    campoTelefone.addEventListener("input", function () {
+      this.value = this.value.replace(/\D/g, "");
+    });
+  }
+
+  if (campoNome) {
+    campoNome.addEventListener("input", function () {
+      this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, "");
+    });
+  }
+});
