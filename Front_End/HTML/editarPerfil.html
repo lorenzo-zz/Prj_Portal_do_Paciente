@@ -7,14 +7,14 @@
   <link rel="stylesheet" href="/Front_End/CSS/editarPerfil.css">
   <link rel="stylesheet" href="/Front_End/CSS/global.css">
   <link rel="shortcut icon" href="/Front_End/img/LogoPortalApenasRedondoFundoBranco.png" type="image/x-icon">
-  <script src="../JS/EditarPerfil/EditarPerfil.js"></script>
+  <script src="/Front_End/JS/EditarPerfil/EditarPerfil.js"></script>
   <title>Editar Perfil - Portal do Paciente</title>
 </head>
 
 <body>
   <header class="navbar">
     <nav>
-      <a href="index.html">Portal Do Paciente</a>
+      <a href="/Front_End/HTML/index.html">Portal Do Paciente</a>
     </nav>
     <div class="right_links">
       <a href="/Front_End/HTML/index.html" id="logout_button">Sair</a>
@@ -39,7 +39,7 @@
   <div class="container">
     <div class="card" id="formulario1">
       <form id="editProfileForm">
-        <input type="text" placeholder="Nome Completo" id="nome" maxlength="100"><br>
+        <input type="text" placeholder="Nome Completo" id="nomeCompleto" maxlength="100"><br>
         <input type="tel" placeholder="Telefone: (99) 12345-6789" id="telefone" maxlength="11"><br>
         <input type="email" placeholder="Email: exemplo@email.com" id="email" maxlength="100"><br>
         <input type="text" id="dt_nascimento" value="Data de nascimento: 19/01/2000" disabled><br>
@@ -51,7 +51,7 @@
         <input type="text" placeholder="Bairro" id="bairro" maxlength="50"><br>
         <input type="text" placeholder="Cidade" id="cidade" maxlength="50"><br>
         <input type="text" placeholder="Estado" id="estado" maxlength="2"><br>
-        <button type="button" id="salvar-butao">Salvar Alterações</button>
+       <button type="button" id="salvar-butao">Salvar Alterações</button>
 
         <div class="sucessoAlteracao">
           <h3>Alterações salvas com sucesso!</h3>
@@ -60,7 +60,7 @@
           <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
             <p>Perfil atualizado com sucesso!</p>
-            <button onclick="closeModal()" class="ok-button">OK</button>
+             <button onclick="closeModal()" class="ok-button">OK</button>
           </div>
         </div>
       </form>
