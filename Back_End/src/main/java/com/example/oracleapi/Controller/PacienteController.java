@@ -48,7 +48,7 @@ public class PacienteController {
     @PostMapping("/dados-paciente")
     public ResponseEntity<?> dadosPaciente(@RequestBody CpfDTO cpfDTO) throws SQLException {
         try {
-            DadosPacienteDTO paciente = pacienteService.dadosDoPaciente(cpfDTO.cpf());
+            RetornoPacienteDTO paciente = pacienteService.dadosDoPaciente(cpfDTO.cpf());
             return ResponseEntity.ok(paciente);
         } catch (DadosPacienteException e) {
             throw new DadosPacienteException("Erro ao trazer os dados do paciente" + e.getMessage());
