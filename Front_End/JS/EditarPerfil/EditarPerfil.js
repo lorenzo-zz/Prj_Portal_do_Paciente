@@ -30,8 +30,12 @@ function carregarDadosPaciente() {
     .then(dados => {
       console.log('Dados recebidos:', dados);
 
+<<<<<<< HEAD
       
       document.getElementById('nome').value = dados.nome;
+=======
+      document.getElementById('nomeCompleto').value = dados.nome;
+>>>>>>> 0e288b19af0f5de2739f0678de7b536b91de0bad
       document.getElementById('telefone').value = dados.telefone;
       document.getElementById('email').value = dados.email;
       document.getElementById('dt_nascimento').value = dados.dataNascimento;
@@ -57,7 +61,7 @@ function atualizarDados() {
 
   const dadosAtualizados = {
     cpf: cpfStorage,
-    nomeCompleto: document.getElementById('nome').value,
+    nomeCompleto: document.getElementById('nomeCompleto').value,
     telefone: document.getElementById('telefone').value,
     email: document.getElementById('email').value,
     dataNascimento: document.getElementById('dt_nascimento').value,
@@ -69,6 +73,8 @@ function atualizarDados() {
     cidade: document.getElementById('cidade').value,
     uf: document.getElementById('estado').value
   };
+
+  console.log('Dados enviados:', dadosAtualizados);
 
   fetch('http://localhost:8080/paciente/atualizar-dados', {
     method: 'PUT',
@@ -86,7 +92,7 @@ function atualizarDados() {
     .then(response => {
       console.log('Dados atualizados:', response);
       showModal();
-      carregarDadosPaciente(); // Atualiza os campos com os dados mais recentes
+      carregarDadosPaciente(); 
     })
     .catch(error => {
       console.error('Erro:', error);
@@ -94,10 +100,10 @@ function atualizarDados() {
     });
 }
 
-// Carrega os dados quando a página abre
-document.addEventListener('DOMContentLoaded', carregarDadosPaciente);
+document.addEventListener('DOMContentLoaded', function() {
+  carregarDadosPaciente();
 
-// Evento do botão de salvar
-document.getElementById('salvar-butao').addEventListener('click', function () {
-  atualizarDados();
+  document.getElementById('salvar-butao').addEventListener('click', function () {
+    atualizarDados();
+  });
 });

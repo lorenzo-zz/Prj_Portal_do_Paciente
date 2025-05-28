@@ -40,22 +40,20 @@ public class ConsultaService {
 
             // 1. Chamar procedure de agendamento, supondo que ela retorne ID via OUT param
             CallableStatement stmtAgendamento = conn
-                    .prepareCall("{call proc_t09a_agendamento_consulta(?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+                    .prepareCall("{call proc_t09a_agendamento_consulta(?, ?, ?, ?, ?, ?, ?, ?)}");
 
-            stmtAgendamento.setString(1, agendamentoConsulta.nomePaciente());
-            stmtAgendamento.setString(2, agendamentoConsulta.cpfPaciente());
-            stmtAgendamento.setDate(3, Date.valueOf(agendamentoConsulta.data()));
-            stmtAgendamento.setString(4, agendamentoConsulta.telefone());
-            stmtAgendamento.setString(5, agendamentoConsulta.email());
-            stmtAgendamento.setString(6, String.valueOf(agendamentoConsulta.especificacaoMedico()));
-            stmtAgendamento.setTime(7, Time.valueOf(agendamentoConsulta.hora()));
-            stmtAgendamento.setString(8, ConsultaStatus.CONFIRMADA.name());
-            // Parâmetro OUT para capturar o ID criado
-            stmtAgendamento.registerOutParameter(9, java.sql.Types.INTEGER);
+            stmtAgendamento.setString(1, agendamentoConsulta.cpfPaciente());
+            stmtAgendamento.setDate(2, Date.valueOf(agendamentoConsulta.data()));
+            stmtAgendamento.setString(3, agendamentoConsulta.telefone());
+            stmtAgendamento.setString(4, agendamentoConsulta.email());
+            stmtAgendamento.setString(5, String.valueOf(agendamentoConsulta.especificacaoMedico()));
+            stmtAgendamento.setTime(6, Time.valueOf(agendamentoConsulta.hora()));
+            stmtAgendamento.setString(7, ConsultaStatus.CONFIRMADA.name());
+            stmtAgendamento.registerOutParameter(8, java.sql.Types.INTEGER);
 
             stmtAgendamento.execute();
 
-            int novoAgendamentoId = stmtAgendamento.getInt(9);
+            int novoAgendamentoId = stmtAgendamento.getInt(8);
 
             // 2. Chamar procedure para inserir em minha consulta
             CallableStatement stmtMinhaConsulta = conn.prepareCall("{call proc_t09a_minha_consulta(?)}");
