@@ -1,0 +1,55 @@
+create or replace procedure proc_t09a_resultado_consulta(
+   p_descricao in varchar2,
+   p_data in date,
+   p_idMedico in int,
+   p_idPaciente in int,
+   p_idPrescricao in int,
+   p_idMinhaConsulta in int
+   )
+   as
+   v_exists int;
+   v_count int;
+   v_countConsulta int;
+
+   begin
+
+   select count(*) into v_count
+   from t09a_resultado_consulta
+   where PRESCRICAO_ID = p_idPrescricao;
+
+   if v_count > 0 then
+         RAISE_APPLICATION_ERROR(-20001, 'Prescrição não pode ser utilizada, pois já foi utilizada em outro resultado de consulta!');
+   END IF;
+
+   select count(*) into v_exists from t09a_medico where id = p_idMedico;
+   if v_exists = 0 then
+      raise_application_error(-20008, 'Médico não encontrado.');
+   end if;
+
+   select count(*) into v_exists from t09a_paciente where id = p_idPaciente;
+   if v_exists = 0 then
+      raise_application_error(-20009, 'Paciente não encontrado.');
+   end if;
+
+   select count(*) into v_exists from t09a_prescricao where id = p_idPrescricao;
+   if v_exists = 0 then
+      raise_application_error(-20010, 'Prescrição não encontrada.');
+   end if;
+
+   select count(*) into v_exists from t09a_minha_consulta where id = p_idMinhaConsulta;
+   if v_exists = 0 then
+      raise_application_error(-20011, 'Consulta não encontrada.');
+   end if;
+
+   select count(*) into v_countConsulta
+   from t09a_resultado_consulta
+   where MINHA_CONSULTA_ID = p_idMinhaConsulta;
+
+     if v_countConsulta > 0 then
+         RAISE_APPLICATION_ERROR(-20001, 'Prescrição não pode ser utilizada, pois já foi utilizada em outro resultado de consulta!');
+   END IF;
+
+      insert into t09a_resultado_consulta(DATA_RESULTADO, DESCRICAO, MEDICO_ID, PACIENTE_ID, PRESCRICAO_ID, MINHA_CONSULTA_ID)
+      values(p_data, p_descricao, p_idMedico, p_idPaciente, p_idPrescricao,p_idMinhaConsulta);
+
+   end proc_t09a_resultado_consulta;
