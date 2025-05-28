@@ -36,4 +36,8 @@ public class Medico {
     @NotBlank
     @Size(max = 15, message = "O CRM deve ter no máximo 15 caracteres")
     private String crm;
+
+    public int getId() {
+        return id;
+    }
 }

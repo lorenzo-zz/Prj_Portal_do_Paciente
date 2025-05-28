@@ -79,9 +79,14 @@ public class Paciente{
     }
 
 
+    public int getId() {
+        return id;
+    }
+
     public void setDocumento(String documento) {
         this.documento = documento;
     }
+
 
     public String getDocumento() {
         return documento;

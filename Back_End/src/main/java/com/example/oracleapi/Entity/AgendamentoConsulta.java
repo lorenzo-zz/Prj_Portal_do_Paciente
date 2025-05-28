@@ -33,8 +33,41 @@ public class AgendamentoConsulta {
     @Enumerated(EnumType.STRING)
     private EspecificacaoMedico especificacaoMedico;
 
+   public int getId() {
+        return id;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public LocalTime getHora() {
+        return hora;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public EspecificacaoMedico getEspecificacaoMedico() {
+        return especificacaoMedico;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public ConsultaStatus getStatus() {
+        return status;
+    }
+
     @NotBlank
     private String telefone;
+
 
     @NotBlank
     private String email;

@@ -2,206 +2,176 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/Front_End/CSS/editarPerfil.css">
-    <link rel="stylesheet" href="/Front_End/CSS/global.css">
-    <link rel="shortcut icon" href="/Front_End/img/LogoPortalApenasRedondoFundoBranco.png" type="image/x-icon">
-    <script src="../JS/EditarPerfil/EditarPerfil.js"></script>
-    <title>Editar Perfil - Portal do Paciente</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/Front_End/CSS/editarPerfil.css">
+  <link rel="stylesheet" href="/Front_End/CSS/global.css">
+  <link rel="shortcut icon" href="/Front_End/img/LogoPortalApenasRedondoFundoBranco.png" type="image/x-icon">
+  <script src="../JS/EditarPerfil/EditarPerfil.js"></script>
+  <title>Editar Perfil - Portal do Paciente</title>
 </head>
 
 <body>
-    <header class="navbar">
-        <nav>
-          <a href="index.html">Portal Do Paciente</a>
-        </nav>
-        <div class="right_links">
-          <a href="/Front_End/HTML/index.html" id="logout_button">Sair</a>
-        </div>
-      </header>
-
-    <div class="page_navigator">
-        <a href="../HTML/index.html">Portal do Paciente</a>
-        <p>/</p>
-        <p>Editar Perfil</p>
+  <header class="navbar">
+    <nav>
+      <a href="index.html">Portal Do Paciente</a>
+    </nav>
+    <div class="right_links">
+      <a href="/Front_End/HTML/index.html" id="logout_button">Sair</a>
     </div>
+  </header>
 
-    <div class="logo-title">
-        <img src="/Front_End/img/logoSemEscrita.png" alt="Logo">
-        <h2 class="title">Editar Perfil</h2>
-    </div>
+  <div class="page_navigator">
+    <a href="../HTML/index.html">Portal do Paciente</a>
+    <p>/</p>
+    <p>Editar Perfil</p>
+  </div>
 
-    <div class="texto">
-        <p>Edite aqui o seu perfil</p>
-    </div>
+  <div class="logo-title">
+    <img src="/Front_End/img/logoSemEscrita.png" alt="Logo">
+    <h2 class="title">Editar Perfil</h2>
+  </div>
 
-    <div class="container">
-        <div class="card" id="formulario1">
-            <form id="editProfileForm">
-                <input type="text" placeholder="Nome Completo" id="nome" maxlength="100"><br>
-                <input type="tel" placeholder="Telefone: (99) 12345-6789" id="telefone" maxlength="11"><br>
-                <input type="email" placeholder="Email: exemplo@email.com" id="email" maxlength="100"><br>
-                <input type="text" id="dt_nascimento" value="Data de nascimento: 19/01/2000" disabled><br>
-                <h3>Endereço</h3>
-                <input type="text" placeholder="CEP" id="cep" maxlength="9"><br>
-                <input type="text" placeholder="Rua" id="rua" maxlength="100"><br>
-                <input type="text" placeholder="Número" id="numero" maxlength="10"><br>
-                <input type="text" placeholder="Complemento" id="complemento" maxlength="50"><br>
-                <input type="text" placeholder="Bairro" id="bairro" maxlength="50"><br>
-                <input type="text" placeholder="Cidade" id="cidade" maxlength="50"><br>
-                <select id="estado" required>
-                  <option value="" disabled selected>UF</option>
-                  <option value="AC">Acre</option>
-                  <option value="AL">Alagoas</option>
-                  <option value="AP">Amapá</option>
-                  <option value="AM">Amazonas</option>
-                  <option value="BA">Bahia</option>
-                  <option value="CE">Ceará</option>
-                  <option value="DF">Distrito Federal</option>
-                  <option value="ES">Espírito Santo</option>
-                  <option value="GO">Goiás</option>
-                  <option value="MA">Maranhão</option>
-                  <option value="MT">Mato Grosso</option>
-                  <option value="MS">Mato Grosso do Sul</option>
-                  <option value="MG">Minas Gerais</option>
-                  <option value="PA">Pará</option>
-                  <option value="PB">Paraíba</option>
-                  <option value="PR">Paraná</option>
-                  <option value="PE">Pernambuco</option>
-                  <option value="PI">Piauí</option>
-                  <option value="RR">Roraima</option>
-                  <option value="RO">Rondônia</option>
-                  <option value="RJ">Rio de Janeiro</option>
-                  <option value="RN">Rio Grande do Norte</option>
-                  <option value="RS">Rio Grande do Sul</option>
-                  <option value="SC">Santa Catarina</option>
-                  <option value="SP">São Paulo</option>
-                  <option value="SE">Sergipe</option>
-                  <option value="TO">Tocantins</option>
-                </select>
-    
-                <button type="button" onclick="showModal()">Salvar Alterações</button>
+  <div class="texto">
+    <p>Edite aqui o seu perfil</p>
+  </div>
 
-                <div class="sucessoAlteracao">
-                  <h3>Alterações salvas com sucesso!</h3>
-                </div>
-                <div id="modal" class="modal">
-                    <div class="modal-content">
-                        <span class="close" onclick="closeModal()">&times;</span>
-                        <p>Perfil atualizado com sucesso!</p>
-                        <button onclick="closeModal()" class="ok-button">OK</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+  <div class="container">
+    <div class="card" id="formulario1">
+      <form id="editProfileForm">
+        <input type="text" placeholder="Nome Completo" id="nome" maxlength="100"><br>
+        <input type="tel" placeholder="Telefone: (99) 12345-6789" id="telefone" maxlength="11"><br>
+        <input type="email" placeholder="Email: exemplo@email.com" id="email" maxlength="100"><br>
+        <input type="text" id="dt_nascimento" value="Data de nascimento: 19/01/2000" disabled><br>
+        <h3>Endereço</h3>
+        <input type="text" placeholder="CEP" id="cep" maxlength="9"><br>
+        <input type="text" placeholder="Rua" id="rua" maxlength="100"><br>
+        <input type="text" placeholder="Número" id="numero" maxlength="10"><br>
+        <input type="text" placeholder="Complemento" id="complemento" maxlength="50"><br>
+        <input type="text" placeholder="Bairro" id="bairro" maxlength="50"><br>
+        <input type="text" placeholder="Cidade" id="cidade" maxlength="50"><br>
+        <input type="text" placeholder="Estado" id="estado" maxlength="2"><br>
+        <button type="button" id="salvar-butao">Salvar Alterações</button>
 
-        <div class="card" id="formulario2">
-            <div class="form-container">
-    <div class="form_alergias">
- 
-      <form id="alergiaCadastro">
- 
-        <div class="alergias">
-          <h2>Suas alergias:</h2>
- 
-          <div class="erroCadastrarAlergia">
-            <p>Erro ao cadastrar alergia!</p>
-          </div>
- 
-          <div id="alergiasSelecionadas"></div>
-          </div>
-        </form>
-    </div>
-
-
-      
-    
-
-          <br>
-          <select id="alergiaSelect">
-            <option value="" disabled selected>Escolha uma alergia</option>
-            <option value="Alimentar">Alimentar</option>
-            <option value="Medicamentos">Medicamentos</option>
-            <option value="Respiratória">Respiratória</option>
-            <option value="Dermatológica">Dermatológica</option>
-            <option value="Ocular">Ocular</option>
-            <option value="Contactante">Contactante</option>
-            <option value="Látex">Látex</option>
-            <option value="Mofo">Mofo</option>
-            <option value="Poeira">Poeira</option>
-            <option value="Pólen">Pólen</option>
-            <option value="Animais">Animais</option>
-            <option value="Frutos do mar">Frutos do mar</option>
-            <option value="Lactose">Lactose</option>
-            <option value="Glúten">Glúten</option>
-            <option value="Ovo">Ovo</option>
-            <option value="Amendoim">Amendoim</option>
-            <option value="Soja">Soja</option>
-            <option value="Trigo">Trigo</option>
-            <option value="Nozes">Nozes</option>
-            <option value="Castanhas">Castanhas</option>
-            <option value="Frutas cítricas">Frutas cítricas</option>
-            <option value="Picada de insetos">Picada de insetos</option>
-            <option value="Abelha">Abelha</option>
-            <option value="Vespas">Vespas</option>
-            <option value="Perfumes">Perfumes</option>
-            <option value="Cosméticos">Cosméticos</option>
-            <option value="Detergentes">Detergentes</option>
-            <option value="Bebidas alcoólicas">Bebidas alcoólicas</option>
-            <option value="Cafeína">Cafeína</option>
-            <option value="Conservantes">Conservantes</option>
-            <option value="Corantes">Corantes</option>
-            <option value="Aditivos alimentares">Aditivos alimentares</option>
-            <option value="Sulfitos">Sulfitos</option>
-            <option value="Níquel">Níquel</option>
-            <option value="Cobalto">Cobalto</option>
-            <option value="Formaldeído">Formaldeído</option>
-            <option value="Fungos">Fungos</option>
-            <option value="Pelos">Pelos</option>
-            <option value="Ácaros">Ácaros</option>
-            <option value="Antiinflamatórios">Antiinflamatórios</option>
-            <option value="Antibióticos">Antibióticos</option>
-            <option value="Analgésicos">Analgésicos</option>
-            <option value="Penicilina">Penicilina</option>
-            <option value="AAS (Ácido Acetilsalicílico)">AAS (Ácido Acetilsalicílico)</option>
-            <option value="Insulina">Insulina</option>
-            <option value="Anticonvulsivantes">Anticonvulsivantes</option>
-            <option value="Anestésicos">Anestésicos</option>
-            <option value="Inibidores da enzima conversora">Inibidores da enzima conversora</option>
-            <option value="Vacinas">Vacinas</option>
-            <option value="Produtos de limpeza">Produtos de limpeza</option>
-            <option value="Tintas">Tintas</option>
-            <option value="Metal">Metal</option>
-            <option value="Fibras sintéticas">Fibras sintéticas</option>
-            <option value="Poeira doméstica">Poeira doméstica</option>
-            <option value="Plantas">Plantas</option>
-            <option value="Cereais">Cereais</option>
-            <option value="Azeites">Azeites</option>
-            <option value="Lustradores">Lustradores</option>
-            <option value="Produtos capilares">Produtos capilares</option>
-          </select>
- 
-          <button type="button" onclick="adicionarAlergia()">Adicionar</button>
- 
- 
-          <button type="submit">Confirmar</button>
-          <script src="/Front_End/JS/CadastroServices/cadastroAlergia/cadastroAlergias.js"></script>
-        </div>
-        <div class="sucessoAlteracao2">
+        <div class="sucessoAlteracao">
           <h3>Alterações salvas com sucesso!</h3>
         </div>
-      </form>
- 
-    </div>
-   
-  </div>
+        <div id="modal" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p>Perfil atualizado com sucesso!</p>
+            <button onclick="closeModal()" class="ok-button">OK</button>
+          </div>
         </div>
+      </form>
     </div>
-    <footer class="footer">
-        <p>&copy; 2025 Portal do Paciente. Todos os direitos reservados.</p>
-       <a href="/Front_End/HTML/sobreNos.html">Sobre nós</a>
-    </footer>
+
+    <div class="card" id="formulario2">
+      <div class="form-container">
+        <div class="form_alergias">
+
+          <form id="alergiaCadastro">
+
+            <div class="alergias">
+              <h2>Suas alergias:</h2>
+
+              <div class="erroCadastrarAlergia">
+                <p>Erro ao cadastrar alergia!</p>
+              </div>
+
+              <div id="alergiasSelecionadas"></div>
+            </div>
+          </form>
+        </div>
+
+
+
+
+
+        <br>
+        <select id="alergiaSelect">
+          <option value="" disabled selected>Escolha uma alergia</option>
+          <option value="Alimentar">Alimentar</option>
+          <option value="Medicamentos">Medicamentos</option>
+          <option value="Respiratória">Respiratória</option>
+          <option value="Dermatológica">Dermatológica</option>
+          <option value="Ocular">Ocular</option>
+          <option value="Contactante">Contactante</option>
+          <option value="Látex">Látex</option>
+          <option value="Mofo">Mofo</option>
+          <option value="Poeira">Poeira</option>
+          <option value="Pólen">Pólen</option>
+          <option value="Animais">Animais</option>
+          <option value="Frutos do mar">Frutos do mar</option>
+          <option value="Lactose">Lactose</option>
+          <option value="Glúten">Glúten</option>
+          <option value="Ovo">Ovo</option>
+          <option value="Amendoim">Amendoim</option>
+          <option value="Soja">Soja</option>
+          <option value="Trigo">Trigo</option>
+          <option value="Nozes">Nozes</option>
+          <option value="Castanhas">Castanhas</option>
+          <option value="Frutas cítricas">Frutas cítricas</option>
+          <option value="Picada de insetos">Picada de insetos</option>
+          <option value="Abelha">Abelha</option>
+          <option value="Vespas">Vespas</option>
+          <option value="Perfumes">Perfumes</option>
+          <option value="Cosméticos">Cosméticos</option>
+          <option value="Detergentes">Detergentes</option>
+          <option value="Bebidas alcoólicas">Bebidas alcoólicas</option>
+          <option value="Cafeína">Cafeína</option>
+          <option value="Conservantes">Conservantes</option>
+          <option value="Corantes">Corantes</option>
+          <option value="Aditivos alimentares">Aditivos alimentares</option>
+          <option value="Sulfitos">Sulfitos</option>
+          <option value="Níquel">Níquel</option>
+          <option value="Cobalto">Cobalto</option>
+          <option value="Formaldeído">Formaldeído</option>
+          <option value="Fungos">Fungos</option>
+          <option value="Pelos">Pelos</option>
+          <option value="Ácaros">Ácaros</option>
+          <option value="Antiinflamatórios">Antiinflamatórios</option>
+          <option value="Antibióticos">Antibióticos</option>
+          <option value="Analgésicos">Analgésicos</option>
+          <option value="Penicilina">Penicilina</option>
+          <option value="AAS (Ácido Acetilsalicílico)">AAS (Ácido Acetilsalicílico)</option>
+          <option value="Insulina">Insulina</option>
+          <option value="Anticonvulsivantes">Anticonvulsivantes</option>
+          <option value="Anestésicos">Anestésicos</option>
+          <option value="Inibidores da enzima conversora">Inibidores da enzima conversora</option>
+          <option value="Vacinas">Vacinas</option>
+          <option value="Produtos de limpeza">Produtos de limpeza</option>
+          <option value="Tintas">Tintas</option>
+          <option value="Metal">Metal</option>
+          <option value="Fibras sintéticas">Fibras sintéticas</option>
+          <option value="Poeira doméstica">Poeira doméstica</option>
+          <option value="Plantas">Plantas</option>
+          <option value="Cereais">Cereais</option>
+          <option value="Azeites">Azeites</option>
+          <option value="Lustradores">Lustradores</option>
+          <option value="Produtos capilares">Produtos capilares</option>
+        </select>
+
+        <button type="button" onclick="adicionarAlergia()">Adicionar</button>
+
+
+        <button type="submit">Confirmar</button>
+        <script src="/Front_End/JS/CadastroServices/cadastroAlergia/cadastroAlergias.js"></script>
+      </div>
+      <div class="sucessoAlteracao2">
+        <h3>Alterações salvas com sucesso!</h3>
+      </div>
+      </form>
+
+    </div>
+
+  </div>
+  </div>
+  </div>
+  <footer class="footer">
+    <p>&copy; 2025 Portal do Paciente. Todos os direitos reservados.</p>
+    <a href="/Front_End/HTML/sobreNos.html">Sobre nós</a>
+  </footer>
 </body>
 
 </html>

@@ -33,4 +33,8 @@ public class ResultadoExame {
     @NotNull
     @OneToOne
     private RequisicaoExame solicitacaoExame;
+
+    public long getId() {
+        return id;
+    }
 }

@@ -1,24 +1,66 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const cpf = localStorage.getItem('cpf');
+document.addEventListener("DOMContentLoaded", function () {
+  const cpf = localStorage.getItem("cpf");
+  const filtroStatus = document.getElementById("filtro-status");
+  const lista = document.getElementById("consultas-lista");
+  const btnAnterior = document.getElementById("anterior");
+  const btnProximo = document.getElementById("proximo");
 
-    
-  const consultasPorPagina = 6;
+  let todasConsultas = [];
+  let consultasFiltradas = [];
   let paginaAtual = 0;
+  const consultasPorPagina = 6;
 
-  document.getElementById("filtro-status").addEventListener("change", function () {
-    paginaAtual = 0; 
-    renderizarConsultas();
-  });
+  const dados = { cpf };
 
-  function renderizarConsultas() {
-    const lista = document.getElementById("consultas-lista");
-    lista.innerHTML = "";
+  fetch('http://localhost:8080/consulta/listar-consultas', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(dados)
+  })
+    .then(async response => {
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.erro || 'Erro ao buscar consultas');
+      }
+      return response.json();
+    })
+    .then(data => {
+      todasConsultas = data;
+      aplicarFiltro(); // inicia com tudo exibido
+    })
+    .catch(error => {
+      console.error('Erro ao buscar consultas:', error.message);
+    });
 
-    const filtroStatus = document.getElementById("filtro-status").value;
+  function aplicarFiltro() {
+    const statusSelecionado = filtroStatus.value;
 
-    let consultasFiltradas = consultas;
-    if (filtroStatus !== "todos") {
-      consultasFiltradas = consultas.filter(consulta => consulta.status === filtroStatus);
+    if (statusSelecionado === "todos") {
+      consultasFiltradas = [...todasConsultas];
+    } else if (statusSelecionado === "mais-recente") {
+      consultasFiltradas = [...todasConsultas].sort((a, b) => {
+        const dataA = new Date(`${a.data} ${a.hora}`);
+        const dataB = new Date(`${b.data} ${b.hora}`);
+        return dataB - dataA;
+      });
+    } else {
+      consultasFiltradas = todasConsultas.filter(c => c.status.toLowerCase() === statusSelecionado);
+    }
+
+    paginaAtual = 0;
+    renderizarPagina();
+  }
+
+  function renderizarPagina() {
+    lista.innerHTML = '';
+
+    if (consultasFiltradas.length === 0) {
+      lista.innerHTML = '<p>Nenhuma consulta encontrada.</p>';
+      btnAnterior.disabled = true;
+      btnProximo.disabled = true;
+      return;
     }
 
     const inicio = paginaAtual * consultasPorPagina;
@@ -26,49 +68,51 @@ document.addEventListener('DOMContentLoaded', () => {
     const pagina = consultasFiltradas.slice(inicio, fim);
 
     pagina.forEach((consulta, index) => {
-      const card = document.createElement("a");
-      card.href = `dadosConsulta.html?id=${inicio + index + 1}`;
-      card.className = "consulta-card-link";
-      card.innerHTML = `
-            <div class="consulta-card">
-                <div class="consulta-box">
-                    <div class="consulta-info">
-                        <h2>Consulta com ${consulta.nome}</h2>
-                        <p><strong>Data:</strong> ${consulta.data}</p>
-                        <p><strong>Hora:</strong> ${consulta.hora}</p>
-                        <p><strong>Especialidade:</strong> ${consulta.especialidade}</p>
-                    </div>
-                    <div class="consulta-acoes">
-                        <span class="status status-${consulta.status}">${capitalize(consulta.status)}</span>
-                    </div>
-                </div>
-            </div>
-        `;
-      lista.appendChild(card);
+      const card = `
+        <div class="consulta-card">
+          <div class="consulta-info">
+            <h2>${consulta.especificacaoMedico}</h2>
+            <p><strong>Hora:</strong> ${consulta.hora}</p>
+            <p><strong>Data:</strong> ${consulta.data}</p>
+          </div>
+          <div class="consulta-acoes">
+            <span class="status status-${consulta.status.toLowerCase()}">${consulta.status}</span>
+          </div>
+        </div>
+      `;
+      lista.insertAdjacentHTML('beforeend', card);
     });
 
-    document.getElementById("anterior").disabled = paginaAtual === 0;
-    document.getElementById("proximo").disabled = fim >= consultasFiltradas.length;
+    // Evento de clique nos cards
+    const cards = document.querySelectorAll('.consulta-card');
+    cards.forEach((card, i) => {
+      card.addEventListener('click', () => {
+        const indexConsulta = paginaAtual * consultasPorPagina + i;
+        localStorage.setItem('consultaId', consultasFiltradas[indexConsulta].id);
+        window.location.href = 'http://172.20.208.1:5500/Front_End/HTML/dadosConsulta.html';
+      });
+    });
+
+    // Controle de botões
+    btnAnterior.disabled = paginaAtual === 0;
+    btnProximo.disabled = fim >= consultasFiltradas.length;
   }
 
-  document.getElementById("anterior").addEventListener("click", () => {
+  // Evento no filtro
+  filtroStatus.addEventListener("change", aplicarFiltro);
+
+  // Eventos dos botões de paginação
+  btnAnterior.addEventListener("click", () => {
     if (paginaAtual > 0) {
       paginaAtual--;
-      renderizarConsultas();
+      renderizarPagina();
     }
   });
 
-  document.getElementById("proximo").addEventListener("click", () => {
-    if ((paginaAtual + 1) * consultasPorPagina < consultas.length) {
+  btnProximo.addEventListener("click", () => {
+    if ((paginaAtual + 1) * consultasPorPagina < consultasFiltradas.length) {
       paginaAtual++;
-      renderizarConsultas();
+      renderizarPagina();
     }
   });
-
-  function capitalize(text) {
-    return text.charAt(0).toUpperCase() + text.slice(1);
-  }
-
-  renderizarConsultas();
-
 });
