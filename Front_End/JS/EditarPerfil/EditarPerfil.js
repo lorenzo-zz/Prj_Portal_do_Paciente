@@ -30,6 +30,7 @@ function carregarDadosPaciente() {
     .then(dados => {
       console.log('Dados recebidos:', dados);
 
+      
       document.getElementById('nome').value = dados.nome;
       document.getElementById('telefone').value = dados.telefone;
       document.getElementById('email').value = dados.email;
@@ -47,6 +48,8 @@ function carregarDadosPaciente() {
       alert('Erro ao buscar dados do paciente');
     });
 }
+
+
 
 // Função para atualizar os dados do paciente
 function atualizarDados() {

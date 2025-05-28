@@ -77,7 +77,7 @@ public class ConsultaController {
     }
 
     @PostMapping("/dados-consulta")
-    public ResponseEntity<List<MinhaConsulta>> dadosConsulta(MinhaConsultaDTO idConsulta) {
+    public ResponseEntity<List<MinhaConsulta>> dadosConsulta(@RequestBody MinhaConsultaDTO idConsulta) {
         try {
             List<MinhaConsulta> consultas = consultaService.dadosConsulta(idConsulta);
             return ResponseEntity.ok(consultas);

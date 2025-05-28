@@ -64,6 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const inicio = paginaAtual * consultasPorPagina;
+    
     const fim = inicio + consultasPorPagina;
     const pagina = consultasFiltradas.slice(inicio, fim);
 
@@ -71,7 +72,6 @@ document.addEventListener("DOMContentLoaded", function () {
       const card = `
         <div class="consulta-card">
           <div class="consulta-info">
-            <h2>Nome Paciente: ${consulta.nomePaciente}</h2>
             <p><strong>Hora:</strong> ${consulta.hora}</p>
             <p><strong>Data:</strong> ${consulta.data}</p>
             <p><strong>Especialidade:</strong> ${consulta.especificacaoMedico}</p>

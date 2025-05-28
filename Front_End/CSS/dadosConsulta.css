@@ -227,5 +227,14 @@ h2 {
     object-fit: contain;
   }
 
+  input{
+    border: none;
+    width: 40%;
+    margin-top: 3px;
+  }
+
+  input :hover{
+    user-select: none;
+  }
   
   

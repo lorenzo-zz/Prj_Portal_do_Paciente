@@ -17,6 +17,7 @@ import com.example.oracleapi.DTO.PrescricaoDTO;
 import com.example.oracleapi.DTO.ResultadoConsultaDTO;
 import com.example.oracleapi.DTO.RetornoAgendamentoDTO;
 import com.example.oracleapi.Entity.MinhaConsulta;
+import com.example.oracleapi.Exception.ConsultaException;
 import com.example.oracleapi.Model.ConsultaStatus;
 import com.example.oracleapi.Repository.AgendamentoRepository;
 import com.example.oracleapi.Repository.MinhaConsultaRepository;
@@ -122,9 +123,10 @@ public class ConsultaService {
 
     }
 
-    public List<MinhaConsulta> dadosConsulta(MinhaConsultaDTO idConsulta) {
-        return consultaRepository.findAll()
-                .stream()
-                .toList();
+    public List<MinhaConsulta> dadosConsulta(MinhaConsultaDTO dto) {
+        MinhaConsulta consulta = consultaRepository.findByAgendamentoConsultaId(dto.idAgendamento())
+                .orElseThrow(() -> new ConsultaException("Consulta não encontrada"));
+
+        return List.of(consulta); 
     }
 }

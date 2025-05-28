@@ -19,4 +19,6 @@ public interface MinhaConsultaRepository extends JpaRepository<MinhaConsulta, In
             @Param("data") LocalDate data,
             @Param("hora") LocalTime hora);
 
+    Optional<MinhaConsulta> findByAgendamentoConsultaId(Integer id);
+
 }
