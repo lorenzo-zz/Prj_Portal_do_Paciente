@@ -1,6 +1,21 @@
 const atestados = [
-    { Medico: 'Dr. Jeremias', Data: '20/05/2025', Hora: '14:00', Descricao: 'Consulta de rotina' },
-    { Medico: 'Dra. Ana', Data: '22/05/2025', Hora: '10:30', Descricao: 'Retorno pós-operatório' }
+  { Medico: 'Dra. Ana Paula Lima', Data: '07/04/2025', Hora: '09:00', Descricao: 'Consulta cardiológica' },
+  { Medico: 'Dr. Bruno Costa', Data: '08/04/2025', Hora: '10:00', Descricao: 'Avaliação ortopédica' },
+  { Medico: 'Dra. Camila Torres', Data: '09/04/2025', Hora: '11:00', Descricao: 'Acompanhamento pediátrico' },
+  { Medico: 'Dr. Daniel Ribeiro', Data: '10/04/2025', Hora: '12:00', Descricao: 'Tratamento de acne' },
+  { Medico: 'Dra. Elisa Martins', Data: '11/04/2025', Hora: '13:00', Descricao: 'Avaliação neurológica' },
+  { Medico: 'Dr. Fernando Souza', Data: '12/04/2025', Hora: '14:00', Descricao: 'Exame de visão' },
+  { Medico: 'Dra. Gabriela Nunes', Data: '13/04/2025', Hora: '15:00', Descricao: 'Consulta ginecológica' },
+  { Medico: 'Dr. Henrique Duarte', Data: '14/04/2025', Hora: '16:00', Descricao: 'Exame de próstata' },
+  { Medico: 'Dra. Isabela Castro', Data: '15/04/2025', Hora: '17:00', Descricao: 'Sessão de terapia' },
+  { Medico: 'Dr. João Vitor Almeida', Data: '16/04/2025', Hora: '18:00', Descricao: 'Controle de diabetes' },
+  { Medico: 'Dra. Ana Paula Lima', Data: '17/04/2025', Hora: '09:00', Descricao: 'Eletrocardiograma' },
+  { Medico: 'Dr. Bruno Costa', Data: '18/04/2025', Hora: '10:00', Descricao: 'Revisão de lesão muscular' },
+  { Medico: 'Dra. Camila Torres', Data: '19/04/2025', Hora: '11:00', Descricao: 'Vacinação infantil' },
+  { Medico: 'Dr. Daniel Ribeiro', Data: '20/04/2025', Hora: '12:00', Descricao: 'Consulta dermatológica' },
+  { Medico: 'Dra. Elisa Martins', Data: '21/04/2025', Hora: '13:00', Descricao: 'Análise de dores de cabeça' },
+  { Medico: 'Dr. Fernando Souza', Data: '22/04/2025', Hora: '14:00', Descricao: 'Teste de acuidade visual' },
+  { Medico: 'Dra. Gabriela Nunes', Data: '23/04/2025', Hora: '15:00', Descricao: 'Prevenção feminina anual' }
 ];
 
 function gerarAtestadoPDF(atestado) {
