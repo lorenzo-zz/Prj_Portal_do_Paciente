@@ -142,10 +142,21 @@ public class PacienteService {
             stmt.registerOutParameter(11, Types.VARCHAR);
             stmt.registerOutParameter(12, Types.VARCHAR);
             stmt.execute();
-            return new RetornoPacienteDTO(stmt.getString(2), stmt.getString(3), stmt.getString(4),
-                    stmt.getDate(5) != null ? String.valueOf(stmt.getDate(5).toLocalDate()) : null, stmt.getString(6),
-                    stmt.getString(7), stmt.getString(8), stmt.getString(9), stmt.getString(10), stmt.getString(11),
-                    stmt.getString(12));
+
+            return new RetornoPacienteDTO(
+                    cpf,
+                    stmt.getString(2),
+                    stmt.getString(3),
+                    stmt.getString(4),
+                    stmt.getDate(5) != null ? String.valueOf(stmt.getDate(5).toLocalDate()) : null, // dataNascimento
+                    stmt.getString(6),
+                    stmt.getString(7),
+                    stmt.getString(8),
+                    stmt.getString(9),
+                    stmt.getString(10),
+                    stmt.getString(11),
+                    stmt.getString(12)
+            );
         } catch (SQLException e) {
             throw new SQLException("Erro generico" + e.getMessage());
         }
