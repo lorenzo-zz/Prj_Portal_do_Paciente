@@ -65,16 +65,13 @@ document.addEventListener('DOMContentLoaded', function () {
       })
       .then(data => {
 
-
-        localStorage.setItem('cpf', data.cpf);
-        localStorage.setItem('nome', data.nome);
         localStorage.setItem('cpf', cpf);
         localStorage.setItem('nome', nome);
         window.location.href = 'http://127.0.0.1:5500/Front_End/HTML/adressSignUp.html';
       })
       .catch(async error => {
         let errorMsg = '';
-
+        alert(error.message)
         try {
           const errJson = await error.response.json();
           errorMsg = errJson.message || errJson.erro || JSON.stringify(errJson);

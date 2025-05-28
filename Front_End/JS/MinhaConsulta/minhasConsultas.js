@@ -71,10 +71,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const card = `
         <div class="consulta-card">
           <div class="consulta-info">
-            <h2>Nome Paciente: ${consulta.nomePaciente}</h2>
+            <h2>${consulta.especificacaoMedico}</h2>
             <p><strong>Hora:</strong> ${consulta.hora}</p>
             <p><strong>Data:</strong> ${consulta.data}</p>
-            <p><strong>Especialidade:</strong> ${consulta.especificacaoMedico}</p>
           </div>
           <div class="consulta-acoes">
             <span class="status status-${consulta.status.toLowerCase()}">${consulta.status}</span>
