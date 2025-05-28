@@ -1,10 +1,13 @@
 package com.example.oracleapi.DTO;
 
-public record AtualizarPacienteDTO(
+import java.time.LocalDate;
+
+public record DadosPacienteDTO(
         String cpf,
-        String nomeCompleto,
+        String nome,
         String telefone,
         String email,
+        LocalDate dataNascimento,
         String cep,
         String logradouro,
         String numero,
@@ -13,6 +16,7 @@ public record AtualizarPacienteDTO(
         String cidade,
         String uf
 
-) {
 
+) {
+    
 }
