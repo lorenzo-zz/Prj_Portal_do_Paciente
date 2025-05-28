@@ -33,9 +33,8 @@ public class PacienteService {
                     .orElseThrow(() -> new SQLException("Erro banco de dados"))
                     .getId();
 
-            stmt.setString(1, pacienteAlergiaDTO.descricao());
-            stmt.setString(2, pacienteAlergiaDTO.nomeAlergia());
-            stmt.setInt(3, paciente);
+            stmt.setString(1, pacienteAlergiaDTO.nomeAlergia());
+            stmt.setInt(2, paciente);
 
             stmt.execute();
 
