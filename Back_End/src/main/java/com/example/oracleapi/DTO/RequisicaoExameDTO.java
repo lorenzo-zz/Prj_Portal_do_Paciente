@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public record RequisicaoExameDTO(
-                String pacienteCpf,
+  String pacienteCpf,
                 String tipoExame,
                 String tipoConvenio,
                 String telefone,

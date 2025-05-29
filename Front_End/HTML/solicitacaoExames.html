@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/Front_End/CSS/global.css" />
   <link rel="stylesheet" href="/Front_End/CSS/solicitacaoExames.css" />
   <link rel="shortcut icon" href="/Front_End/img/LogoPortalApenasRedondoFundoBranco.png" type="image/x-icon">
+  <script src="../JS/solicitacaoExames.js"></script>
 </head>
 
 <body>
@@ -39,11 +40,12 @@
     <form id="exames-form">
       <div class="form-group">
         <label for="cpf-paciente">CPF:</label>
-        <input type="text" id="cpf-paciente" name="cpf-paciente" maxlength="11" />
+        <input type="text" id="cpf-paciente" name="cpf-paciente" maxlength="11" disabled />
       </div>
 
       <div class="form-group">
         <label for="tipo-exame">Tipo de Exame:</label>
+
         <select id="tipo-exame" name="tipo-exame">
           <option value="hemograma-completo">Hemograma completo</option>
           <option value="contagem-de-plaquetas">Contagem de plaquetas</option>
@@ -169,9 +171,6 @@
           <option value="rubéola-igg-igm">Rubéola IgG/IgM</option>
           <option value="herpes-simples-igg-igm">Herpes simples IgG/IgM</option>
           <option value="epstein-barr-igg-igm">Epstein-Barr IgG/IgM
-            <!-- Outras categorias omitidas para brevidade, mas posso completar se desejar -->
-
-        </select>
       </div>
 
       <div class="form-group">
@@ -208,6 +207,12 @@
 
       <button type="submit" class="solicitar-btn">Solicitar Exame</button>
     </form>
+    <div id="modal-alerta" class="modal-alerta hidden">
+      <div class="modal-conteudo">
+        <p>Consulta agendada com sucesso!</p>
+        <button onclick="fecharModal()">OK</button>
+      </div>
+    </div>
   </main>
 
   <footer class="footer">
@@ -215,7 +220,7 @@
     <a href="/Front_End/HTML/sobreNos.html">Sobre nós</a>
   </footer>
 
-  <script src="/Front_End/JS/solicitacaoExames.js"></script>
+
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 package com.example.oracleapi.DTO;
 
 public record RetornoPacienteDTO(
+        String cpf,
         String nome,
         String telefone,
         String email,
@@ -11,9 +12,7 @@ public record RetornoPacienteDTO(
         String complemento,
         String bairro,
         String cidade,
-        String uf,
-        String cpf
-
+        String uf
 ) {
-    
+
 }

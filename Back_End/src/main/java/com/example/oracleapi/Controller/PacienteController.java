@@ -1,15 +1,16 @@
 package com.example.oracleapi.Controller;
 
 import com.example.oracleapi.DTO.*;
-import com.example.oracleapi.Exception.*;
+import com.example.oracleapi.Exception.AlergiaException;
+import com.example.oracleapi.Exception.DadosPacienteException;
 import com.example.oracleapi.Service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.sql.SQLException;
 import java.util.Map;
-import com.example.oracleapi.Exception.DadosPacienteException;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -47,7 +48,8 @@ public class PacienteController {
     @PostMapping("/dados-paciente")
     public ResponseEntity<?> dadosPaciente(@RequestBody CpfDTO cpfDTO) throws SQLException {
         try {
-            return ResponseEntity.status(200).body(Map.of("Messagem", pacienteService.dadosDoPaciente(cpfDTO.cpf())));
+            RetornoPacienteDTO paciente = pacienteService.dadosDoPaciente(cpfDTO.cpf());
+            return ResponseEntity.ok(paciente);
         } catch (DadosPacienteException e) {
             throw new DadosPacienteException("Erro ao trazer os dados do paciente" + e.getMessage());
 
@@ -56,10 +58,11 @@ public class PacienteController {
         }
     }
 
+
     @PutMapping("/atualizar-dados")
     public ResponseEntity<?> atualizaDados(@RequestBody AtualizarPacienteDTO atualizarPacienteDTO) throws SQLException {
         try {
-            pacienteService.atualziarDadosPaciente(atualizarPacienteDTO);
+            pacienteService.atualizarDadosPaciente(atualizarPacienteDTO);
             return ResponseEntity.status(200).body(Map.of("Messagem", "Sucesso ao salvar suas novas informações"));
         } catch (DadosPacienteException e) {
             throw new DadosPacienteException("Erro ao salvar os dados do paciente" + e.getMessage());

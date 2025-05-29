@@ -8,7 +8,6 @@ public record AtualizarPacienteDTO(
         String cep,
         String logradouro,
         String numero,
-        String dataNascimento,
         String complemento,
         String bairro,
         String cidade,
