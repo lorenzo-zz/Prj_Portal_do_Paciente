@@ -16,6 +16,7 @@ import com.example.oracleapi.DTO.MinhaConsultaDTO;
 import com.example.oracleapi.DTO.PrescricaoDTO;
 import com.example.oracleapi.DTO.ResultadoConsultaDTO;
 import com.example.oracleapi.DTO.RetornoAgendamentoDTO;
+import com.example.oracleapi.DTO.idMinhaConsultaDTO;
 import com.example.oracleapi.Entity.MinhaConsulta;
 import com.example.oracleapi.Exception.ConsultaException;
 import com.example.oracleapi.Model.ConsultaStatus;
@@ -124,9 +125,18 @@ public class ConsultaService {
     }
 
     public List<MinhaConsulta> dadosConsulta(MinhaConsultaDTO dto) {
-        MinhaConsulta consulta = consultaRepository.findByAgendamentoConsultaId(dto.idAgendamento())
-                .orElseThrow(() -> new ConsultaException("Consulta não encontrada"));
+        return consultaRepository.findByAgendamentoConsultaId(dto.idAgendamento());
+    }
 
-        return List.of(consulta); 
+    public void cancelarConsulta(idMinhaConsultaDTO idConsulta) {
+
+        MinhaConsulta consultaExists = consultaRepository.findById(idConsulta.idMinhaConsulta()).get();
+
+        if(consultaExists == null){
+            throw new ConsultaException("Erro ao cancelar a consulta!");
+        }
+
+        consultaExists.setConsultaStatus(ConsultaStatus.CANCELADA_PELO_PACIENTE);
+        consultaRepository.save(consultaExists);
     }
 }

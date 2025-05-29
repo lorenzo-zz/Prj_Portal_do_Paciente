@@ -10,6 +10,7 @@
     <link rel="icon" type="image/png" href="/Front_End/img/LogoPortalApenasRedondoFundoBranco.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <script src="../JS/MinhaConsulta/dadosConsulta.js"></script>
+    <script src="../JS/MinhaConsulta/cancelarConsulta.js"></script>
     <title>Dados da Consulta - Portal do Paciente</title>
 </head>
 
@@ -109,8 +110,8 @@
         </div>
 
     </div>
-    <div class="cancelar_consulta">
-    <button id="btnCancelarConsulta">Cancelar Consulta</button>
+    <div class="cancelar_consulta" id="cancelar_consulta">
+    <button type="submit" id="btnCancelarConsulta">Cancelar Consulta</button>
 </div>
 
 <div id="modalConfirmacao" class="modal">
@@ -118,7 +119,7 @@
         <h3>Confirmar Cancelamento</h3>
         <p>Tem certeza de que deseja cancelar esta consulta?</p>
         <div class="modal-buttons">
-            <button id="btnConfirmar">Sim, cancelar</button>
+            <button type="submit" id="btnConfirmar">Sim, cancelar</button>
             <button id="btnFechar">Voltar</button>
         </div>
     </div>

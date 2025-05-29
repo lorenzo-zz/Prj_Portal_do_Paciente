@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -19,6 +20,8 @@ public interface MinhaConsultaRepository extends JpaRepository<MinhaConsulta, In
             @Param("data") LocalDate data,
             @Param("hora") LocalTime hora);
 
-    Optional<MinhaConsulta> findByAgendamentoConsultaId(Integer id);
+    List<MinhaConsulta> findByAgendamentoConsultaId(Integer idAgendamento);
+
+    
 
 }
