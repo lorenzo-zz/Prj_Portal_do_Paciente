@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(data => {
             data.forEach(paciente => {
-                if (paciente.id == idConsulta) {
+                if (paciente.agendamentoConsulta?.id == idConsulta) {
                     document.getElementById('nomeMedico').value = paciente.medico?.nome || '';
                     document.getElementById('especialidadeMedico').value = paciente.medico?.especificacaoMedico || '';
                     document.getElementById('crmMedico').value = paciente.medico?.crm || '';
