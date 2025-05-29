@@ -1,7 +1,6 @@
 package com.example.oracleapi.DTO;
 
 public record idMinhaConsultaDTO(
-    int idMinhaConsulta
-) {
-    
+        int idMinhaConsulta,
+        int idAgendamento) {
 }

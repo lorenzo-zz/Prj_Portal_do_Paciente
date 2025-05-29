@@ -40,7 +40,6 @@ public class MinhaConsulta {
     @Size(max = 250, message = "O resultado deve ter no máximo 250 caracteres")
     private String resultado;
 
-    @Size(min = 1, max = 1, message = "O campo ativo deve ter no máximo 1 caractere")
     private char ativo;
 
     @Enumerated(EnumType.STRING)

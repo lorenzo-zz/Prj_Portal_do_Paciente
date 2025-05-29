@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(data => {
             data.forEach(paciente => {
                 if (paciente.agendamentoConsulta?.id == idConsulta) {
+                    const idConsulta = localStorage.setItem('consulta', paciente.id);
                     document.getElementById('nomeMedico').value = paciente.medico?.nome || '';
                     document.getElementById('especialidadeMedico').value = paciente.medico?.especificacaoMedico || '';
                     document.getElementById('crmMedico').value = paciente.medico?.crm || '';

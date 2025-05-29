@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .then(data => {
       todasConsultas = data;
-      aplicarFiltro(); 
+      aplicarFiltro();
     })
     .catch(error => {
       console.error('Erro ao buscar consultas:', error.message);
@@ -68,19 +68,22 @@ document.addEventListener("DOMContentLoaded", function () {
     const fim = inicio + consultasPorPagina;
     const pagina = consultasFiltradas.slice(inicio, fim);
 
+
     pagina.forEach((consulta, index) => {
+
       const card = `
-        <div class="consulta-card">
-          <div class="consulta-info">
-            <h2>${consulta.especificacaoMedico}</h2>
-            <p><strong>Hora:</strong> ${consulta.hora}</p>
-            <p><strong>Data:</strong> ${consulta.data}</p>
-          </div>
-          <div class="consulta-acoes">
-            <span class="status status-${consulta.status.toLowerCase()}">${consulta.status}</span>
-          </div>
+      <div class="consulta-card">
+        <div class="consulta-info">
+          <h2>${consulta.especificacaoMedico}</h2>
+          <p><strong>Hora:</strong> ${consulta.hora}</p>
+          <p><strong>Data:</strong> ${consulta.data}</p>
         </div>
-      `;
+
+        <div class="consulta-acoes">
+          <span class="status">${consulta.status}</span>
+        </div>
+      </div>
+    `;
       lista.insertAdjacentHTML('beforeend', card);
     });
 

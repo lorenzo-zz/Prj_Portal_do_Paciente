@@ -17,11 +17,12 @@ import com.example.oracleapi.DTO.PrescricaoDTO;
 import com.example.oracleapi.DTO.ResultadoConsultaDTO;
 import com.example.oracleapi.DTO.RetornoAgendamentoDTO;
 import com.example.oracleapi.DTO.idMinhaConsultaDTO;
+import com.example.oracleapi.Entity.AgendamentoConsulta;
 import com.example.oracleapi.Entity.MinhaConsulta;
-import com.example.oracleapi.Exception.ConsultaException;
 import com.example.oracleapi.Model.ConsultaStatus;
 import com.example.oracleapi.Repository.AgendamentoRepository;
 import com.example.oracleapi.Repository.MinhaConsultaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ConsultaService {
@@ -120,7 +121,6 @@ public class ConsultaService {
                         agendamento.getEspecificacaoMedico(),
                         agendamento.getStatus()))
                 .toList();
-                
 
     }
 
@@ -128,15 +128,18 @@ public class ConsultaService {
         return consultaRepository.findByAgendamentoConsultaId(dto.idAgendamento());
     }
 
+    @Transactional
     public void cancelarConsulta(idMinhaConsultaDTO idConsulta) {
+        MinhaConsulta consulta = consultaRepository.findById(idConsulta.idMinhaConsulta())
+                .orElseThrow(() -> new RuntimeException("Consulta não encontrada"));
 
-        MinhaConsulta consultaExists = consultaRepository.findById(idConsulta.idMinhaConsulta()).get();
+        AgendamentoConsulta agendamento = agendamentoRepository.findById(idConsulta.idAgendamento())
+                .orElseThrow(() -> new RuntimeException("Agendamento não encontrado"));
 
-        if(consultaExists == null){
-            throw new ConsultaException("Erro ao cancelar a consulta!");
-        }
+        agendamento.setStatus(ConsultaStatus.CANCELADA_PELO_PACIENTE);
+        agendamentoRepository.save(agendamento);
 
-        consultaExists.setConsultaStatus(ConsultaStatus.CANCELADA_PELO_PACIENTE);
-        consultaRepository.save(consultaExists);
+        consulta.setConsultaStatus(ConsultaStatus.CANCELADA_PELO_PACIENTE);
+        consultaRepository.save(consulta);
     }
 }
