@@ -5,17 +5,18 @@ function limparFormulario() {
 
 
 document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("cpf-paciente").value = localStorage.getItem("cpf");
   document.getElementById("consulta-form").addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const nome = document.getElementById("nome-paciente").value;
-    const cpf = document.getElementById("cpf-paciente").value;
-    const data = document.getElementById("data").value;
-    const telefone = document.getElementById("telefone").value;
-    const email = document.getElementById("email").value;
-    const especialidade = document.getElementById("especialidade").value;
-    const horario = document.getElementById("horario").value;
-    document.getElementById('cpf-paciente').value = cpf;
+    const cpf = localStorage.getItem('cpf');
+    const tipoExame = document.getElementById("tipo-exame");
+    const convenio = document.getElementById("convenio");
+    const telefone = document.getElementById("telefone");
+    const email = document.getElementById("email");
+    const observacoes = document.getElementById("observacoes");
+
+    document.getElementById("cpf-paciente").values = localStorage.getItem("cpf");
 
     if (!nome || !cpf || !data || !telefone || !email || !especialidade || !horario) {
       alert("Por favor, preencha todos os campos obrigatórios.");
@@ -23,21 +24,28 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const dados = {
-      nomePaciente: nome,
-      cpfPaciente: cpf,
-      data: data,
-      telefone: telefone,
-      email: email,
-      especificacaoMedico: especialidade,
-      hora: horario + ":00"
+      pacienteCpf: cpf.value,
+      tipoExame: tipoExame.value,
+      tipoConvenio: convenio.value,
+      telefone: telefone.value,
+      email: email.value,
+      observacoes: observacoes.value
     };
+
+    let formData = new FormData();
+    const docInput = document.getElementById("anexar-arquivo");
+    const documento = docInput.files[0];
+    
+    
+    formData.append("dados", new Blob([JSON.stringify(cadastrarInfPessoais)], { type: "application/json" }));
+    formData.append("documento", documento);
 
     fetch('http://localhost:8080/consulta/agendar-consulta', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(dados)
+      body: formData
     })
       .then(async response => {
         if (!response.ok) {

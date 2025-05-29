@@ -71,7 +71,7 @@ public class ExameService {
                 salvarDocumento(requisicaoExameDTO.pacienteCpf(), arquivo);
             }
         } catch (SQLException e) {
-            throw new SQLException("Erro ao processar a requisição do exame");
+            throw new SQLException("Erro ao processar a requisição do exame" + e.getMessage(), e);
         } catch (IOException e) {
         throw new RuntimeException("Erro ao salvar o documento do paciente: " + e.getMessage(), e);
 
