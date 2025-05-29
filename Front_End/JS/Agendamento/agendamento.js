@@ -5,13 +5,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const campoNome = document.getElementById("nome-paciente");
   const modal = document.getElementById('modal-alerta');
 
-  // ✅ Auto preencher o CPF com localStorage
+  
   const cpfPaciente = localStorage.getItem('cpf');
   if (campoCPF && cpfPaciente) {
     campoCPF.value = cpfPaciente;
   }
 
-  // ✅ Validação dos campos
   if (campoCPF) {
     campoCPF.addEventListener("input", function () {
       this.value = this.value.replace(/\D/g, "");
@@ -30,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // ✅ Submissão do formulário
   form.addEventListener("submit", function (event) {
     event.preventDefault();
 
@@ -79,18 +77,29 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 
-  // ✅ Limpar formulário
   function limparFormulario() {
     form.reset();
-    // Após reset, reatribui o CPF do localStorage
     if (campoCPF && cpfPaciente) {
       campoCPF.value = cpfPaciente;
     }
   }
 
-  // ✅ Fechar modal
-  window.fecharModal = function () {
+    window.fecharModal = function () {
     modal.classList.add('hidden');
     limparFormulario();
   }
 });
+
+
+const cpfInput = document.getElementById('cpf-paciente');
+
+  cpfInput.addEventListener('input', function () {
+    let value = cpfInput.value;
+    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+    value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+
+    cpfInput.value = value;
+  });
+
+  
