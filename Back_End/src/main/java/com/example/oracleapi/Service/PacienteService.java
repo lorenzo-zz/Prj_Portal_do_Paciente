@@ -4,6 +4,7 @@ import com.example.oracleapi.DTO.*;
 import com.example.oracleapi.Entity.Paciente;
 import com.example.oracleapi.Exception.AlergiaException;
 import com.example.oracleapi.Repository.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -47,6 +48,26 @@ public class PacienteService {
             throw new SQLException(e.getMessage(), e);
         }
     }
+
+
+    public void cadastrarPrescricao(PrescricaoDTO prescricaoDTO) throws SQLException {
+        try (Connection conn = dataSource.getConnection()) {
+            CallableStatement stmt = conn.prepareCall("call proc_t09a_precricao(?,?,?)");
+
+            stmt.setString(1, prescricaoDTO.remedio());
+            stmt.setString(2, String.valueOf(prescricaoDTO.data()));
+            stmt.setString(3, prescricaoDTO.descricao());
+
+            stmt.execute();
+
+        } catch (SQLException e) {
+            throw new SQLException("Erro ao cadastrar prescrição");
+        }
+    }
+
+   
+
+    public void cadastrarResultadoExame(ResultadoExameDTO resultadoExameDTO) {
 
     public void atualziarDadosPaciente(AtualizarPacienteDTO atualizarPacienteDTO) {
         try (Connection conn = dataSource.getConnection();
