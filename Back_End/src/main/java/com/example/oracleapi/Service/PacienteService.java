@@ -49,7 +49,6 @@ public class PacienteService {
         }
     }
 
-
     public void cadastrarPrescricao(PrescricaoDTO prescricaoDTO) throws SQLException {
         try (Connection conn = dataSource.getConnection()) {
             CallableStatement stmt = conn.prepareCall("call proc_t09a_precricao(?,?,?)");
@@ -64,10 +63,6 @@ public class PacienteService {
             throw new SQLException("Erro ao cadastrar prescrição");
         }
     }
-
-   
-
-    public void cadastrarResultadoExame(ResultadoExameDTO resultadoExameDTO) {
 
     public void atualziarDadosPaciente(AtualizarPacienteDTO atualizarPacienteDTO) {
         try (Connection conn = dataSource.getConnection();
@@ -175,8 +170,7 @@ public class PacienteService {
                     stmt.getString(9),
                     stmt.getString(10),
                     stmt.getString(11),
-                    stmt.getString(12)
-            );
+                    stmt.getString(12));
         } catch (SQLException e) {
             throw new SQLException("Erro generico" + e.getMessage());
         }
