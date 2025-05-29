@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .then(data => {
       todasConsultas = data;
-      aplicarFiltro(); // inicia com tudo exibido
+      aplicarFiltro(); 
     })
     .catch(error => {
       console.error('Erro ao buscar consultas:', error.message);
@@ -84,25 +84,21 @@ document.addEventListener("DOMContentLoaded", function () {
       lista.insertAdjacentHTML('beforeend', card);
     });
 
-    // Evento de clique nos cards
     const cards = document.querySelectorAll('.consulta-card');
     cards.forEach((card, i) => {
       card.addEventListener('click', () => {
         const indexConsulta = paginaAtual * consultasPorPagina + i;
         localStorage.setItem('consultaId', consultasFiltradas[indexConsulta].id);
-        window.location.href = 'http://172.20.208.1:5500/Front_End/HTML/dadosConsulta.html';
+        window.location.href = 'http://127.0.0.1:5500/Front_End/HTML/dadosConsulta.html';
       });
     });
 
-    // Controle de botões
     btnAnterior.disabled = paginaAtual === 0;
     btnProximo.disabled = fim >= consultasFiltradas.length;
   }
 
-  // Evento no filtro
   filtroStatus.addEventListener("change", aplicarFiltro);
 
-  // Eventos dos botões de paginação
   btnAnterior.addEventListener("click", () => {
     if (paginaAtual > 0) {
       paginaAtual--;
