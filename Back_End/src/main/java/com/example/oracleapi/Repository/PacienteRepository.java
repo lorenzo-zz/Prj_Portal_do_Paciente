@@ -12,6 +12,8 @@ public interface PacienteRepository extends JpaRepository<Paciente, Integer> {
 
     Optional<Paciente> findByCpf(String cpf);
 
+    Optional<String> findCpfById(Integer id);
+
     Optional<String> findCpfById(Long id);
 
 }

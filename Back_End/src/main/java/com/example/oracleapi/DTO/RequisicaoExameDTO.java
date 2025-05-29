@@ -6,14 +6,12 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public record RequisicaoExameDTO(
-        String pacienteCpf,
-        String medicoCrm,
-        LocalDate dataRequisicao,
-        LocalTime horaRequisicao,
-        String descricao,
-        String tipoExame,
-        MinhaConsulta minhaConsulta,
-        String tipoConvenio,
-        String nomeDocumento
-) {
+                String pacienteCpf,
+                String tipoExame,
+                String tipoConvenio,
+                String telefone,
+                String email,
+                String nomeDocumento,
+                String observacoes,
+                String medicoCrm) {
 }

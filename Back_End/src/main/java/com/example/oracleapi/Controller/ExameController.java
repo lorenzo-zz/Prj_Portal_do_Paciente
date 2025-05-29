@@ -8,12 +8,15 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.oracleapi.DTO.RequisicaoExameDTO;
 import com.example.oracleapi.DTO.ResultadoExameDTO;
 import com.example.oracleapi.Exception.RequisicaoExameException;
 import com.example.oracleapi.Exception.ResultadoExameExeception;
 import com.example.oracleapi.Service.ExameService;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.MediaType;
 
 @RestController
 @RequestMapping("/exame")
@@ -27,17 +30,20 @@ public class ExameController {
     public ResponseEntity<?> resultadoExame(@RequestBody ResultadoExameDTO resultadoExameDTO) {
         try {
             exameService.cadastrarResultadoExame(resultadoExameDTO);
-            return ResponseEntity.status(200).body(Map.of("Messagem", "Resultado do exame salvo com sucesso"));
+            return ResponseEntity.status(200).body(Map.of("Mensagem", "Resultado do exame salvo com sucesso"));
         } catch (ResultadoExameExeception e) {
             throw new ResultadoExameExeception("Erro ao salvar o resultado do exame" + e.getMessage());
         }
     }
 
-    @PostMapping("/prescricao/requisicao-exame")
-    public ResponseEntity<?> prescricaoExame(@RequestBody RequisicaoExameDTO requisicaoExameDTO) {
+   @PostMapping(
+   "/prescricao/requisicao-exame"
+)
+    public ResponseEntity<?> prescricaoExame(@RequestPart("requisicaoExameDTO") RequisicaoExameDTO requisicaoExameDTO,
+                                             @RequestPart("arquivo") MultipartFile arquivo) {
         try {
-            exameService.cadastrarRequisicaoExame(requisicaoExameDTO);
-            return ResponseEntity.status(200).body(Map.of("Massagem", "Requisicao exame salva com sucesso"));
+            exameService.cadastrarRequisicaoExame(requisicaoExameDTO, arquivo);
+            return ResponseEntity.status(200).body(Map.of("Mensagem", "Requisicao exame salva com sucesso"));
 
         } catch (RequisicaoExameException e) {
             throw new RequisicaoExameException("Erro ao salvar a Requisicao do exame" + e.getMessage());

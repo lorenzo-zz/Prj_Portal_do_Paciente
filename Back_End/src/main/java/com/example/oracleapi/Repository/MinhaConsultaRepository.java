@@ -13,11 +13,9 @@ import org.springframework.data.repository.query.Param;
 @Repository
 public interface MinhaConsultaRepository extends JpaRepository<MinhaConsulta, Integer> {
 
-    @Query("SELECT m FROM MinhaConsulta m WHERE m.paciente.id = :pacienteId AND m.medico.id = :medicoId AND m.data = :data AND m.hora = :hora")
-    Optional<MinhaConsulta> findByPacienteAndMedicoAndDataAndHora(
+    @Query("SELECT m FROM MinhaConsulta m WHERE m.paciente.id = :pacienteId AND m.medico.id = :medicoId")
+    Optional<MinhaConsulta> findByPacienteAndMedico(
             @Param("pacienteId") int pacienteId,
-            @Param("medicoId") int medicoId,
-            @Param("data") LocalDate data,
-            @Param("hora") LocalTime hora);
+            @Param("medicoId") int medicoId);
 
 }
