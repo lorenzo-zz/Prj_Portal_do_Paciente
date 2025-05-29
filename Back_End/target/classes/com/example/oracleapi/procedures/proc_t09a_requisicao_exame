@@ -1,0 +1,44 @@
+create or replace PROCEDURE proc_t09a_requisicao_exame(
+    p_dataExame IN DATE,
+    p_horaExame IN DATE,
+    p_observacao IN VARCHAR2,
+    p_tipoExame IN VARCHAR2,
+    p_nomeDocumento IN VARCHAR2,
+    p_tipoConvenio IN VARCHAR2,
+    p_idMinhaConsulta IN INT,
+    p_descricao IN VARCHAR2
+)
+AS
+    v_count INT;
+BEGIN
+    SELECT COUNT(*) INTO v_count
+    FROM t09a_requisicao_exame
+    WHERE MINHA_CONSULTA_ID = p_idMinhaConsulta;
+
+    IF v_count > 0 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Já possui uma solicitação de exame para esta consulta!');
+    END IF;
+
+    INSERT INTO t09a_requisicao_exame(
+        DATA_REQUISICAO,
+        MINHA_CONSULTA_ID,
+        TIPO_EXAME,
+        DESCRICAO,
+        HORA_REQUISICAO,
+        TIPO_CONVENIO,
+        NOME_DOCUMENTO
+    )
+    VALUES(
+        p_dataExame,
+        p_idMinhaConsulta,
+        p_tipoExame,
+        p_descricao,
+        p_horaExame,
+        p_tipoConvenio,
+        p_nomeDocumento
+    );
+
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE_APPLICATION_ERROR(-20099, 'Erro inesperado: ' || SQLERRM);
+END proc_t09a_requisicao_exame;

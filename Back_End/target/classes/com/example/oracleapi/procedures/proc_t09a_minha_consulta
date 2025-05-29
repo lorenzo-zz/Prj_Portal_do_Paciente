@@ -1,0 +1,27 @@
+create or replace procedure proc_t09a_minha_consulta(
+    p_dataConsulta in date,
+    p_horaConsulta in date,
+    p_descricao in varchar2,
+    p_resultado in varchar2,
+    p_ativo in char,
+    p_consultaStatus in varchar2,
+    p_idPaciente in int,
+    p_idMedico in int,
+    p_idAgendamentoConsulta in int,
+    p_frequencia in varchar2,
+    p_pressaoArterial in varchar2,
+    p_temperatura in varchar2
+    )
+    as
+    
+    begin
+
+   insert into t09a_minha_consulta(
+  AGENDAMENTO_CONSULTA_ID, ATIVO, DATA, HORA, MEDICO_ID, PACIENTE_ID,
+  RESULTADO, DESCRICAO, CONSULTA_STATUS, FREQUENCIA, PRESSAO_ARTERIAL, TEMPERATURA)
+values(
+  p_idAgendamentoConsulta, p_ativo, p_dataConsulta, p_horaConsulta, p_idMedico, p_idPaciente,
+  p_resultado, p_descricao, p_consultaStatus, p_frequencia, p_pressaoArterial, p_temperatura);
+
+
+    END proc_t09a_minha_consulta;
