@@ -41,7 +41,7 @@ public class LoginService {
 
     public void cadastrar(Paciente paciente, MultipartFile arquivo) throws SQLException, IOException {
         try (Connection conn = dataSource.getConnection();
-                CallableStatement stmt = conn.prepareCall("{call proc_t09a_cadastro_paciente (?,?,?,?,?,?,?,?,?)}")) {
+                CallableStatement stmt = conn.prepareCall("{call proc_t09a_cadastro_paciente (?,?,?,?,?,?,?,?,?,?)}")) {
 
             stmt.setString(1, paciente.getEmail());
             stmt.setString(2, paciente.getSenha());
@@ -52,7 +52,9 @@ public class LoginService {
             stmt.setDate(7, java.sql.Date.valueOf(paciente.getDataNascimento()));
             stmt.setString(8, "S"); 
             stmt.setDate(9, java.sql.Date.valueOf(LocalDate.now()));
+            stmt.setString(10, null);
             stmt.execute();
+
 
             if (arquivo != null && !arquivo.isEmpty()) {
                 salvarDocumento(paciente.getCpf(), arquivo);

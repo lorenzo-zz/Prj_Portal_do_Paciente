@@ -30,18 +30,14 @@ function carregarDadosPaciente() {
     .then(dados => {
       console.log('Dados recebidos:', dados);
 
-<<<<<<< HEAD
       
-      document.getElementById('nome').value = dados.nome;
-=======
       document.getElementById('nomeCompleto').value = dados.nome;
->>>>>>> 0e288b19af0f5de2739f0678de7b536b91de0bad
       document.getElementById('telefone').value = dados.telefone;
       document.getElementById('email').value = dados.email;
       document.getElementById('dt_nascimento').value = dados.dataNascimento;
       document.getElementById('cep').value = dados.cep;
       document.getElementById('rua').value = dados.logradouro;
-      document.getElementById('numero').value = dados.numero;
+      document.getElementById('numero').value = dados.numero
       document.getElementById('complemento').value = dados.complemento;
       document.getElementById('bairro').value = dados.bairro;
       document.getElementById('cidade').value = dados.cidade;

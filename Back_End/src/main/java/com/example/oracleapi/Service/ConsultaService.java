@@ -40,7 +40,7 @@ public class ConsultaService {
 
             // 1. Chamar procedure de agendamento, supondo que ela retorne ID via OUT param
             CallableStatement stmtAgendamento = conn
-                    .prepareCall("{call proc_t09a_agendamento_consulta(?, ?, ?, ?, ?, ?, ?, ?)}");
+                    .prepareCall("{call proc_t09a_agendamento_consulta(?, ?, ?, ?, ?, ?, ?, ? )}");
 
             stmtAgendamento.setString(1, agendamentoConsulta.cpfPaciente());
             stmtAgendamento.setDate(2, Date.valueOf(agendamentoConsulta.data()));
@@ -49,6 +49,7 @@ public class ConsultaService {
             stmtAgendamento.setString(5, String.valueOf(agendamentoConsulta.especificacaoMedico()));
             stmtAgendamento.setTime(6, Time.valueOf(agendamentoConsulta.hora()));
             stmtAgendamento.setString(7, ConsultaStatus.CONFIRMADA.name());
+            // Parâmetro OUT para capturar o ID criado
             stmtAgendamento.registerOutParameter(8, java.sql.Types.INTEGER);
 
             stmtAgendamento.execute();
@@ -118,6 +119,7 @@ public class ConsultaService {
                         agendamento.getEspecificacaoMedico(),
                         agendamento.getStatus()))
                 .toList();
+                
 
     }
 
