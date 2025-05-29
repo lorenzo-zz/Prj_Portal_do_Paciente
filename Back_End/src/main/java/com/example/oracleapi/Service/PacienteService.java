@@ -48,7 +48,11 @@ public class PacienteService {
             throw new SQLException(e.getMessage(), e);
         }
     }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> b7961bb775d965ecb1ec93b0d25aeebd45e546ee
     public void cadastrarPrescricao(PrescricaoDTO prescricaoDTO) throws SQLException {
         try (Connection conn = dataSource.getConnection()) {
             CallableStatement stmt = conn.prepareCall("call proc_t09a_precricao(?,?,?)");
@@ -63,7 +67,11 @@ public class PacienteService {
             throw new SQLException("Erro ao cadastrar prescrição");
         }
     }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> b7961bb775d965ecb1ec93b0d25aeebd45e546ee
     public void atualziarDadosPaciente(AtualizarPacienteDTO atualizarPacienteDTO) {
         try (Connection conn = dataSource.getConnection();
                 CallableStatement stmt = conn
