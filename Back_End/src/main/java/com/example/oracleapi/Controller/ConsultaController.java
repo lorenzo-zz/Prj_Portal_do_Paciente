@@ -88,7 +88,7 @@ public class ConsultaController {
         }
     }
 
-    @PutMapping("/caneldar-consulta")
+    @PutMapping("/cancelar-consulta")
     public ResponseEntity<Map<String,String>> cancelarConsulta(@RequestBody idMinhaConsultaDTO idConsulta){
     try{
         consultaService.cancelarConsulta(idConsulta);

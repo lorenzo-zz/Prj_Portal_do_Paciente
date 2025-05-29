@@ -37,6 +37,43 @@ public class AgendamentoConsulta {
         return id;
     }
 
+    @NotBlank
+    private String telefone;
+
+    @NotBlank
+    private String email;
+
+    @Enumerated(EnumType.STRING)
+    private ConsultaStatus status;
+
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+
+    public void setHora(LocalTime hora) {
+        this.hora = hora;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
+    public void setEspecificacaoMedico(EspecificacaoMedico especificacaoMedico) {
+        this.especificacaoMedico = especificacaoMedico;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setStatus(ConsultaStatus status) {
+        this.status = status;
+    }
+
     public LocalDate getData() {
         return data;
     }
@@ -64,14 +101,4 @@ public class AgendamentoConsulta {
     public ConsultaStatus getStatus() {
         return status;
     }
-
-    @NotBlank
-    private String telefone;
-
-
-    @NotBlank
-    private String email;
-
-    @Enumerated(EnumType.STRING)
-    private ConsultaStatus status;
 }
