@@ -34,10 +34,6 @@ public class RequisicaoExame {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @NotNull
-    private LocalDate dataRequisicao;
-    @NotNull
-    private LocalTime horaRequisicao;
     @NotBlank
     @Size(max = 500, message = "A descrição deve ter no máximo 500 caracteres")
     private String descricao;

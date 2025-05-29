@@ -129,8 +129,18 @@ body {
   background-color: #e0efff; /* Um tom mais intenso ao passar o mouse */
   transform: scale(1.05);
 }
-
-
+.descricaoErro, .tipoExameErro {
+    font-size: 14px;
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+    font-weight: bold;
+    margin: 8px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
 .modal-alerta {
   position: fixed;
   top: 0;
