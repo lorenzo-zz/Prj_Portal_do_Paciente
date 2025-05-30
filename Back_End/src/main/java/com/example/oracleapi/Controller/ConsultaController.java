@@ -89,12 +89,12 @@ public class ConsultaController {
     }
 
     @PutMapping("/cancelar-consulta")
-    public ResponseEntity<Map<String,String>> cancelarConsulta(@RequestBody idMinhaConsultaDTO idConsulta){
-    try{
-        consultaService.cancelarConsulta(idConsulta);
+    public ResponseEntity<Map<String, String>> cancelarConsulta(@RequestBody idMinhaConsultaDTO idConsulta) {
+        try {
+            consultaService.cancelarConsulta(idConsulta);
             return ResponseEntity.status(200).body(Map.of("Messagem", "Consulta cancelada com sucesso!"));
-    }catch(ConsultaException e){
-        throw new ConsultaException("Erro ao cancelar a consulta: " + e.getMessage());
+        } catch (ConsultaException e) {
+            throw new ConsultaException("Erro ao cancelar a consulta: " + e.getMessage());
+        }
     }
-}
 }

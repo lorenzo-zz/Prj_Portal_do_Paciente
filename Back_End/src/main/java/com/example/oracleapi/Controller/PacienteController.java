@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.sql.SQLException;
 import java.util.Map;
 
@@ -58,7 +57,6 @@ public class PacienteController {
         }
     }
 
-
     @PutMapping("/atualizar-dados")
     public ResponseEntity<?> atualizaDados(@RequestBody AtualizarPacienteDTO atualizarPacienteDTO) throws SQLException {
         try {
@@ -67,6 +65,17 @@ public class PacienteController {
         } catch (DadosPacienteException e) {
             throw new DadosPacienteException("Erro ao salvar os dados do paciente" + e.getMessage());
 
+        }
+    }
+
+    @PostMapping("/listar-alergias")
+    public ResponseEntity<?> listarAlergias(@RequestBody CpfDTO cpfDTO) {
+        try {
+            var lista = pacienteService.listarAlergiasPorCpf(cpfDTO.cpf());
+            return ResponseEntity.ok(lista);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("erro", "Erro ao listar alergias: " + e.getMessage()));
         }
     }
 }
