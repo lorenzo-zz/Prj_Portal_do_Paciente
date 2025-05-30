@@ -142,3 +142,7 @@ select {
 }
 
 
+.fotoLogo {
+  display: flex;
+  margin-left: 95px;
+}
