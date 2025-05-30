@@ -4,20 +4,17 @@ import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
+import com.example.oracleapi.DTO.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.oracleapi.DTO.AgendamentoConsultaDTO;
-import com.example.oracleapi.DTO.CpfDTO;
-import com.example.oracleapi.DTO.MinhaConsultaDTO;
-import com.example.oracleapi.DTO.PrescricaoDTO;
-import com.example.oracleapi.DTO.ResultadoConsultaDTO;
-import com.example.oracleapi.DTO.RetornoAgendamentoDTO;
 import com.example.oracleapi.Entity.MinhaConsulta;
 import com.example.oracleapi.Exception.ConsultaException;
 import com.example.oracleapi.Exception.PrescricaoException;
@@ -85,4 +82,14 @@ public class ConsultaController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Collections.emptyList());
         }
     }
+
+    @PutMapping("/cancelar-consulta")
+    public ResponseEntity<Map<String,String>> cancelarConsulta(@RequestBody idMinhaConsultaDTO idConsulta){
+    try{
+        consultaService.cancelarConsulta(idConsulta);
+            return ResponseEntity.status(200).body(Map.of("Messagem", "Consulta cancelada com sucesso!"));
+    }catch(ConsultaException e){
+        throw new ConsultaException("Erro ao cancelar a consulta: " + e.getMessage());
+    }
+}
 }

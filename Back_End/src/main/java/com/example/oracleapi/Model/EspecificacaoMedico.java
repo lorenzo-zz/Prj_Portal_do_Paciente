@@ -73,7 +73,8 @@ public enum EspecificacaoMedico {
     PATOLOGIA_CLINICA("Patologia Clínica"),
     MEDICINA_REGENERATIVA("Medicina Regenerativa"),
     BIOETICA("Bioética"),
-    PSICOSSOMATICA("Psicossomática");
+    PSICOSSOMATICA("Psicossomática"),
+    GERAL("Geral");
 
     private final String descricao;
 

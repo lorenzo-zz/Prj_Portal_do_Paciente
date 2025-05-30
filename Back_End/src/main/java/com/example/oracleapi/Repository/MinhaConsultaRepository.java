@@ -3,8 +3,7 @@ package com.example.oracleapi.Repository;
 import com.example.oracleapi.Entity.MinhaConsulta;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,6 +16,8 @@ public interface MinhaConsultaRepository extends JpaRepository<MinhaConsulta, In
             @Param("pacienteId") int pacienteId,
             @Param("medicoId") int medicoId);
 
-    Optional<MinhaConsulta> findByAgendamentoConsultaId(Integer id);
+    List<MinhaConsulta> findByAgendamentoConsultaId(Integer idAgendamento);
+
+    
 
 }

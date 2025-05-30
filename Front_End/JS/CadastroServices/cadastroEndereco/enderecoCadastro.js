@@ -1,8 +1,37 @@
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('cep').addEventListener('blur', function () {
+        const cep = this.value.replace(/\D/g, '');
 
-document.addEventListener('DOMContentLoaded', function () {  
+        if (cep.length !== 8) {
+            alert('CEP inválido!');
+            return;
+        }
+
+        fetch(`http://localhost:8080/cep/${cep}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('CEP não encontrado');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if(data.erro) {
+                    throw new Error('CEP não encontrado');
+                }
+                document.getElementById('logradouro').value = data.logradouro || '';
+                document.getElementById('bairro').value = data.bairro || '';
+                document.getElementById('cidade').value = data.localidade || '';
+                document.getElementById('estado').value = data.uf || '';
+            })
+            .catch(error => {
+                console.error('Erro ao buscar CEP:', error);
+                alert('Erro ao buscar o CEP. Verifique se está correto.');
+            });
+    });
+
+
     document.getElementById('enderecoCadastroForm').addEventListener('submit', function (event) {
         event.preventDefault();
-
 
         const cep = document.getElementById('cep').value;
         const uf = document.getElementById('estado').value;
@@ -15,13 +44,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const cadastrarEndereco = {
             cpfPaciente: cpfPaciente,
-            cep : cep,
-            logradouro : logradouro,
-            cidade : cidade,
-            uf : uf,
-            bairro : bairro,
-            complemento : complemento,
-            numero : numero
+            cep: cep,
+            logradouro: logradouro,
+            cidade: cidade,
+            uf: uf,
+            bairro: bairro,
+            complemento: complemento,
+            numero: numero
         };
 
         console.log("Dados para cadastro de endereço:", cadastrarEndereco);
@@ -38,13 +67,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     const errorData = await response.json();
                     throw new Error(errorData.erro || 'Erro desconhecido');
                 }
-                return response.text(); 
+                return response.text();
             })
             .then(data => {
                 window.location.href = 'http://127.0.0.1:5500/Front_End/HTML/cadastroAlergias.html';
             })
             .catch(error => {
-                const msg = error.message;
+                console.error(error.message);
+                alert(error.message);
             });
     });
 });

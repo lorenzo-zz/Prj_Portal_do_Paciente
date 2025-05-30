@@ -1,8 +1,5 @@
 package com.example.oracleapi.Entity;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -40,9 +37,6 @@ public class RequisicaoExame {
     @NotBlank
     @Size(max = 200, message = "O tipo de exame deve ter no máximo 200 caracteres")
     private String tipoExame;
-    @NotNull
-    @ManyToOne
-    private MinhaConsulta minhaConsulta;
     @NotBlank
     private String tipoConvenio;
     @NotBlank

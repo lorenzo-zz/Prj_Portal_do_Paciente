@@ -1,0 +1,32 @@
+create or replace procedure proc_t09a_resultado_exame(
+p_resultado in varchar2,
+p_idSolicitacaoExame in int
+)
+
+as 
+v_exists int;
+v_count int;
+
+begin
+
+select count(*) into v_count
+from t09a_resultado_exame
+where SOLICITACAO_EXAME_ID = p_idSolicitacaoExame;
+
+   if v_count > 0 then
+
+   RAISE_APPLICATION_ERROR(-20001, 'Já possui um paciente nesse horário!');
+   END IF;
+   
+   select count(*) into v_exists
+   from t09a_requisicao_exame 
+   where ID = p_idSolicitacaoExame;
+
+   if v_exists = 0 then
+      RAISE_APPLICATION_ERROR(-20004, 'Solicitação de exame não encontrada.');
+   end if;
+
+insert into t09a_resultado_exame(RESULTADO, SOLICITACAO_EXAME_ID)
+values(p_resultado, p_idSolicitacaoExame);
+
+end proc_t09a_resultado_exame;

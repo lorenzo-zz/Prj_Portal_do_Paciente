@@ -16,11 +16,13 @@ import com.example.oracleapi.DTO.MinhaConsultaDTO;
 import com.example.oracleapi.DTO.PrescricaoDTO;
 import com.example.oracleapi.DTO.ResultadoConsultaDTO;
 import com.example.oracleapi.DTO.RetornoAgendamentoDTO;
+import com.example.oracleapi.DTO.idMinhaConsultaDTO;
+import com.example.oracleapi.Entity.AgendamentoConsulta;
 import com.example.oracleapi.Entity.MinhaConsulta;
-import com.example.oracleapi.Exception.ConsultaException;
 import com.example.oracleapi.Model.ConsultaStatus;
 import com.example.oracleapi.Repository.AgendamentoRepository;
 import com.example.oracleapi.Repository.MinhaConsultaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ConsultaService {
@@ -119,14 +121,25 @@ public class ConsultaService {
                         agendamento.getEspecificacaoMedico(),
                         agendamento.getStatus()))
                 .toList();
-                
 
     }
 
     public List<MinhaConsulta> dadosConsulta(MinhaConsultaDTO dto) {
-        MinhaConsulta consulta = consultaRepository.findByAgendamentoConsultaId(dto.idAgendamento())
-                .orElseThrow(() -> new ConsultaException("Consulta não encontrada"));
+        return consultaRepository.findByAgendamentoConsultaId(dto.idAgendamento());
+    }
 
-        return List.of(consulta); 
+    @Transactional
+    public void cancelarConsulta(idMinhaConsultaDTO idConsulta) {
+        MinhaConsulta consulta = consultaRepository.findById(idConsulta.idMinhaConsulta())
+                .orElseThrow(() -> new RuntimeException("Consulta não encontrada"));
+
+        AgendamentoConsulta agendamento = agendamentoRepository.findById(idConsulta.idAgendamento())
+                .orElseThrow(() -> new RuntimeException("Agendamento não encontrado"));
+
+        agendamento.setStatus(ConsultaStatus.CANCELADA_PELO_PACIENTE);
+        agendamentoRepository.save(agendamento);
+
+        consulta.setConsultaStatus(ConsultaStatus.CANCELADA_PELO_PACIENTE);
+        consultaRepository.save(consulta);
     }
 }

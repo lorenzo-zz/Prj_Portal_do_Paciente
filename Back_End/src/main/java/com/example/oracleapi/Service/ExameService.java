@@ -11,16 +11,12 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 import java.sql.Date;
 import java.sql.RowId;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.example.oracleapi.DTO.RequisicaoExameDTO;
 import com.example.oracleapi.DTO.ResultadoExameDTO;
 import com.example.oracleapi.Entity.Paciente;
-import com.example.oracleapi.Repository.MedicoRepository;
-import com.example.oracleapi.Repository.MinhaConsultaRepository;
 import com.example.oracleapi.Repository.PacienteRepository;
 
 @Service
@@ -31,12 +27,6 @@ public class ExameService {
 
     @Autowired
     private PacienteRepository pacienteRepository;
-
-    @Autowired
-    private MedicoRepository medicoRepository;
-
-    @Autowired
-    private MinhaConsultaRepository minhaConsultaRepository;
 
     public void cadastrarResultadoExame(ResultadoExameDTO resultadoExameDTO) {
         try (Connection conn = dataSource.getConnection();
@@ -57,24 +47,28 @@ public class ExameService {
         try (Connection conn = dataSource.getConnection()) {
             CallableStatement stmt = conn.prepareCall("call proc_t09a_requisicao_exame(?,?,?,?,?,?,?)");
 
+            String nomeArquivo = null;
+            if (arquivo != null && !arquivo.isEmpty()) {
+                nomeArquivo = requisicaoExameDTO.pacienteCpf() + "_" + arquivo.getOriginalFilename();
+            }
+
             stmt.setString(1, requisicaoExameDTO.pacienteCpf());
             stmt.setString(2, requisicaoExameDTO.tipoExame());
-            stmt.setString(3, requisicaoExameDTO.tipoConvenio());
+            stmt.setString(3, (requisicaoExameDTO.tipoConvenio() == null || requisicaoExameDTO.tipoConvenio().isEmpty()) ? null : requisicaoExameDTO.tipoConvenio());
             stmt.setString(4, requisicaoExameDTO.telefone());
             stmt.setString(5, requisicaoExameDTO.email());
-            stmt.setString(6, requisicaoExameDTO.nomeDocumento());
-            stmt.setString(7, requisicaoExameDTO.observacoes());
-            
+            stmt.setString(6, (requisicaoExameDTO.observacoes() == null || requisicaoExameDTO.observacoes().isEmpty()) ? null : requisicaoExameDTO.observacoes());
+            stmt.setString(7, nomeArquivo);
+
             stmt.execute();
-            
+
             if (arquivo != null && !arquivo.isEmpty()) {
                 salvarDocumento(requisicaoExameDTO.pacienteCpf(), arquivo);
             }
         } catch (SQLException e) {
-            throw new SQLException("Erro ao processar a requisição do exame");
+            throw new SQLException("Erro ao processar a requisição do exame: " + e.getMessage(), e);
         } catch (IOException e) {
-        throw new RuntimeException("Erro ao salvar o documento do paciente: " + e.getMessage(), e);
-
+            throw new RuntimeException("Erro ao salvar o documento do paciente: " + e.getMessage(), e);
         }
     }
 
