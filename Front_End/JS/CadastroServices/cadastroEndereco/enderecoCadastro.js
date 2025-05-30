@@ -2,11 +2,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('cep').addEventListener('blur', function () {
         const cep = this.value.replace(/\D/g, '');
 
-        if (cep.length !== 8) {
-            alert('CEP inválido!');
-            return;
-        }
-
         fetch(`http://localhost:8080/cep/${cep}`)
             .then(response => {
                 if (!response.ok) {
@@ -25,8 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch(error => {
                 console.error('Erro ao buscar CEP:', error);
-                alert('Erro ao buscar o CEP. Verifique se está correto.');
-            });
+            }); 
     });
 
 

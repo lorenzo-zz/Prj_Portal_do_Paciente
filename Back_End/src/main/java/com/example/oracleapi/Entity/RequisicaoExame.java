@@ -41,7 +41,9 @@ public class RequisicaoExame {
     private String tipoConvenio;
     @NotBlank
     private String nomeDocumento;
-
+    @NotNull
+    @ManyToOne
+    private Paciente paciente;
     public int getId() {
         return id;
     }

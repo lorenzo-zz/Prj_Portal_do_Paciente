@@ -8,6 +8,9 @@ import java.nio.file.StandardCopyOption;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import javax.sql.DataSource;
 import java.sql.Date;
 import java.sql.RowId;
@@ -17,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.oracleapi.DTO.RequisicaoExameDTO;
 import com.example.oracleapi.DTO.ResultadoExameDTO;
 import com.example.oracleapi.Entity.Paciente;
+import com.example.oracleapi.Repository.ExameRepository;
 import com.example.oracleapi.Repository.PacienteRepository;
 
 @Service
@@ -27,6 +31,9 @@ public class ExameService {
 
     @Autowired
     private PacienteRepository pacienteRepository;
+
+    @Autowired
+    private ExameRepository exameRepository;
 
     public void cadastrarResultadoExame(ResultadoExameDTO resultadoExameDTO) {
         try (Connection conn = dataSource.getConnection();
@@ -44,21 +51,23 @@ public class ExameService {
 
     public void cadastrarRequisicaoExame(RequisicaoExameDTO requisicaoExameDTO, MultipartFile arquivo)
             throws SQLException {
+
+        int paciente = pacienteRepository.findByCpf(requisicaoExameDTO.pacienteCpf())
+                .orElseThrow(() -> new RuntimeException("Consulta não encontrada")).getId();
+
         try (Connection conn = dataSource.getConnection()) {
-            CallableStatement stmt = conn.prepareCall("call proc_t09a_requisicao_exame(?,?,?,?,?,?,?)");
+            CallableStatement stmt = conn.prepareCall("call proc_t09a_requisicao_exame(?,?,?,?,?)");
 
             String nomeArquivo = null;
             if (arquivo != null && !arquivo.isEmpty()) {
                 nomeArquivo = requisicaoExameDTO.pacienteCpf() + "_" + arquivo.getOriginalFilename();
             }
 
-            stmt.setString(1, requisicaoExameDTO.pacienteCpf());
-            stmt.setString(2, requisicaoExameDTO.tipoExame());
-            stmt.setString(3, (requisicaoExameDTO.tipoConvenio() == null || requisicaoExameDTO.tipoConvenio().isEmpty()) ? null : requisicaoExameDTO.tipoConvenio());
-            stmt.setString(4, requisicaoExameDTO.telefone());
-            stmt.setString(5, requisicaoExameDTO.email());
-            stmt.setString(6, (requisicaoExameDTO.observacoes() == null || requisicaoExameDTO.observacoes().isEmpty()) ? null : requisicaoExameDTO.observacoes());
-            stmt.setString(7, nomeArquivo);
+            stmt.setString(1, requisicaoExameDTO.tipoExame());
+            stmt.setString(2, requisicaoExameDTO.observacoes());
+            stmt.setString(3, requisicaoExameDTO.tipoConvenio());
+            stmt.setString(4, nomeArquivo);
+            stmt.setInt(5, paciente);
 
             stmt.execute();
 
@@ -91,5 +100,4 @@ public class ExameService {
         paciente.setDocumento(nomeArquivo);
         pacienteRepository.save(paciente);
     }
-
 }

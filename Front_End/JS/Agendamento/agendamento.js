@@ -73,7 +73,6 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .catch(error => {
         console.error('Erro:', error);
-        alert('Erro ao agendar consulta: ' + error.message);
       });
   });
 

@@ -1,0 +1,27 @@
+create or replace PROCEDURE proc_t09a_medico(
+    p_nome IN VARCHAR2,
+    p_ativo IN CHAR DEFAULT 'S',
+    p_especificacao_medico IN VARCHAR2,
+    p_crm in varchar2
+)
+AS
+v_count int; 
+BEGIN
+
+SELECT COUNT(*) INTO v_count
+from t09a_medico
+where UPPER(NOME) = UPPER(p_nome)
+and CRM = p_crm;
+
+if v_count = 0 then
+    INSERT INTO t09a_medico (NOME, ATIVO, ESPECIFICACAO_MEDICO, CRM)
+    VALUES (
+        p_nome,
+        P_ativo,
+        p_especificacao_medico,
+        p_crm
+    );
+       ELSE
+      RAISE_APPLICATION_ERROR(-20001, 'Médico já cadastrado em sistema!');
+   END IF;
+END proc_t09a_medico;

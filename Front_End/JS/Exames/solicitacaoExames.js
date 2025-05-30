@@ -73,11 +73,6 @@ function fecharModal() {
 }
 
 
-
-
-
-
-
 // ------------------------------- Validação dos campos 
 
 document.addEventListener("DOMContentLoaded", function () {
