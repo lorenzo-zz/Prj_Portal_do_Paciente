@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('cadastroForm').addEventListener('submit', function (event) {
     event.preventDefault();
@@ -71,10 +72,14 @@ document.addEventListener('DOMContentLoaded', function () {
       })
       .catch(async error => {
         let errorMsg = '';
-        alert(error.message)
+        
         try {
-          const errJson = await error.response.json();
-          errorMsg = errJson.message || errJson.erro || JSON.stringify(errJson);
+          if (error.response) {
+            const errJson = await error.response.json();
+            errorMsg = errJson.message || errJson.erro || JSON.stringify(errJson);
+          } else {
+            errorMsg = error.message || "Erro desconhecido";
+          }
         } catch (e) {
           errorMsg = error.message || "Erro desconhecido";
         }
@@ -89,6 +94,10 @@ document.addEventListener('DOMContentLoaded', function () {
           erroIdade.style.display = 'block';
         } else if (msg.includes("arquivo") && msg.includes("present")){
           erroArquivo.style.display = 'block';
+        } else if (msg.includes("is null") || msg.includes("java.time.LocalDate.getYear()") || msg.includes(" is not present")){
+          campoNull.style.display = 'block';
+        } else if (msg.includes("Maximum upload size exceeded")){
+          BigArquivo.style.display = 'block';
         } else if (msg.includes("Erro com o banco de dados: Erro ao cadastrar paciente: ORA-20999: Erro inesperado: ORA-01400: n├úo ├® poss├¡vel inserir NULL em")){
           erroSenhaInexistente.style.display = 'block'
         }
