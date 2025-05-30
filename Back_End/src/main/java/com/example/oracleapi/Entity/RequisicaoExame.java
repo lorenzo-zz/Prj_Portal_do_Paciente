@@ -37,9 +37,6 @@ public class RequisicaoExame {
     @NotBlank
     @Size(max = 200, message = "O tipo de exame deve ter no máximo 200 caracteres")
     private String tipoExame;
-    @NotNull
-    @ManyToOne
-    private MinhaConsulta minhaConsulta;
     @NotBlank
     private String tipoConvenio;
     @NotBlank

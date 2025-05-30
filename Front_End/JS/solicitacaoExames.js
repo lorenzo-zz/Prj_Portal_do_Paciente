@@ -5,17 +5,18 @@ function limparFormulario() {
 
 
 document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("cpf-paciente").value = localStorage.getItem("cpf");
   document.getElementById("consulta-form").addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const nome = document.getElementById("nome-paciente").value;
-    const cpf = document.getElementById("cpf-paciente").value;
-    const data = document.getElementById("data").value;
-    const telefone = document.getElementById("telefone").value;
-    const email = document.getElementById("email").value;
-    const especialidade = document.getElementById("especialidade").value;
-    const horario = document.getElementById("horario").value;
-    document.getElementById('cpf-paciente').value = cpf;
+    const cpf = localStorage.getItem('cpf');
+    const tipoExame = document.getElementById("tipo-exame");
+    const convenio = document.getElementById("convenio");
+    const telefone = document.getElementById("telefone");
+    const email = document.getElementById("email");
+    const observacoes = document.getElementById("observacoes");
+
+    document.getElementById("cpf-paciente").values = localStorage.getItem("cpf");
 
     if (!nome || !cpf || !data || !telefone || !email || !especialidade || !horario) {
       alert("Por favor, preencha todos os campos obrigatórios.");
@@ -23,21 +24,28 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const dados = {
-      nomePaciente: nome,
-      cpfPaciente: cpf,
-      data: data,
-      telefone: telefone,
-      email: email,
-      especificacaoMedico: especialidade,
-      hora: horario + ":00"
+      pacienteCpf: cpf.value,
+      tipoExame: tipoExame.value,
+      tipoConvenio: convenio.value,
+      telefone: telefone.value,
+      email: email.value,
+      observacoes: observacoes.value
     };
+
+    let formData = new FormData();
+    const docInput = document.getElementById("anexar-arquivo");
+    const documento = docInput.files[0];
+
+
+    formData.append("dados", new Blob([JSON.stringify(cadastrarInfPessoais)], { type: "application/json" }));
+    formData.append("documento", documento);
 
     fetch('http://localhost:8080/consulta/agendar-consulta', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(dados)
+      body: formData
     })
       .then(async response => {
         if (!response.ok) {
@@ -77,30 +85,25 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("exames-form").addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const campoCPF = document.getElementById("cpf-paciente").value;
-    const campoTelefone = document.getElementById("telefone").value;
-    const campoTipoExame = document.getElementById("tipo-exame").value;
-    const campoConvenio = document.getElementById("convenio").value;
-    const campoEmail = document.getElementById("email").value;
-    const campoObservacoes = document.getElementById("observacoes").value;
-
-    
     const requisicaoExameDTO = {
-      pacienteCpf: campoCPF,
-      telefone: campoTelefone,
-      tipoExame: campoTipoExame,
-      tipoConvenio: campoConvenio,
-      email: campoEmail,
-      observacoes: campoObservacoes
-    }
+      pacienteCpf: document.getElementById("cpf-paciente").value,
+      tipoExame: document.getElementById("tipo-exame").value,
+      tipoConvenio: document.getElementById("convenio").value,
+      telefone: document.getElementById("telefone").value,
+      email: document.getElementById("email").value,
+      observacoes: document.getElementById("observacoes").value  // <-- nome correto
+    };
 
     console.log(requisicaoExameDTO);
-    
+
     const formData = new FormData();
     const guiaMedicaInput = document.getElementById("anexar-arquivo");
     const arquivo = guiaMedicaInput.files[0];
 
-    formData.append("requisicaoExameDTO", new Blob([JSON.stringify(requisicaoExameDTO)], { type: "application/json" }));
+    formData.append(
+      "requisicaoExameDTO",
+      new Blob([JSON.stringify(requisicaoExameDTO)], { type: "application/json" })
+    );
     formData.append("arquivo", arquivo);
 
     fetch('http://localhost:8080/exame/prescricao/requisicao-exame', {
@@ -121,9 +124,10 @@ document.addEventListener("DOMContentLoaded", function () {
             status: response.status,
             data: errorData
           };
-
         }
 
+        // Se quiser, pode tratar sucesso aqui
+        alert("Exame solicitado com sucesso!");
       })
       .catch(async error => {
         let errorMsg = '';
@@ -142,7 +146,8 @@ document.addEventListener("DOMContentLoaded", function () {
         } else if (msg.includes("tipo") && msg.includes("200")) {
           tipoExameErro.style.display = 'block';
         }
-      })
-  })
-})
-  ; 
+      });
+
+  });
+
+});

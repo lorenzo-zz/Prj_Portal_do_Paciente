@@ -6,7 +6,7 @@ public record RequisicaoExameDTO(
                 String tipoConvenio,
                 String telefone,
                 String email,
-                String nomeDocumento,
                 String observacoes,
-                String medicoCrm) {
+                String nomeDocumento
+                ) {
 }
