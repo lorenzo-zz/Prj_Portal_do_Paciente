@@ -121,8 +121,6 @@ document.addEventListener("DOMContentLoaded", function () {
           };
         }
 
-        // Se quiser, pode tratar sucesso aqui
-        alert("Exame solicitado com sucesso!");
       })
       .catch(async error => {
         let errorMsg = '';
@@ -144,5 +142,19 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
   });
+
+});
+
+
+function mostrarModal() {
+  document.getElementById("modal-confirmacao").classList.remove("hidden");
+}
+
+function fecharModal() {
+  document.getElementById("modal-confirmacao").classList.add("hidden");
+}
+  document.getElementById("exames-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+  mostrarModal(); 
 
 });
