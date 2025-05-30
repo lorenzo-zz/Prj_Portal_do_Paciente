@@ -40,7 +40,6 @@ public class MinhaConsulta {
     @Size(max = 250, message = "O resultado deve ter no máximo 250 caracteres")
     private String resultado;
 
-    @Size(min = 1, max = 1, message = "O campo ativo deve ter no máximo 1 caractere")
     private char ativo;
 
     @Enumerated(EnumType.STRING)
@@ -64,5 +63,101 @@ public class MinhaConsulta {
 
     public int getId() {
         return id;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+
+    public LocalTime getHora() {
+        return hora;
+    }
+
+    public void setHora(LocalTime hora) {
+        this.hora = hora;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getResultado() {
+        return resultado;
+    }
+
+    public void setResultado(String resultado) {
+        this.resultado = resultado;
+    }
+
+    public char getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(char ativo) {
+        this.ativo = ativo;
+    }
+
+    public ConsultaStatus getConsultaStatus() {
+        return consultaStatus;
+    }
+
+    public void setConsultaStatus(ConsultaStatus consultaStatus) {
+        this.consultaStatus = consultaStatus;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
+    public Medico getMedico() {
+        return medico;
+    }
+
+    public void setMedico(Medico medico) {
+        this.medico = medico;
+    }
+
+    public AgendamentoConsulta getAgendamentoConsulta() {
+        return agendamentoConsulta;
+    }
+
+    public void setAgendamentoConsulta(AgendamentoConsulta agendamentoConsulta) {
+        this.agendamentoConsulta = agendamentoConsulta;
+    }
+
+    public String getFrequencia() {
+        return frequencia;
+    }
+
+    public void setFrequencia(String frequencia) {
+        this.frequencia = frequencia;
+    }
+
+    public String getPressao_arterial() {
+        return pressao_arterial;
+    }
+
+    public void setPressao_arterial(String pressao_arterial) {
+        this.pressao_arterial = pressao_arterial;
+    }
+
+    public String getTemperatura() {
+        return temperatura;
+    }
+
+    public void setTemperatura(String temperatura) {
+        this.temperatura = temperatura;
     }
 }

@@ -109,7 +109,6 @@
 #logout_button {
   border: solid 2px white;
   border-radius: 5px;
-  display: none;
 }
 
 #logout_button:hover {

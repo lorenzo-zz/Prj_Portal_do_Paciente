@@ -16,7 +16,6 @@ import com.example.oracleapi.Exception.RequisicaoExameException;
 import com.example.oracleapi.Exception.ResultadoExameExeception;
 import com.example.oracleapi.Service.ExameService;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.http.MediaType;
 
 @RestController
 @RequestMapping("/exame")

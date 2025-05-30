@@ -1,44 +1,44 @@
 package com.example.oracleapi.Service;
-
+ 
 import com.example.oracleapi.DTO.*;
 import com.example.oracleapi.Entity.Paciente;
 import com.example.oracleapi.Exception.AlergiaException;
 import com.example.oracleapi.Repository.*;
-
+ 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+ 
 import javax.sql.DataSource;
 import java.sql.*;
 import java.time.LocalDate;
-
+ 
 @CrossOrigin(origins = "*")
 @RequestMapping("/paciente")
 @Service
 public class PacienteService {
-
+ 
     @Autowired
     private DataSource dataSource;
-
+ 
     @Autowired
     private PacienteRepository pacienteRepository;
-
+ 
     public void cadastrarAlergia(PacienteAlergiaDTO pacienteAlergiaDTO) throws SQLException {
-
+ 
         try (Connection conn = dataSource.getConnection()) {
             CallableStatement stmt = conn.prepareCall("{call proc_t09a_paciente_alergia(?, ?)}");
-
+ 
             int paciente = pacienteRepository.findByCpf(pacienteAlergiaDTO.pacienteCpf())
                     .orElseThrow(() -> new SQLException("Erro banco de dados"))
                     .getId();
-
+ 
             stmt.setString(1, pacienteAlergiaDTO.nomeAlergia());
             stmt.setInt(2, paciente);
-
+ 
             stmt.execute();
-
+ 
         } catch (SQLException e) {
             if (e.getErrorCode() == 20001) {
                 throw new AlergiaException("Alergia já cadastrada para este paciente.");
@@ -48,17 +48,16 @@ public class PacienteService {
             throw new SQLException(e.getMessage(), e);
         }
     }
-
     public void cadastrarPrescricao(PrescricaoDTO prescricaoDTO) throws SQLException {
         try (Connection conn = dataSource.getConnection()) {
             CallableStatement stmt = conn.prepareCall("call proc_t09a_precricao(?,?,?)");
-
+ 
             stmt.setString(1, prescricaoDTO.remedio());
             stmt.setString(2, String.valueOf(prescricaoDTO.data()));
             stmt.setString(3, prescricaoDTO.descricao());
-
+ 
             stmt.execute();
-
+ 
         } catch (SQLException e) {
             throw new SQLException("Erro ao cadastrar prescrição");
         }
@@ -89,35 +88,35 @@ public class PacienteService {
             throw new RuntimeException("Erro ao atualizar dados do paciente: " + e.getMessage());
         }
     }
-
+ 
     public void alergiaRemover(PacienteAlergiaDTO pacienteAlergiaDTO) throws SQLException {
-
+ 
         Paciente pacienteExistente = pacienteRepository.findByCpf(pacienteAlergiaDTO.paciente().getCpf())
                 .orElseThrow(() -> new SQLException("Paciente não encontrado"));
-
+ 
         try (Connection conn = dataSource.getConnection()) {
             CallableStatement stmt = conn.prepareCall("{call proc_remover_alergia_paciente(?, ?)}");
-
+ 
             stmt.setString(1, pacienteAlergiaDTO.nomeAlergia());
             stmt.setInt(2, pacienteExistente.getId());
-
+ 
             stmt.execute();
-
+ 
         } catch (SQLException e) {
             throw new SQLException(e.getMessage(), e);
         }
     }
-
+ 
     public void atualizarDadosPaciente(AtualizarPacienteDTO atualizarPacienteDTO) {
         try (Connection conn = dataSource.getConnection();
                 CallableStatement stmt = conn.prepareCall(
                         "{call proc_t09a_atualizar_dados_paciente(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}")) {
-
+ 
             // Busca a data de nascimento já cadastrada
             String dataNascimento = pacienteRepository.findByCpf(atualizarPacienteDTO.cpf())
                     .map(p -> p.getDataNascimento() != null ? p.getDataNascimento().toString() : null)
                     .orElse(null);
-
+ 
             // Mapeamento dos parâmetros na ordem correta
             stmt.setString(1, atualizarPacienteDTO.cpf());
             stmt.setString(2, atualizarPacienteDTO.nomeCompleto());
@@ -131,15 +130,15 @@ public class PacienteService {
             stmt.setString(10, atualizarPacienteDTO.bairro());
             stmt.setString(11, atualizarPacienteDTO.cidade());
             stmt.setString(12, atualizarPacienteDTO.uf());
-
+ 
             stmt.execute();
-
+ 
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("Erro ao atualizar dados do paciente: " + e.getMessage());
         }
     }
-
+ 
     public RetornoPacienteDTO dadosDoPaciente(String cpf) throws SQLException {
         try (Connection conn = dataSource.getConnection()) {
             CallableStatement stmt = conn
@@ -157,7 +156,7 @@ public class PacienteService {
             stmt.registerOutParameter(11, Types.VARCHAR);
             stmt.registerOutParameter(12, Types.VARCHAR);
             stmt.execute();
-
+ 
             return new RetornoPacienteDTO(
                     cpf,
                     stmt.getString(2),

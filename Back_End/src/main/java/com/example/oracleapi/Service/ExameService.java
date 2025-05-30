@@ -11,16 +11,12 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 import java.sql.Date;
 import java.sql.RowId;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.example.oracleapi.DTO.RequisicaoExameDTO;
 import com.example.oracleapi.DTO.ResultadoExameDTO;
 import com.example.oracleapi.Entity.Paciente;
-import com.example.oracleapi.Repository.MedicoRepository;
-import com.example.oracleapi.Repository.MinhaConsultaRepository;
 import com.example.oracleapi.Repository.PacienteRepository;
 
 @Service
@@ -31,12 +27,6 @@ public class ExameService {
 
     @Autowired
     private PacienteRepository pacienteRepository;
-
-    @Autowired
-    private MedicoRepository medicoRepository;
-
-    @Autowired
-    private MinhaConsultaRepository minhaConsultaRepository;
 
     public void cadastrarResultadoExame(ResultadoExameDTO resultadoExameDTO) {
         try (Connection conn = dataSource.getConnection();
