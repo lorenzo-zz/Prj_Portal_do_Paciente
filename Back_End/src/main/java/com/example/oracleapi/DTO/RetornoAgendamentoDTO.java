@@ -33,5 +33,4 @@ public record RetornoAgendamentoDTO(
                 agendamentoConsulta.getStatus());
 
     }
-
 }

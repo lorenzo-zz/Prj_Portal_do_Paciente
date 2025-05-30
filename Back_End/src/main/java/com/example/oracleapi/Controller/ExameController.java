@@ -18,6 +18,7 @@ import com.example.oracleapi.DTO.CpfDTO;
 import com.example.oracleapi.DTO.RequisicaoExameDTO;
 import com.example.oracleapi.DTO.ResultadoExameDTO;
 import com.example.oracleapi.DTO.RetornoAgendamentoDTO;
+import com.example.oracleapi.Entity.RequisicaoExame;
 import com.example.oracleapi.Exception.ConsultaException;
 import com.example.oracleapi.Exception.RequisicaoExameException;
 import com.example.oracleapi.Exception.ResultadoExameExeception;
@@ -57,9 +58,9 @@ public class ExameController {
     }
 
     @PostMapping("/listar-exame")
-    public ResponseEntity<List<RetornoAgendamentoDTO>> listarConsultas(@RequestBody CpfDTO cpfPaciente) {
+    public ResponseEntity<List<RequisicaoExame>> listarConsultas(@RequestBody CpfDTO cpfPaciente) {
         try {
-            List<RetornoAgendamentoDTO> exame = exameService.listarExames(cpfPaciente);
+            List<RequisicaoExame> exame = exameService.listarExames(cpfPaciente);
             return ResponseEntity.ok(exame);
         } catch (ConsultaException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Collections.emptyList());

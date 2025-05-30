@@ -8,18 +8,18 @@ import java.nio.file.StandardCopyOption;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalTime;
-
+import java.util.List;
 import javax.sql.DataSource;
 import java.sql.Date;
 import java.sql.RowId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import com.example.oracleapi.DTO.CpfDTO;
 import com.example.oracleapi.DTO.RequisicaoExameDTO;
 import com.example.oracleapi.DTO.ResultadoExameDTO;
 import com.example.oracleapi.Entity.Paciente;
+import com.example.oracleapi.Entity.RequisicaoExame;
 import com.example.oracleapi.Repository.ExameRepository;
 import com.example.oracleapi.Repository.PacienteRepository;
 
@@ -99,5 +99,12 @@ public class ExameService {
 
         paciente.setDocumento(nomeArquivo);
         pacienteRepository.save(paciente);
+    }
+
+    public List<RequisicaoExame> listarExames(CpfDTO cpfPaciente) {
+        return exameRepository.findAll()
+        .stream()
+        .filter(e -> e.getPaciente().getCpf().equals(cpfPaciente.cpf()))
+        .toList();
     }
 }

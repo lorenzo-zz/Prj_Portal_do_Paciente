@@ -1,52 +1,114 @@
-// Exemplo de dados dos exames. Em produção, esses dados podem vir de uma API.
-const examResults = [
-  {
-    nome: "Hemograma Completo",
-    data: "15/05/2025",
-    hora: "09:00",
-    resumo: "Exame com resultados dentro do esperado para hemácias e leucócitos.",
-    resultado: "O hemograma completo apresentou valores normais para hemácias, leucócitos, plaquetas e demais parâmetros importantes, sem alterações significativas."
-  },
-  {
-    nome: "Glicemia de Jejum",
-    data: "15/05/2025",
-    hora: "09:15",
-    resumo: "Glicose dentro dos níveis ideais.",
-    resultado: "O exame de glicemia de jejum indicou níveis de glicose normais, sem evidências de hiperglicemia ou hipoglicemia."
-  },
-  {
-    nome: "Colesterol Total",
-    data: "15/05/2025",
-    hora: "09:30",
-    resumo: "Valores levemente alterados, sugerindo cuidado alimentar.",
-    resultado: "O exame de colesterol total apresentou níveis um pouco acima do recomendado. Recomenda-se acompanhamento nutricional e acompanhamento clínico."
+document.addEventListener("DOMContentLoaded", function () {
+  const cpf = localStorage.getItem("cpf");
+  const filtroStatus = document.getElementById("filtro-status");
+  const lista = document.getElementById("consultas-lista");
+  const btnAnterior = document.getElementById("anterior");
+  const btnProximo = document.getElementById("proximo");
+
+  let todasConsultas = [];
+  let consultasFiltradas = [];
+  let paginaAtual = 0;
+  const consultasPorPagina = 6;
+
+  const dados = { cpf };
+
+  fetch('http://localhost:8080/exame/listar-exame', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(dados)
+  })
+    .then(async response => {
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.erro || 'Erro ao buscar consultas');
+      }
+      return response.json();
+    })
+    .then(data => {
+      todasConsultas = data;
+      aplicarFiltro();
+    })
+    .catch(error => {
+      console.error('Erro ao buscar consultas:', error.message);
+    });
+
+  function aplicarFiltro() {
+    const statusSelecionado = filtroStatus.value;
+
+    if (statusSelecionado === "todos") {
+      consultasFiltradas = [...todasConsultas];
+    } else if (statusSelecionado === "mais-recente") {
+      consultasFiltradas = [...todasConsultas].sort((a, b) => {
+        const dataA = new Date(`${a.data} ${a.hora}`);
+        const dataB = new Date(`${b.data} ${b.hora}`);
+        return dataB - dataA;
+      });
+    } else {
+      consultasFiltradas = todasConsultas.filter(c => c.status.toLowerCase() === statusSelecionado);
+    }
+
+    paginaAtual = 0;
+    renderizarPagina();
   }
-];
 
-// Seleciona o container da lista
-const examesListContainer = document.getElementById("exames-list");
+  function renderizarPagina() {
+    lista.innerHTML = '';
 
-// Cria os itens da lista dinamicamente
-examResults.forEach((exame, index) => {
-  const itemDiv = document.createElement("div");
-  itemDiv.classList.add("exame-item");
+    if (consultasFiltradas.length === 0) {
+      lista.innerHTML = '<p>Nenhuma consulta encontrada.</p>';
+      btnAnterior.disabled = true;
+      btnProximo.disabled = true;
+      return;
+    }
 
-  // Cria o conteúdo do item
-  itemDiv.innerHTML = `
-    <h2>${exame.nome}</h2>
-    <p>Data: ${exame.data} | Hora: ${exame.hora}</p>
-    <p>Resumo: ${exame.resumo}</p>
-  `;
+    const inicio = paginaAtual * consultasPorPagina;
 
-  // Ao clicar, redireciona para a página de detalhes com os parâmetros via query string
-  itemDiv.addEventListener("click", () => {
-    const url = new URL(window.location.origin + "/Front_End/HTML/detalhesExame.html");
-    url.searchParams.append("nome", exame.nome);
-    url.searchParams.append("data", exame.data);
-    url.searchParams.append("hora", exame.hora);
-    url.searchParams.append("resultado", exame.resultado);
-    window.location.href = url.toString();
+    const fim = inicio + consultasPorPagina;
+    const pagina = consultasFiltradas.slice(inicio, fim);
+
+
+    pagina.forEach((consulta, index) => {
+
+      const card = `
+      <div class="consulta-card">
+        <div class="consulta-info">
+          <h2>${consulta.tipoExame}</h2>
+          <p><strong>Descrição:</strong> ${consulta.nomeDocumento}</p>
+          <p><strong>Tipo do Convenio:</strong> ${consulta.tipoConvenio}</p>
+        </div>
+      </div>
+    `;
+      lista.insertAdjacentHTML('beforeend', card);
+    });
+
+    const cards = document.querySelectorAll('.consulta-card');
+    cards.forEach((card, i) => {
+      card.addEventListener('click', () => {
+        const indexConsulta = paginaAtual * consultasPorPagina + i;
+        localStorage.setItem('consultaId', consultasFiltradas[indexConsulta].id);
+        window.location.href = 'http://127.0.0.1:5500/Front_End/HTML/dadosConsulta.html';
+      });
+    });
+
+    btnAnterior.disabled = paginaAtual === 0;
+    btnProximo.disabled = fim >= consultasFiltradas.length;
+  }
+
+  filtroStatus.addEventListener("change", aplicarFiltro);
+
+  btnAnterior.addEventListener("click", () => {
+    if (paginaAtual > 0) {
+      paginaAtual--;
+      renderizarPagina();
+    }
   });
 
-  examesListContainer.appendChild(itemDiv);
+  btnProximo.addEventListener("click", () => {
+    if ((paginaAtual + 1) * consultasPorPagina < consultasFiltradas.length) {
+      paginaAtual++;
+      renderizarPagina();
+    }
+  });
 });
