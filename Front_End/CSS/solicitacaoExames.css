@@ -32,7 +32,6 @@ body {
     font-weight: bold;
     margin-bottom: 6px;
     color: #023279;
-    margin-top: ;
   }
    
   input, select, textarea {
@@ -192,3 +191,5 @@ body {
 .hidden {
   display: none;
 }
+
+
